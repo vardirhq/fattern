@@ -10,7 +10,7 @@ export function SearchBar({ value, onChange, placeholder }) {
         stroke={1.8}
         style={{
           position: 'absolute', left: 10, top: '50%', transform: 'translateY(-50%)',
-          color: 'var(--f-text-subtle)', pointerEvents: 'none',
+          color: 'var(--f-text-subtle)', pointerEvents: 'none', zIndex: 1,
         }}
       />
       <input

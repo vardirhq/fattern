@@ -24,7 +24,7 @@ export function ProductCard({ product, formatCurrency: fmt, onEdit, onDelete, in
           />
         </div>
       ) : (
-        <div className="aspect-square w-full flex items-center justify-center" style={{ background: 'linear-gradient(135deg, rgba(63,217,160,0.06), rgba(63,217,160,0.12))' }}>
+        <div className="aspect-square w-full flex items-center justify-center" style={{ background: 'var(--f-bg-base)' }}>
           <div className="text-center">
             <svg className="mx-auto h-12 w-12" style={{ color: 'var(--f-green-text-dim)' }} fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />

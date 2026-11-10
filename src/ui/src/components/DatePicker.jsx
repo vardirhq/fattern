@@ -187,13 +187,13 @@ export function DatePicker({ value, onChange, placeholder = 'dd.mm.yyyy', requir
           onClick={() => handleCalendarSelect(date)}
           className="h-8 w-8 rounded-lg text-sm transition-colors"
           style={{
-            background: isSelected ? 'var(--f-green-bg)' : isToday ? 'rgba(63,217,160,0.1)' : 'transparent',
+            background: isSelected ? 'var(--f-green-bg)' : isToday ? 'rgba(47,75,216,0.1)' : 'transparent',
             color: isSelected ? 'var(--f-green-text)' : isToday ? 'var(--f-green-text-dim)' : 'var(--f-text-body)',
             fontWeight: isSelected || isToday ? 600 : 400,
             opacity: !isCurrentMonth ? 0.3 : 1,
           }}
           onMouseEnter={e => { if (!isSelected) e.currentTarget.style.background = 'rgba(255,255,255,0.07)'; }}
-          onMouseLeave={e => { if (!isSelected) e.currentTarget.style.background = isToday ? 'rgba(63,217,160,0.1)' : 'transparent'; }}
+          onMouseLeave={e => { if (!isSelected) e.currentTarget.style.background = isToday ? 'rgba(47,75,216,0.1)' : 'transparent'; }}
         >
           {day}
         </button>
@@ -211,7 +211,7 @@ export function DatePicker({ value, onChange, placeholder = 'dd.mm.yyyy', requir
         top: `${dropdownPosition.top}px`,
         left: `${dropdownPosition.left}px`,
         width: `${Math.max(dropdownPosition.width, 280)}px`,
-        background: 'rgba(12,22,18,0.96)',
+        background: 'var(--f-surface-elevated)',
         backdropFilter: 'blur(20px)',
         border: '1px solid var(--f-border)',
         boxShadow: '0 8px 32px rgba(0,0,0,0.45)',

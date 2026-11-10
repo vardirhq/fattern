@@ -109,7 +109,20 @@
     "monthly_overview": "Monthly overview for the active budget year",
     "no_data_for_period": "No data to show for this period",
     "income": "Income",
-    "expenses_label": "Expenses"
+    "expenses_label": "Expenses",
+    "key_figures": "Key figures",
+    "invoiced_ytd": "Invoiced this period",
+    "paid_in": "Paid in",
+    "outstanding": "Outstanding",
+    "nothing_overdue": "Nothing overdue",
+    "result": "Result",
+    "needs_attention": "Needs attention",
+    "see_all": "See all",
+    "all_in_order": "All in order",
+    "no_overdue_invoices": "No overdue invoices.",
+    "days_overdue_one": "{{count}} day overdue",
+    "days_overdue_other": "{{count}} days overdue",
+    "and_more": "+ {{count}} more"
   },
   "invoice": {
     "title": "Invoices",
@@ -202,7 +215,8 @@
       "picker_empty": "No unlinked expenses found",
       "confirm": "Link selected",
       "cancel": "Cancel"
-    }
+    },
+    "all": "All"
   },
   "expense": {
     "filter_by": "Filter by {{name}}",

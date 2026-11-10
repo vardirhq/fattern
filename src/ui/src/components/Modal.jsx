@@ -69,7 +69,7 @@ export function Modal({ isOpen, onClose, title, description, children, footer, s
             {footer ? (
               <footer
                 className="flex-shrink-0 px-6 pb-6 pt-4 flex items-center justify-end gap-3"
-                style={{ borderTop: '1px solid var(--f-border-subtle)', background: 'rgba(0,0,0,0.15)' }}
+                style={{ borderTop: '1px solid var(--f-border-subtle)', background: 'var(--f-surface-hover)' }}
               >
                 {footer}
               </footer>

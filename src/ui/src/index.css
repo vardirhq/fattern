@@ -4,185 +4,202 @@
 
 @layer base {
   :root {
-    /* ─── Brand / theme colors (runtime-switchable via useTheme) ─── */
-    --color-brand-50: #f0f8f5;
-    --color-brand-50-rgb: 240 248 245;
-    --color-brand-100: #e1f1eb;
-    --color-brand-100-rgb: 225 241 235;
-    --color-brand-200: #c2e3d6;
-    --color-brand-200-rgb: 194 227 214;
-    --color-brand-300: #a4d5c2;
-    --color-brand-300-rgb: 164 213 194;
-    --color-brand-400: #82b8b3;
-    --color-brand-400-rgb: 130 184 179;
-    --color-brand-500: #59a19a;
-    --color-brand-500-rgb: 89 161 154;
-    --color-brand-600: #2f8981;
-    --color-brand-600-rgb: 47 137 129;
-    --color-brand-700: #1b5c64;
-    --color-brand-700-rgb: 27 92 100;
-    --color-brand-800: #144d5b;
-    --color-brand-800-rgb: 20 77 91;
-    --color-brand-900: #0d3e51;
-    --color-brand-900-rgb: 13 62 81;
-    --color-brand-950: #041318;
-    --color-brand-950-rgb: 4 19 24;
+    /* ─── Brand / theme colors (runtime-switchable via useTheme) ───
+       Defaults match the "Papir" light theme so first paint is correct. */
+    --color-brand-50: #F3F5FE;
+    --color-brand-50-rgb: 243 245 254;
+    --color-brand-100: #E6EAFB;
+    --color-brand-100-rgb: 230 234 251;
+    --color-brand-200: #CBD3F6;
+    --color-brand-200-rgb: 203 211 246;
+    --color-brand-300: #A6B4F0;
+    --color-brand-300-rgb: 166 180 240;
+    --color-brand-400: #7187E6;
+    --color-brand-400-rgb: 113 135 230;
+    --color-brand-500: #4A63DE;
+    --color-brand-500-rgb: 74 99 222;
+    --color-brand-600: #2F4BD8;
+    --color-brand-600-rgb: 47 75 216;
+    --color-brand-700: #2337A8;
+    --color-brand-700-rgb: 35 55 168;
+    --color-brand-800: #1C2C85;
+    --color-brand-800-rgb: 28 44 133;
+    --color-brand-900: #162266;
+    --color-brand-900-rgb: 22 34 102;
+    --color-brand-950: #0D1440;
+    --color-brand-950-rgb: 13 20 64;
 
-    /* ── ink tokens re-mapped for the dark ambient shell ── */
-    --color-ink: rgba(225,238,234,1);
-    --color-ink-rgb: 225 238 234;
-    --color-ink-soft: rgba(148,182,176,1);
-    --color-ink-soft-rgb: 148 182 176;
-    --color-ink-subtle: rgba(92,132,126,1);
-    --color-ink-subtle-rgb: 92 132 126;
-    --color-accent: #2f8981;
-    --color-accent-rgb: 47 137 129;
-    --color-moss: #67b999;
-    --color-moss-rgb: 103 185 153;
-    --color-cloud: #f0f8f5;
-    --color-cloud-rgb: 240 248 245;
-    --color-mist: #e1f1eb;
-    --color-mist-rgb: 225 241 235;
-    --color-sand: #d5e7e6;
-    --color-sand-rgb: 213 231 230;
-    --color-foam: #a4d5c2;
-    --color-foam-rgb: 164 213 194;
-    --color-tide: #82b8b3;
-    --color-tide-rgb: 130 184 179;
+    --color-ink: #15171A;
+    --color-ink-rgb: 21 23 26;
+    --color-ink-soft: #4A4F57;
+    --color-ink-soft-rgb: 74 79 87;
+    --color-ink-subtle: #62666E;
+    --color-ink-subtle-rgb: 98 102 110;
+    --color-accent: #2F4BD8;
+    --color-accent-rgb: 47 75 216;
+    --color-moss: #2337A8;
+    --color-moss-rgb: 35 55 168;
+    --color-cloud: #FFFFFF;
+    --color-cloud-rgb: 255 255 255;
+    --color-mist: #F4F2EC;
+    --color-mist-rgb: 244 242 236;
+    --color-sand: #ECEAE3;
+    --color-sand-rgb: 236 234 227;
+    --color-foam: #E3DFD5;
+    --color-foam-rgb: 227 223 213;
+    --color-tide: #D6D1C4;
+    --color-tide-rgb: 214 209 196;
     --color-white: #ffffff;
-    --color-black: #000000;
+    --color-black: #15171A;
 
-    color-scheme: dark;
+    color-scheme: light;
 
-    /* ─── 2026 Ambient Design Tokens ─── */
-    /* All --f-* vars are updated at runtime by applyTheme() for theme switching */
+    /* ─── Design tokens ───
+       All --f-* vars are updated at runtime by applyTheme() (see themes/tokens.js). */
 
-    /* Background layers */
-    --f-bg-gradient: linear-gradient(160deg, #0d1a14 0%, #111820 50%, #0e1118 100%);
-    --f-bg-radial:
-      radial-gradient(ellipse 80% 60% at 15% 20%,  rgba(45,180,130,0.28) 0%, transparent 60%),
-      radial-gradient(ellipse 60% 50% at 85% 80%,  rgba(80,140,220,0.22) 0%, transparent 55%),
-      radial-gradient(ellipse 50% 40% at 60% 10%,  rgba(160,100,220,0.12) 0%, transparent 50%);
+    /* Background */
+    --f-bg-base:     #F4F2EC;
+    --f-bg-gradient: linear-gradient(#F4F2EC, #F4F2EC);
+    --f-bg-radial:   linear-gradient(transparent, transparent);
 
-    /* Glass surfaces */
-    --f-surface:          rgba(255,255,255,0.05);
-    --f-surface-hover:    rgba(255,255,255,0.08);
-    --f-surface-elevated: rgba(10,18,14,0.65);
-    --f-surface-topbar:   rgba(10,18,14,0.6);
-    --f-surface-rail:     rgba(8,15,11,0.5);
-    --f-surface-bottom:   rgba(8,14,10,0.55);
+    /* Surfaces */
+    --f-surface:          #FFFFFF;
+    --f-surface-hover:    #FAF9F6;
+    --f-surface-elevated: #FFFFFF;
+    --f-surface-topbar:   #F4F2EC;
+    --f-surface-rail:     #F4F2EC;
+    --f-surface-bottom:   #F4F2EC;
 
     /* Borders */
-    --f-border:            rgba(255,255,255,0.08);
-    --f-border-subtle:     rgba(255,255,255,0.06);
-    --f-border-faint:      rgba(255,255,255,0.04);
-    --f-border-top:        rgba(255,255,255,0.07);
-    --f-border-green:      rgba(45,180,130,0.35);
-    --f-border-green-pill: rgba(63,217,160,0.20);
+    --f-border:            #E3DFD5;
+    --f-border-subtle:     #EAE7DF;
+    --f-border-faint:      #F1EEE7;
+    --f-border-top:        #E3DFD5;
+    --f-border-strong:     #D6D1C4;
+    --f-border-green:      rgba(47,75,216,0.30);
+    --f-border-green-pill: rgba(47,75,216,0.20);
 
-    /* Green accent */
-    --f-green:          #3fd9a0;
-    --f-green-dim:      rgba(63,217,160,0.35);
-    --f-green-bright:   rgba(63,217,160,0.9);
-    --f-green-glow:     rgba(63,217,160,0.5);
-    --f-green-bg:       rgba(45,180,130,0.18);
-    --f-green-bg-pill:  rgba(63,217,160,0.14);
-    --f-green-text:     rgba(80,220,160,0.95);
-    --f-green-text-dim: rgba(63,217,160,0.7);
-    --f-green-shadow:   rgba(45,180,130,0.3);
+    /* Accent (historically named "green"; holds the theme accent) */
+    --f-green:          #2F4BD8;
+    --f-green-dim:      rgba(47,75,216,0.25);
+    --f-green-bright:   rgba(47,75,216,0.90);
+    --f-green-glow:     rgba(47,75,216,0.30);
+    --f-green-bg:       rgba(47,75,216,0.10);
+    --f-green-bg-pill:  rgba(47,75,216,0.10);
+    --f-green-text:     #1D2E86;
+    --f-green-text-dim: rgba(47,75,216,0.70);
+    --f-green-shadow:   rgba(47,75,216,0.25);
 
-    /* Blue / purple accents */
-    --f-blue:        rgba(80,140,220,0.9);
-    --f-blue-bg:     rgba(80,140,220,0.14);
-    --f-blue-border: rgba(80,140,220,0.2);
-    --f-blue-text:   rgba(100,160,240,0.9);
+    /* Sent */
+    --f-blue:        #2F4BD8;
+    --f-blue-bg:     #E6EAFB;
+    --f-blue-border: #CBD3F6;
+    --f-blue-text:   #2337A8;
+
+    /* Paid / positive */
+    --f-success:        #1E7A4C;
+    --f-success-bg:     #E3F2E9;
+    --f-success-border: #C3E2CF;
+    --f-success-text:   #17603B;
 
     /* Text */
-    --f-text:        rgba(255,255,255,0.9);
-    --f-text-body:   rgba(255,255,255,0.82);
-    --f-text-soft:   rgba(255,255,255,0.45);
-    --f-text-subtle: rgba(255,255,255,0.28);
-    --f-text-muted:  rgba(255,255,255,0.2);
-    --f-text-label:  rgba(255,255,255,0.35);
+    --f-text:        #15171A;
+    --f-text-body:   #22252A;
+    --f-text-soft:   #4A4F57;
+    --f-text-subtle: #62666E;
+    --f-text-muted:  #8A8E95;
+    --f-text-label:  #62666E;
 
     /* Status */
-    --f-warn:        #f0b840;
-    --f-warn-bg:     rgba(240,184,64,0.14);
-    --f-warn-border: rgba(240,184,64,0.2);
-    --f-danger:      #f07860;
-    --f-danger-bg:   rgba(240,120,96,0.14);
-    --f-danger-border: rgba(240,120,96,0.2);
-    --f-danger-text: rgba(250,140,110,0.9);
-
-    /* ── Component-level tokens ── */
+    --f-warn:          #9A5B00;
+    --f-warn-bg:       #FBF0DC;
+    --f-warn-border:   #EED6A8;
+    --f-danger:        #B4321F;
+    --f-danger-bg:     #FBE6E1;
+    --f-danger-border: #F2CFC6;
+    --f-danger-text:   #8F2818;
 
     /* Hover tints */
-    --f-hover:          rgba(255,255,255,0.06);
-    --f-hover-elevated: rgba(255,255,255,0.09);
+    --f-hover:          rgba(21,23,26,0.04);
+    --f-hover-elevated: rgba(21,23,26,0.07);
 
     /* Tooltip / popover */
-    --f-tooltip-bg:     rgba(12,22,18,0.97);
-    --f-tooltip-border: rgba(255,255,255,0.10);
-    --f-tooltip-text:   rgba(255,255,255,0.88);
-    --f-tooltip-shadow: rgba(0,0,0,0.40);
+    --f-tooltip-bg:     #15171A;
+    --f-tooltip-border: #15171A;
+    --f-tooltip-text:   #F4F2EC;
+    --f-tooltip-shadow: rgba(21,23,26,0.18);
 
-    /* Nav badge dot border (matches surface-rail) */
-    --f-badge-border: rgba(8,15,11,0.8);
+    --f-badge-border: #F4F2EC;
 
-    /* Glass hero (modals, hero cards) */
-    --f-glass-hero-bg:     rgba(255,255,255,0.05);
-    --f-glass-hero-border: rgba(255,255,255,0.10);
-    --f-glass-shadow:      rgba(0,0,0,0.25);
-    --f-glass-inner:       rgba(255,255,255,0.06);
-    --f-glass-hero-inner:  rgba(255,255,255,0.10);
+    /* Sheets */
+    --f-glass-hero-bg:     #FFFFFF;
+    --f-glass-hero-border: #E3DFD5;
+    --f-glass-shadow:      rgba(21,23,26,0.06);
+    --f-glass-inner:       rgba(255,255,255,0);
+    --f-glass-hero-inner:  rgba(255,255,255,0);
+    --f-blur:              none;
 
     /* Inputs */
-    --f-input-bg:         rgba(255,255,255,0.06);
-    --f-input-focus-ring: rgba(63,217,160,0.12);
+    --f-input-bg:         #FFFFFF;
+    --f-input-focus-ring: rgba(47,75,216,0.16);
 
-    /* Ghost button */
-    --f-btn-ghost-bg:    rgba(255,255,255,0.06);
-    --f-btn-ghost-hover: rgba(255,255,255,0.10);
+    /* Ghost / secondary button */
+    --f-btn-ghost-bg:    #FFFFFF;
+    --f-btn-ghost-hover: #F4F2EC;
+
+    /* Inverse surface */
+    --f-inverse-bg:   #15171A;
+    --f-inverse-text: #F4F2EC;
 
     /* Scrollbar */
-    --f-scrollbar-thumb:       rgba(255,255,255,0.12);
-    --f-scrollbar-thumb-hover: rgba(255,255,255,0.22);
+    --f-scrollbar-thumb:       rgba(21,23,26,0.16);
+    --f-scrollbar-thumb-hover: rgba(21,23,26,0.28);
 
     /* Typography */
-    --f-font-sans: 'Inter', system-ui, sans-serif;
-    --f-font-mono: 'DM Mono', ui-monospace, monospace;
+    --f-font-sans:    'Inter', system-ui, sans-serif;
+    --f-font-display: 'Space Grotesk', 'Inter', system-ui, sans-serif;
+    --f-font-mono:    var(--f-font-display); /* numbers & labels use the display face */
 
     /* Radii */
-    --f-radius-xs: 5px;
-    --f-radius-sm: 7px;
+    --f-radius-xs: 6px;
+    --f-radius-sm: 8px;
     --f-radius:    10px;
-    --f-radius-md: 12px;
+    --f-radius-md: 10px;
     --f-radius-lg: 14px;
-    --f-radius-xl: 16px;
+    --f-radius-xl: 18px;
 
     /* Layout dimensions */
-    --f-topbar-h: 40px;
-    --f-rail-w:   52px;
-    --f-bottom-h: 38px;
+    --f-topbar-h:  40px;
+    --f-rail-w:    232px;
+    --f-bottom-h:  38px;
   }
 
-  /* ─── Ambient background applied globally ─── */
   html, body {
     margin: 0; padding: 0;
-    background: var(--f-bg-radial), var(--f-bg-gradient);
-    background-attachment: fixed;
+    background: var(--f-bg-base);
     color: var(--f-text-body);
     font-family: var(--f-font-sans);
+    -webkit-font-smoothing: antialiased;
   }
 
   body { overflow: hidden; }
+
+  h1, h2 {
+    font-family: var(--f-font-display);
+    letter-spacing: -0.02em;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--f-green);
+    outline-offset: 2px;
+  }
 }
 
 /* ─── Scrollbar ─── */
-::-webkit-scrollbar          { width: 3px; }
+::-webkit-scrollbar          { width: 8px; height: 8px; }
 ::-webkit-scrollbar-track    { background: transparent; }
-::-webkit-scrollbar-thumb    { background: var(--f-scrollbar-thumb); border-radius: 2px; }
-::-webkit-scrollbar-thumb:hover { background: var(--f-scrollbar-thumb-hover); }
+::-webkit-scrollbar-thumb    { background: var(--f-scrollbar-thumb); border-radius: 4px; border: 2px solid transparent; background-clip: padding-box; }
+::-webkit-scrollbar-thumb:hover { background: var(--f-scrollbar-thumb-hover); background-clip: padding-box; }
 
 /* ─── Component utilities ─── */
 @layer components {
@@ -190,66 +207,69 @@
     @apply rounded-xl border;
     border-color: var(--f-border);
     background: var(--f-surface);
-    backdrop-filter: blur(20px);
   }
 
   .badge {
     @apply inline-flex items-center gap-2 rounded-full px-3 py-1 text-sm font-medium;
   }
 
+  /* Amounts and big numbers: display face with tabular digits */
+  .f-num {
+    font-family: var(--f-font-display);
+    font-variant-numeric: tabular-nums;
+    letter-spacing: -0.01em;
+  }
+
+  /* Historical names: these are now solid sheets, not frosted glass */
   .f-glass {
     background: var(--f-surface);
-    backdrop-filter: blur(20px) saturate(1.4);
     border: 1px solid var(--f-border);
-    box-shadow: 0 4px 16px var(--f-glass-shadow), inset 0 1px 0 var(--f-glass-inner);
   }
 
   .f-glass-hero {
     background: var(--f-glass-hero-bg);
-    backdrop-filter: blur(24px) saturate(1.5);
     border: 1px solid var(--f-glass-hero-border);
-    box-shadow: 0 8px 32px var(--f-glass-shadow), inset 0 1px 0 var(--f-glass-hero-inner);
+    box-shadow: 0 1px 2px var(--f-glass-shadow), 0 12px 32px var(--f-glass-shadow);
   }
 
   /* ── Form inputs ── */
   .f-input {
     background: var(--f-input-bg);
-    border: 1px solid var(--f-border);
-    color: var(--f-text-body);
+    border: 1px solid var(--f-border-strong);
+    color: var(--f-text);
     border-radius: var(--f-radius-md);
     transition: border-color 0.15s, box-shadow 0.15s;
   }
   .f-input:focus {
     outline: none;
-    border-color: var(--f-border-green);
+    border-color: var(--f-green);
     box-shadow: 0 0 0 3px var(--f-input-focus-ring);
   }
-  .f-input::placeholder { color: var(--f-text-subtle); }
+  .f-input::placeholder { color: var(--f-text-muted); }
 
   /* ── Buttons ── */
   .f-btn-primary {
-    background: linear-gradient(135deg, rgba(45,180,130,0.88) 0%, rgba(28,140,100,0.75) 100%);
-    border: 1px solid rgba(63,217,160,0.28);
-    color: rgba(255,255,255,0.95);
-    box-shadow: 0 2px 8px rgba(45,180,130,0.22);
-    transition: box-shadow 0.15s, transform 0.15s, background 0.15s;
+    background: var(--f-green);
+    border: 1px solid var(--f-green);
+    color: var(--f-on-accent, #FFFFFF);
+    font-weight: 600;
+    transition: background 0.15s, border-color 0.15s;
   }
   .f-btn-primary:hover {
-    background: linear-gradient(135deg, rgba(55,195,145,0.92) 0%, rgba(38,155,110,0.82) 100%);
-    box-shadow: 0 4px 14px rgba(45,180,130,0.32);
-    transform: translateY(-1px);
+    background: var(--color-brand-700);
+    border-color: var(--color-brand-700);
   }
-  .f-btn-primary:disabled { opacity: 0.5; transform: none; }
+  .f-btn-primary:disabled { opacity: 0.5; }
 
   .f-btn-ghost {
     background: var(--f-btn-ghost-bg);
-    border: 1px solid var(--f-border);
-    color: var(--f-text-soft);
+    border: 1px solid var(--f-border-strong);
+    color: var(--f-text);
     transition: background 0.13s, color 0.13s;
   }
   .f-btn-ghost:hover {
     background: var(--f-btn-ghost-hover);
-    color: var(--f-text-body);
+    color: var(--f-text);
   }
 
   .f-btn-danger {
@@ -258,21 +278,25 @@
     color: var(--f-danger-text);
     transition: background 0.13s;
   }
-  .f-btn-danger:hover { background: rgba(240,120,96,0.22); }
+  .f-btn-danger:hover { filter: brightness(0.97); }
 
   /* ── Section label ── */
   .f-label {
     display: block;
-    font-size: 0.75rem;
+    font-size: 0.8125rem;
     font-weight: 500;
-    color: var(--f-text-subtle);
+    color: var(--f-text-soft);
     margin-bottom: 6px;
-    letter-spacing: 0.02em;
   }
 
-  /* Status pill variants */
-  .f-pill-paid    { background: var(--f-green-bg-pill); color: var(--f-green-text);  border: 1px solid var(--f-border-green-pill); }
-  .f-pill-sent    { background: var(--f-blue-bg);       color: var(--f-blue-text);   border: 1px solid var(--f-blue-border); }
-  .f-pill-draft   { background: var(--f-surface);       color: var(--f-text-label);  border: 1px solid var(--f-border-subtle); }
-  .f-pill-overdue { background: var(--f-danger-bg);     color: var(--f-danger-text); border: 1px solid var(--f-danger-border); }
+  /* Status pill variants — each differs by shape of its icon as well as colour */
+  .f-pill-paid    { background: var(--f-success-bg); color: var(--f-success-text); border: 1px solid var(--f-success-border); }
+  .f-pill-sent    { background: var(--f-blue-bg);    color: var(--f-blue-text);    border: 1px solid var(--f-blue-border); }
+  .f-pill-draft   { background: var(--f-hover);      color: var(--f-text-soft);    border: 1px solid var(--f-border); }
+  .f-pill-overdue { background: var(--f-danger-bg);  color: var(--f-danger-text);  border: 1px solid var(--f-danger-border); }
 }
+
+/* ─── Small interaction states ─── */
+.f-pick-row:hover { background: var(--f-surface-hover) !important; border-color: var(--f-border-strong) !important; }
+.f-line-remove:hover { background: var(--f-danger-bg) !important; color: var(--f-danger-text) !important; }
+.f-attn-row:hover span:first-child > span:first-child { text-decoration: underline; }

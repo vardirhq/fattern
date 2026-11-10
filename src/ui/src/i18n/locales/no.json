@@ -109,7 +109,20 @@
     "monthly_overview": "Månedlig oversikt for aktivt budsjettår",
     "no_data_for_period": "Ingen data å vise for denne perioden",
     "income": "Inntekter",
-    "expenses_label": "Utgifter"
+    "expenses_label": "Utgifter",
+    "key_figures": "Nøkkeltall",
+    "invoiced_ytd": "Fakturert i perioden",
+    "paid_in": "Innbetalt",
+    "outstanding": "Utestående",
+    "nothing_overdue": "Ingenting forfalt",
+    "result": "Resultat",
+    "needs_attention": "Krever oppmerksomhet",
+    "see_all": "Se alle",
+    "all_in_order": "Alt i orden",
+    "no_overdue_invoices": "Ingen forfalte fakturaer.",
+    "days_overdue_one": "{{count}} dag forfalt",
+    "days_overdue_other": "{{count}} dager forfalt",
+    "and_more": "+ {{count}} til"
   },
   "invoice": {
     "title": "Fakturaer",
@@ -202,7 +215,8 @@
       "picker_empty": "Ingen ugyldige utgifter funnet",
       "confirm": "Koble valgte",
       "cancel": "Avbryt"
-    }
+    },
+    "all": "Alle"
   },
   "expense": {
     "filter_by": "Filtrer etter {{name}}",

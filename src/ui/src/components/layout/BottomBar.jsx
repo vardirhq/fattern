@@ -171,8 +171,8 @@ export function BottomBar({
         <span
           style={{
             width: 20, height: 20, borderRadius: '50%',
-            background: 'rgba(45,180,130,0.25)',
-            border: '1px solid rgba(63,217,160,0.3)',
+            background: 'rgba(47,75,216,0.25)',
+            border: '1px solid rgba(47,75,216,0.3)',
             display: 'flex', alignItems: 'center', justifyContent: 'center',
             fontSize: 8, fontWeight: 700, color: 'var(--f-green)',
           }}
@@ -248,9 +248,9 @@ export function BottomBar({
               width: 300,
               padding: 8,
               borderRadius: 14,
-              background: 'rgba(10, 18, 14, 0.96)',
+              background: 'var(--f-surface-elevated)',
               border: '1px solid var(--f-border)',
-              boxShadow: '0 18px 45px rgba(0,0,0,0.35)',
+              boxShadow: '0 12px 32px var(--f-tooltip-shadow)',
               backdropFilter: 'blur(20px)',
             }}
           >
@@ -400,9 +400,9 @@ export function BottomBar({
               width: 280,
               padding: 8,
               borderRadius: 14,
-              background: 'rgba(10, 18, 14, 0.96)',
+              background: 'var(--f-surface-elevated)',
               border: '1px solid var(--f-border)',
-              boxShadow: '0 18px 45px rgba(0,0,0,0.35)',
+              boxShadow: '0 12px 32px var(--f-tooltip-shadow)',
               backdropFilter: 'blur(20px)',
             }}
           >
@@ -537,7 +537,7 @@ export function BottomBar({
             style={{
               width: 6, height: 6, borderRadius: '50%',
               background: 'var(--f-green)',
-              boxShadow: '0 0 6px rgba(63,217,160,0.7)',
+              boxShadow: 'none',
               flexShrink: 0,
             }}
           />
@@ -553,9 +553,9 @@ export function BottomBar({
               width: 260,
               padding: 12,
               borderRadius: 14,
-              background: 'rgba(10, 18, 14, 0.96)',
+              background: 'var(--f-surface-elevated)',
               border: '1px solid var(--f-border)',
-              boxShadow: '0 18px 45px rgba(0,0,0,0.35)',
+              boxShadow: '0 12px 32px var(--f-tooltip-shadow)',
               backdropFilter: 'blur(20px)',
               fontFamily: 'var(--f-font-sans)',
             }}

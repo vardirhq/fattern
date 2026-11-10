@@ -24,7 +24,7 @@ export function CustomerCard({ customer, onEdit, onDelete, index = 0 }) {
           />
         </div>
       ) : (
-        <div className="aspect-square w-full flex items-center justify-center" style={{ background: 'linear-gradient(135deg, rgba(63,217,160,0.06), rgba(63,217,160,0.12))' }}>
+        <div className="aspect-square w-full flex items-center justify-center" style={{ background: 'var(--f-bg-base)' }}>
           <div className="text-center">
             <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full text-2xl font-semibold" style={{ background: 'var(--f-green-bg)', color: 'var(--f-green-text)', border: '1px solid var(--f-border-green)' }}>
               {customer.name?.charAt(0)?.toUpperCase() || '?'}

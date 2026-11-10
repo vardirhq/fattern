@@ -10,8 +10,8 @@ import {
 
 const variants = {
   success: {
-    bg: 'rgba(45,180,130,0.12)',
-    border: '1px solid rgba(63,217,160,0.25)',
+    bg: 'rgba(47,75,216,0.12)',
+    border: '1px solid rgba(47,75,216,0.25)',
     text: 'var(--f-text)',
     icon: IconCircleCheck,
     iconColor: 'var(--f-green)',

@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { IconTerminal2 } from '@tabler/icons-react';
+import { FatternMark } from './brand/FatternMark';
 
-export function TitleBar({ title = 'Fattern' }) {
+export function TitleBar({ title = 'Fattern', showBrand = false }) {
   const { t } = useTranslation();
   const [isMaximized, setIsMaximized] = useState(false);
 
@@ -34,8 +35,6 @@ export function TitleBar({ title = 'Fattern' }) {
         padding: '0 18px',
         flexShrink: 0,
         background: 'var(--f-surface-topbar)',
-        backdropFilter: 'blur(30px)',
-        borderBottom: '1px solid var(--f-border-top)',
         WebkitAppRegion: 'drag',
         userSelect: 'none',
         zIndex: 100,
@@ -43,12 +42,8 @@ export function TitleBar({ title = 'Fattern' }) {
     >
       {/* Brand */}
       <div style={{ display: 'flex', alignItems: 'center', gap: 9 }}>
-        <img
-          src="/logo.png"
-          alt="Fattern"
-          style={{ width: 20, height: 20, objectFit: 'contain', display: 'block' }}
-        />
-        <span style={{ fontSize: 13, fontWeight: 600, color: 'var(--f-text)', letterSpacing: '-0.01em' }}>
+        {showBrand && <FatternMark size={18} title="" />}
+        <span style={{ fontSize: 13, fontWeight: 500, color: 'var(--f-text-subtle)', letterSpacing: '-0.01em' }}>
           {title}
         </span>
       </div>

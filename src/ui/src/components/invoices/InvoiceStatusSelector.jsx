@@ -73,7 +73,7 @@ export function InvoiceStatusSelector({ invoice, onStatusChange, showModal }) {
         left: pos.left,
         zIndex: 9999,
         minWidth: 150,
-        background: 'var(--f-surface-card, rgba(12,22,18,0.97))',
+        background: 'var(--f-surface-elevated)',
         backdropFilter: 'blur(20px)',
         border: '1px solid var(--f-border)',
         borderRadius: 10,
@@ -96,7 +96,7 @@ export function InvoiceStatusSelector({ invoice, onStatusChange, showModal }) {
               color: isActive ? 'var(--f-green-text)' : 'var(--f-text-soft)',
               transition: 'background 0.1s, color 0.1s',
             }}
-            onMouseEnter={e => { if (!isActive) { e.currentTarget.style.background = 'rgba(255,255,255,0.06)'; e.currentTarget.style.color = 'var(--f-text-body)'; }}}
+            onMouseEnter={e => { if (!isActive) { e.currentTarget.style.background = 'var(--f-hover-elevated)'; e.currentTarget.style.color = 'var(--f-text-body)'; }}}
             onMouseLeave={e => { if (!isActive) { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.color = 'var(--f-text-soft)'; }}}
           >
             <Icon size={13} stroke={1.8} />
@@ -117,13 +117,12 @@ export function InvoiceStatusSelector({ invoice, onStatusChange, showModal }) {
         className={badgeClass}
         style={{
           display: 'inline-flex', alignItems: 'center', gap: 5,
-          fontSize: 11, fontWeight: 500,
-          borderRadius: 'var(--f-radius-xs)',
-          padding: '3px 7px 3px 8px',
-          fontFamily: 'var(--f-font-mono)',
+          fontSize: 12, fontWeight: 600,
+          borderRadius: 999,
+          padding: '3px 8px 3px 10px',
+          fontFamily: 'var(--f-font-sans)',
+          whiteSpace: 'nowrap',
           cursor: 'pointer',
-          border: 'none',
-          background: 'inherit',
         }}
       >
         <currentDef.Icon size={12} stroke={2} />

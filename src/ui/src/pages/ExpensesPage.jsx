@@ -68,12 +68,12 @@ export function ExpensesPage({
   return (
     <div className="space-y-4">
       {/* Page header */}
-      <header className="f-glass rounded-3xl overflow-hidden" style={{ position: 'relative' }}>
-        <div className="pointer-events-none absolute inset-0" style={{ background: 'linear-gradient(135deg, rgba(45,180,130,0.07) 0%, transparent 60%)' }} />
-        <div className="relative z-10 p-6 lg:p-8">
+      <header style={{ position: 'relative' }}>
+        <div className="pointer-events-none absolute inset-0" style={{ background: 'transparent' }} />
+        <div className="relative z-10">
           <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
             <div>
-              <p className="text-xs uppercase tracking-[0.3em]" style={{ color: 'var(--f-text-subtle)' }}>
+              <p className="text-sm" style={{ color: 'var(--f-text-subtle)' }}>
                 {t('expense.title')}
               </p>
               <h1 className="mt-2 text-3xl font-semibold" style={{ color: 'var(--f-text)' }}>

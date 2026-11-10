@@ -106,13 +106,13 @@ export function BudgetYearsPage({
 
   return (
     <div className="space-y-6">
-      <header className="f-glass rounded-3xl overflow-hidden" style={{ position: 'relative' }}>
-        <div className="pointer-events-none absolute inset-0" style={{ background: 'linear-gradient(135deg, rgba(45,180,130,0.07) 0%, transparent 60%)' }} />
-        <div className="relative z-10 p-6 lg:p-8">
+      <header style={{ position: 'relative' }}>
+        <div className="pointer-events-none absolute inset-0" style={{ background: 'transparent' }} />
+        <div className="relative z-10">
           <div className="flex flex-col gap-6 lg:flex-row lg:items-start lg:justify-between">
             <div>
-              <p className="text-xs uppercase tracking-[0.3em]" style={{ color: 'var(--f-text-subtle)' }}>{t('budget_years_page.subtitle')}</p>
-              <h1 className="mt-3 text-3xl font-semibold" style={{ color: 'var(--f-text)' }}>{t('budget_years_page.title')}</h1>
+              <p className="text-sm" style={{ color: 'var(--f-text-subtle)' }}>{t('budget_years_page.subtitle')}</p>
+              <h1 className="mt-1 text-3xl font-semibold" style={{ color: 'var(--f-text)' }}>{t('budget_years_page.title')}</h1>
               <p className="mt-2 text-sm" style={{ color: 'var(--f-text-soft)' }}>
                 {t('budget_years_page.desc')}
               </p>
@@ -162,10 +162,10 @@ export function BudgetYearsPage({
                 transition={{ duration: 0.3, delay: sortedYears.indexOf(year) * 0.05 }}
                 whileHover={{ y: -2, transition: { duration: 0.2 } }}
                 className="f-glass rounded-3xl overflow-hidden transition"
-                style={isActive ? { borderColor: 'var(--f-border-green)', boxShadow: '0 0 20px rgba(63,217,160,0.12)' } : {}}
+                style={isActive ? { borderColor: 'var(--f-border-green)', boxShadow: 'none' } : {}}
               >
                 {/* Header */}
-                <div className="relative overflow-hidden p-6" style={{ borderBottom: '1px solid var(--f-border-subtle)', background: 'linear-gradient(135deg, rgba(45,180,130,0.06) 0%, transparent 60%)' }}>
+                <div className="relative overflow-hidden p-6" style={{ borderBottom: '1px solid var(--f-border-subtle)', background: 'transparent' }}>
                   <div className="relative z-10 flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
                     <div className="flex-1">
                       <div className="flex items-center gap-3 mb-2">
@@ -333,7 +333,7 @@ export function BudgetYearsPage({
 
                       {/* Net */}
                       <div className="rounded-2xl p-4" style={{
-                        background: summary.net >= 0 ? 'rgba(63,217,160,0.06)' : 'rgba(240,120,96,0.06)',
+                        background: summary.net >= 0 ? 'rgba(47,75,216,0.06)' : 'rgba(240,120,96,0.06)',
                         border: summary.net >= 0 ? '1px solid var(--f-border-green)' : '1px solid var(--f-danger-border)',
                       }}>
                         <div className="flex items-center gap-2 mb-2">

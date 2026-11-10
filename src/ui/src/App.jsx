@@ -956,6 +956,7 @@ function App() {
             onInvoiceStatusChange={handleInvoiceStatusChange}
             showInvoiceStatusModal={showInvoiceStatusModal}
             onViewInvoice={openViewInvoiceModal}
+            overdueInvoices={(allInvoices || []).filter(inv => inv.status === 'overdue')}
           />
         );
     }
@@ -970,7 +971,7 @@ function App() {
         overflow: 'hidden',
       }}
     >
-      <TitleBar />
+      <TitleBar showBrand={!!templateEditorId} />
       {templateEditorId ? (
         <div style={{ flex: 1, overflow: 'hidden' }}>
           <TemplateEditorPage
@@ -986,7 +987,7 @@ function App() {
             workflowShortcuts={workflowShortcuts}
             activeNavItem={currentPage}
             onNavigate={setCurrentPage}
-            badges={{ Fakturaer: (summary.overdue ?? 0) > 0 }}
+            badges={{ Fakturaer: (allInvoices || []).filter(inv => inv.status === 'overdue').length }}
           >
             <AnimatePresence mode="wait">
               <motion.div
@@ -1104,6 +1105,7 @@ function App() {
         onSubmit={handleInvoiceSubmit}
         customers={customers || []}
         products={products || []}
+        company={company}
       />
       <ExpenseModal
         isOpen={isExpenseModalOpen}

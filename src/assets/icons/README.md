@@ -1,6 +1,12 @@
 # App Icons
 
-This directory should contain the app icon files.
+The app icon is the Fattern mark: a lowercase f whose crossbar is a moustache.
+Source drawings:
+
+- `src/ui/public/fattern-monogram.svg` (also at the repo root) — the full mark, used for 64 px and up
+- `fattern-mark-small.svg` (this folder) — a heavier drawing for 16 and 32 px, so the moustache stays legible
+
+The React version lives in `src/ui/src/components/brand/FatternMark.jsx`.
 
 ## Required Files
 

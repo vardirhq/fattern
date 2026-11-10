@@ -840,6 +840,7 @@ class FatternDatabase {
         invoices.id,
         invoices.invoice_number,
         invoices.invoice_date,
+        invoices.due_date,
         invoices.total,
         invoices.status,
         invoices.payment_date,
@@ -861,6 +862,7 @@ class FatternDatabase {
       amount: row.total ?? 0,
       status: row.status || 'draft',
       date: row.invoice_date,
+      due_date: row.due_date,
       payment_date: row.payment_date,
     }));
   }

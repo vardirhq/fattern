@@ -1,157 +1,194 @@
 /**
  * Token factories for --f-* CSS custom properties.
  *
- * Each theme supplies its bg/radial overrides; everything else
- * (surfaces, borders, text, status, glass, component tokens) is shared
+ * Each theme supplies its bg overrides; everything else
+ * (surfaces, borders, text, status, component tokens) is shared
  * per colour-scheme so all light themes look consistent and all
  * dark themes look consistent.
  *
+ * Visual direction ("papir, blekk og én farge"): a warm paper ground,
+ * solid white sheets with 1px lines instead of glass and glow, graphite
+ * ink for text and a single accent colour for actions.
+ *
  * --f-green* / --f-border-green* are NOT included here — they are
  * always derived dynamically from colors.accent by applyTheme().
+ * (The name is historical: they hold the theme's accent, whatever its hue.)
  */
 
 const SHARED_LIGHT = {
-  // Glass surfaces — frosted white
-  '--f-surface':          'rgba(255,255,255,0.60)',
-  '--f-surface-hover':    'rgba(255,255,255,0.75)',
-  '--f-surface-elevated': 'rgba(255,255,255,0.70)',
-  '--f-surface-topbar':   'rgba(255,255,255,0.65)',
-  '--f-surface-rail':     'rgba(255,255,255,0.55)',
-  '--f-surface-bottom':   'rgba(255,255,255,0.55)',
+  // Surfaces — solid paper and white sheets
+  '--f-surface':          '#FFFFFF',
+  '--f-surface-hover':    '#FAF9F6',
+  '--f-surface-elevated': '#FFFFFF',
+  '--f-surface-topbar':   'var(--f-bg-base)',
+  '--f-surface-rail':     'var(--f-bg-base)',
+  '--f-surface-bottom':   'var(--f-bg-base)',
 
-  // Borders — dark-on-light (low alpha)
-  '--f-border':            'rgba(0,0,0,0.07)',
-  '--f-border-subtle':     'rgba(0,0,0,0.05)',
-  '--f-border-faint':      'rgba(0,0,0,0.04)',
-  '--f-border-top':        'rgba(0,0,0,0.07)',
-  '--f-border-green-pill': 'rgba(26,144,104,0.20)',
+  // Borders — warm hairlines
+  '--f-border':            '#E3DFD5',
+  '--f-border-subtle':     '#EAE7DF',
+  '--f-border-faint':      '#F1EEE7',
+  '--f-border-top':        '#E3DFD5',
+  '--f-border-strong':     '#D6D1C4',
+  '--f-chart-muted':       '#C9C3B4',
 
-  // Blue status accents (for "sent" status pills)
-  '--f-blue':        'rgba(40,100,200,0.90)',
-  '--f-blue-bg':     'rgba(40,100,200,0.09)',
-  '--f-blue-border': 'rgba(40,100,200,0.18)',
-  '--f-blue-text':   '#1555a0',
+  // "Sent" status
+  '--f-blue':        '#2F4BD8',
+  '--f-blue-bg':     '#E6EAFB',
+  '--f-blue-border': '#CBD3F6',
+  '--f-blue-text':   '#2337A8',
 
-  // Text — dark for readability on light backgrounds
-  '--f-text':        'rgba(26,31,28,0.90)',
-  '--f-text-body':   'rgba(26,31,28,0.82)',
-  '--f-text-soft':   'rgba(0,0,0,0.50)',
-  '--f-text-subtle': 'rgba(0,0,0,0.32)',
-  '--f-text-muted':  'rgba(0,0,0,0.22)',
-  '--f-text-label':  'rgba(0,0,0,0.38)',
+  // "Paid" / positive status — independent of the accent colour
+  '--f-success':        '#1E7A4C',
+  '--f-success-bg':     '#E3F2E9',
+  '--f-success-border': '#C3E2CF',
+  '--f-success-text':   '#17603B',
 
-  // Status — warm/rich on white backgrounds
-  '--f-warn':          '#b07010',
-  '--f-warn-bg':       'rgba(176,112,16,0.10)',
-  '--f-warn-border':   'rgba(176,112,16,0.18)',
-  '--f-danger':        '#b83820',
-  '--f-danger-bg':     'rgba(200,60,30,0.09)',
-  '--f-danger-border': 'rgba(200,60,30,0.18)',
-  '--f-danger-text':   '#a03020',
+  // Text — graphite ink (all body/label shades pass 4.5:1 on paper and white)
+  '--f-text':        '#15171A',
+  '--f-text-body':   '#22252A',
+  '--f-text-soft':   '#4A4F57',
+  '--f-text-subtle': '#62666E',
+  '--f-text-muted':  '#8A8E95',
+  '--f-text-label':  '#62666E',
+
+  // Status
+  '--f-warn':          '#9A5B00',
+  '--f-warn-bg':       '#FBF0DC',
+  '--f-warn-border':   '#EED6A8',
+  '--f-danger':        '#B4321F',
+  '--f-danger-bg':     '#FBE6E1',
+  '--f-danger-border': '#F2CFC6',
+  '--f-danger-text':   '#8F2818',
 
   // Hover tints
-  '--f-hover':          'rgba(0,0,0,0.04)',
-  '--f-hover-elevated': 'rgba(0,0,0,0.07)',
+  '--f-hover':          'rgba(21,23,26,0.04)',
+  '--f-hover-elevated': 'rgba(21,23,26,0.07)',
 
-  // Tooltip / popover
-  '--f-tooltip-bg':     'rgba(255,255,255,0.96)',
-  '--f-tooltip-border': 'rgba(0,0,0,0.10)',
-  '--f-tooltip-text':   '#1a1f1c',
-  '--f-tooltip-shadow': 'rgba(0,0,0,0.12)',
+  // Tooltip / popover — ink chip
+  '--f-tooltip-bg':     '#15171A',
+  '--f-tooltip-border': '#15171A',
+  '--f-tooltip-text':   '#F4F2EC',
+  '--f-tooltip-shadow': 'rgba(21,23,26,0.18)',
 
   // Nav badge dot border (should match surface-rail)
-  '--f-badge-border': 'rgba(240,247,243,0.9)',
+  '--f-badge-border': 'var(--f-bg-base)',
 
-  // Glass hero (modals, hero cards)
-  '--f-glass-hero-bg':     'rgba(255,255,255,0.70)',
-  '--f-glass-hero-border': 'rgba(255,255,255,0.92)',
-  '--f-glass-shadow':      'rgba(0,0,0,0.07)',
-  '--f-glass-inner':       'rgba(255,255,255,0.90)',
-  '--f-glass-hero-inner':  'rgba(255,255,255,0.92)',
+  // Sheets (modals, hero cards) — solid, no frosted glass
+  '--f-glass-hero-bg':     '#FFFFFF',
+  '--f-glass-hero-border': '#E3DFD5',
+  '--f-glass-shadow':      'rgba(21,23,26,0.06)',
+  '--f-glass-inner':       'rgba(255,255,255,0)',
+  '--f-glass-hero-inner':  'rgba(255,255,255,0)',
+  '--f-blur':              'none',
 
   // Inputs
-  '--f-input-bg':         'rgba(255,255,255,0.75)',
-  '--f-input-focus-ring': 'rgba(26,144,104,0.12)',
+  '--f-input-bg':         '#FFFFFF',
+  '--f-input-focus-ring': 'rgba(47,75,216,0.16)',
 
-  // Ghost button
-  '--f-btn-ghost-bg':    'rgba(0,0,0,0.04)',
-  '--f-btn-ghost-hover': 'rgba(0,0,0,0.07)',
+  // Ghost / secondary button
+  '--f-btn-ghost-bg':    '#FFFFFF',
+  '--f-btn-ghost-hover': '#F4F2EC',
+
+  // Inverse (ink) surface — e.g. active nav item, dark summary cards
+  '--f-inverse-bg':   '#15171A',
+  '--f-inverse-text': '#F4F2EC',
+
+  // Logo mark
+  '--f-mark-tile': '#15171A',
+  '--f-mark-ink':  '#F4F2EC',
 
   // Scrollbar
-  '--f-scrollbar-thumb':       'rgba(0,0,0,0.12)',
-  '--f-scrollbar-thumb-hover': 'rgba(0,0,0,0.22)',
+  '--f-scrollbar-thumb':       'rgba(21,23,26,0.16)',
+  '--f-scrollbar-thumb-hover': 'rgba(21,23,26,0.28)',
 };
 
 const SHARED_DARK = {
-  // Surfaces — near-transparent on dark backgrounds
-  '--f-surface':          'rgba(255,255,255,0.05)',
-  '--f-surface-hover':    'rgba(255,255,255,0.08)',
-  '--f-surface-elevated': 'rgba(10,18,14,0.65)',
-  '--f-surface-topbar':   'rgba(10,18,14,0.60)',
-  '--f-surface-rail':     'rgba(8,15,11,0.50)',
-  '--f-surface-bottom':   'rgba(8,14,10,0.55)',
+  // Surfaces — solid ink sheets
+  '--f-surface':          '#1D2024',
+  '--f-surface-hover':    '#23262B',
+  '--f-surface-elevated': '#1D2024',
+  '--f-surface-topbar':   'var(--f-bg-base)',
+  '--f-surface-rail':     'var(--f-bg-base)',
+  '--f-surface-bottom':   'var(--f-bg-base)',
 
-  // Borders — light-on-dark (low alpha)
-  '--f-border':            'rgba(255,255,255,0.08)',
-  '--f-border-subtle':     'rgba(255,255,255,0.06)',
-  '--f-border-faint':      'rgba(255,255,255,0.04)',
-  '--f-border-top':        'rgba(255,255,255,0.07)',
-  '--f-border-green-pill': 'rgba(63,217,160,0.20)',
+  // Borders
+  '--f-border':            'rgba(244,242,236,0.10)',
+  '--f-border-subtle':     'rgba(244,242,236,0.07)',
+  '--f-border-faint':      'rgba(244,242,236,0.05)',
+  '--f-border-top':        'rgba(244,242,236,0.09)',
+  '--f-border-strong':     'rgba(244,242,236,0.18)',
+  '--f-chart-muted':       'rgba(244,242,236,0.24)',
 
-  // Blue status accents
-  '--f-blue':        'rgba(80,140,220,0.90)',
-  '--f-blue-bg':     'rgba(80,140,220,0.14)',
-  '--f-blue-border': 'rgba(80,140,220,0.20)',
-  '--f-blue-text':   'rgba(100,160,240,0.90)',
+  // "Sent" status
+  '--f-blue':        '#8FA2FF',
+  '--f-blue-bg':     'rgba(143,162,255,0.14)',
+  '--f-blue-border': 'rgba(143,162,255,0.26)',
+  '--f-blue-text':   '#AEBBFF',
 
-  // Text — light on dark
-  '--f-text':        'rgba(255,255,255,0.90)',
-  '--f-text-body':   'rgba(255,255,255,0.82)',
-  '--f-text-soft':   'rgba(255,255,255,0.45)',
-  '--f-text-subtle': 'rgba(255,255,255,0.28)',
-  '--f-text-muted':  'rgba(255,255,255,0.20)',
-  '--f-text-label':  'rgba(255,255,255,0.35)',
+  // "Paid" / positive status
+  '--f-success':        '#6FCF97',
+  '--f-success-bg':     'rgba(111,207,151,0.14)',
+  '--f-success-border': 'rgba(111,207,151,0.26)',
+  '--f-success-text':   '#8EDDB0',
+
+  // Text — paper on ink
+  '--f-text':        '#F4F2EC',
+  '--f-text-body':   'rgba(244,242,236,0.88)',
+  '--f-text-soft':   'rgba(244,242,236,0.70)',
+  '--f-text-subtle': 'rgba(244,242,236,0.56)',
+  '--f-text-muted':  'rgba(244,242,236,0.38)',
+  '--f-text-label':  'rgba(244,242,236,0.56)',
 
   // Status
-  '--f-warn':          '#f0b840',
+  '--f-warn':          '#F0B840',
   '--f-warn-bg':       'rgba(240,184,64,0.14)',
-  '--f-warn-border':   'rgba(240,184,64,0.20)',
-  '--f-danger':        '#f07860',
-  '--f-danger-bg':     'rgba(240,120,96,0.14)',
-  '--f-danger-border': 'rgba(240,120,96,0.20)',
-  '--f-danger-text':   'rgba(250,140,110,0.90)',
+  '--f-warn-border':   'rgba(240,184,64,0.24)',
+  '--f-danger':        '#FF8A75',
+  '--f-danger-bg':     'rgba(255,138,117,0.14)',
+  '--f-danger-border': 'rgba(255,138,117,0.24)',
+  '--f-danger-text':   '#FFA595',
 
   // Hover tints
-  '--f-hover':          'rgba(255,255,255,0.06)',
-  '--f-hover-elevated': 'rgba(255,255,255,0.09)',
+  '--f-hover':          'rgba(244,242,236,0.05)',
+  '--f-hover-elevated': 'rgba(244,242,236,0.08)',
 
-  // Tooltip / popover
-  '--f-tooltip-bg':     'rgba(12,22,18,0.97)',
-  '--f-tooltip-border': 'rgba(255,255,255,0.10)',
-  '--f-tooltip-text':   'rgba(255,255,255,0.88)',
+  // Tooltip / popover — paper chip
+  '--f-tooltip-bg':     '#F4F2EC',
+  '--f-tooltip-border': '#F4F2EC',
+  '--f-tooltip-text':   '#15171A',
   '--f-tooltip-shadow': 'rgba(0,0,0,0.40)',
 
   // Nav badge dot border (matches surface-rail)
-  '--f-badge-border': 'rgba(8,15,11,0.8)',
+  '--f-badge-border': 'var(--f-bg-base)',
 
-  // Glass hero (modals, hero cards)
-  '--f-glass-hero-bg':     'rgba(255,255,255,0.05)',
-  '--f-glass-hero-border': 'rgba(255,255,255,0.10)',
-  '--f-glass-shadow':      'rgba(0,0,0,0.25)',
-  '--f-glass-inner':       'rgba(255,255,255,0.06)',
-  '--f-glass-hero-inner':  'rgba(255,255,255,0.10)',
+  // Sheets (modals, hero cards)
+  '--f-glass-hero-bg':     '#1D2024',
+  '--f-glass-hero-border': 'rgba(244,242,236,0.10)',
+  '--f-glass-shadow':      'rgba(0,0,0,0.30)',
+  '--f-glass-inner':       'rgba(255,255,255,0)',
+  '--f-glass-hero-inner':  'rgba(255,255,255,0)',
+  '--f-blur':              'none',
 
   // Inputs
-  '--f-input-bg':         'rgba(255,255,255,0.06)',
-  '--f-input-focus-ring': 'rgba(63,217,160,0.12)',
+  '--f-input-bg':         '#15171A',
+  '--f-input-focus-ring': 'rgba(143,162,255,0.20)',
 
-  // Ghost button
-  '--f-btn-ghost-bg':    'rgba(255,255,255,0.06)',
-  '--f-btn-ghost-hover': 'rgba(255,255,255,0.10)',
+  // Ghost / secondary button
+  '--f-btn-ghost-bg':    'rgba(244,242,236,0.04)',
+  '--f-btn-ghost-hover': 'rgba(244,242,236,0.08)',
+
+  // Inverse surface
+  '--f-inverse-bg':   '#F4F2EC',
+  '--f-inverse-text': '#15171A',
+
+  // Logo mark — paper tile on ink
+  '--f-mark-tile': '#F4F2EC',
+  '--f-mark-ink':  '#15171A',
 
   // Scrollbar
-  '--f-scrollbar-thumb':       'rgba(255,255,255,0.12)',
-  '--f-scrollbar-thumb-hover': 'rgba(255,255,255,0.22)',
+  '--f-scrollbar-thumb':       'rgba(244,242,236,0.14)',
+  '--f-scrollbar-thumb-hover': 'rgba(244,242,236,0.26)',
 };
 
 /**
@@ -186,15 +223,19 @@ export function makeDarkTokens({ bgBase, bgMid, bgDark, bgGradient, bgRadial }, 
   };
 }
 
-/** Default dark ambient background (green-biased, matches original index.css) */
-export const defaultDarkBg = {
-  bgBase:     '#0d1a14',
-  bgMid:      '#111820',
-  bgDark:     '#0e1118',
-  bgGradient: 'linear-gradient(160deg, #0d1a14 0%, #111820 50%, #0e1118 100%)',
-  bgRadial: [
-    'radial-gradient(ellipse 80% 60% at 15% 20%,  rgba(45,180,130,0.28) 0%, transparent 60%)',
-    'radial-gradient(ellipse 60% 50% at 85% 80%,  rgba(80,140,220,0.22) 0%, transparent 55%)',
-    'radial-gradient(ellipse 50% 40% at 60% 10%,  rgba(160,100,220,0.12) 0%, transparent 50%)',
-  ].join(',\n      '),
-};
+/** A flat background: no gradient washes or orbs. */
+export function flatBg(color) {
+  return {
+    bgBase:     color,
+    bgMid:      color,
+    bgDark:     color,
+    bgGradient: `linear-gradient(${color}, ${color})`,
+    bgRadial:   'linear-gradient(transparent, transparent)',
+  };
+}
+
+/** Default light ground: warm paper. */
+export const paperBg = flatBg('#F4F2EC');
+
+/** Default dark ground: ink. */
+export const defaultDarkBg = flatBg('#121417');
