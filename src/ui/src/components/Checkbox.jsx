@@ -19,7 +19,7 @@ export function Checkbox({ checked, onChange, label, description, disabled = fal
             background: checked ? 'var(--f-green-bg)' : 'rgba(255,255,255,0.06)',
             border: checked ? '1.5px solid var(--f-border-green)' : '1.5px solid var(--f-border)',
             color: checked ? 'var(--f-green-text)' : 'transparent',
-            boxShadow: checked ? '0 0 8px rgba(63,217,160,0.2)' : 'none',
+            boxShadow: checked ? 'none' : 'none',
           }}
         >
           {checked && <IconCheck size={12} stroke={2.8} />}

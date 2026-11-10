@@ -100,7 +100,7 @@ export function TemplateProperties({ element, onUpdate, template }) {
               style={{
                 borderBottomColor: isActive ? 'var(--f-green)' : 'transparent',
                 color: isActive ? 'var(--f-green-text)' : 'var(--f-text-subtle)',
-                background: isActive ? 'rgba(63,217,160,0.06)' : 'transparent',
+                background: isActive ? 'rgba(47,75,216,0.06)' : 'transparent',
               }}
               onMouseEnter={e => { if (!isActive) { e.currentTarget.style.color = 'var(--f-text-body)'; e.currentTarget.style.background = 'rgba(255,255,255,0.04)'; } }}
               onMouseLeave={e => { if (!isActive) { e.currentTarget.style.color = 'var(--f-text-subtle)'; e.currentTarget.style.background = 'transparent'; } }}

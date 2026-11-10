@@ -111,7 +111,7 @@ export function CustomersPage({ customers, onEditCustomer, onDeleteCustomer, onC
   return (
     <div className="space-y-6">
       <header className="f-glass rounded-3xl overflow-hidden" style={{ position: 'relative' }}>
-        <div className="pointer-events-none absolute inset-0" style={{ background: 'linear-gradient(135deg, rgba(45,180,130,0.07) 0%, transparent 60%)' }} />
+        <div className="pointer-events-none absolute inset-0" style={{ background: 'transparent' }} />
         <div className="relative z-10 p-6 lg:p-8">
           <div className="flex flex-col gap-6 lg:flex-row lg:items-start lg:justify-between">
             <div>

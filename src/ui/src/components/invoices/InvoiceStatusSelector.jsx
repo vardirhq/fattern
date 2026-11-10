@@ -73,7 +73,7 @@ export function InvoiceStatusSelector({ invoice, onStatusChange, showModal }) {
         left: pos.left,
         zIndex: 9999,
         minWidth: 150,
-        background: 'var(--f-surface-card, rgba(12,22,18,0.97))',
+        background: 'var(--f-surface-elevated)',
         backdropFilter: 'blur(20px)',
         border: '1px solid var(--f-border)',
         borderRadius: 10,

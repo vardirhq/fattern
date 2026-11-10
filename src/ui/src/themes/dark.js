@@ -1,50 +1,49 @@
 import { makeDarkTokens, defaultDarkBg } from './tokens';
 
 /**
- * Dark Theme - Free theme
- * Deep dark with teal accents, excellent contrast
+ * Dark Theme ("Blekk") - Free theme
+ * Ink ground with paper-coloured text and a light cobalt accent.
  */
 export const darkTheme = {
   id: 'dark',
-  name: 'Mørk',
+  name: 'Blekk',
   premium: false,
   dark: true,
   accentOptions: [
-    { name: 'Turkis', color: '#2dd4bf' }, // Standard
-    { name: 'Blå', color: '#60a5fa' },
-    { name: 'Grønn', color: '#4ade80' },
-    { name: 'Lilla', color: '#c084fc' },
-    { name: 'Oransje', color: '#fb923c' },
-    { name: 'Rosa', color: '#f472b6' },
+    { name: 'Kobolt',  color: '#8FA2FF' }, // Standard
+    { name: 'Papir',   color: '#F4F2EC' },
+    { name: 'Fjord',   color: '#5EC8C0' },
+    { name: 'Lyng',    color: '#C9A2F2' },
+    { name: 'Rust',    color: '#F2A273' },
+    { name: 'Bær',     color: '#F28DB0' },
   ],
   colors: {
     brand: {
-      50: '#042f2e',
-      100: '#134e4a',
-      200: '#115e59',
-      300: '#0f766e',
-      400: '#0d9488',
-      500: '#14b8a6',
-      600: '#2dd4bf',
-      700: '#5eead4',
-      800: '#99f6e4',
-      900: '#ccfbf1',
-      950: '#f0fdfa',
+      50:  '#10142A',
+      100: '#171D3D',
+      200: '#222B5C',
+      300: '#33417F',
+      400: '#4E61B8',
+      500: '#6F84E6',
+      600: '#8FA2FF',
+      700: '#AEBBFF',
+      800: '#C9D2FF',
+      900: '#E1E6FF',
+      950: '#F3F5FF',
     },
-    ink: '#f1f5f9',
-    'ink-soft': '#cbd5e1',
-    'ink-subtle': '#94a3b8',
-    accent: '#2dd4bf',
-    moss: '#5eead4',
-    cloud: '#0f172a',
-    mist: '#1e293b',
-    sand: '#334155',
-    foam: '#475569',
-    tide: '#64748b',
-    white: '#1e293b',
-    black: '#f1f5f9',
+    ink: '#F4F2EC',
+    'ink-soft': '#C9C5BB',
+    'ink-subtle': '#9C988F',
+    accent: '#8FA2FF',
+    moss: '#AEBBFF',
+    cloud: '#121417',
+    mist: '#1D2024',
+    sand: '#262A2F',
+    foam: '#34383E',
+    tide: '#4A4F57',
+    white: '#1D2024',
+    black: '#F4F2EC',
   },
 
-  /** 2026 ambient design tokens */
   tokens: makeDarkTokens(defaultDarkBg),
 };

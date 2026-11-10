@@ -11,13 +11,13 @@ export function AboutSettings() {
     <div className="space-y-6">
       {/* Hero Section */}
       <div className="f-glass-hero relative overflow-hidden rounded-3xl">
-        <div className="pointer-events-none absolute inset-0" style={{ background: 'linear-gradient(135deg, rgba(45,180,130,0.07) 0%, transparent 60%)' }} />
+        <div className="pointer-events-none absolute inset-0" style={{ background: 'transparent' }} />
         <div className="relative p-8 md:p-12">
           <div className="flex flex-col md:flex-row items-start md:items-center gap-6">
             {/* Logo */}
             <div className="flex-shrink-0">
               <div className="relative">
-                <div className="absolute inset-0 rounded-2xl blur-xl" style={{ background: 'rgba(45,180,130,0.15)' }} />
+                <div className="absolute inset-0 rounded-2xl blur-xl" style={{ background: 'rgba(47,75,216,0.15)' }} />
                 <div className="relative rounded-2xl p-4" style={{ background: 'rgba(255,255,255,0.08)', border: '1px solid var(--f-border)', backdropFilter: 'blur(12px)' }}>
                   <img
                     src="/logo.png"

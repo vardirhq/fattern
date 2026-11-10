@@ -1,65 +1,54 @@
-import { makeLightTokens } from './tokens';
+import { makeLightTokens, paperBg } from './tokens';
 
 /**
- * Light Theme - Default free theme
- * Refined emerald-green palette with airy glassmorphism backgrounds
- * Visual reference: fattern-light-theme.jsx
+ * Light Theme ("Papir") - Default free theme
+ * Warm paper ground, graphite ink and a single cobalt accent.
+ * Visual reference: the "Fattern Redesign" design canvas (Oversikt, Foundations).
  */
 export const lightTheme = {
   id: 'light',
-  name: 'Lys',
+  name: 'Papir',
   premium: false,
   accentOptions: [
-    { name: 'Grønn',   color: '#2abd8a' }, // Standard — matches light mockup
-    { name: 'Turkis',  color: '#0d9488' },
-    { name: 'Blå',     color: '#2563eb' },
-    { name: 'Lilla',   color: '#9333ea' },
-    { name: 'Oransje', color: '#d97706' },
-    { name: 'Rosa',    color: '#db2777' },
+    { name: 'Kobolt',  color: '#2F4BD8' }, // Standard
+    { name: 'Blekk',   color: '#15171A' },
+    { name: 'Fjord',   color: '#0F6E6A' },
+    { name: 'Lyng',    color: '#7A3DB8' },
+    { name: 'Rust',    color: '#B4501F' },
+    { name: 'Bær',     color: '#B3265A' },
   ],
   colors: {
-    // Brand colors — emerald scale matching the light mockup
+    // Brand scale — cobalt
     brand: {
-      50:  '#f0fdf7',
-      100: '#d1fae9',
-      200: '#a3f4d3',
-      300: '#6ee7b7',
-      400: '#34d399',
-      500: '#10b981',
-      600: '#2abd8a',
-      700: '#1a9068',
-      800: '#1e7a58',
-      900: '#145c42',
-      950: '#0a3d2b',
+      50:  '#F3F5FE',
+      100: '#E6EAFB',
+      200: '#CBD3F6',
+      300: '#A6B4F0',
+      400: '#7187E6',
+      500: '#4A63DE',
+      600: '#2F4BD8',
+      700: '#2337A8',
+      800: '#1C2C85',
+      900: '#162266',
+      950: '#0D1440',
     },
-    // Text colors — deep for readability on light backgrounds
-    ink:           '#1a1f1c',
-    'ink-soft':    '#3d4a44',
-    'ink-subtle':  '#637068',
+    // Ink
+    ink:           '#15171A',
+    'ink-soft':    '#4A4F57',
+    'ink-subtle':  '#62666E',
     // Accent colors
-    accent: '#2abd8a',
-    moss:   '#1a9068',
-    // Background colors — airy whites / off-whites
-    cloud: '#ffffff',
-    mist:  '#f5faf7',
-    sand:  '#eef5f1',
-    foam:  '#dff0e8',
-    tide:  '#c4ddd3',
+    accent: '#2F4BD8',
+    moss:   '#2337A8',
+    // Grounds — paper and sheets
+    cloud: '#FFFFFF',
+    mist:  '#F4F2EC',
+    sand:  '#ECEAE3',
+    foam:  '#E3DFD5',
+    tide:  '#D6D1C4',
     // Base
-    white: '#ffffff',
-    black: '#1a1f1c',
+    white: '#FFFFFF',
+    black: '#15171A',
   },
 
-  // Design tokens — from fattern-light-theme.jsx mockup
-  tokens: makeLightTokens({
-    bgBase:     '#F0F7F3',
-    bgMid:      '#EEF3F9',
-    bgDark:     '#F2EFF8',
-    bgGradient: 'linear-gradient(160deg, #F0F7F3 0%, #EEF3F9 50%, #F2EFF8 100%)',
-    bgRadial: [
-      'radial-gradient(ellipse 70% 50% at 10% 15%, rgba(45,180,130,0.10) 0%, transparent 55%)',
-      'radial-gradient(ellipse 55% 45% at 88% 85%, rgba(80,140,220,0.08) 0%, transparent 50%)',
-      'radial-gradient(ellipse 45% 35% at 65% 5%,  rgba(160,100,220,0.05) 0%, transparent 45%)',
-    ].join(',\n      '),
-  }),
+  tokens: makeLightTokens(paperBg),
 };

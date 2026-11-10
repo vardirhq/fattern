@@ -19,7 +19,7 @@ function formatCurrencyShort(value) {
 const CustomTooltip = ({ active, payload, label, incomeLabel, expensesLabel }) => {
   if (!active || !payload?.length) return null;
   return (
-    <div className="rounded-xl p-3 shadow-lg text-sm" style={{ background: 'rgba(12,22,18,0.96)', border: '1px solid var(--f-border)', backdropFilter: 'blur(20px)' }}>
+    <div className="rounded-xl p-3 shadow-lg text-sm" style={{ background: 'var(--f-surface-elevated)', border: '1px solid var(--f-border)' }}>
       <p className="font-semibold mb-2" style={{ color: 'var(--f-text-body)' }}>{label}</p>
       {payload.map((entry) => (
         <p key={entry.name} style={{ color: entry.color }}>
@@ -51,16 +51,16 @@ export function IncomeExpenseChart({ data = [] }) {
   return (
     <ResponsiveContainer width="100%" height={220}>
       <BarChart data={data} margin={{ top: 4, right: 8, left: 0, bottom: 0 }}>
-        <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.06)" />
+        <CartesianGrid strokeDasharray="3 3" stroke="var(--f-border-faint)" vertical={false} />
         <XAxis
           dataKey="label"
-          tick={{ fontSize: 11, fill: 'rgba(225,238,234,0.5)' }}
+          tick={{ fontSize: 11, fill: 'var(--f-text-subtle)' }}
           tickLine={false}
           axisLine={false}
         />
         <YAxis
           tickFormatter={formatCurrencyShort}
-          tick={{ fontSize: 11, fill: 'rgba(225,238,234,0.5)' }}
+          tick={{ fontSize: 11, fill: 'var(--f-text-subtle)' }}
           tickLine={false}
           axisLine={false}
           width={48}
@@ -69,11 +69,11 @@ export function IncomeExpenseChart({ data = [] }) {
           content={<CustomTooltip incomeLabel={incomeLabel} expensesLabel={expensesLabel} />}
         />
         <Legend
-          wrapperStyle={{ fontSize: 12, paddingTop: 8, color: 'rgba(225,238,234,0.7)' }}
+          wrapperStyle={{ fontSize: 12, paddingTop: 8, color: 'var(--f-text-soft)' }}
           formatter={(value) => (value === 'income' ? incomeLabel : expensesLabel)}
         />
-        <Bar dataKey="income" name="income" fill="#3fd9a0" radius={[4, 4, 0, 0]} />
-        <Bar dataKey="expenses" name="expenses" fill="rgba(63,217,160,0.25)" radius={[4, 4, 0, 0]} />
+        <Bar dataKey="income" name="income" fill="var(--f-green)" radius={[3, 3, 0, 0]} />
+        <Bar dataKey="expenses" name="expenses" fill="var(--f-chart-muted, #C9C3B4)" radius={[3, 3, 0, 0]} />
       </BarChart>
     </ResponsiveContainer>
   );

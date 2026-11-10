@@ -199,7 +199,7 @@ export function SettingsPage({ company, onCompanyUpdate, onOpenTemplateEditor, o
         {/* Main Content */}
         <main className="flex-1 min-w-0">
           <div className="f-glass rounded-2xl overflow-hidden">
-            <div className="px-8 py-6" style={{ borderBottom: '1px solid var(--f-border-subtle)', background: 'linear-gradient(135deg, rgba(45,180,130,0.05) 0%, transparent 60%)' }}>
+            <div className="px-8 py-6" style={{ borderBottom: '1px solid var(--f-border-subtle)', background: 'transparent' }}>
               <h2 className="text-2xl font-semibold" style={{ color: 'var(--f-text)' }}>{activeCategoryLabel}</h2>
               <p className="text-sm mt-2" style={{ color: 'var(--f-text-soft)' }}>{activeCategoryDescription}</p>
             </div>

@@ -10,7 +10,7 @@ export function StatCard({ title, value, subtitle, icon, tone = 'default' }) {
     'var(--f-text)';
 
   const shimmerColor =
-    tone === 'accent' ? 'rgba(63,217,160,0.5)' :
+    tone === 'accent' ? 'rgba(47,75,216,0.5)' :
     tone === 'warn'   ? 'rgba(240,184,64,0.5)' :
     tone === 'danger' ? 'rgba(240,120,96,0.5)' :
     'rgba(255,255,255,0.2)';
@@ -37,7 +37,7 @@ export function StatCard({ title, value, subtitle, icon, tone = 'default' }) {
         background: 'var(--f-surface)',
         backdropFilter: 'blur(20px)',
         border: '1px solid var(--f-border)',
-        boxShadow: '0 4px 16px rgba(0,0,0,0.2), inset 0 1px 0 rgba(255,255,255,0.07)',
+        boxShadow: 'none',
         transition: 'border-color 0.15s',
       }}
       onMouseEnter={e => (e.currentTarget.style.borderColor = 'rgba(255,255,255,0.15)')}

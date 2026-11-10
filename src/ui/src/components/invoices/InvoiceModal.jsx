@@ -588,7 +588,7 @@ export function InvoiceModal({ isOpen, mode = 'create', initialInvoice, onSubmit
               </form>
             </div>
 
-            <div className="p-4 flex items-center justify-end gap-3" style={{ borderTop: '1px solid var(--f-border-subtle)', background: 'rgba(0,0,0,0.15)' }}>
+            <div className="p-4 flex items-center justify-end gap-3" style={{ borderTop: '1px solid var(--f-border-subtle)', background: 'var(--f-surface-hover)' }}>
               <button
                 type="button"
                 onClick={onClose}

@@ -320,7 +320,7 @@ export function TemplateElement({
         boxSizing: 'border-box',
         overflow: 'hidden',
         zIndex: element.zIndex ?? 1,
-        outline: isSelected ? '2px solid #3fd9a0' : '1px solid transparent',
+        outline: isSelected ? '2px solid #2F4BD8' : '1px solid transparent',
       }}
       onMouseDown={handleMouseDown}
     >
@@ -328,14 +328,14 @@ export function TemplateElement({
       {isSelected && (
         <>
           {/* Resize handles */}
-          <div className="resize-handle absolute -right-1 -top-1 h-3 w-3 cursor-nwse-resize rounded-full" style={{ background: '#3fd9a0' }} />
-          <div className="resize-handle absolute -right-1 -bottom-1 h-3 w-3 cursor-nesw-resize rounded-full" style={{ background: '#3fd9a0' }} />
-          <div className="resize-handle absolute -left-1 -top-1 h-3 w-3 cursor-nesw-resize rounded-full" style={{ background: '#3fd9a0' }} />
-          <div className="resize-handle absolute -left-1 -bottom-1 h-3 w-3 cursor-nwse-resize rounded-full" style={{ background: '#3fd9a0' }} />
-          <div className="resize-handle absolute -right-1 top-1/2 h-3 w-3 -translate-y-1/2 cursor-ew-resize rounded-full" style={{ background: '#3fd9a0' }} />
-          <div className="resize-handle absolute -bottom-1 left-1/2 h-3 w-3 -translate-x-1/2 cursor-ns-resize rounded-full" style={{ background: '#3fd9a0' }} />
-          <div className="resize-handle absolute -left-1 top-1/2 h-3 w-3 -translate-y-1/2 cursor-ew-resize rounded-full" style={{ background: '#3fd9a0' }} />
-          <div className="resize-handle absolute -top-1 left-1/2 h-3 w-3 -translate-x-1/2 cursor-ns-resize rounded-full" style={{ background: '#3fd9a0' }} />
+          <div className="resize-handle absolute -right-1 -top-1 h-3 w-3 cursor-nwse-resize rounded-full" style={{ background: '#2F4BD8' }} />
+          <div className="resize-handle absolute -right-1 -bottom-1 h-3 w-3 cursor-nesw-resize rounded-full" style={{ background: '#2F4BD8' }} />
+          <div className="resize-handle absolute -left-1 -top-1 h-3 w-3 cursor-nesw-resize rounded-full" style={{ background: '#2F4BD8' }} />
+          <div className="resize-handle absolute -left-1 -bottom-1 h-3 w-3 cursor-nwse-resize rounded-full" style={{ background: '#2F4BD8' }} />
+          <div className="resize-handle absolute -right-1 top-1/2 h-3 w-3 -translate-y-1/2 cursor-ew-resize rounded-full" style={{ background: '#2F4BD8' }} />
+          <div className="resize-handle absolute -bottom-1 left-1/2 h-3 w-3 -translate-x-1/2 cursor-ns-resize rounded-full" style={{ background: '#2F4BD8' }} />
+          <div className="resize-handle absolute -left-1 top-1/2 h-3 w-3 -translate-y-1/2 cursor-ew-resize rounded-full" style={{ background: '#2F4BD8' }} />
+          <div className="resize-handle absolute -top-1 left-1/2 h-3 w-3 -translate-x-1/2 cursor-ns-resize rounded-full" style={{ background: '#2F4BD8' }} />
         </>
       )}
     </div>

@@ -970,7 +970,7 @@ function App() {
         overflow: 'hidden',
       }}
     >
-      <TitleBar />
+      <TitleBar showBrand={!!templateEditorId} />
       {templateEditorId ? (
         <div style={{ flex: 1, overflow: 'hidden' }}>
           <TemplateEditorPage
@@ -986,7 +986,7 @@ function App() {
             workflowShortcuts={workflowShortcuts}
             activeNavItem={currentPage}
             onNavigate={setCurrentPage}
-            badges={{ Fakturaer: (summary.overdue ?? 0) > 0 }}
+            badges={{ Fakturaer: (allInvoices || []).filter(inv => inv.status === 'overdue').length }}
           >
             <AnimatePresence mode="wait">
               <motion.div

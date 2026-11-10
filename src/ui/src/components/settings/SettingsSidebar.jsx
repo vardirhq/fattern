@@ -38,7 +38,7 @@ export function SettingsSidebar({ activeCategory, onCategoryChange, showDevMenu 
                 <span
                   className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg transition"
                   style={{
-                    background: isActive ? 'rgba(63,217,160,0.15)' : 'rgba(255,255,255,0.06)',
+                    background: isActive ? 'rgba(47,75,216,0.15)' : 'rgba(255,255,255,0.06)',
                     color: isActive ? 'var(--f-green-text)' : 'var(--f-text-subtle)',
                   }}
                 >

@@ -144,7 +144,7 @@ export function TemplateCard({
       style={isLocked
         ? { opacity: 0.7 }
         : isDefault
-        ? { borderColor: 'var(--f-border-green)', boxShadow: '0 0 16px rgba(63,217,160,0.18)' }
+        ? { borderColor: 'var(--f-border-green)', boxShadow: 'none' }
         : {}
       }
     >
@@ -265,7 +265,7 @@ export function TemplateCard({
           ref={menuRef}
           className="fixed z-[9999] w-48 rounded-lg py-1"
           style={{
-            background: 'rgba(12,22,18,0.96)',
+            background: 'var(--f-surface-elevated)',
             border: '1px solid var(--f-border)',
             backdropFilter: 'blur(20px)',
             boxShadow: '0 8px 32px rgba(0,0,0,0.4)',

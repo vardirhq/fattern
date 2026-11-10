@@ -29,14 +29,15 @@ export function StatusBadge({ status, className = '' }) {
         display: 'inline-flex',
         alignItems: 'center',
         gap: 5,
-        fontSize: 11,
-        fontWeight: 500,
-        borderRadius: 'var(--f-radius-xs)',
-        padding: '3px 8px',
-        fontFamily: 'var(--f-font-mono)',
+        fontSize: 12,
+        fontWeight: 600,
+        borderRadius: 999,
+        padding: '3px 10px',
+        fontFamily: 'var(--f-font-sans)',
+        whiteSpace: 'nowrap',
       }}
     >
-      <Icon size={12} stroke={2} />
+      <Icon size={12} stroke={2.2} aria-hidden="true" />
       {label}
     </span>
   );

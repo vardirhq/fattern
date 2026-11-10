@@ -15,7 +15,7 @@ function GlassSection({ children, style }) {
         backdropFilter: 'blur(20px)',
         border: '1px solid var(--f-border)',
         borderRadius: 'var(--f-radius-md)',
-        boxShadow: '0 4px 20px rgba(0,0,0,0.25)',
+        boxShadow: 'none',
         padding: '20px 22px',
         ...style,
       }}
@@ -89,8 +89,8 @@ function Sparkline({ monthlyBreakdown }) {
               flex: 1,
               height: h,
               borderRadius: '2px 2px 0 0',
-              background: isNow ? 'rgba(63,217,160,0.9)' : 'rgba(63,217,160,0.32)',
-              boxShadow: isNow ? '0 0 8px rgba(63,217,160,0.5)' : 'none',
+              background: isNow ? 'rgba(47,75,216,0.9)' : 'rgba(47,75,216,0.32)',
+              boxShadow: isNow ? 'none' : 'none',
             }}
           />
         ))}
@@ -124,9 +124,9 @@ function Sparkline({ monthlyBreakdown }) {
 
 /* ── Stat cards ───────────────────────────────────────────────────────── */
 const CARD_TONES = [
-  { shimmer: 'rgba(63,217,160,0.5)',  valueColor: 'var(--f-green)',   metaColor: 'rgba(63,217,160,0.6)' },
-  { shimmer: 'rgba(240,184,64,0.5)',  valueColor: 'var(--f-warn)',    metaColor: 'var(--f-text-subtle)' },
-  { shimmer: 'rgba(255,255,255,0.2)', valueColor: 'var(--f-warn)',    metaColor: 'var(--f-text-subtle)' },
+  { valueColor: 'var(--f-text)', metaColor: 'var(--f-text-soft)', bg: 'var(--f-surface)' },
+  { valueColor: 'var(--f-text)', metaColor: 'var(--f-text-soft)', bg: 'var(--f-surface)' },
+  { valueColor: 'var(--f-text)', metaColor: 'var(--f-danger-text)', bg: 'var(--f-warn-bg)' },
 ];
 
 function StatCard({ label, value, meta, toneIndex = 0 }) {
@@ -134,56 +134,31 @@ function StatCard({ label, value, meta, toneIndex = 0 }) {
   return (
     <div
       style={{
-        borderRadius: 'var(--f-radius-md)',
-        padding: '14px 16px',
-        position: 'relative',
-        overflow: 'hidden',
-        background: 'var(--f-surface)',
-        backdropFilter: 'blur(20px)',
+        borderRadius: 'var(--f-radius-lg)',
+        padding: '18px 20px',
+        background: tone.bg,
         border: '1px solid var(--f-border)',
-        boxShadow: '0 4px 16px rgba(0,0,0,0.2), inset 0 1px 0 rgba(255,255,255,0.07)',
-        transition: 'border-color 0.15s',
+        display: 'flex',
+        flexDirection: 'column',
+        gap: 8,
       }}
-      onMouseEnter={e => (e.currentTarget.style.borderColor = 'rgba(255,255,255,0.15)')}
-      onMouseLeave={e => (e.currentTarget.style.borderColor = 'var(--f-border)')}
     >
-      {/* Top shimmer line */}
-      <div
-        style={{
-          position: 'absolute', top: 0, left: 0, right: 0, height: 1,
-          background: `linear-gradient(90deg, transparent, ${tone.shimmer}, transparent)`,
-        }}
-      />
-      <div
-        style={{
-          fontSize: 10,
-          fontWeight: 500,
-          color: 'var(--f-text-subtle)',
-          letterSpacing: '0.1em',
-          textTransform: 'uppercase',
-          fontFamily: 'var(--f-font-mono)',
-          marginBottom: 8,
-        }}
-      >
+      <div style={{ fontSize: 13, fontWeight: 500, color: 'var(--f-text-soft)' }}>
         {label}
       </div>
       <div
+        className="f-num"
         style={{
-          fontSize: 20, fontWeight: 700,
+          fontSize: 26, fontWeight: 600,
           letterSpacing: '-0.02em',
-          marginBottom: 3,
+          lineHeight: 1.1,
           color: tone.valueColor,
+          whiteSpace: 'nowrap',
         }}
       >
         {value}
       </div>
-      <div
-        style={{
-          fontSize: 11,
-          fontFamily: 'var(--f-font-mono)',
-          color: tone.metaColor,
-        }}
-      >
+      <div style={{ fontSize: 13, color: tone.metaColor }}>
         {meta}
       </div>
     </div>
@@ -201,7 +176,7 @@ function TableHead() {
         gridTemplateColumns: COL_TEMPLATE,
         gap: 10,
         padding: '8px 16px',
-        background: 'rgba(255,255,255,0.03)',
+        background: 'var(--f-surface-hover)',
         borderBottom: '1px solid var(--f-border-subtle)',
       }}
     >
@@ -241,7 +216,7 @@ function TableRow({ invoice, formatCurrency, onViewInvoice, onStatusChange, show
         alignItems: 'center',
         transition: 'background 0.1s',
       }}
-      onMouseEnter={e => (e.currentTarget.style.background = 'rgba(255,255,255,0.04)')}
+      onMouseEnter={e => (e.currentTarget.style.background = 'var(--f-hover)')}
       onMouseLeave={e => (e.currentTarget.style.background = 'transparent')}
     >
       <div style={{ fontSize: 11, color: 'var(--f-text-subtle)', fontFamily: 'var(--f-font-mono)' }}>
@@ -295,8 +270,8 @@ function BudgetYearCard({ year, isActive, onEdit, onDelete, onSelect }) {
             borderRadius: 20,
             fontSize: 11,
             fontWeight: 600,
-            background: isActive ? 'var(--f-green)' : 'rgba(255,255,255,0.08)',
-            color: isActive ? '#000' : 'var(--f-text-soft)',
+            background: isActive ? 'var(--f-green)' : 'var(--f-hover-elevated)',
+            color: isActive ? 'var(--f-on-accent)' : 'var(--f-text-soft)',
           }}
         >
           {isActive ? 'Aktiv' : 'Tilgjengelig'}
@@ -461,7 +436,7 @@ export function DashboardView({
             background: 'var(--f-surface-elevated)',
             backdropFilter: 'blur(20px)',
             border: '1px solid var(--f-border)',
-            boxShadow: '0 4px 20px rgba(0,0,0,0.25)',
+            boxShadow: 'none',
           }}
         >
           <TableHead />
@@ -514,7 +489,7 @@ export function DashboardView({
                     display: 'flex', alignItems: 'flex-start', gap: 10,
                     padding: '10px 12px',
                     borderRadius: 'var(--f-radius)',
-                    background: 'rgba(255,255,255,0.03)',
+                    background: 'var(--f-surface-hover)',
                     border: '1px solid var(--f-border-faint)',
                   }}
                 >
@@ -524,7 +499,7 @@ export function DashboardView({
                       display: 'flex', alignItems: 'center', justifyContent: 'center',
                       background: item.status === 'success' ? 'var(--f-green-bg)'
                                 : item.status === 'warn'    ? 'rgba(240,184,64,0.15)'
-                                : 'rgba(255,255,255,0.06)',
+                                : 'var(--f-border)',
                       border: `1px solid ${
                         item.status === 'success' ? 'var(--f-border-green)'
                         : item.status === 'warn'  ? 'var(--f-warn-border)'
@@ -584,7 +559,7 @@ export function DashboardView({
                     display: 'flex', alignItems: 'center', justifyContent: 'space-between',
                     padding: '10px 12px',
                     borderRadius: 'var(--f-radius)',
-                    background: 'rgba(255,255,255,0.03)',
+                    background: 'var(--f-surface-hover)',
                     border: '1px solid var(--f-border-faint)',
                   }}
                 >
@@ -622,7 +597,7 @@ export function DashboardView({
                   display: 'flex', alignItems: 'center', justifyContent: 'space-between',
                   padding: '10px 12px',
                   borderRadius: 'var(--f-radius)',
-                  background: 'rgba(255,255,255,0.03)',
+                  background: 'var(--f-surface-hover)',
                   border: '1px solid var(--f-border-faint)',
                 }}
               >

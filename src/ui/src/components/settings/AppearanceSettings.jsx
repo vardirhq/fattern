@@ -44,7 +44,7 @@ export function AppearanceSettings() {
                   className={`relative rounded-xl overflow-hidden transition-all ${isLocked ? 'opacity-60 cursor-not-allowed' : 'cursor-pointer'}`}
                   style={{
                     border: isSelected ? '2px solid var(--f-border-green)' : '2px solid var(--f-border)',
-                    boxShadow: isSelected ? '0 0 16px rgba(63,217,160,0.2)' : 'none',
+                    boxShadow: isSelected ? 'none' : 'none',
                   }}
                 >
                   {/* Theme Preview */}
@@ -114,7 +114,7 @@ export function AppearanceSettings() {
 
                     {/* Selected Checkmark */}
                     {isSelected && (
-                      <div className="absolute top-2 right-2 rounded-full p-1.5" style={{ background: 'var(--f-green)', boxShadow: '0 0 8px rgba(63,217,160,0.5)' }}>
+                      <div className="absolute top-2 right-2 rounded-full p-1.5" style={{ background: 'var(--f-green)', boxShadow: 'none' }}>
                         <IconCheck className="h-3.5 w-3.5 text-white" />
                       </div>
                     )}

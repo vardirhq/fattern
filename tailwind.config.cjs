@@ -59,11 +59,17 @@ module.exports = {
       },
       fontFamily: {
         sans: ['Inter', 'system-ui', 'sans-serif'],
-        display: ['"Soehne"', 'Inter', 'system-ui', 'sans-serif'],
-        mono: ['"DM Mono"', 'ui-monospace', 'monospace'],
+        display: ['"Space Grotesk"', 'Inter', 'system-ui', 'sans-serif'],
+        mono: ['"Space Grotesk"', 'Inter', 'ui-monospace', 'monospace'],
+      },
+      // Calmer corners: large Tailwind radii are capped so cards read as sheets
+      borderRadius: {
+        xl: '12px',
+        '2xl': '14px',
+        '3xl': '18px',
       },
       boxShadow: {
-        card: '0 10px 30px color-mix(in srgb, var(--color-ink) 12%, transparent)'
+        card: '0 1px 2px var(--f-glass-shadow), 0 8px 24px var(--f-glass-shadow)'
       }
     }
   },

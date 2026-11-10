@@ -170,12 +170,16 @@ function hexToRgb(hex) {
 function computeAccentTokens(hex, isLight) {
   const rgb = hexToRgb(hex);           // "R G B"
   const [r, g, b] = rgb.split(' ');    // individual channel strings
+  // Text colour that sits on a solid accent fill (primary buttons, active chips)
+  const lum = (0.2126 * r + 0.7152 * g + 0.0722 * b) / 255;
+  const onAccent = { '--f-on-accent': lum > 0.55 ? '#15171A' : '#FFFFFF' };
 
   if (isLight) {
     // Text on white: darken substantially for WCAG contrast
     const textHex = darkenColor(hex, 0.38);
     const textDimHex = darkenColor(hex, 0.20);
     return {
+      ...onAccent,
       '--f-green':             hex,
       '--f-green-dim':         `rgba(${r},${g},${b},0.25)`,
       '--f-green-bright':      `rgba(${r},${g},${b},0.90)`,
@@ -192,6 +196,7 @@ function computeAccentTokens(hex, isLight) {
     // Text on dark: lighten slightly for brightness / vibrancy
     const textHex = lightenColor(hex, 0.15);
     return {
+      ...onAccent,
       '--f-green':             hex,
       '--f-green-dim':         `rgba(${r},${g},${b},0.35)`,
       '--f-green-bright':      `rgba(${r},${g},${b},0.90)`,

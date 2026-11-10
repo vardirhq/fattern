@@ -168,8 +168,8 @@ export function TemplateCanvas({
           top: '-5000px',
           width: '10000px',
           height: '10000px',
-          backgroundImage: `linear-gradient(to right, rgba(63,217,160,0.07) 1px, transparent 1px),
-                            linear-gradient(to bottom, rgba(63,217,160,0.07) 1px, transparent 1px)`,
+          backgroundImage: `linear-gradient(to right, rgba(47,75,216,0.07) 1px, transparent 1px),
+                            linear-gradient(to bottom, rgba(47,75,216,0.07) 1px, transparent 1px)`,
           backgroundSize: `${GRID_SIZE * zoomFactor}px ${GRID_SIZE * zoomFactor}px`,
           backgroundPosition: `${snappedPan.x % (GRID_SIZE * zoomFactor)}px ${snappedPan.y % (GRID_SIZE * zoomFactor)}px`,
         }}
