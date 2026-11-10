@@ -4,21 +4,11 @@ import { IconEdit, IconTrash, IconDownload, IconEye } from '@tabler/icons-react'
 import { DataTable } from '../components/DataTable';
 import { StatusBadge } from '../components/StatusBadge';
 import { SearchBar } from '../components/SearchBar';
-import { Select } from '../components/Select';
 import { InvoiceStatusSelector } from '../components/invoices/InvoiceStatusSelector';
 import { formatDate } from '../utils/formatDate';
 import { formatCurrency } from '../utils/formatCurrency';
 import { useSettings } from '../hooks/useSettings';
 import { useSearch } from '../hooks/useSearch';
-
-const STATUS_OPTIONS = [
-  { value: 'all', labelKey: 'invoice.status_filter' },
-  { value: 'draft', labelKey: 'status.draft' },
-  { value: 'sent', labelKey: 'status.sent' },
-  { value: 'paid', labelKey: 'status.paid' },
-  { value: 'overdue', labelKey: 'status.overdue' },
-  { value: 'cancelled', labelKey: 'status.cancelled' },
-];
 
 export function InvoicesPage({ invoices, formatCurrency: fmt, onCreateInvoice, onEditInvoice, onDeleteInvoice, onViewInvoice, onStatusChange, showStatusModal, showToast }) {
   const { t } = useTranslation();
@@ -32,6 +22,19 @@ export function InvoicesPage({ invoices, formatCurrency: fmt, onCreateInvoice, o
     if (statusFilter === 'all') return searched;
     return searched.filter((inv) => inv.status === statusFilter);
   }, [searched, statusFilter]);
+
+  const statusTiles = useMemo(() => {
+    const all = invoices || [];
+    const of = (status) => all.filter((inv) => inv.status === status);
+    const sum = (list) => list.reduce((acc, inv) => acc + (inv.amount || 0), 0);
+    return [
+      { value: 'all', label: t('invoice.all', 'Alle'), count: all.length },
+      { value: 'draft', label: t('status.draft'), count: of('draft').length },
+      { value: 'sent', label: t('status.sent'), count: of('sent').length, sum: sum(of('sent')) },
+      { value: 'overdue', label: t('status.overdue'), count: of('overdue').length, sum: sum(of('overdue')) },
+      { value: 'paid', label: t('status.paid'), count: of('paid').length },
+    ];
+  }, [invoices, t]);
 
   const handleGeneratePDF = async (invoice) => {
     if (!invoice?.dbId) return;
@@ -106,7 +109,7 @@ export function InvoicesPage({ invoices, formatCurrency: fmt, onCreateInvoice, o
           <div className="flex flex-col">
             <span className="text-ink-subtle">{date ? formatDate(date) : '—'}</span>
             {invoice.status === 'paid' && invoice.payment_date && (
-              <span className="text-xs font-medium" style={{ color: 'var(--f-green-text)' }}>
+              <span className="text-xs font-medium" style={{ color: 'var(--f-success-text)' }}>
                 {t('invoice.paid_date')} {formatDate(invoice.payment_date)}
               </span>
             )}
@@ -185,13 +188,13 @@ export function InvoicesPage({ invoices, formatCurrency: fmt, onCreateInvoice, o
 
   return (
     <div className="space-y-6">
-      <header className="f-glass rounded-3xl overflow-hidden" style={{ position: 'relative' }}>
+      <header style={{ position: 'relative' }}>
         <div className="pointer-events-none absolute inset-0" style={{ background: 'transparent' }} />
-        <div className="relative z-10 p-6 lg:p-8">
+        <div className="relative z-10">
           <div className="flex flex-col gap-6 lg:flex-row lg:items-start lg:justify-between">
             <div>
-              <p className="text-xs uppercase tracking-[0.3em]" style={{ color: 'var(--f-text-subtle)' }}>{t('invoice.title')}</p>
-              <h1 className="mt-3 text-3xl font-semibold" style={{ color: 'var(--f-text)' }}>{t('invoice.all_invoices')}</h1>
+              <p className="text-sm" style={{ color: 'var(--f-text-subtle)' }}>{t('invoice.title')}</p>
+              <h1 className="mt-1 text-3xl font-semibold" style={{ color: 'var(--f-text)' }}>{t('invoice.all_invoices')}</h1>
               <p className="mt-2 text-sm" style={{ color: 'var(--f-text-soft)' }}>{t('invoice.overview')}</p>
             </div>
             <button
@@ -204,19 +207,59 @@ export function InvoicesPage({ invoices, formatCurrency: fmt, onCreateInvoice, o
         </div>
       </header>
 
-      <section className="f-glass rounded-3xl p-6">
-        {/* Toolbar: search + status filter + count */}
+      {/* Status tiles double as filters */}
+      <div
+        role="group"
+        aria-label={t('invoice.status')}
+        style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))', gap: 12 }}
+      >
+        {statusTiles.map((tile) => {
+          const isActive = statusFilter === tile.value;
+          const isDanger = tile.value === 'overdue' && tile.count > 0;
+          return (
+            <button
+              key={tile.value}
+              type="button"
+              aria-pressed={isActive}
+              onClick={() => setStatusFilter(isActive && tile.value !== 'all' ? 'all' : tile.value)}
+              style={{
+                textAlign: 'left',
+                cursor: 'pointer',
+                padding: isActive ? '13px 15px' : '14px 16px',
+                borderRadius: 12,
+                border: isActive
+                  ? '2px solid var(--f-text)'
+                  : `1px solid ${isDanger ? 'var(--f-danger-border)' : 'var(--f-border)'}`,
+                background: isDanger ? 'var(--f-danger-bg)' : isActive ? 'var(--f-surface)' : 'var(--f-surface-hover)',
+                font: 'inherit',
+                color: 'inherit',
+                display: 'flex',
+                flexDirection: 'column',
+                gap: 6,
+                minWidth: 0,
+              }}
+            >
+              <span style={{ fontSize: 13, fontWeight: isDanger ? 600 : 500, color: isDanger ? 'var(--f-danger-text)' : 'var(--f-text-soft)' }}>
+                {tile.label}
+              </span>
+              <span className="f-num" style={{ fontSize: 22, fontWeight: 600, color: 'var(--f-text)', whiteSpace: 'nowrap' }}>
+                {tile.count}
+                {tile.sum != null && tile.count > 0 && (
+                  <span style={{ marginLeft: 6, fontSize: 13, fontWeight: 500, color: isDanger ? 'var(--f-danger-text)' : 'var(--f-text-subtle)' }}>
+                    {'· '}{formatCurrency(tile.sum)}
+                  </span>
+                )}
+              </span>
+            </button>
+          );
+        })}
+      </div>
+
+      <section>
+        {/* Toolbar: search + count */}
         <div className="mb-4 flex flex-col gap-3 sm:flex-row sm:items-center">
           <div className="flex-1">
             <SearchBar value={query} onChange={setQuery} />
-          </div>
-          <div style={{ width: 160 }}>
-            <Select
-              value={statusFilter}
-              onChange={setStatusFilter}
-              options={STATUS_OPTIONS.map((opt) => ({ value: opt.value, label: t(opt.labelKey) }))}
-              noMargin
-            />
           </div>
           <span className="whitespace-nowrap text-xs" style={{ color: 'var(--f-text-subtle)' }}>
             {t('invoice.showing', { count: filtered.length, total: (invoices || []).length })}

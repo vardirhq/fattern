@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
-// (tabler icons available if individual sections need them)
+import { IconPlus, IconCheck } from '@tabler/icons-react';
 import { InvoiceStatusSelector } from '../invoices/InvoiceStatusSelector';
 import { IncomeExpenseChart } from './IncomeExpenseChart';
 import { formatDate } from '../../utils/formatDate';
@@ -9,42 +9,34 @@ import { formatDate } from '../../utils/formatDate';
 
 function GlassSection({ children, style }) {
   return (
-    <div
+    <section
       style={{
-        background: 'var(--f-surface-elevated)',
-        backdropFilter: 'blur(20px)',
+        background: 'var(--f-surface)',
         border: '1px solid var(--f-border)',
-        borderRadius: 'var(--f-radius-md)',
-        boxShadow: 'none',
+        borderRadius: 'var(--f-radius-lg)',
         padding: '20px 22px',
+        minWidth: 0,
         ...style,
       }}
     >
       {children}
-    </div>
+    </section>
   );
 }
 
 function SectionHead({ title, link, onLink }) {
   return (
-    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 12 }}>
-      <span
-        style={{
-          fontSize: 10.5,
-          fontWeight: 600,
-          color: 'var(--f-text-subtle)',
-          letterSpacing: '0.1em',
-          textTransform: 'uppercase',
-        }}
-      >
+    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 12, marginBottom: 12 }}>
+      <h2 style={{ margin: 0, fontSize: 16, fontWeight: 600, fontFamily: 'var(--f-font-sans)', letterSpacing: 0, color: 'var(--f-text)' }}>
         {title}
-      </span>
+      </h2>
       {link && (
         <button
+          type="button"
           onClick={onLink}
           style={{
-            background: 'none', border: 'none', cursor: 'pointer',
-            fontSize: 11.5, color: 'var(--f-green-text)', fontWeight: 500,
+            background: 'none', border: 'none', cursor: 'pointer', padding: 0,
+            fontSize: 13, color: 'var(--f-green-text)', fontWeight: 500,
           }}
         >
           {link}
@@ -54,115 +46,38 @@ function SectionHead({ title, link, onLink }) {
   );
 }
 
-
-/* ── Hero Sparkline ───────────────────────────────────────────────────── */
-const MONTH_LABELS_NO = ['JAN','FEB','MAR','APR','MAI','JUN','JUL','AUG','SEP','OKT','NOV','DES'];
-
-function Sparkline({ monthlyBreakdown }) {
-  const bars = useMemo(() => {
-    if (!monthlyBreakdown?.length) {
-      return [34, 26, 46, 30, 50, 40].map((h, i) => ({ h, label: MONTH_LABELS_NO[i], isNow: i === 5 }));
-    }
-    // Prefer months that contain data; fall back to last 6 if all are empty.
-    const withData = monthlyBreakdown.filter(m => (m.income || 0) + (m.expenses || 0) > 0);
-    const source = withData.length >= 2
-      ? monthlyBreakdown.slice(
-          Math.max(0, monthlyBreakdown.indexOf(withData[0])),
-          monthlyBreakdown.indexOf(withData[withData.length - 1]) + 1
-        ).slice(-6)
-      : monthlyBreakdown.slice(-6);
-    const max = Math.max(...source.map(m => m.income || 0), 1);
-    return source.map((m, i) => ({
-      h: Math.max(4, Math.round(((m.income || 0) / max) * 40)),
-      label: m.label || MONTH_LABELS_NO[i],
-      isNow: i === source.length - 1,
-    }));
-  }, [monthlyBreakdown]);
-
-  return (
-    <>
-      <div style={{ display: 'flex', alignItems: 'flex-end', gap: 3, height: 42 }}>
-        {bars.map(({ h, label, isNow }) => (
-          <div
-            key={label}
-            style={{
-              flex: 1,
-              height: h,
-              borderRadius: '2px 2px 0 0',
-              background: isNow ? 'rgba(47,75,216,0.9)' : 'rgba(47,75,216,0.32)',
-              boxShadow: isNow ? 'none' : 'none',
-            }}
-          />
-        ))}
-      </div>
-      <div
-        style={{
-          display: 'flex',
-          borderTop: '1px solid var(--f-border-subtle)',
-          paddingTop: 6, paddingBottom: 14,
-        }}
-      >
-        {bars.map(({ label }) => (
-          <div
-            key={label}
-            style={{
-              flex: 1,
-              fontSize: 9,
-              color: 'var(--f-text-muted)',
-              textAlign: 'center',
-              fontFamily: 'var(--f-font-mono)',
-              letterSpacing: '0.05em',
-            }}
-          >
-            {label}
-          </div>
-        ))}
-      </div>
-    </>
-  );
-}
-
-/* ── Stat cards ───────────────────────────────────────────────────────── */
-const CARD_TONES = [
-  { valueColor: 'var(--f-text)', metaColor: 'var(--f-text-soft)', bg: 'var(--f-surface)' },
-  { valueColor: 'var(--f-text)', metaColor: 'var(--f-text-soft)', bg: 'var(--f-surface)' },
-  { valueColor: 'var(--f-text)', metaColor: 'var(--f-danger-text)', bg: 'var(--f-warn-bg)' },
-];
-
-function StatCard({ label, value, meta, toneIndex = 0 }) {
-  const tone = CARD_TONES[toneIndex] || CARD_TONES[0];
+/* ── KPI strip ────────────────────────────────────────────────────────── */
+function Kpi({ label, value, children, tint, isLast }) {
   return (
     <div
       style={{
-        borderRadius: 'var(--f-radius-lg)',
-        padding: '18px 20px',
-        background: tone.bg,
-        border: '1px solid var(--f-border)',
+        padding: '20px 22px',
         display: 'flex',
         flexDirection: 'column',
-        gap: 8,
+        gap: 10,
+        minWidth: 0,
+        background: tint ? 'var(--f-warn-bg)' : 'transparent',
+        borderRight: isLast ? 'none' : '1px solid var(--f-border)',
       }}
     >
-      <div style={{ fontSize: 13, fontWeight: 500, color: 'var(--f-text-soft)' }}>
-        {label}
-      </div>
-      <div
+      <span style={{ fontSize: 13, fontWeight: 500, color: 'var(--f-text-soft)' }}>{label}</span>
+      <span
         className="f-num"
-        style={{
-          fontSize: 26, fontWeight: 600,
-          letterSpacing: '-0.02em',
-          lineHeight: 1.1,
-          color: tone.valueColor,
-          whiteSpace: 'nowrap',
-        }}
+        style={{ fontSize: 28, fontWeight: 600, letterSpacing: '-0.02em', lineHeight: 1.1, color: 'var(--f-text)', whiteSpace: 'nowrap' }}
       >
         {value}
-      </div>
-      <div style={{ fontSize: 13, color: tone.metaColor }}>
-        {meta}
-      </div>
+      </span>
+      <div style={{ fontSize: 13, color: 'var(--f-text-soft)', minHeight: 18 }}>{children}</div>
     </div>
   );
+}
+
+function daysOverdue(invoice) {
+  if (!invoice?.due_date) return null;
+  const due = new Date(invoice.due_date);
+  if (Number.isNaN(due.getTime())) return null;
+  const days = Math.floor((Date.now() - due.getTime()) / 86400000);
+  return days > 0 ? days : null;
 }
 
 /* ── Invoice table row ────────────────────────────────────────────────── */
@@ -325,101 +240,166 @@ export function DashboardView({
   onInvoiceStatusChange,
   showInvoiceStatusModal,
   onViewInvoice,
+  overdueInvoices,
 }) {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const fmt = (v) => (typeof formatCurrency === 'function' ? formatCurrency(v) : v);
 
   const activeBudgetYear = budgetYears?.find(y => y.id === selectedYear);
   const yearLabel = activeBudgetYear?.label || '—';
 
-  // Show the current month when viewing the current year; otherwise show the year label.
-  const now = new Date();
-  const budgetYearNum = activeBudgetYear
-    ? new Date(activeBudgetYear.start_date).getFullYear()
-    : null;
-  const isCurrentYear = budgetYearNum === now.getFullYear();
-  const heroLabel = isCurrentYear
-    ? (() => {
-        const monthName = now.toLocaleString('nb-NO', { month: 'long' });
-        return `Nettoinntekt · ${monthName.charAt(0).toUpperCase() + monthName.slice(1)} ${now.getFullYear()}`;
-      })()
-    : `Nettoinntekt · ${yearLabel}`;
+  const today = new Date().toLocaleDateString(i18n.language === 'en' ? 'en-GB' : 'nb-NO', {
+    weekday: 'long', day: 'numeric', month: 'long',
+  });
+  const todayLabel = today.charAt(0).toUpperCase() + today.slice(1);
+
+  const outstanding = (summaries?.unpaid ?? 0) + (summaries?.overdue ?? 0);
+  const overdueList = (overdueInvoices || [])
+    .slice()
+    .sort((a, b) => (daysOverdue(b) ?? 0) - (daysOverdue(a) ?? 0));
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: 18 }}>
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
 
-      {/* ── Hero glass card ─────────────────────────────────────────── */}
-      <div
-        className="f-glass-hero"
-        style={{ borderRadius: 'var(--f-radius-xl)', padding: '20px 22px 0', overflow: 'hidden' }}
-      >
-        <div style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', marginBottom: 14 }}>
-          <div>
-            <div
-              style={{
-                fontSize: 10,
-                fontWeight: 500,
-                color: 'var(--f-text-label)',
-                letterSpacing: '0.13em',
-                textTransform: 'uppercase',
-                fontFamily: 'var(--f-font-mono)',
-                marginBottom: 6,
-              }}
-            >
-              {heroLabel}
-            </div>
-            <div style={{ fontSize: 44, fontWeight: 700, color: '#fff', letterSpacing: '-0.04em', lineHeight: 1 }}>
-              {fmt(summaries?.net ?? 0)}
-            </div>
-            <div style={{ fontSize: 11, color: 'var(--f-green-text-dim)', marginTop: 5, fontFamily: 'var(--f-font-mono)' }}>
-              Aktivt år · {yearLabel}
-            </div>
-          </div>
-
-          {/* Right stats */}
-          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: 10 }}>
-            <div style={{ textAlign: 'right' }}>
-              <div style={{ fontSize: 16, fontWeight: 600, color: 'var(--f-warn)', letterSpacing: '-0.02em' }}>
-                {fmt(summaries?.unpaid ?? 0)}
-              </div>
-              <div style={{ fontSize: 10, color: 'var(--f-text-subtle)', fontFamily: 'var(--f-font-mono)', marginTop: 1 }}>
-                ubetalt
-              </div>
-            </div>
-            <div style={{ textAlign: 'right' }}>
-              <div style={{ fontSize: 16, fontWeight: 600, color: 'var(--f-danger)', letterSpacing: '-0.02em' }}>
-                {fmt(summaries?.overdue ?? 0)}
-              </div>
-              <div style={{ fontSize: 10, color: 'var(--f-text-subtle)', fontFamily: 'var(--f-font-mono)', marginTop: 1 }}>
-                forfalt
-              </div>
-            </div>
-          </div>
+      {/* ── Page header ─────────────────────────────────────────────── */}
+      <header style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'flex-end', justifyContent: 'space-between', gap: 16 }}>
+        <div>
+          <p style={{ margin: 0, fontSize: 13, color: 'var(--f-text-subtle)' }}>
+            {todayLabel} · {t('dashboard_view.budget_year')} {yearLabel}
+          </p>
+          <h1 style={{ margin: '6px 0 0', fontSize: 34, fontWeight: 600, letterSpacing: '-0.03em', lineHeight: 1.1, color: 'var(--f-text)' }}>
+            {t('nav.overview')}
+          </h1>
         </div>
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: 10 }}>
+          <button
+            type="button"
+            onClick={() => onCreateExpense?.()}
+            className="f-btn-ghost"
+            style={{ height: 44, padding: '0 16px', borderRadius: 10, fontSize: 14, fontWeight: 500, cursor: 'pointer' }}
+          >
+            {t('dashboard_view.log_expense')}
+          </button>
+          <button
+            type="button"
+            onClick={() => onCreateInvoice?.()}
+            className="f-btn-primary"
+            style={{ height: 44, padding: '0 18px', borderRadius: 10, fontSize: 14, cursor: 'pointer', display: 'inline-flex', alignItems: 'center', gap: 8 }}
+          >
+            <IconPlus size={16} stroke={2.2} aria-hidden="true" />
+            {t('dashboard_view.new_invoice')}
+          </button>
+        </div>
+      </header>
 
-        <Sparkline monthlyBreakdown={monthlyBreakdown} />
-      </div>
+      {/* ── KPI strip ───────────────────────────────────────────────── */}
+      <section
+        aria-label={t('dashboard_view.key_figures', 'Nøkkeltall')}
+        style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
+          border: '1px solid var(--f-border)',
+          borderRadius: 'var(--f-radius-lg)',
+          overflow: 'hidden',
+        }}
+      >
+        <Kpi label={t('dashboard_view.invoiced_ytd', 'Fakturert i perioden')} value={fmt(summaries?.income ?? 0)}>
+          {t('dashboard_view.active_year')} {yearLabel}
+        </Kpi>
+        <Kpi label={t('dashboard_view.paid_in', 'Innbetalt')} value={fmt(summaries?.paid ?? 0)}>
+          <div
+            role="img"
+            aria-label={`${collectionRate}${t('dashboard_view.invoices_collected')}`}
+            title={`${collectionRate}${t('dashboard_view.invoices_collected')}`}
+            style={{ height: 6, borderRadius: 3, background: 'var(--f-border)', overflow: 'hidden', marginTop: 6 }}
+          >
+            <div style={{ width: `${Math.max(0, Math.min(100, collectionRate))}%`, height: 6, background: 'var(--f-text)' }} />
+          </div>
+        </Kpi>
+        <Kpi label={t('dashboard_view.outstanding', 'Utestående')} value={fmt(outstanding)} tint={(summaries?.overdue ?? 0) > 0}>
+          {(summaries?.overdue ?? 0) > 0 ? (
+            <span style={{ color: 'var(--f-danger-text)', fontWeight: 600 }}>
+              {fmt(summaries.overdue)} {t('dashboard_view.overdue')}
+            </span>
+          ) : (
+            t('dashboard_view.nothing_overdue', 'Ingenting forfalt')
+          )}
+        </Kpi>
+        <Kpi label={t('dashboard_view.expenses')} value={fmt(summaries?.expenses ?? 0)} isLast>
+          {t('dashboard_view.result', 'Resultat')}{' '}
+          <span className="f-num" style={{ fontWeight: 600, color: 'var(--f-text)' }}>{fmt(summaries?.net ?? 0)}</span>
+        </Kpi>
+      </section>
 
-      {/* ── Stat cards ──────────────────────────────────────────────── */}
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 10 }}>
-        <StatCard
-          label="Inntekter"
-          value={fmt(summaries?.income ?? 0)}
-          meta={`${utilization}% kapasitetsbruk`}
-          toneIndex={0}
-        />
-        <StatCard
-          label="Utgifter"
-          value={fmt(summaries?.expenses ?? 0)}
-          meta="Registrerte kostnader"
-          toneIndex={1}
-        />
-        <StatCard
-          label="Innkrevingstakt"
-          value={`${collectionRate}%`}
-          meta="av fakturert beløp"
-          toneIndex={2}
-        />
+      {/* ── Chart + needs attention ─────────────────────────────────── */}
+      <div style={{ display: 'flex', flexWrap: 'wrap', gap: 24 }}>
+        <GlassSection style={{ flex: '2 1 520px' }}>
+          <SectionHead title={t('dashboard_view.income_vs_expenses')} />
+          <IncomeExpenseChart data={monthlyBreakdown || []} />
+        </GlassSection>
+
+        <GlassSection style={{ flex: '1 1 300px', display: 'flex', flexDirection: 'column' }}>
+          <SectionHead
+            title={t('dashboard_view.needs_attention', 'Krever oppmerksomhet')}
+            link={t('dashboard_view.see_all', 'Se alle')}
+            onLink={() => onNavigate?.('Fakturaer')}
+          />
+          {overdueList.length === 0 ? (
+            <div style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 8, padding: '24px 8px', textAlign: 'center' }}>
+              <span
+                style={{
+                  width: 36, height: 36, borderRadius: 18,
+                  display: 'flex', alignItems: 'center', justifyContent: 'center',
+                  background: 'var(--f-success-bg)', color: 'var(--f-success-text)',
+                }}
+              >
+                <IconCheck size={18} stroke={2.2} aria-hidden="true" />
+              </span>
+              <p style={{ margin: 0, fontSize: 14, fontWeight: 600, color: 'var(--f-text)' }}>
+                {t('dashboard_view.all_in_order', 'Alt i orden')}
+              </p>
+              <p style={{ margin: 0, fontSize: 13, color: 'var(--f-text-soft)' }}>
+                {t('dashboard_view.no_overdue_invoices', 'Ingen forfalte fakturaer.')}
+              </p>
+            </div>
+          ) : (
+            overdueList.slice(0, 4).map(invoice => {
+              const days = daysOverdue(invoice);
+              return (
+                <button
+                  key={invoice.dbId ?? invoice.id}
+                  type="button"
+                  onClick={() => onViewInvoice?.(invoice)}
+                  className="f-attn-row"
+                  style={{
+                    display: 'flex', alignItems: 'center', gap: 12, width: '100%',
+                    padding: '12px 0', background: 'none', border: 'none',
+                    borderTop: '1px solid var(--f-border-faint)',
+                    cursor: 'pointer', textAlign: 'left', font: 'inherit', color: 'inherit',
+                  }}
+                >
+                  <span style={{ flex: 1, minWidth: 0, display: 'flex', flexDirection: 'column', gap: 3 }}>
+                    <span style={{ fontSize: 14, fontWeight: 600, color: 'var(--f-text)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                      {invoice.customer}
+                    </span>
+                    <span style={{ fontSize: 13, fontWeight: 500, color: 'var(--f-danger-text)' }}>
+                      {invoice.id}
+                      {days != null && ` · ${t('dashboard_view.days_overdue', '{{count}} dager forfalt', { count: days })}`}
+                    </span>
+                  </span>
+                  <span className="f-num" style={{ fontSize: 14, fontWeight: 600, color: 'var(--f-text)', whiteSpace: 'nowrap' }}>
+                    {fmt(invoice.amount)}
+                  </span>
+                </button>
+              );
+            })
+          )}
+          {overdueList.length > 4 && (
+            <p style={{ margin: '8px 0 0', fontSize: 13, color: 'var(--f-text-soft)' }}>
+              {t('dashboard_view.and_more', '+ {{count}} til', { count: overdueList.length - 4 })}
+            </p>
+          )}
+        </GlassSection>
       </div>
 
       {/* ── Invoice table ───────────────────────────────────────────── */}
@@ -431,10 +411,9 @@ export function DashboardView({
         />
         <div
           style={{
-            borderRadius: 'var(--f-radius-md)',
+            borderRadius: 'var(--f-radius-lg)',
             overflow: 'hidden',
-            background: 'var(--f-surface-elevated)',
-            backdropFilter: 'blur(20px)',
+            background: 'var(--f-surface)',
             border: '1px solid var(--f-border)',
             boxShadow: 'none',
           }}
@@ -460,14 +439,8 @@ export function DashboardView({
         </div>
       </div>
 
-      {/* ── Income vs Expenses chart ─────────────────────────────────── */}
-      <GlassSection>
-        <SectionHead title={t('dashboard_view.income_vs_expenses')} />
-        <IncomeExpenseChart data={monthlyBreakdown || []} />
-      </GlassSection>
-
       {/* ── Activity feed + Client highlights ───────────────────────── */}
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 18 }}>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: 24 }}>
 
         {/* Activity feed */}
         <GlassSection>

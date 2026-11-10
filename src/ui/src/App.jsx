@@ -956,6 +956,7 @@ function App() {
             onInvoiceStatusChange={handleInvoiceStatusChange}
             showInvoiceStatusModal={showInvoiceStatusModal}
             onViewInvoice={openViewInvoiceModal}
+            overdueInvoices={(allInvoices || []).filter(inv => inv.status === 'overdue')}
           />
         );
     }

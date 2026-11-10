@@ -106,13 +106,13 @@ export function BudgetYearsPage({
 
   return (
     <div className="space-y-6">
-      <header className="f-glass rounded-3xl overflow-hidden" style={{ position: 'relative' }}>
+      <header style={{ position: 'relative' }}>
         <div className="pointer-events-none absolute inset-0" style={{ background: 'transparent' }} />
-        <div className="relative z-10 p-6 lg:p-8">
+        <div className="relative z-10">
           <div className="flex flex-col gap-6 lg:flex-row lg:items-start lg:justify-between">
             <div>
-              <p className="text-xs uppercase tracking-[0.3em]" style={{ color: 'var(--f-text-subtle)' }}>{t('budget_years_page.subtitle')}</p>
-              <h1 className="mt-3 text-3xl font-semibold" style={{ color: 'var(--f-text)' }}>{t('budget_years_page.title')}</h1>
+              <p className="text-sm" style={{ color: 'var(--f-text-subtle)' }}>{t('budget_years_page.subtitle')}</p>
+              <h1 className="mt-1 text-3xl font-semibold" style={{ color: 'var(--f-text)' }}>{t('budget_years_page.title')}</h1>
               <p className="mt-2 text-sm" style={{ color: 'var(--f-text-soft)' }}>
                 {t('budget_years_page.desc')}
               </p>
