@@ -295,3 +295,8 @@
   .f-pill-draft   { background: var(--f-hover);      color: var(--f-text-soft);    border: 1px solid var(--f-border); }
   .f-pill-overdue { background: var(--f-danger-bg);  color: var(--f-danger-text);  border: 1px solid var(--f-danger-border); }
 }
+
+/* ─── Small interaction states ─── */
+.f-pick-row:hover { background: var(--f-surface-hover) !important; border-color: var(--f-border-strong) !important; }
+.f-line-remove:hover { background: var(--f-danger-bg) !important; color: var(--f-danger-text) !important; }
+.f-attn-row:hover span:first-child > span:first-child { text-decoration: underline; }

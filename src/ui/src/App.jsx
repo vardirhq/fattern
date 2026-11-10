@@ -1105,6 +1105,7 @@ function App() {
         onSubmit={handleInvoiceSubmit}
         customers={customers || []}
         products={products || []}
+        company={company}
       />
       <ExpenseModal
         isOpen={isExpenseModalOpen}
