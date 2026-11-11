@@ -271,7 +271,7 @@ export function ExpenseModal({ isOpen, mode = 'create', initialExpense, onSubmit
 
           {items.length > 0 ? (
             <div className="rounded-xl overflow-hidden flex flex-col max-h-[400px]" style={{ border: '1px solid var(--f-border-subtle)' }}>
-              <div className="flex-shrink-0" style={{ background: 'rgba(255,255,255,0.04)', borderBottom: '1px solid var(--f-border-subtle)' }}>
+              <div className="flex-shrink-0" style={{ background: 'var(--f-hover)', borderBottom: '1px solid var(--f-border-subtle)' }}>
                 <div className="grid grid-cols-[1fr_100px_120px_80px_120px_48px] gap-3 px-4 py-2.5 text-xs font-semibold uppercase tracking-wide" style={{ color: 'var(--f-text-subtle)' }}>
                   <div>Beskrivelse</div>
                   <div className="text-center">Antall</div>
@@ -288,7 +288,7 @@ export function ExpenseModal({ isOpen, mode = 'create', initialExpense, onSubmit
                   const lineTotal = lineSubtotal + lineVat;
                   return (
                     <div key={item.id} className="grid grid-cols-[1fr_100px_120px_80px_120px_48px] gap-3 px-4 py-3 transition" style={{ borderBottom: '1px solid var(--f-border-faint)' }}
-                      onMouseEnter={e => e.currentTarget.style.background = 'rgba(255,255,255,0.02)'}
+                      onMouseEnter={e => e.currentTarget.style.background = 'var(--f-surface-hover)'}
                       onMouseLeave={e => e.currentTarget.style.background = 'transparent'}
                     >
                       <input
@@ -344,7 +344,7 @@ export function ExpenseModal({ isOpen, mode = 'create', initialExpense, onSubmit
                 })}
               </div>
               {items.length > 0 && (
-                <div className="flex-shrink-0 px-4 py-3 space-y-2" style={{ background: 'rgba(255,255,255,0.03)', borderTop: '1px solid var(--f-border-subtle)' }}>
+                <div className="flex-shrink-0 px-4 py-3 space-y-2" style={{ background: 'var(--f-surface-hover)', borderTop: '1px solid var(--f-border-subtle)' }}>
                   <div className="flex justify-between text-sm" style={{ color: 'var(--f-text-soft)' }}>
                     <span>Sum eks. MVA:</span>
                     <span className="font-medium" style={{ color: 'var(--f-text-body)' }}>{subtotal.toFixed(2)}</span>
@@ -361,7 +361,7 @@ export function ExpenseModal({ isOpen, mode = 'create', initialExpense, onSubmit
               )}
             </div>
           ) : (
-            <div className="rounded-xl border-2 border-dashed p-8 text-center" style={{ borderColor: 'var(--f-border)', background: 'rgba(255,255,255,0.02)' }}>
+            <div className="rounded-xl border-2 border-dashed p-8 text-center" style={{ borderColor: 'var(--f-border)', background: 'var(--f-surface-hover)' }}>
               <p className="text-sm mb-3" style={{ color: 'var(--f-text-subtle)' }}>Legg til linjeelementer for å dele opp utgiften</p>
               <p className="text-xs mb-4" style={{ color: 'var(--f-text-subtle)' }}>eller</p>
               <div className="max-w-xs mx-auto">

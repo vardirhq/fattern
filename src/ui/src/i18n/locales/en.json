@@ -122,7 +122,20 @@
     "no_overdue_invoices": "No overdue invoices.",
     "days_overdue_one": "{{count}} day overdue",
     "days_overdue_other": "{{count}} days overdue",
-    "and_more": "+ {{count}} more"
+    "and_more": "+ {{count}} more",
+    "remind": "Remind",
+    "reminded_on": "Reminded {{date}}",
+    "vat_title": "VAT",
+    "vat_term": "term",
+    "vat_deadline": "Due {{date}}",
+    "vat_running": "In progress",
+    "vat_output": "Output VAT",
+    "vat_input": "Input VAT",
+    "vat_payable": "To pay",
+    "vat_refund": "Refund",
+    "vat_estimate_note": "Estimate based on invoices and expenses in Fattern. Check before filing your VAT return.",
+    "vat_missing_lines_one": "{{count}} expense has no VAT lines and is not included.",
+    "vat_missing_lines_other": "{{count}} expenses have no VAT lines and are not included."
   },
   "invoice": {
     "title": "Invoices",
@@ -216,7 +229,10 @@
       "confirm": "Link selected",
       "cancel": "Cancel"
     },
-    "all": "All"
+    "all": "All",
+    "send_reminder": "Send reminder",
+    "send_reminder_again": "Remind again",
+    "last_reminded": "Last reminded {{date}}"
   },
   "expense": {
     "filter_by": "Filter by {{name}}",
@@ -695,7 +711,8 @@
       "updated_after_send": "Edited after sending",
       "status_changed": "Status changed",
       "pdf_generated": "PDF generated",
-      "email_sent": "Email sent"
+      "email_sent": "Email sent",
+      "reminder_sent": "Reminder sent"
     }
   },
   "send_email": {
@@ -727,7 +744,12 @@
     "default_body_content": "Please find invoice {{num}}{{due}} attached.",
     "default_body_due": " with due date {{date}}",
     "default_body_contact": "Please don't hesitate to contact us if you have any questions.",
-    "default_body_regards": "Kind regards"
+    "default_body_regards": "Kind regards",
+    "reminder_title": "Send reminder",
+    "reminder_subject": "Reminder: invoice {{num}} from {{company}}",
+    "reminder_body_content": "We have not yet received payment for invoice {{num}} of {{amount}}, which was due on {{date}}.",
+    "reminder_body_request": "Please pay the amount within {{days}} days. The invoice is attached.",
+    "reminder_body_ignore": "If you have already paid, please disregard this reminder."
   },
   "confirm": {
     "delete_invoice": "Delete invoice",

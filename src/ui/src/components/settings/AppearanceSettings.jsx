@@ -107,7 +107,7 @@ export function AppearanceSettings() {
                     
                     {/* Lock Icon */}
                     {isLocked && (
-                      <div className="absolute top-2 right-2 rounded-full p-1.5" style={{ background: 'rgba(10,18,14,0.8)', backdropFilter: 'blur(8px)' }}>
+                      <div className="absolute top-2 right-2 rounded-full p-1.5" style={{ background: 'var(--f-inverse-bg)', backdropFilter: 'blur(8px)' }}>
                         <IconLock className="h-3.5 w-3.5" style={{ color: 'var(--f-text-subtle)' }} />
                       </div>
                     )}

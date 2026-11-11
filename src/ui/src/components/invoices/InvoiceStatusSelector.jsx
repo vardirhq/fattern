@@ -77,7 +77,7 @@ export function InvoiceStatusSelector({ invoice, onStatusChange, showModal }) {
         backdropFilter: 'blur(20px)',
         border: '1px solid var(--f-border)',
         borderRadius: 10,
-        boxShadow: '0 8px 32px rgba(0,0,0,0.4)',
+        boxShadow: '0 12px 32px var(--f-tooltip-shadow)',
         padding: 4,
       }}
     >

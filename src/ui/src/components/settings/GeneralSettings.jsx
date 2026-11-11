@@ -14,7 +14,7 @@ function WipeConfirmModal({ onConfirm, onCancel }) {
     <div
       style={{
         position: 'fixed', inset: 0, zIndex: 9999,
-        background: 'rgba(0,0,0,0.72)',
+        background: 'var(--f-overlay)',
         backdropFilter: 'blur(6px)',
         display: 'flex', alignItems: 'center', justifyContent: 'center',
       }}
@@ -23,7 +23,7 @@ function WipeConfirmModal({ onConfirm, onCancel }) {
       <div
         style={{
           width: 440,
-          background: 'var(--f-surface-card)',
+          background: 'var(--f-surface-elevated)',
           border: '1px solid rgba(240,80,70,0.35)',
           borderRadius: 16,
           padding: '28px 28px 24px',
@@ -74,7 +74,7 @@ function WipeConfirmModal({ onConfirm, onCancel }) {
               fontSize: 13,
               fontFamily: 'var(--font-mono, ui-monospace, monospace)',
               letterSpacing: '0.05em',
-              background: 'var(--f-surface-input, rgba(255,255,255,0.06))',
+              background: 'var(--f-input-bg)',
               border: `1px solid ${matches ? 'rgba(240,80,70,0.6)' : 'var(--f-border-subtle)'}`,
               color: matches ? '#f07060' : 'var(--f-text-body)',
               outline: 'none',
@@ -100,7 +100,7 @@ function WipeConfirmModal({ onConfirm, onCancel }) {
             disabled={!matches}
             style={{
               padding: '8px 20px', borderRadius: 8, fontSize: 13, fontWeight: 600,
-              background: matches ? 'rgba(240,80,70,0.15)' : 'rgba(255,255,255,0.04)',
+              background: matches ? 'rgba(240,80,70,0.15)' : 'var(--f-hover)',
               border: `1px solid ${matches ? 'rgba(240,80,70,0.5)' : 'var(--f-border-faint)'}`,
               color: matches ? '#f07060' : 'var(--f-text-subtle)',
               cursor: matches ? 'pointer' : 'not-allowed',
@@ -190,7 +190,7 @@ export function GeneralSettings({ onRefreshData }) {
                     transition: 'all 0.13s',
                     background: currentLang === code
                       ? 'var(--f-green-bg)'
-                      : 'rgba(255,255,255,0.04)',
+                      : 'var(--f-hover)',
                     border: currentLang === code
                       ? '1px solid var(--f-border-green)'
                       : '1px solid var(--f-border-subtle)',
@@ -265,7 +265,7 @@ export function GeneralSettings({ onRefreshData }) {
         <div
           style={{
             position: 'fixed', inset: 0, zIndex: 9998,
-            background: 'rgba(0,0,0,0.6)',
+            background: 'var(--f-overlay)',
             backdropFilter: 'blur(4px)',
             display: 'flex', alignItems: 'center', justifyContent: 'center',
           }}
@@ -273,12 +273,12 @@ export function GeneralSettings({ onRefreshData }) {
         >
           <div
             style={{
-              background: 'var(--f-surface-card)',
+              background: 'var(--f-surface-elevated)',
               border: '1px solid rgba(240,80,70,0.25)',
               borderRadius: 14,
               padding: '22px 24px 20px',
               width: 340,
-              boxShadow: '0 16px 48px rgba(0,0,0,0.45)',
+              boxShadow: '0 12px 32px var(--f-tooltip-shadow)',
             }}
           >
             <div style={{ fontSize: 14, fontWeight: 600, color: 'var(--f-text-body)', marginBottom: 8 }}>

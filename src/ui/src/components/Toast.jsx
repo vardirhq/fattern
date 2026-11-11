@@ -81,7 +81,7 @@ export function Toast({ id, message, variant = 'info', duration = 4000, onClose 
         backdropFilter: 'blur(20px)',
         color: style.text,
         padding: '12px 14px',
-        boxShadow: '0 8px 32px rgba(0,0,0,0.4)',
+        boxShadow: '0 12px 32px var(--f-tooltip-shadow)',
         minWidth: 300,
         maxWidth: 420,
       }}
@@ -96,7 +96,7 @@ export function Toast({ id, message, variant = 'info', duration = 4000, onClose 
               height: 2,
               width: '100%',
               borderRadius: 2,
-              background: 'rgba(255,255,255,0.1)',
+              background: 'var(--f-hover-elevated)',
               overflow: 'hidden',
             }}
           >

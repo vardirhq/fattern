@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { DataTable } from '../components/DataTable';
 import { CustomerCard } from '../components/CustomerCard';
 import { SearchBar } from '../components/SearchBar';
+import { Select } from '../components/Select';
 import { useSettings } from '../hooks/useSettings';
 import { useSearch } from '../hooks/useSearch';
 
@@ -65,8 +66,8 @@ export function CustomersPage({ customers, onEditCustomer, onDeleteCustomer, onC
         render: (active) => (
           <span className="inline-flex rounded-full px-3 py-1 text-xs font-semibold"
             style={active
-              ? { background: 'var(--f-green-bg-pill)', color: 'var(--f-green-text)', border: '1px solid var(--f-border-green-pill)' }
-              : { background: 'rgba(255,255,255,0.06)', color: 'var(--f-text-subtle)', border: '1px solid var(--f-border)' }
+              ? { background: 'var(--f-success-bg)', color: 'var(--f-success-text)', border: '1px solid var(--f-success-border)' }
+              : { background: 'var(--f-hover)', color: 'var(--f-text-subtle)', border: '1px solid var(--f-border)' }
             }>
             {active ? t('common.active') : t('common.inactive')}
           </span>
@@ -120,12 +121,12 @@ export function CustomersPage({ customers, onEditCustomer, onDeleteCustomer, onC
               <p className="mt-2 text-sm" style={{ color: 'var(--f-text-soft)' }}>{t('customer.overview')}</p>
             </div>
             <div className="flex items-center gap-3">
-              <div className="flex rounded-xl p-1" style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid var(--f-border)' }}>
+              <div className="flex rounded-xl p-1" style={{ background: 'var(--f-hover)', border: '1px solid var(--f-border)' }}>
                 <button
                   type="button"
                   onClick={() => handleViewModeChange('table')}
                   className="rounded-lg px-3 py-1.5 text-sm font-medium transition"
-                  style={viewMode === 'table' ? { background: 'var(--f-green-bg)', color: 'var(--f-green-text)' } : { color: 'var(--f-text-soft)' }}
+                  style={viewMode === 'table' ? { background: 'var(--f-inverse-bg)', color: 'var(--f-inverse-text)' } : { color: 'var(--f-text-soft)' }}
                 >
                   {t('common.list')}
                 </button>
@@ -133,7 +134,7 @@ export function CustomersPage({ customers, onEditCustomer, onDeleteCustomer, onC
                   type="button"
                   onClick={() => handleViewModeChange('card')}
                   className="rounded-lg px-3 py-1.5 text-sm font-medium transition"
-                  style={viewMode === 'card' ? { background: 'var(--f-green-bg)', color: 'var(--f-green-text)' } : { color: 'var(--f-text-soft)' }}
+                  style={viewMode === 'card' ? { background: 'var(--f-inverse-bg)', color: 'var(--f-inverse-text)' } : { color: 'var(--f-text-soft)' }}
                 >
                   {t('common.card')}
                 </button>
@@ -150,21 +151,20 @@ export function CustomersPage({ customers, onEditCustomer, onDeleteCustomer, onC
         </div>
       </header>
 
-      <section className="f-glass rounded-3xl p-6">
+      <section>
         {/* Toolbar */}
         <div className="mb-4 flex flex-col gap-3 sm:flex-row sm:items-center">
           <div className="flex-1">
             <SearchBar value={query} onChange={setQuery} />
           </div>
-          <select
-            value={activeFilter}
-            onChange={(e) => setActiveFilter(e.target.value)}
-            className="f-input rounded-xl px-4 py-2 text-sm"
-          >
-            {ACTIVE_OPTIONS.map((opt) => (
-              <option key={opt.value} value={opt.value}>{t(opt.labelKey)}</option>
-            ))}
-          </select>
+          <div style={{ width: 180 }}>
+            <Select
+              value={activeFilter}
+              onChange={setActiveFilter}
+              options={ACTIVE_OPTIONS.map((opt) => ({ value: opt.value, label: t(opt.labelKey) }))}
+              noMargin
+            />
+          </div>
           <span className="whitespace-nowrap text-xs" style={{ color: 'var(--f-text-subtle)' }}>
             {t('customer.showing', { count: filtered.length, total: (customers || []).length })}
           </span>

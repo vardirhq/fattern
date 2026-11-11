@@ -7,6 +7,7 @@ import { DatePicker } from '../DatePicker';
 import { formatDate, parseDateInput } from '../../utils/formatDate';
 import { formatCurrency } from '../../utils/formatCurrency';
 import { useSettings } from '../../hooks/useSettings';
+import { buildInvoicePayload, validInvoiceItems } from './invoicePayload.mjs';
 import { IconPlus, IconTrash, IconCheck, IconCircleCheck, IconSend, IconFile, IconAlertCircle, IconX, IconChevronLeft } from '@tabler/icons-react';
 
 export function InvoiceModal({ isOpen, mode = 'create', initialInvoice, onSubmit, onClose, customers = [], products = [], company }) {
@@ -198,7 +199,7 @@ export function InvoiceModal({ isOpen, mode = 'create', initialInvoice, onSubmit
       return;
     }
 
-    const validItems = items.filter((item) => item.description.trim() && item.quantity > 0 && item.unitPrice > 0);
+    const validItems = validInvoiceItems(items);
     if (validItems.length === 0) {
       setError('Faktura må ha minst én gyldig linje med beskrivelse, antall og pris.');
       return;
@@ -206,27 +207,10 @@ export function InvoiceModal({ isOpen, mode = 'create', initialInvoice, onSubmit
 
     setSaving(true);
     try {
-      const payload = {
-        customerId: parseInt(customerId),
-        invoiceDate,
-        dueDate,
-        status,
-        notes: notes.trim() || null,
-        yourReference: yourReference.trim() || null,
-        ourReference: ourReference.trim() || null,
-        startDate: startDate || null,
-        endDate: endDate || null,
-        deliveryReference: deliveryReference.trim() || null,
-        reference: reference.trim() || null,
-        credited: credited,
-        items: validItems.map((item) => ({
-          productId: item.productId ? parseInt(item.productId) : null,
-          description: item.description.trim(),
-          quantity: parseFloat(item.quantity),
-          unitPrice: parseFloat(item.unitPrice),
-          vatRate: parseFloat(item.vatRate),
-        })),
-      };
+      const payload = buildInvoicePayload({
+        customerId, invoiceDate, dueDate, status, notes, yourReference, ourReference,
+        startDate, endDate, deliveryReference, reference, credited, items: validItems,
+      });
       
       // Include ID only for edit mode
       if (isEdit && initialInvoice?.id) {
@@ -418,11 +402,11 @@ export function InvoiceModal({ isOpen, mode = 'create', initialInvoice, onSubmit
                   onChange={setStatus}
                   noMargin
                   options={[
-                    { value: 'draft', label: 'Kladd', icon: <IconFile className="h-4 w-4" /> },
-                    { value: 'sent', label: 'Sendt', icon: <IconSend className="h-4 w-4" /> },
-                    { value: 'paid', label: 'Betalt', icon: <IconCircleCheck className="h-4 w-4" /> },
-                    { value: 'overdue', label: 'Forfalt', icon: <IconAlertCircle className="h-4 w-4" /> },
-                    { value: 'cancelled', label: 'Kansellert', icon: <IconX className="h-4 w-4" /> },
+                    { value: 'draft', label: t('status.draft'), icon: <IconFile className="h-4 w-4" /> },
+                    { value: 'sent', label: t('status.sent'), icon: <IconSend className="h-4 w-4" /> },
+                    { value: 'paid', label: t('status.paid'), icon: <IconCircleCheck className="h-4 w-4" /> },
+                    { value: 'overdue', label: t('status.overdue'), icon: <IconAlertCircle className="h-4 w-4" /> },
+                    { value: 'cancelled', label: t('status.cancelled'), icon: <IconX className="h-4 w-4" /> },
                   ]}
                 />
               </div>

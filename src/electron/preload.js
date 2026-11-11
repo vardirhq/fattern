@@ -55,6 +55,7 @@ contextBridge.exposeInMainWorld('fattern', {
     linkExpenseToInvoice: (invoiceId, expenseId) => invoke('db:link-expense-to-invoice', invoiceId, expenseId),
     unlinkExpenseFromInvoice: (invoiceId, expenseId) => invoke('db:unlink-expense-from-invoice', invoiceId, expenseId),
     getInvoiceEvents: (invoiceId) => invoke('db:get-invoice-events', invoiceId),
+    getVatSummary: () => invoke('db:get-vat-summary'),
     logInvoiceEvent: (invoiceId, type, description, metadata) => invoke('db:log-invoice-event', invoiceId, type, description, metadata),
   },
   system: {

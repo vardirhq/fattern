@@ -121,6 +121,7 @@ function registerDatabaseHandlers(database) {
 
   // Invoice event log
   handle('db:get-invoice-events', (invoiceId) => database.getInvoiceEvents(invoiceId));
+  handle('db:get-vat-summary', () => database.getVatSummary());
   handle('db:log-invoice-event', (invoiceId, type, description, metadata) =>
     database.logInvoiceEvent(invoiceId, type, description, metadata)
   );

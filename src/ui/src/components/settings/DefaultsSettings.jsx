@@ -27,14 +27,14 @@ export function DefaultsSettings() {
             <label className="text-sm font-medium" style={{ color: 'var(--f-text-body)' }}>{t('settings.defaults.products_label')}</label>
             <p className="text-xs mt-0.5" style={{ color: 'var(--f-text-subtle)' }}>{t('settings.defaults.products_desc')}</p>
           </div>
-          <div className="flex rounded-lg p-0.5" style={{ border: '1px solid var(--f-border)', background: 'rgba(255,255,255,0.04)' }}>
+          <div className="flex rounded-lg p-0.5" style={{ border: '1px solid var(--f-border)', background: 'var(--f-hover)' }}>
             <button
               type="button"
               onClick={() => handleDefaultViewChange('products', 'table')}
               disabled={isLoading}
               className="rounded-md px-3 py-1.5 text-xs font-medium transition disabled:opacity-60"
               style={productsDefaultView === 'table' ? segmentActive : segmentInactive}
-              onMouseEnter={e => { if (productsDefaultView !== 'table') { e.currentTarget.style.background = 'rgba(255,255,255,0.06)'; e.currentTarget.style.color = 'var(--f-text-body)'; } }}
+              onMouseEnter={e => { if (productsDefaultView !== 'table') { e.currentTarget.style.background = 'var(--f-hover)'; e.currentTarget.style.color = 'var(--f-text-body)'; } }}
               onMouseLeave={e => { if (productsDefaultView !== 'table') { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.color = 'var(--f-text-soft)'; } }}
             >
               {t('common.list')}
@@ -45,7 +45,7 @@ export function DefaultsSettings() {
               disabled={isLoading}
               className="rounded-md px-3 py-1.5 text-xs font-medium transition disabled:opacity-60"
               style={productsDefaultView === 'card' ? segmentActive : segmentInactive}
-              onMouseEnter={e => { if (productsDefaultView !== 'card') { e.currentTarget.style.background = 'rgba(255,255,255,0.06)'; e.currentTarget.style.color = 'var(--f-text-body)'; } }}
+              onMouseEnter={e => { if (productsDefaultView !== 'card') { e.currentTarget.style.background = 'var(--f-hover)'; e.currentTarget.style.color = 'var(--f-text-body)'; } }}
               onMouseLeave={e => { if (productsDefaultView !== 'card') { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.color = 'var(--f-text-soft)'; } }}
             >
               {t('common.card')}
@@ -58,14 +58,14 @@ export function DefaultsSettings() {
             <label className="text-sm font-medium" style={{ color: 'var(--f-text-body)' }}>{t('settings.defaults.customers_label')}</label>
             <p className="text-xs mt-0.5" style={{ color: 'var(--f-text-subtle)' }}>{t('settings.defaults.customers_desc')}</p>
           </div>
-          <div className="flex rounded-lg p-0.5" style={{ border: '1px solid var(--f-border)', background: 'rgba(255,255,255,0.04)' }}>
+          <div className="flex rounded-lg p-0.5" style={{ border: '1px solid var(--f-border)', background: 'var(--f-hover)' }}>
             <button
               type="button"
               onClick={() => handleDefaultViewChange('customers', 'table')}
               disabled={isLoading}
               className="rounded-md px-3 py-1.5 text-xs font-medium transition disabled:opacity-60"
               style={customersDefaultView === 'table' ? segmentActive : segmentInactive}
-              onMouseEnter={e => { if (customersDefaultView !== 'table') { e.currentTarget.style.background = 'rgba(255,255,255,0.06)'; e.currentTarget.style.color = 'var(--f-text-body)'; } }}
+              onMouseEnter={e => { if (customersDefaultView !== 'table') { e.currentTarget.style.background = 'var(--f-hover)'; e.currentTarget.style.color = 'var(--f-text-body)'; } }}
               onMouseLeave={e => { if (customersDefaultView !== 'table') { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.color = 'var(--f-text-soft)'; } }}
             >
               {t('common.list')}
@@ -76,7 +76,7 @@ export function DefaultsSettings() {
               disabled={isLoading}
               className="rounded-md px-3 py-1.5 text-xs font-medium transition disabled:opacity-60"
               style={customersDefaultView === 'card' ? segmentActive : segmentInactive}
-              onMouseEnter={e => { if (customersDefaultView !== 'card') { e.currentTarget.style.background = 'rgba(255,255,255,0.06)'; e.currentTarget.style.color = 'var(--f-text-body)'; } }}
+              onMouseEnter={e => { if (customersDefaultView !== 'card') { e.currentTarget.style.background = 'var(--f-hover)'; e.currentTarget.style.color = 'var(--f-text-body)'; } }}
               onMouseLeave={e => { if (customersDefaultView !== 'card') { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.color = 'var(--f-text-soft)'; } }}
             >
               {t('common.card')}

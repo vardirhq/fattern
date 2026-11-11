@@ -16,7 +16,7 @@ export function ExpenseBreakdownBar({ breakdown = [], activeCategory, onSelectCa
           height: 12,
           borderRadius: 6,
           overflow: 'hidden',
-          background: 'var(--f-surface-2)',
+          background: 'var(--f-surface-hover)',
         }}
       >
         {breakdown.map((cat) => (

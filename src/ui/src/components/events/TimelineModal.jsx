@@ -29,14 +29,14 @@ export function TimelineModal({ isOpen, onClose, activityFeed, formatCurrency: f
                         ? { background: 'var(--f-green-bg)', border: '1px solid var(--f-border-green)', color: 'var(--f-green-text)' }
                         : item.status === 'warn'
                         ? { background: 'rgba(217,119,6,0.1)', border: '1px solid rgba(217,119,6,0.3)', color: '#fbbf24' }
-                        : { background: 'rgba(255,255,255,0.06)', border: '1px solid var(--f-border)', color: 'var(--f-text-soft)' }
+                        : { background: 'var(--f-hover)', border: '1px solid var(--f-border)', color: 'var(--f-text-soft)' }
                     }
                   >
                     <span className="text-sm font-semibold">{item.title.charAt(0)}</span>
                   </div>
 
                   {/* Content */}
-                  <div className="flex-1 rounded-2xl p-4" style={{ border: '1px solid var(--f-border-subtle)', background: 'rgba(255,255,255,0.03)' }}>
+                  <div className="flex-1 rounded-2xl p-4" style={{ border: '1px solid var(--f-border-subtle)', background: 'var(--f-surface-hover)' }}>
                     <div className="flex items-start justify-between gap-4">
                       <div className="flex-1">
                         <p className="font-semibold" style={{ color: 'var(--f-text-body)' }}>{item.title}</p>
@@ -59,7 +59,7 @@ export function TimelineModal({ isOpen, onClose, activityFeed, formatCurrency: f
             </div>
           </div>
         ) : (
-          <div className="rounded-2xl p-12 text-center" style={{ border: '1px solid var(--f-border-subtle)', background: 'rgba(255,255,255,0.02)' }}>
+          <div className="rounded-2xl p-12 text-center" style={{ border: '1px solid var(--f-border-subtle)', background: 'var(--f-surface-hover)' }}>
             <p className="text-sm" style={{ color: 'var(--f-text-subtle)' }}>{t('timeline.empty')}</p>
             <p className="mt-1 text-xs" style={{ color: 'var(--f-text-subtle)' }}>{t('timeline.empty_hint')}</p>
           </div>

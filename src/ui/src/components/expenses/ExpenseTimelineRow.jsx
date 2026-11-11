@@ -1,10 +1,11 @@
 // src/ui/src/components/expenses/ExpenseTimelineRow.jsx
 import { useTranslation } from 'react-i18next';
 import { IconPaperclip } from '@tabler/icons-react';
+import { formatDate } from '../../utils/formatDate';
 
 export function ExpenseTimelineRow({ expense, formatCurrency, isSelected, onClick }) {
   const { t } = useTranslation();
-  const accentColor = expense.category_color || '#555555';
+  const accentColor = expense.category_color || 'var(--f-text-muted)';
 
   return (
     <div
@@ -16,24 +17,19 @@ export function ExpenseTimelineRow({ expense, formatCurrency, isSelected, onClic
         display: 'flex',
         alignItems: 'center',
         gap: 12,
-        padding: '10px 14px',
         borderRadius: 12,
         cursor: 'pointer',
-        border: `1px solid ${isSelected ? accentColor : 'var(--f-border)'}`,
-        background: isSelected ? `${accentColor}12` : 'var(--f-surface)',
+        border: isSelected ? '2px solid var(--f-text)' : '1px solid var(--f-border)',
+        padding: isSelected ? '9px 13px' : '10px 14px',
+        background: 'var(--f-surface)',
         transition: 'border-color 150ms, background 150ms',
         marginBottom: 6,
       }}
     >
-      {/* Left accent bar */}
-      <div
-        style={{
-          width: 4,
-          alignSelf: 'stretch',
-          borderRadius: 2,
-          background: accentColor,
-          flexShrink: 0,
-        }}
+      {/* Category dot */}
+      <span
+        aria-hidden="true"
+        style={{ width: 10, height: 10, borderRadius: 5, background: accentColor, flexShrink: 0 }}
       />
 
       {/* Content */}
@@ -51,11 +47,11 @@ export function ExpenseTimelineRow({ expense, formatCurrency, isSelected, onClic
           {expense.vendor || t('expense.unknown_vendor')}
         </div>
         <div style={{ fontSize: 12, color: 'var(--f-text-subtle)', marginTop: 2 }}>
-          <span>{expense.date}</span>
+          <span>{expense.date ? formatDate(expense.date) : '—'}</span>
           {expense.category_name && (
             <>
               {' · '}
-              <span style={{ color: accentColor }}>{expense.category_name}</span>
+              <span>{expense.category_name}</span>
             </>
           )}
         </div>
@@ -66,7 +62,7 @@ export function ExpenseTimelineRow({ expense, formatCurrency, isSelected, onClic
         {expense.attachment_path && (
           <IconPaperclip size={14} stroke={1.5} title={t('expense.has_receipt')} aria-label={t('expense.has_receipt')} style={{ color: 'var(--f-text-subtle)', flexShrink: 0 }} />
         )}
-        <span style={{ fontWeight: 700, fontSize: 14, color: 'var(--f-text)' }}>
+        <span className="f-num" style={{ fontWeight: 600, fontSize: 14, color: 'var(--f-text)', whiteSpace: 'nowrap' }}>
           {formatCurrency ? formatCurrency(expense.amount) : expense.amount}
         </span>
       </div>

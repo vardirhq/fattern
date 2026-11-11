@@ -56,7 +56,7 @@ export function CreditLedgerViewer() {
         </p>
       </div>
 
-      <div className="rounded-2xl p-4" style={{ border: '1px solid var(--f-border-subtle)', background: 'rgba(255,255,255,0.03)' }}>
+      <div className="rounded-2xl p-4" style={{ border: '1px solid var(--f-border-subtle)', background: 'var(--f-surface-hover)' }}>
         <div className="flex items-center justify-between">
           <div>
             <p className="text-sm" style={{ color: 'var(--f-text-subtle)' }}>Nåværende saldo</p>
@@ -74,7 +74,7 @@ export function CreditLedgerViewer() {
       <div>
         <h4 className="text-sm font-semibold mb-3" style={{ color: 'var(--f-text-body)' }}>Transaksjoner ({ledger.length})</h4>
         {ledger.length === 0 ? (
-          <div className="rounded-lg p-8 text-center text-sm" style={{ border: '1px solid var(--f-border-subtle)', background: 'rgba(255,255,255,0.02)', color: 'var(--f-text-subtle)' }}>
+          <div className="rounded-lg p-8 text-center text-sm" style={{ border: '1px solid var(--f-border-subtle)', background: 'var(--f-surface-hover)', color: 'var(--f-text-subtle)' }}>
             Ingen transaksjoner
           </div>
         ) : (
@@ -85,7 +85,7 @@ export function CreditLedgerViewer() {
                 <div
                   key={tx.id || index}
                   className="flex items-center justify-between rounded-lg p-4"
-                  style={{ border: '1px solid var(--f-border-subtle)', background: 'rgba(255,255,255,0.03)' }}
+                  style={{ border: '1px solid var(--f-border-subtle)', background: 'var(--f-surface-hover)' }}
                 >
                   <div className="flex-1">
                     <div className="flex items-center gap-2">
@@ -115,7 +115,7 @@ export function CreditLedgerViewer() {
         )}
       </div>
 
-      <div className="rounded-lg p-4" style={{ border: '1px solid var(--f-border-subtle)', background: 'rgba(255,255,255,0.02)' }}>
+      <div className="rounded-lg p-4" style={{ border: '1px solid var(--f-border-subtle)', background: 'var(--f-surface-hover)' }}>
         <p className="text-xs" style={{ color: 'var(--f-text-soft)' }}>
           <strong style={{ color: 'var(--f-text-body)' }}>Sikkerhet:</strong> Hver transaksjon er kryptografisk signert. Manipulasjon av bokføringen vil bli oppdaget og transaksjonen vil bli avvist.
         </p>

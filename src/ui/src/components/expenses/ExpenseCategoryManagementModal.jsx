@@ -86,7 +86,7 @@ export function ExpenseCategoryManagementModal({ isOpen, onClose, categories = [
             <div className="space-y-2">
               {categoryTree.map((category) => (
                 <div key={category.id} className="space-y-1">
-                  <div className="flex items-center justify-between rounded-lg px-4 py-3" style={{ border: '1px solid var(--f-border-subtle)', background: 'rgba(255,255,255,0.03)' }}>
+                  <div className="flex items-center justify-between rounded-lg px-4 py-3" style={{ border: '1px solid var(--f-border-subtle)', background: 'var(--f-surface-hover)' }}>
                     <div>
                       <p className="text-sm font-medium" style={{ color: 'var(--f-text-body)' }}>
                         <span style={{ display: 'inline-flex', alignItems: 'center', gap: 8 }}>
@@ -135,7 +135,7 @@ export function ExpenseCategoryManagementModal({ isOpen, onClose, categories = [
                   {category.children.length > 0 && (
                     <div className="ml-6 space-y-1">
                       {category.children.map((child) => (
-                        <div key={child.id} className="flex items-center justify-between rounded-lg px-4 py-2" style={{ border: '1px solid var(--f-border-faint)', background: 'rgba(255,255,255,0.02)' }}>
+                        <div key={child.id} className="flex items-center justify-between rounded-lg px-4 py-2" style={{ border: '1px solid var(--f-border-faint)', background: 'var(--f-surface-hover)' }}>
                           <p className="text-sm" style={{ color: 'var(--f-text-soft)' }}>
                             <span style={{ display: 'inline-flex', alignItems: 'center', gap: 8 }}>
                               <span

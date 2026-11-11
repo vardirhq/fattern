@@ -177,12 +177,12 @@ export function BudgetYearsPage({
                           </div>
                         )}
                         {progress?.isFuture && (
-                          <span className="rounded-full px-3 py-1 text-xs font-semibold" style={{ background: 'rgba(255,255,255,0.07)', color: 'var(--f-text-soft)', border: '1px solid var(--f-border)' }}>
+                          <span className="rounded-full px-3 py-1 text-xs font-semibold" style={{ background: 'var(--f-hover)', color: 'var(--f-text-soft)', border: '1px solid var(--f-border)' }}>
                             {t('budget_years_page.future_badge')}
                           </span>
                         )}
                         {progress?.isPast && (
-                          <span className="rounded-full px-3 py-1 text-xs font-semibold" style={{ background: 'rgba(255,255,255,0.05)', color: 'var(--f-text-subtle)', border: '1px solid var(--f-border-subtle)' }}>
+                          <span className="rounded-full px-3 py-1 text-xs font-semibold" style={{ background: 'var(--f-hover)', color: 'var(--f-text-subtle)', border: '1px solid var(--f-border-subtle)' }}>
                             {t('budget_years_page.past_badge')}
                           </span>
                         )}
@@ -213,7 +213,7 @@ export function BudgetYearsPage({
                         )}
                       </div>
                       {progress?.isActive && progress.progress > 0 && (
-                        <div className="mt-3 h-2 w-full rounded-full overflow-hidden relative" style={{ background: 'rgba(255,255,255,0.1)' }}>
+                        <div className="mt-3 h-2 w-full rounded-full overflow-hidden relative" style={{ background: 'var(--f-hover-elevated)' }}>
                           <motion.div
                             className="h-full relative overflow-hidden"
                             style={{ background: 'var(--f-green)' }}
@@ -224,7 +224,7 @@ export function BudgetYearsPage({
                             <motion.div
                               className="absolute top-0 bottom-0"
                               style={{
-                                background: 'linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.5) 50%, transparent 100%)',
+                                background: 'linear-gradient(90deg, transparent 0%, var(--f-hover-elevated) 50%, transparent 100%)',
                                 width: '50%',
                               }}
                               animate={{ x: ['-50%', '150%'] }}
@@ -273,7 +273,7 @@ export function BudgetYearsPage({
                   ) : (
                     <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
                       {/* Income */}
-                      <div className="rounded-2xl p-4" style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid var(--f-border-subtle)' }}>
+                      <div className="rounded-2xl p-4" style={{ background: 'var(--f-hover)', border: '1px solid var(--f-border-subtle)' }}>
                         <div className="flex items-center gap-2 mb-2">
                           <div className="rounded-lg p-2" style={{ background: 'var(--f-green-bg)' }}>
                             <IconCoin size={18} stroke={1.6} style={{ color: 'var(--f-green-text)' }} />
@@ -288,7 +288,7 @@ export function BudgetYearsPage({
                         <div className="mt-3 pt-3 space-y-1.5 text-xs" style={{ borderTop: '1px solid var(--f-border-faint)' }}>
                           <div className="flex items-center justify-between">
                             <span style={{ color: 'var(--f-text-soft)' }}>{t('budget_years_page.paid')}</span>
-                            <span className="font-medium" style={{ color: 'var(--f-green-text)' }}>{formatCurrencyFn(summary.paid)}</span>
+                            <span className="font-medium" style={{ color: 'var(--f-success-text)' }}>{formatCurrencyFn(summary.paid)}</span>
                           </div>
                           <div className="flex items-center justify-between">
                             <span style={{ color: 'var(--f-text-soft)' }}>{t('budget_years_page.unpaid')}</span>
@@ -307,7 +307,7 @@ export function BudgetYearsPage({
                       </div>
 
                       {/* Expenses */}
-                      <div className="rounded-2xl p-4" style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid var(--f-border-subtle)' }}>
+                      <div className="rounded-2xl p-4" style={{ background: 'var(--f-hover)', border: '1px solid var(--f-border-subtle)' }}>
                         <div className="flex items-center gap-2 mb-2">
                           <div className="rounded-lg p-2" style={{ background: 'var(--f-danger-bg)' }}>
                             <IconReceipt size={18} stroke={1.6} style={{ color: 'var(--f-danger-text)' }} />
@@ -346,7 +346,7 @@ export function BudgetYearsPage({
                           </div>
                           <div className="flex-1">
                             <p className="text-xs font-medium uppercase tracking-wider" style={{ color: 'var(--f-text-subtle)' }}>{t('budget_years_page.net')}</p>
-                            <p className="text-xl font-semibold mt-0.5" style={{ color: summary.net >= 0 ? 'var(--f-green-text)' : 'var(--f-danger-text)' }}>
+                            <p className="text-xl font-semibold mt-0.5" style={{ color: summary.net >= 0 ? 'var(--f-text)' : 'var(--f-danger-text)' }}>
                               {formatCurrencyFn(summary.net)}
                             </p>
                           </div>
@@ -355,7 +355,7 @@ export function BudgetYearsPage({
                           <div className="mt-3 pt-3" style={{ borderTop: '1px solid var(--f-border-faint)' }}>
                             <div className="flex items-center justify-between text-xs">
                               <span style={{ color: 'var(--f-text-soft)' }}>{t('budget_years_page.margin')}</span>
-                              <span className="font-medium" style={{ color: summary.net >= 0 ? 'var(--f-green-text)' : 'var(--f-danger-text)' }}>
+                              <span className="font-medium" style={{ color: summary.net >= 0 ? 'var(--f-success-text)' : 'var(--f-danger-text)' }}>
                                 {summary.net >= 0 ? '+' : ''}{Math.round((summary.net / summary.income) * 100)}%
                               </span>
                             </div>

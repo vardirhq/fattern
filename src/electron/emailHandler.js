@@ -155,7 +155,7 @@ function registerEmailHandlers(ipcMain, database) {
   });
 
   // Send invoice email via SMTP
-  ipcMain.handle('email:send-invoice', async (event, { invoiceId, to, subject, message, templateId }) => {
+  ipcMain.handle('email:send-invoice', async (event, { invoiceId, to, subject, message, templateId, kind }) => {
     const raw = readRawConfig();
     if (!raw.host || !raw.user) {
       throw new Error('SMTP ikke konfigurert. Gå til Innstillinger → E-post.');
@@ -187,12 +187,16 @@ function registerEmailHandlers(ipcMain, database) {
       ],
     });
 
-    database.logInvoiceEvent(invoiceId, 'email_sent', `E-post sendt til ${to}`, { to, subject });
+    if (kind === 'reminder') {
+      database.logInvoiceEvent(invoiceId, 'reminder_sent', `Purring sendt til ${to}`, { to, subject, via: 'smtp' });
+    } else {
+      database.logInvoiceEvent(invoiceId, 'email_sent', `E-post sendt til ${to}`, { to, subject });
+    }
     return { ok: true };
   });
 
   // Mailto fallback: save PDF to temp dir + open mailto: link
-  ipcMain.handle('email:open-mailto', async (event, { invoiceId, to, subject, message }) => {
+  ipcMain.handle('email:open-mailto', async (event, { invoiceId, to, subject, message, kind }) => {
     // Save PDF to temp dir
     const pdfPath = await generatePdfForInvoice(database, invoiceId);
 
@@ -209,6 +213,10 @@ function registerEmailHandlers(ipcMain, database) {
 
     // Also reveal PDF in Finder/Explorer so user can drag to email compose window
     shell.showItemInFolder(destPath);
+
+    if (kind === 'reminder') {
+      database.logInvoiceEvent(invoiceId, 'reminder_sent', `Purring klargjort i e-postprogrammet til ${to}`, { to, subject, via: 'mailto' });
+    }
 
     return { ok: true, pdfPath: destPath };
   });

@@ -149,7 +149,7 @@ export function TemplateCard({
       }
     >
       {/* Preview */}
-      <div className="relative h-48 overflow-hidden flex items-center justify-center" style={{ background: 'rgba(255,255,255,0.05)' }}>
+      <div className="relative h-48 overflow-hidden flex items-center justify-center" style={{ background: 'var(--f-hover)' }}>
         {previewHtml ? (
           <div className="relative w-full h-full flex items-center justify-center">
             <iframe
@@ -194,7 +194,7 @@ export function TemplateCard({
             </span>
           )}
           {isPreset && !isPremium && !isDefault && (
-            <span className="inline-flex items-center rounded-full px-2 py-1 text-xs font-medium" style={{ background: 'rgba(255,255,255,0.06)', color: 'var(--f-text-subtle)' }}>
+            <span className="inline-flex items-center rounded-full px-2 py-1 text-xs font-medium" style={{ background: 'var(--f-hover)', color: 'var(--f-text-subtle)' }}>
               {t('settings.templates.badge_preset')}
             </span>
           )}
@@ -219,7 +219,7 @@ export function TemplateCard({
               onClick={() => setShowActions(!showActions)}
               className="rounded-lg p-1.5 transition"
               style={{ color: 'var(--f-text-subtle)' }}
-              onMouseEnter={e => { e.currentTarget.style.background = 'rgba(255,255,255,0.08)'; e.currentTarget.style.color = 'var(--f-text-body)'; }}
+              onMouseEnter={e => { e.currentTarget.style.background = 'var(--f-hover-elevated)'; e.currentTarget.style.color = 'var(--f-text-body)'; }}
               onMouseLeave={e => { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.color = 'var(--f-text-subtle)'; }}
               title={t('settings.templates.more_actions')}
             >
@@ -232,7 +232,7 @@ export function TemplateCard({
         {templateMeta.tags && templateMeta.tags.length > 0 && (
           <div className="flex flex-wrap gap-1.5 mt-2">
             {templateMeta.tags.map((tag, idx) => (
-              <span key={idx} className="inline-flex items-center rounded-full px-2 py-0.5 text-xs font-medium" style={{ background: 'rgba(255,255,255,0.06)', color: 'var(--f-text-subtle)' }}>
+              <span key={idx} className="inline-flex items-center rounded-full px-2 py-0.5 text-xs font-medium" style={{ background: 'var(--f-hover)', color: 'var(--f-text-subtle)' }}>
                 {tag}
               </span>
             ))}
@@ -250,7 +250,7 @@ export function TemplateCard({
         </div>
 
         {isLocked && (
-          <div className="mt-2 pt-2" style={{ borderTop: '1px solid rgba(255,255,255,0.06)' }}>
+          <div className="mt-2 pt-2" style={{ borderTop: '1px solid var(--f-border)' }}>
             <p className="text-xs font-medium flex items-center gap-1" style={{ color: '#fbbf24' }}>
               <IconLock className="h-3 w-3" />
               {t('settings.templates.requires_supporter')}
@@ -268,7 +268,7 @@ export function TemplateCard({
             background: 'var(--f-surface-elevated)',
             border: '1px solid var(--f-border)',
             backdropFilter: 'blur(20px)',
-            boxShadow: '0 8px 32px rgba(0,0,0,0.4)',
+            boxShadow: '0 12px 32px var(--f-tooltip-shadow)',
             top: `${menuPosition.top}px`,
             left: `${menuPosition.left}px`,
           }}
@@ -278,7 +278,7 @@ export function TemplateCard({
               onClick={() => { onSetDefault?.(); setShowActions(false); }}
               className="w-full px-3 py-2 text-left text-xs transition flex items-center gap-2"
               style={{ color: 'var(--f-text-body)' }}
-              onMouseEnter={e => { e.currentTarget.style.background = 'rgba(255,255,255,0.06)'; }}
+              onMouseEnter={e => { e.currentTarget.style.background = 'var(--f-hover)'; }}
               onMouseLeave={e => { e.currentTarget.style.background = 'transparent'; }}
             >
               <IconCheck className="h-3.5 w-3.5" />
@@ -290,7 +290,7 @@ export function TemplateCard({
               onClick={() => { onEdit?.(); setShowActions(false); }}
               className="w-full px-3 py-2 text-left text-xs transition flex items-center gap-2"
               style={{ color: 'var(--f-text-body)' }}
-              onMouseEnter={e => { e.currentTarget.style.background = 'rgba(255,255,255,0.06)'; }}
+              onMouseEnter={e => { e.currentTarget.style.background = 'var(--f-hover)'; }}
               onMouseLeave={e => { e.currentTarget.style.background = 'transparent'; }}
             >
               <IconEdit className="h-3.5 w-3.5" />
@@ -302,7 +302,7 @@ export function TemplateCard({
               onClick={() => { onExport?.(); setShowActions(false); }}
               className="w-full px-3 py-2 text-left text-xs transition flex items-center gap-2"
               style={{ color: 'var(--f-text-body)' }}
-              onMouseEnter={e => { e.currentTarget.style.background = 'rgba(255,255,255,0.06)'; }}
+              onMouseEnter={e => { e.currentTarget.style.background = 'var(--f-hover)'; }}
               onMouseLeave={e => { e.currentTarget.style.background = 'transparent'; }}
             >
               <IconDownload className="h-3.5 w-3.5" />
@@ -314,7 +314,7 @@ export function TemplateCard({
               onClick={() => { onDuplicate?.(); setShowActions(false); }}
               className="w-full px-3 py-2 text-left text-xs transition flex items-center gap-2"
               style={{ color: 'var(--f-text-body)' }}
-              onMouseEnter={e => { e.currentTarget.style.background = 'rgba(255,255,255,0.06)'; }}
+              onMouseEnter={e => { e.currentTarget.style.background = 'var(--f-hover)'; }}
               onMouseLeave={e => { e.currentTarget.style.background = 'transparent'; }}
             >
               <IconCopy className="h-3.5 w-3.5" />

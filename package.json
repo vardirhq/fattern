@@ -5,6 +5,7 @@
   "main": "src/electron/main.js",
   "scripts": {
     "init-db": "node scripts/run-with-electron-node.js scripts/init-db.js",
+    "check:invoice-save": "node scripts/run-with-electron-node.js scripts/check-invoice-save.mjs",
     "lint": "echo \"No linters configured yet\"",
     "ui:dev": "vite",
     "ui:build": "vite build",

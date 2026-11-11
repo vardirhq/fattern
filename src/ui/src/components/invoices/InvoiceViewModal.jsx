@@ -16,6 +16,7 @@ const EVENT_CONFIG = {
   status_changed:      { icon: IconCircleCheck,   color: 'var(--f-blue-text)', labelKey: 'invoice_log.types.status_changed' },
   pdf_generated:       { icon: IconDownload,      color: 'var(--f-text-soft)', labelKey: 'invoice_log.types.pdf_generated' },
   email_sent:          { icon: IconMail,          color: 'var(--f-green-text)',labelKey: 'invoice_log.types.email_sent' },
+  reminder_sent:       { icon: IconMail,          color: 'var(--f-danger-text)',labelKey: 'invoice_log.types.reminder_sent' },
   overdue:             { icon: IconAlertCircle,   color: 'var(--f-warn)',      labelKey: 'invoice_log.types.status_changed' },
 };
 
@@ -99,7 +100,7 @@ function InvoiceEventLog({ invoiceId }) {
                         className="flex items-baseline gap-2 px-3 py-1.5"
                         style={{
                           borderTop: ci > 0 ? '1px solid var(--f-border-faint)' : 'none',
-                          background: ci % 2 === 0 ? 'transparent' : 'rgba(255,255,255,0.015)',
+                          background: ci % 2 === 0 ? 'transparent' : 'var(--f-surface-hover)',
                         }}
                       >
                         <span className="flex-shrink-0 font-medium" style={{ color: 'var(--f-text-subtle)', minWidth: 80 }}>
@@ -166,11 +167,11 @@ function ExpensePickerModal({ isOpen, invoiceId, budgetYearId, onLink, onClose, 
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-[70] flex items-center justify-center p-4" style={{ background: 'rgba(4,10,8,0.75)', backdropFilter: 'blur(6px)' }}>
+    <div className="fixed inset-0 z-[70] flex items-center justify-center p-4" style={{ background: 'var(--f-overlay)', backdropFilter: 'blur(6px)' }}>
       <div className="f-glass-hero w-full max-w-lg rounded-3xl shadow-xl">
         <div className="flex items-center justify-between p-6" style={{ borderBottom: '1px solid var(--f-border-subtle)' }}>
           <h3 className="text-base font-semibold" style={{ color: 'var(--f-text-body)' }}>{t('invoice.linked_expenses.picker_title')}</h3>
-          <button type="button" onClick={onClose} className="rounded-lg p-1.5 transition" style={{ color: 'var(--f-text-subtle)' }} onMouseEnter={e => e.currentTarget.style.background = 'rgba(255,255,255,0.08)'} onMouseLeave={e => e.currentTarget.style.background = 'transparent'}>
+          <button type="button" onClick={onClose} className="rounded-lg p-1.5 transition" style={{ color: 'var(--f-text-subtle)' }} onMouseEnter={e => e.currentTarget.style.background = 'var(--f-hover-elevated)'} onMouseLeave={e => e.currentTarget.style.background = 'transparent'}>
             <IconX className="h-4 w-4" />
           </button>
         </div>
@@ -182,7 +183,7 @@ function ExpensePickerModal({ isOpen, invoiceId, budgetYearId, onLink, onClose, 
           ) : (
             <div className="space-y-2">
               {unlinked.map((exp) => (
-                <label key={exp.id} className="flex items-center gap-3 rounded-xl p-3 cursor-pointer transition" onMouseEnter={e => e.currentTarget.style.background = 'rgba(255,255,255,0.06)'} onMouseLeave={e => e.currentTarget.style.background = 'transparent'}>
+                <label key={exp.id} className="flex items-center gap-3 rounded-xl p-3 cursor-pointer transition" onMouseEnter={e => e.currentTarget.style.background = 'var(--f-hover)'} onMouseLeave={e => e.currentTarget.style.background = 'transparent'}>
                   <input
                     type="checkbox"
                     checked={selected.has(exp.id)}
@@ -275,7 +276,7 @@ function LinkedExpensesTab({ invoiceId, budgetYearId, formatCurrency: fmt }) {
       ) : (
         <div className="space-y-2">
           {linked.map((exp) => (
-            <div key={exp.id} className="flex items-center gap-3 rounded-xl p-3" style={{ border: '1px solid var(--f-border-subtle)', background: 'rgba(255,255,255,0.02)' }}>
+            <div key={exp.id} className="flex items-center gap-3 rounded-xl p-3" style={{ border: '1px solid var(--f-border-subtle)', background: 'var(--f-surface-hover)' }}>
               <div className="flex-1 min-w-0">
                 <p className="text-sm font-medium" style={{ color: 'var(--f-text-body)' }}>{exp.vendor || '—'}</p>
                 <p className="text-xs" style={{ color: 'var(--f-text-subtle)' }}>
@@ -506,7 +507,7 @@ export function InvoiceViewModal({ isOpen, invoice, onClose, onEdit, onGenerateP
             <div className="rounded-2xl overflow-hidden" style={{ border: '1px solid var(--f-border-subtle)' }}>
               <div className="overflow-x-auto">
                 <table className="w-full">
-                  <thead style={{ background: 'rgba(255,255,255,0.04)', borderBottom: '1px solid var(--f-border-subtle)' }}>
+                  <thead style={{ background: 'var(--f-hover)', borderBottom: '1px solid var(--f-border-subtle)' }}>
                     <tr>
                       <th className="px-4 py-3 text-left text-xs font-semibold uppercase tracking-wide" style={{ color: 'var(--f-text-subtle)' }}>{t('invoice.view.description')}</th>
                       <th className="px-4 py-3 text-center text-xs font-semibold uppercase tracking-wide" style={{ color: 'var(--f-text-subtle)' }}>{t('invoice.view.quantity')}</th>
@@ -525,7 +526,7 @@ export function InvoiceViewModal({ isOpen, invoice, onClose, onEdit, onGenerateP
                       const lineTotal = lineSubtotal + lineVat;
 
                       return (
-                        <tr key={item.id || index} style={{ borderBottom: '1px solid var(--f-border-faint)' }} onMouseEnter={e => e.currentTarget.style.background = 'rgba(255,255,255,0.025)'} onMouseLeave={e => e.currentTarget.style.background = 'transparent'}>
+                        <tr key={item.id || index} style={{ borderBottom: '1px solid var(--f-border-faint)' }} onMouseEnter={e => e.currentTarget.style.background = 'var(--f-surface-hover)'} onMouseLeave={e => e.currentTarget.style.background = 'transparent'}>
                           <td className="px-4 py-3 text-sm" style={{ color: 'var(--f-text-body)' }}>{item.description || '—'}</td>
                           <td className="px-4 py-3 text-sm text-center" style={{ color: 'var(--f-text-soft)' }}>{quantity}</td>
                           <td className="px-4 py-3 text-sm text-right" style={{ color: 'var(--f-text-soft)' }}>{fmt(unitPrice)}</td>
@@ -541,7 +542,7 @@ export function InvoiceViewModal({ isOpen, invoice, onClose, onEdit, onGenerateP
               </div>
             </div>
           ) : (
-            <div className="rounded-2xl p-8 text-center text-sm" style={{ border: '1px solid var(--f-border-subtle)', background: 'rgba(255,255,255,0.02)', color: 'var(--f-text-subtle)' }}>
+            <div className="rounded-2xl p-8 text-center text-sm" style={{ border: '1px solid var(--f-border-subtle)', background: 'var(--f-surface-hover)', color: 'var(--f-text-subtle)' }}>
               {t('invoice.view.no_items')}
             </div>
           )}
@@ -576,7 +577,7 @@ export function InvoiceViewModal({ isOpen, invoice, onClose, onEdit, onGenerateP
 
           {/* Notes */}
           {invoice.notes && (
-            <div className="rounded-2xl p-4" style={{ border: '1px solid var(--f-border-subtle)', background: 'rgba(255,255,255,0.02)' }}>
+            <div className="rounded-2xl p-4" style={{ border: '1px solid var(--f-border-subtle)', background: 'var(--f-surface-hover)' }}>
               <label className="f-label uppercase tracking-wide">{t('invoice.view.notes')}</label>
               <p className="mt-2 text-sm whitespace-pre-wrap" style={{ color: 'var(--f-text-body)' }}>{invoice.notes}</p>
             </div>

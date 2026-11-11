@@ -294,7 +294,7 @@ export function BottomBar({
                       textAlign: 'left',
                     }}
                     onMouseEnter={e => {
-                      if (!action.disabled) e.currentTarget.style.background = 'rgba(255,255,255,0.06)';
+                      if (!action.disabled) e.currentTarget.style.background = 'var(--f-hover)';
                     }}
                     onMouseLeave={e => (e.currentTarget.style.background = 'transparent')}
                   >
@@ -445,7 +445,7 @@ export function BottomBar({
                       textAlign: 'left',
                     }}
                     onMouseEnter={e => {
-                      if (!isActive) e.currentTarget.style.background = 'rgba(255,255,255,0.06)';
+                      if (!isActive) e.currentTarget.style.background = 'var(--f-hover)';
                     }}
                     onMouseLeave={e => {
                       e.currentTarget.style.background = isActive ? 'var(--f-green-bg)' : 'transparent';

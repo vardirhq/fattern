@@ -60,7 +60,7 @@ export function DataTable({ columns, data, emptyMessage = 'Ingen data å vise', 
 
   if (!data || data.length === 0) {
     return (
-      <div className="rounded-2xl p-12 text-center" style={{ border: '1px solid var(--f-border-subtle)', background: 'rgba(255,255,255,0.02)' }}>
+      <div className="rounded-2xl p-12 text-center" style={{ border: '1px solid var(--f-border-subtle)', background: 'var(--f-surface-hover)' }}>
         <p className="text-sm" style={{ color: 'var(--f-text-subtle)' }}>{emptyMessage}</p>
       </div>
     );
@@ -70,7 +70,7 @@ export function DataTable({ columns, data, emptyMessage = 'Ingen data å vise', 
     <div className="overflow-x-auto rounded-2xl" style={{ border: '1px solid var(--f-border-subtle)' }}>
       <table className="min-w-full text-sm">
         <thead>
-          <tr style={{ background: 'rgba(255,255,255,0.04)', borderBottom: '1px solid var(--f-border-subtle)', color: 'var(--f-text-subtle)' }}>
+          <tr style={{ background: 'var(--f-hover)', borderBottom: '1px solid var(--f-border-subtle)', color: 'var(--f-text-subtle)' }}>
             {columns.map((column) => {
               const isSortable = column.sortable !== false && column.key !== 'actions';
               const isSorted = sortColumn === column.key;
@@ -84,7 +84,7 @@ export function DataTable({ columns, data, emptyMessage = 'Ingen data å vise', 
                   }`}
                   style={{ color: 'var(--f-text-subtle)', ...(column.headerStyle || column.style || {}) }}
                   onClick={() => isSortable && handleSort(column.key)}
-                  onMouseEnter={e => { if (isSortable) e.currentTarget.style.background = 'rgba(255,255,255,0.04)'; }}
+                  onMouseEnter={e => { if (isSortable) e.currentTarget.style.background = 'var(--f-hover)'; }}
                   onMouseLeave={e => { e.currentTarget.style.background = 'transparent'; }}
                 >
                   <div className={`flex items-center gap-2 ${column.align === 'right' ? 'justify-end' : ''}`}>
@@ -115,7 +115,7 @@ export function DataTable({ columns, data, emptyMessage = 'Ingen data å vise', 
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.2, delay: rowIndex * 0.02 }}
               style={{ borderBottom: '1px solid var(--f-border-faint)' }}
-              onMouseEnter={e => e.currentTarget.style.background = 'rgba(255,255,255,0.025)'}
+              onMouseEnter={e => e.currentTarget.style.background = 'var(--f-surface-hover)'}
               onMouseLeave={e => e.currentTarget.style.background = 'transparent'}
             >
               {columns.map((column) => {

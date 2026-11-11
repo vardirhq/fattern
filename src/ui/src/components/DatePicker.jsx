@@ -192,7 +192,7 @@ export function DatePicker({ value, onChange, placeholder = 'dd.mm.yyyy', requir
             fontWeight: isSelected || isToday ? 600 : 400,
             opacity: !isCurrentMonth ? 0.3 : 1,
           }}
-          onMouseEnter={e => { if (!isSelected) e.currentTarget.style.background = 'rgba(255,255,255,0.07)'; }}
+          onMouseEnter={e => { if (!isSelected) e.currentTarget.style.background = 'var(--f-hover)'; }}
           onMouseLeave={e => { if (!isSelected) e.currentTarget.style.background = isToday ? 'rgba(47,75,216,0.1)' : 'transparent'; }}
         >
           {day}
@@ -214,7 +214,7 @@ export function DatePicker({ value, onChange, placeholder = 'dd.mm.yyyy', requir
         background: 'var(--f-surface-elevated)',
         backdropFilter: 'blur(20px)',
         border: '1px solid var(--f-border)',
-        boxShadow: '0 8px 32px rgba(0,0,0,0.45)',
+        boxShadow: '0 12px 32px var(--f-tooltip-shadow)',
       }}
     >
       <div className="p-4">
@@ -225,7 +225,7 @@ export function DatePicker({ value, onChange, placeholder = 'dd.mm.yyyy', requir
             onClick={handlePrevMonth}
             className="rounded-lg p-1.5 transition"
             style={{ color: 'var(--f-text-subtle)', background: 'transparent' }}
-            onMouseEnter={e => e.currentTarget.style.background = 'rgba(255,255,255,0.07)'}
+            onMouseEnter={e => e.currentTarget.style.background = 'var(--f-hover)'}
             onMouseLeave={e => e.currentTarget.style.background = 'transparent'}
           >
             <IconChevronLeft size={15} stroke={1.8} />
@@ -238,7 +238,7 @@ export function DatePicker({ value, onChange, placeholder = 'dd.mm.yyyy', requir
             onClick={handleNextMonth}
             className="rounded-lg p-1.5 transition"
             style={{ color: 'var(--f-text-subtle)', background: 'transparent' }}
-            onMouseEnter={e => e.currentTarget.style.background = 'rgba(255,255,255,0.07)'}
+            onMouseEnter={e => e.currentTarget.style.background = 'var(--f-hover)'}
             onMouseLeave={e => e.currentTarget.style.background = 'transparent'}
           >
             <IconChevronRight size={15} stroke={1.8} />
