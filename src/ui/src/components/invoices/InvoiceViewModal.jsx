@@ -5,6 +5,7 @@ import { StatusBadge } from '../StatusBadge';
 import { formatDate } from '../../utils/formatDate';
 import { IconEdit, IconDownload, IconX, IconPlus, IconSend, IconFileText, IconMail, IconPencil, IconCircleCheck, IconAlertCircle, IconClockHour4, IconAlertTriangle } from '@tabler/icons-react';
 import { SendEmailModal } from './SendEmailModal';
+import { EhfPanel } from './EhfPanel';
 
 // ─── Event Log Tab ──────────────────────────────────────────────────────────
 
@@ -17,6 +18,7 @@ const EVENT_CONFIG = {
   pdf_generated:       { icon: IconDownload,      color: 'var(--f-text-soft)', labelKey: 'invoice_log.types.pdf_generated' },
   email_sent:          { icon: IconMail,          color: 'var(--f-green-text)',labelKey: 'invoice_log.types.email_sent' },
   reminder_sent:       { icon: IconMail,          color: 'var(--f-danger-text)',labelKey: 'invoice_log.types.reminder_sent' },
+  ehf_exported:        { icon: IconDownload,      color: 'var(--f-text-soft)', labelKey: 'invoice_log.types.ehf_exported' },
   overdue:             { icon: IconAlertCircle,   color: 'var(--f-warn)',      labelKey: 'invoice_log.types.status_changed' },
 };
 
@@ -361,6 +363,7 @@ export function InvoiceViewModal({ isOpen, invoice, onClose, onEdit, onGenerateP
 
   const tabs = [
     { id: 'details',  label: t('invoice.view.details_tab') },
+    { id: 'ehf',      label: 'EHF' },
     { id: 'expenses', label: t('invoice.linked_expenses.tab') },
     { id: 'log',      label: t('invoice.view.log_tab') },
   ];
@@ -457,10 +460,16 @@ export function InvoiceViewModal({ isOpen, invoice, onClose, onEdit, onGenerateP
                   {invoice.due_date ? formatDate(invoice.due_date) : '—'}
                 </p>
               </div>
+              {invoice.kid && (
+                <div>
+                  <label className="f-label uppercase tracking-wide">KID</label>
+                  <p className="mt-1 text-sm font-medium f-num" style={{ color: 'var(--f-text-body)' }}>{invoice.kid}</p>
+                </div>
+              )}
               {invoice.status === 'paid' && invoice.payment_date && (
                 <div>
                   <label className="f-label uppercase tracking-wide">{t('invoice.view.payment_date')}</label>
-                  <p className="mt-1 text-sm font-semibold" style={{ color: 'var(--f-green-text)' }}>
+                  <p className="mt-1 text-sm font-semibold" style={{ color: 'var(--f-success-text)' }}>
                     {formatDate(invoice.payment_date)}
                   </p>
                 </div>
@@ -584,6 +593,8 @@ export function InvoiceViewModal({ isOpen, invoice, onClose, onEdit, onGenerateP
           )}
         </div>
       )}
+
+      {activeTab === 'ehf' && <EhfPanel invoiceId={invoiceId} />}
 
       {activeTab === 'expenses' && (
         <LinkedExpensesTab

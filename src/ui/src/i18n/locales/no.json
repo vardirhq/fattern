@@ -616,7 +616,22 @@
       "enabled": "Aktivert",
       "disabled": "Deaktivert",
       "note_title": "Merk:",
-      "note": "Disse innstillingene gjelder for nye fakturaer. Eksisterende fakturaer påvirkes ikke. Fakturanummerering følger budsjettår-grenser og nullstilles automatisk ved årsskifte."
+      "note": "Disse innstillingene gjelder for nye fakturaer. Eksisterende fakturaer påvirkes ikke. Fakturanummerering følger budsjettår-grenser og nullstilles automatisk ved årsskifte.",
+      "payment_title": "Betaling og EHF",
+      "payment_desc": "Brukes på fakturaer og i EHF-filer.",
+      "kid_label": "KID på fakturaer",
+      "kid_desc": "Slå på når du har KID-avtale med banken. Uten avtale kan banken avvise betalinger med KID.",
+      "kid_format_label": "KID-format",
+      "kid_format_desc": "Bruk kontrollsiffer og lengde fra KID-avtalen. Tom lengde betyr fakturanummer pluss kontrollsiffer.",
+      "kid_length": "Lengde",
+      "kid_length_auto": "auto",
+      "vat_registered_label": "Registrert i Merverdiavgiftsregisteret",
+      "vat_registered_desc": "Styrer MVA-opplysningene i EHF-filer.",
+      "foretak_label": "Registrert i Foretaksregisteret",
+      "foretak_desc": "AS og ASA må oppgi «Foretaksregisteret» på fakturaen. Automatisk betyr ja når firmanavnet slutter på AS eller ASA.",
+      "foretak_auto": "Automatisk",
+      "foretak_true": "Ja",
+      "foretak_false": "Nei"
     },
     "templates": {
       "title": "Fakturamaler",
@@ -712,7 +727,8 @@
       "status_changed": "Status endret",
       "pdf_generated": "PDF generert",
       "email_sent": "E-post sendt",
-      "reminder_sent": "Purring sendt"
+      "reminder_sent": "Purring sendt",
+      "ehf_exported": "EHF-fil lagret"
     }
   },
   "send_email": {
@@ -1107,6 +1123,34 @@
     "binding_company_name": "Selskapsnavn",
     "binding_company_org": "Selskap org.nr",
     "binding_company_address": "Selskap adresse",
-    "binding_invoice_items": "Fakturalinjer"
+    "binding_invoice_items": "Fakturalinjer",
+    "binding_kid": "KID",
+    "binding_account_number": "Kontonummer"
+  },
+  "ehf": {
+    "unavailable": "EHF er bare tilgjengelig i skrivebordsappen.",
+    "saved": "EHF-fil lagret",
+    "save_error": "Kunne ikke lagre EHF-filen",
+    "fix_title": "Dette må fikses før EHF kan lages",
+    "ready_title": "Fakturaen er klar for EHF",
+    "ready_desc": "Alle opplysninger som kreves er på plass.",
+    "error": "Må fikses",
+    "warning": "Anbefalt",
+    "save_button": "Lagre EHF-fil",
+    "send_hint": "Filen lages på maskinen din. Send den via et Peppol-aksesspunkt.",
+    "receiver": {
+      "checking": "Sjekker om kunden kan motta EHF …",
+      "checking_desc": "Slår opp i det offentlige Peppol-registeret.",
+      "accepts_invoice": "Kunden kan motta EHF",
+      "accepts_invoice_desc": "Fra 1. januar 2027 skal fakturaer til denne kunden sendes som EHF, ikke PDF.",
+      "not_registered": "Kunden er ikke registrert for EHF",
+      "not_registered_desc": "Du kan sende PDF som før. Sjekk igjen senere, flere registrerer seg før 2027.",
+      "registered_other": "Kunden er registrert, men ikke for fakturaer",
+      "registered_other_desc": "Kunden mottar andre dokumenttyper via Peppol. Send PDF, eller spør kunden.",
+      "unknown": "Kunne ikke sjekke Peppol-registeret",
+      "unknown_desc": "Du er kanskje frakoblet. Resten av sjekken fungerer uten nett.",
+      "invalid": "Kunden har ikke et gyldig organisasjonsnummer",
+      "invalid_desc": "EHF kan bare sendes til virksomheter med organisasjonsnummer."
+    }
   }
 }

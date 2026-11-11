@@ -616,7 +616,22 @@
       "enabled": "Enabled",
       "disabled": "Disabled",
       "note_title": "Note:",
-      "note": "These settings apply to new invoices. Existing invoices are not affected. Invoice numbering follows budget year boundaries and resets automatically at year change."
+      "note": "These settings apply to new invoices. Existing invoices are not affected. Invoice numbering follows budget year boundaries and resets automatically at year change.",
+      "payment_title": "Payment and EHF",
+      "payment_desc": "Used on invoices and in EHF files.",
+      "kid_label": "KID on invoices",
+      "kid_desc": "Turn on when you have a KID agreement with your bank. Without one, the bank may reject payments with a KID.",
+      "kid_format_label": "KID format",
+      "kid_format_desc": "Use the check digit and length from your KID agreement. Blank length means invoice number plus check digit.",
+      "kid_length": "Length",
+      "kid_length_auto": "auto",
+      "vat_registered_label": "Registered for VAT",
+      "vat_registered_desc": "Controls the VAT details in EHF files.",
+      "foretak_label": "Registered in Foretaksregisteret",
+      "foretak_desc": "AS and ASA must state \"Foretaksregisteret\" on invoices. Automatic means yes when the company name ends in AS or ASA.",
+      "foretak_auto": "Automatic",
+      "foretak_true": "Yes",
+      "foretak_false": "No"
     },
     "templates": {
       "title": "Invoice Templates",
@@ -712,7 +727,8 @@
       "status_changed": "Status changed",
       "pdf_generated": "PDF generated",
       "email_sent": "Email sent",
-      "reminder_sent": "Reminder sent"
+      "reminder_sent": "Reminder sent",
+      "ehf_exported": "EHF file saved"
     }
   },
   "send_email": {
@@ -1107,6 +1123,34 @@
     "binding_company_name": "Company name",
     "binding_company_org": "Company org. no.",
     "binding_company_address": "Company address",
-    "binding_invoice_items": "Invoice lines"
+    "binding_invoice_items": "Invoice lines",
+    "binding_kid": "KID",
+    "binding_account_number": "Account number"
+  },
+  "ehf": {
+    "unavailable": "EHF is only available in the desktop app.",
+    "saved": "EHF file saved",
+    "save_error": "Could not save the EHF file",
+    "fix_title": "Fix these before EHF can be created",
+    "ready_title": "The invoice is ready for EHF",
+    "ready_desc": "All required details are in place.",
+    "error": "Must fix",
+    "warning": "Recommended",
+    "save_button": "Save EHF file",
+    "send_hint": "The file is created on your machine. Send it through a Peppol access point.",
+    "receiver": {
+      "checking": "Checking whether the customer can receive EHF …",
+      "checking_desc": "Looking up the public Peppol directory.",
+      "accepts_invoice": "The customer can receive EHF",
+      "accepts_invoice_desc": "From 1 January 2027, invoices to this customer must be sent as EHF, not PDF.",
+      "not_registered": "The customer is not registered for EHF",
+      "not_registered_desc": "You can send a PDF as before. Check again later; more businesses register before 2027.",
+      "registered_other": "Registered, but not for invoices",
+      "registered_other_desc": "The customer receives other document types via Peppol. Send a PDF, or ask the customer.",
+      "unknown": "Could not check the Peppol directory",
+      "unknown_desc": "You may be offline. The rest of the check works without internet.",
+      "invalid": "The customer has no valid organisation number",
+      "invalid_desc": "EHF can only be sent to businesses with an organisation number."
+    }
   }
 }

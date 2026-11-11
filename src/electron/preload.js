@@ -106,6 +106,11 @@ contextBridge.exposeInMainWorld('fattern', {
   app: {
     wipeAllData: () => invoke('app:wipe-all-data'),
   },
+  ehf: {
+    check:  (invoiceId) => invoke('ehf:check', invoiceId),
+    save:   (invoiceId) => invoke('ehf:save', invoiceId),
+    lookup: (orgNumber) => invoke('ehf:lookup', orgNumber),
+  },
   email: {
     getConfig:       ()       => invoke('email:get-config'),
     saveConfig:      (config) => invoke('email:save-config', config),

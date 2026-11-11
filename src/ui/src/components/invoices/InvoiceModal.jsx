@@ -232,6 +232,7 @@ export function InvoiceModal({ isOpen, mode = 'create', initialInvoice, onSubmit
   if (!isOpen) return null;
 
   const invoiceNumber = initialInvoice?.invoice_number || null;
+  const showKid = Boolean(initialInvoice?.kid) || (!isEdit && getSetting('invoice.kid.enabled', 'false') === 'true');
   const statusLabel = t(`status.${status}`, { defaultValue: status });
   const statusPill = { draft: 'f-pill-draft', sent: 'f-pill-sent', paid: 'f-pill-paid', overdue: 'f-pill-overdue' }[status] || 'f-pill-draft';
   const num = (v) => new Intl.NumberFormat('nb-NO', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(v || 0);
@@ -664,11 +665,19 @@ export function InvoiceModal({ isOpen, mode = 'create', initialInvoice, onSubmit
               </div>
             </div>
 
-            <div className="grid" style={{ gridTemplateColumns: 'repeat(2, minmax(0, 1fr))', gap: 12, padding: '14px 16px', background: '#F4F2EC', borderRadius: 6 }}>
+            <div className="grid" style={{ gridTemplateColumns: `repeat(${showKid ? 3 : 2}, minmax(0, 1fr))`, gap: 12, padding: '14px 16px', background: '#F4F2EC', borderRadius: 6 }}>
               <div className="flex flex-col" style={{ gap: 3 }}>
                 <span style={cap}>Kontonr.</span>
                 <span className="f-num">{company?.account_number || '—'}</span>
               </div>
+              {showKid && (
+                <div className="flex flex-col" style={{ gap: 3 }}>
+                  <span style={cap}>KID</span>
+                  <span className="f-num" style={{ color: initialInvoice?.kid ? '#15171A' : '#62666E' }}>
+                    {initialInvoice?.kid || 'Tildeles ved lagring'}
+                  </span>
+                </div>
+              )}
               <div className="flex flex-col" style={{ gap: 3 }}>
                 <span style={cap}>Forfall</span>
                 <span className="f-num" style={{ fontWeight: 600 }}>{dueDate ? formatDate(dueDate) : '—'}</span>

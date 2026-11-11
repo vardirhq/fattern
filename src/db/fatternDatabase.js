@@ -1,5 +1,7 @@
 const { initializeDatabase, DB_PATH } = require('./initDatabase');
 const { relevantVatTerm } = require('./vatTerms');
+const { makeKid } = require('./kid');
+const { buildEhfInvoice } = require('./ehf');
 const { loadBetterSqlite3 } = require('./loadBetterSqlite3');
 
 function toDateOnlyString(dateLike) {
@@ -282,8 +284,8 @@ class FatternDatabase {
 
     const transaction = this.db.transaction(() => {
       const insertInvoice = this.db.prepare(`
-        INSERT INTO invoices (customer_id, invoice_number, invoice_date, due_date, vat_total, subtotal, total, notes, status, your_reference, our_reference, start_date, end_date, delivery_reference, reference, custom_fields, credited)
-        VALUES (@customer_id, @invoice_number, @invoice_date, @due_date, @vat_total, @subtotal, @total, @notes, @status, @your_reference, @our_reference, @start_date, @end_date, @delivery_reference, @reference, @custom_fields, @credited)
+        INSERT INTO invoices (customer_id, invoice_number, invoice_date, due_date, vat_total, subtotal, total, notes, status, your_reference, our_reference, start_date, end_date, delivery_reference, reference, custom_fields, credited, kid)
+        VALUES (@customer_id, @invoice_number, @invoice_date, @due_date, @vat_total, @subtotal, @total, @notes, @status, @your_reference, @our_reference, @start_date, @end_date, @delivery_reference, @reference, @custom_fields, @credited, @kid)
       `);
 
       const invoiceInfo = insertInvoice.run({
@@ -304,6 +306,7 @@ class FatternDatabase {
         reference: invoice.reference || null,
         custom_fields: invoice.customFields ? JSON.stringify(invoice.customFields) : null,
         credited: invoice.credited ? 1 : 0,
+        kid: this.kidForInvoiceNumber(invoiceNumber),
       });
 
       const insertItem = this.db.prepare(`
@@ -344,12 +347,19 @@ class FatternDatabase {
     if (!invoice) return null;
 
     const items = this.db
-      .prepare('SELECT * FROM invoice_items WHERE invoice_id = ? ORDER BY id')
+      .prepare(`
+        SELECT invoice_items.*, products.unit AS product_unit
+        FROM invoice_items
+        LEFT JOIN products ON products.id = invoice_items.product_id
+        WHERE invoice_items.invoice_id = ?
+        ORDER BY invoice_items.id
+      `)
       .all(invoiceId);
 
     return {
       ...invoice,
       items: items.map((item) => ({
+        unit: item.product_unit || null,
         id: item.id,
         productId: item.product_id,
         description: item.description,
@@ -548,6 +558,34 @@ class FatternDatabase {
     // Items will be deleted via CASCADE
     this.db.prepare('DELETE FROM invoices WHERE id = ?').run(invoiceId);
     return true;
+  }
+
+  // ─── KID and EHF ─────────────────────────────────────────────────────────
+
+  /** KID for a new invoice, or null when KID is turned off in settings. */
+  kidForInvoiceNumber(invoiceNumber) {
+    if (this.getSetting('invoice.kid.enabled', 'false') !== 'true') return null;
+    const length = parseInt(this.getSetting('invoice.kid.length', ''), 10) || null;
+    const algorithm = this.getSetting('invoice.kid.algorithm', 'mod10') === 'mod11' ? 'mod11' : 'mod10';
+    return makeKid(invoiceNumber, { algorithm, length });
+  }
+
+  /** Builds the EHF (Peppol BIS Billing 3.0) document for a saved invoice. */
+  buildEhfForInvoice(invoiceId) {
+    const invoice = this.getInvoice(invoiceId);
+    if (!invoice) throw new Error('Fant ikke fakturaen.');
+    const customer = invoice.customer_id
+      ? this.db.prepare('SELECT * FROM customers WHERE id = ?').get(invoice.customer_id)
+      : null;
+    const company = this.ensureCompany();
+    const foretak = this.getSetting('company.foretaksregisteret', null);
+    return buildEhfInvoice({
+      invoice,
+      company,
+      customer,
+      vatRegistered: this.getSetting('company.vatRegistered', 'true') === 'true',
+      foretaksregisteret: foretak === null || foretak === 'auto' ? undefined : foretak === 'true',
+    });
   }
 
   // ─── VAT (MVA) ────────────────────────────────────────────────────────────

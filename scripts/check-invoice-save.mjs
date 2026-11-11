@@ -1,6 +1,6 @@
 /**
- * Smoke check for the invoice editor's save path, payment reminders and
- * the VAT summary.
+ * Smoke check for the invoice editor's save path, payment reminders,
+ * the VAT summary, KID numbers and EHF generation.
  *
  * Builds create and edit payloads with the same function the editor uses
  * (buildInvoicePayload), sends them to a real FatternDatabase in a
@@ -159,6 +159,39 @@ try {
   check('input VAT from expense lines (250)', () => assert.equal(vat.inputVat, 250));
   check('payable = 4 750', () => assert.equal(vat.payable, 4750));
   check('reports 1 expense without VAT lines', () => assert.equal(vat.expensesWithoutVat, 1));
+
+  console.log('KID');
+  const { mod10, mod11, makeKid, isValidKid } = require('../src/db/kid.js');
+  check('MOD10 matches the Luhn reference value', () => assert.equal(mod10('7992739871'), '3'));
+  check('MOD11 matches a hand-computed value', () => assert.equal(mod11('12345678'), '5'));
+  check('KID from invoice number validates', () => assert.ok(isValidKid(makeKid('2026-041'))));
+  check('KID is padded to the agreed length', () => assert.equal(makeKid('2026-041', { algorithm: 'mod11', length: 10 }).length, 10));
+  check('KID that cannot fit the length is refused', () => assert.equal(makeKid('123456', { length: 5 }), null));
+  check('no KID while KID is off', () => assert.equal(saved.kid, null));
+  db.setSetting('invoice.kid.enabled', 'true');
+  const withKid = db.createInvoice({ ...createPayload, invoiceDate: '2026-11-21' });
+  check('KID is stored on new invoices when on', () => assert.ok(isValidKid(db.getInvoice(withKid.id).kid)));
+
+  console.log('EHF');
+  const { isValidOrgNumber } = require('../src/db/ehf.js');
+  check('organisation number check accepts a real number', () => assert.ok(isValidOrgNumber('974760673')));
+  check('organisation number check rejects a bad check digit', () => assert.equal(isValidOrgNumber('974760674'), false));
+  const missing = db.buildEhfForInvoice(withKid.id);
+  check('EHF reports missing seller and buyer details', () => {
+    assert.equal(missing.ok, false);
+    const fields = missing.problems.filter((p) => p.level === 'error').map((p) => p.field);
+    assert.ok(fields.includes('company.org_number'));
+    assert.ok(fields.includes('customer.org_number'));
+  });
+  db.updateCompany({ name: 'Studio Nord AS', org_number: '991825827', address: 'Storgata 1', post_number: '0155', post_location: 'Oslo', account_number: '12345678903' });
+  const ehfCustomer = db.createCustomer({ name: 'Brreg', orgNumber: '974760673', address: 'Havnegata 48', postNumber: '8900', postLocation: 'Brønnøysund' });
+  const ehfInvoice = db.createInvoice({ ...createPayload, customerId: ehfCustomer.id, invoiceDate: '2026-11-22' });
+  const ehf = db.buildEhfForInvoice(ehfInvoice.id);
+  check('EHF is complete when details are filled in', () => assert.equal(ehf.ok, true, JSON.stringify(ehf.problems)));
+  check('EHF payment reference is the KID', () => assert.match(ehf.xml, new RegExp(`<cbc:PaymentID>${db.getInvoice(ehfInvoice.id).kid}</cbc:PaymentID>`)));
+  check('EHF totals match the stored invoice', () => assert.equal(ehf.totals.payable, db.getInvoice(ehfInvoice.id).total));
+  check('EHF line unit comes from the product (time → HUR)', () => assert.match(ehf.xml, /unitCode="HUR"/));
+  check('AS sellers state Foretaksregisteret', () => assert.match(ehf.xml, /<cbc:CompanyID>Foretaksregisteret<\/cbc:CompanyID>/));
 } finally {
   db.close();
   fs.rmSync(root, { recursive: true, force: true });

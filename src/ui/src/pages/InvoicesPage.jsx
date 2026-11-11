@@ -50,7 +50,7 @@ export function InvoicesPage({ invoices, formatCurrency: fmt, onCreateInvoice, o
         await api.template.createDefault();
       }
 
-      const defaultTemplateId = getSetting('invoice.defaultTemplate', 'default_invoice');
+      const defaultTemplateId = getSetting('invoice.defaultTemplate', 'preset_nordisk_pro');
       const result = await api.pdf.generateInvoice(invoice.dbId, defaultTemplateId);
       if (result?.success && result?.filepath) {
         showToast?.success(t('invoice.pdf_downloaded'));
