@@ -14,6 +14,7 @@ export function TemplateProperties({ element, onUpdate, template }) {
     { value: 'invoice.invoice_number', label: t('template_props.binding_invoice_number') },
     { value: 'invoice.invoice_date', label: t('template_props.binding_invoice_date') },
     { value: 'invoice.due_date', label: t('template_props.binding_due_date') },
+    { value: 'invoice.kid', label: t('template_props.binding_kid') },
     { value: 'invoice.status', label: t('template_props.binding_status') },
     { value: 'invoice.total', label: t('template_props.binding_total') },
     { value: 'invoice.subtotal', label: t('template_props.binding_subtotal') },
@@ -24,6 +25,7 @@ export function TemplateProperties({ element, onUpdate, template }) {
     { value: 'company.name', label: t('template_props.binding_company_name') },
     { value: 'company.org_number', label: t('template_props.binding_company_org') },
     { value: 'company.address', label: t('template_props.binding_company_address') },
+    { value: 'company.account_number', label: t('template_props.binding_account_number') },
   ];
 
   useEffect(() => {

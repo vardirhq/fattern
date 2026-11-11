@@ -70,6 +70,51 @@ async function processTemplateImages(template) {
 }
 
 /**
+ * The data object template bindings resolve against
+ * (invoice.*, customer.*, company.*).
+ */
+function buildTemplateData(invoiceData, company, customer) {
+  return {
+    invoice: {
+      invoice_number: invoiceData.invoice_number || invoiceData.id,
+      kid: invoiceData.kid || '',
+      invoice_date: invoiceData.invoice_date,
+      due_date: invoiceData.due_date,
+      status: invoiceData.status,
+      total: invoiceData.total,
+      subtotal: invoiceData.subtotal,
+      vat_total: invoiceData.vat_total,
+      items: (invoiceData.items || []).map((item) => ({
+        description: item.description,
+        quantity: item.quantity,
+        unit_price: item.unit_price || item.unitPrice,
+        vat_rate: item.vat_rate || item.vatRate || 0,
+        line_total: item.line_total || item.lineTotal || (item.quantity * (item.unit_price || item.unitPrice) * (1 + (item.vat_rate || item.vatRate || 0))),
+      })),
+    },
+    customer: customer ? {
+      name: customer.name,
+      org_number: customer.org_number,
+      address: customer.address,
+      post_number: customer.post_number,
+      post_location: customer.post_location,
+      email: customer.email,
+      phone: customer.phone,
+    } : {},
+    company: company ? {
+      name: company.name,
+      org_number: company.org_number,
+      address: company.address,
+      post_number: company.post_number,
+      post_location: company.post_location,
+      contact_email: company.contact_email,
+      contact_number: company.contact_number,
+      account_number: company.account_number,
+    } : {},
+  };
+}
+
+/**
  * Generates a PDF from a template using Electron's printToPDF
  */
 async function generateTemplatePDF(template, invoiceData, company, customer) {
@@ -90,42 +135,7 @@ async function generateTemplatePDF(template, invoiceData, company, customer) {
       });
 
       // Prepare data object for template rendering
-      const data = {
-        invoice: {
-          invoice_number: invoiceData.invoice_number || invoiceData.id,
-          invoice_date: invoiceData.invoice_date,
-          due_date: invoiceData.due_date,
-          status: invoiceData.status,
-          total: invoiceData.total,
-          subtotal: invoiceData.subtotal,
-          vat_total: invoiceData.vat_total,
-          items: (invoiceData.items || []).map((item) => ({
-            description: item.description,
-            quantity: item.quantity,
-            unit_price: item.unit_price || item.unitPrice,
-            vat_rate: item.vat_rate || item.vatRate || 0,
-            line_total: item.line_total || item.lineTotal || (item.quantity * (item.unit_price || item.unitPrice) * (1 + (item.vat_rate || item.vatRate || 0))),
-          })),
-        },
-        customer: customer ? {
-          name: customer.name,
-          org_number: customer.org_number,
-          address: customer.address,
-          post_number: customer.post_number,
-          post_location: customer.post_location,
-          email: customer.email,
-          phone: customer.phone,
-        } : {},
-        company: company ? {
-          name: company.name,
-          org_number: company.org_number,
-          address: company.address,
-          post_number: company.post_number,
-          post_location: company.post_location,
-          contact_email: company.contact_email,
-          contact_number: company.contact_number,
-        } : {},
-      };
+      const data = buildTemplateData(invoiceData, company, customer);
 
       // Generate HTML from processed template
       const html = renderTemplateToHTML(processedTemplate, data);
@@ -221,7 +231,10 @@ function renderTemplateToHTML(template, data) {
   `;
 
   // Sort elements by z-index (lower z-index renders first/behind)
-  const sortedElements = [...template.elements].sort((a, b) => (a.zIndex ?? 1) - (b.zIndex ?? 1));
+  // Elements with `visibleIf` only render when that binding has a value (e.g. KID).
+  const sortedElements = [...template.elements]
+    .filter((element) => !element.visibleIf || resolveBinding(element.visibleIf, data))
+    .sort((a, b) => (a.zIndex ?? 1) - (b.zIndex ?? 1));
   sortedElements.forEach((element) => {
     html += renderElement(element, data);
   });
@@ -412,7 +425,7 @@ function renderTable(element, data, baseStyle) {
   
   let html = `
     <div class="el" style="${objectToStyleString(tableContainerStyle)}">
-      <table style="width: 100%; height: 100%; border-collapse: ${tableBorderCollapse}; border-spacing: ${tableBorderSpacing}; background-color: ${element.backgroundColor || 'transparent'}; ${element.borderRadius ? `border-radius: ${element.borderRadius}px; overflow: hidden;` : ''}">
+      <table style="width: 100%; border-collapse: ${tableBorderCollapse}; border-spacing: ${tableBorderSpacing}; background-color: ${element.backgroundColor || 'transparent'}; ${element.borderRadius ? `border-radius: ${element.borderRadius}px; overflow: hidden;` : ''}">
         <thead>
           <tr style="background-color: ${element.headerBackgroundColor || '#0d3e51'}; color: ${element.headerTextColor || '#ffffff'};">
   `;
@@ -482,6 +495,11 @@ function resolveBinding(binding, data) {
 function formatValue(value, binding) {
   if (value == null || value === '') return '';
 
+  // VAT rate stored as a fraction (0.25) — show as a percentage
+  if (binding && /vat_rate$/.test(binding) && typeof value === 'number') {
+    return `${Math.round(value * 1000) / 10} %`;
+  }
+
   // Date fields
   if (binding && (binding.includes('date') || binding.includes('Date'))) {
     const date = new Date(value);
@@ -529,4 +547,4 @@ function escapeHtml(text) {
     .replace(/'/g, '&#039;');
 }
 
-module.exports = { generateTemplatePDF };
+module.exports = { generateTemplatePDF, buildTemplateData, renderTemplateToHTML };

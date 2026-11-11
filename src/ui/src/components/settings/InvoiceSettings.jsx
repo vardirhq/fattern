@@ -2,6 +2,40 @@ import { useTranslation } from 'react-i18next';
 import { useSettings } from '../../hooks/useSettings';
 import { useToast } from '../../hooks/useToast';
 
+function Toggle({ checked, onChange, disabled, label }) {
+  return (
+    <button
+      type="button"
+      role="switch"
+      aria-checked={checked}
+      aria-label={label}
+      onClick={() => onChange(!checked)}
+      disabled={disabled}
+      className="relative inline-flex h-6 w-11 flex-shrink-0 items-center rounded-full transition-colors focus:outline-none disabled:opacity-60"
+      style={{ background: checked ? 'var(--f-green)' : 'var(--f-hover-elevated)' }}
+    >
+      <span
+        className={`inline-block h-4 w-4 transform rounded-full transition-transform ${checked ? 'translate-x-6' : 'translate-x-1'}`}
+        style={{ background: checked ? 'var(--f-on-accent)' : 'var(--f-surface)' }}
+      />
+    </button>
+  );
+}
+
+function SettingRow({ label, desc, children }) {
+  return (
+    <div className="py-3" style={{ borderBottom: '1px solid var(--f-border-faint)' }}>
+      <div className="flex items-center justify-between gap-4">
+        <div className="flex-1">
+          <span className="text-sm font-medium" style={{ color: 'var(--f-text-body)' }}>{label}</span>
+          {desc && <p className="text-xs mt-0.5" style={{ color: 'var(--f-text-subtle)' }}>{desc}</p>}
+        </div>
+        {children}
+      </div>
+    </div>
+  );
+}
+
 export function InvoiceSettings() {
   const { t } = useTranslation();
   const { getSetting, updateSetting, isLoading } = useSettings();
@@ -11,6 +45,17 @@ export function InvoiceSettings() {
   const autoCalculateDueDate = getSetting('invoice.autoCalculateDueDate', 'true') === 'true';
   const defaultStatus = getSetting('invoice.defaultStatus', 'draft');
   const autoIncrementNumbers = getSetting('invoice.autoIncrementNumbers', 'true') === 'true';
+
+  const kidEnabled = getSetting('invoice.kid.enabled', 'false') === 'true';
+  const kidAlgorithm = getSetting('invoice.kid.algorithm', 'mod10');
+  const kidLength = getSetting('invoice.kid.length', '');
+  const vatRegistered = getSetting('company.vatRegistered', 'true') === 'true';
+  const foretaksregisteret = getSetting('company.foretaksregisteret', 'auto');
+
+  const save = (key, value, title) => {
+    updateSetting(key, String(value));
+    if (title) toast.success(title);
+  };
 
   const handlePaymentTermsChange = (days) => {
     updateSetting('invoice.defaultPaymentTerms', days.toString());
@@ -156,6 +201,84 @@ export function InvoiceSettings() {
             </button>
           </div>
         </div>
+
+        {/* Payment reference and EHF */}
+        <div className="pt-4">
+          <h3 className="text-sm font-semibold mb-1" style={{ color: 'var(--f-text-body)' }}>{t('settings.invoice.payment_title')}</h3>
+          <p className="text-xs" style={{ color: 'var(--f-text-subtle)' }}>{t('settings.invoice.payment_desc')}</p>
+        </div>
+
+        <SettingRow label={t('settings.invoice.kid_label')} desc={t('settings.invoice.kid_desc')}>
+          <Toggle
+            checked={kidEnabled}
+            disabled={isLoading}
+            label={t('settings.invoice.kid_label')}
+            onChange={(v) => save('invoice.kid.enabled', v, t('settings.invoice.kid_label'))}
+          />
+        </SettingRow>
+
+        {kidEnabled && (
+          <SettingRow label={t('settings.invoice.kid_format_label')} desc={t('settings.invoice.kid_format_desc')}>
+            <div className="flex items-center gap-3">
+              <div className="flex rounded-lg p-0.5" role="group" aria-label={t('settings.invoice.kid_format_label')} style={{ border: '1px solid var(--f-border)', background: 'var(--f-hover)' }}>
+                {['mod10', 'mod11'].map((alg) => (
+                  <button
+                    key={alg}
+                    type="button"
+                    aria-pressed={kidAlgorithm === alg}
+                    onClick={() => save('invoice.kid.algorithm', alg)}
+                    className="rounded-md px-3 py-1.5 text-xs font-medium"
+                    style={kidAlgorithm === alg ? { background: 'var(--f-inverse-bg)', color: 'var(--f-inverse-text)' } : { color: 'var(--f-text-soft)' }}
+                  >
+                    {alg.toUpperCase()}
+                  </button>
+                ))}
+              </div>
+              <label className="flex items-center gap-2 text-xs" style={{ color: 'var(--f-text-soft)' }}>
+                {t('settings.invoice.kid_length')}
+                <input
+                  type="number"
+                  min="2"
+                  max="25"
+                  placeholder={t('settings.invoice.kid_length_auto')}
+                  defaultValue={kidLength}
+                  onBlur={(e) => {
+                    const n = parseInt(e.target.value, 10);
+                    save('invoice.kid.length', n >= 2 && n <= 25 ? n : '');
+                  }}
+                  className="f-input rounded-lg px-2 py-1 text-xs"
+                  style={{ width: 72 }}
+                />
+              </label>
+            </div>
+          </SettingRow>
+        )}
+
+        <SettingRow label={t('settings.invoice.vat_registered_label')} desc={t('settings.invoice.vat_registered_desc')}>
+          <Toggle
+            checked={vatRegistered}
+            disabled={isLoading}
+            label={t('settings.invoice.vat_registered_label')}
+            onChange={(v) => save('company.vatRegistered', v, t('settings.invoice.vat_registered_label'))}
+          />
+        </SettingRow>
+
+        <SettingRow label={t('settings.invoice.foretak_label')} desc={t('settings.invoice.foretak_desc')}>
+          <div className="flex rounded-lg p-0.5" role="group" aria-label={t('settings.invoice.foretak_label')} style={{ border: '1px solid var(--f-border)', background: 'var(--f-hover)' }}>
+            {['auto', 'true', 'false'].map((v) => (
+              <button
+                key={v}
+                type="button"
+                aria-pressed={foretaksregisteret === v}
+                onClick={() => save('company.foretaksregisteret', v)}
+                className="rounded-md px-3 py-1.5 text-xs font-medium"
+                style={foretaksregisteret === v ? { background: 'var(--f-inverse-bg)', color: 'var(--f-inverse-text)' } : { color: 'var(--f-text-soft)' }}
+              >
+                {t(`settings.invoice.foretak_${v}`)}
+              </button>
+            ))}
+          </div>
+        </SettingRow>
 
         {/* Info Box */}
         <div className="rounded-lg p-4" style={{ border: '1px solid var(--f-border-subtle)', background: 'var(--f-surface-hover)' }}>

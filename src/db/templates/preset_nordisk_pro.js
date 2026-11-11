@@ -487,6 +487,35 @@ module.exports = {
       align: 'left',
       zIndex: 2,
     },
+    // Footer — KID (only shown when the invoice has one)
+    {
+      id: 'footer_kid_label',
+      type: 'text',
+      visibleIf: 'invoice.kid',
+      x: 320, y: 1090,
+      width: 52, height: 13,
+      content: 'KID',
+      fontFamily: 'Inter',
+      fontSize: 8.5,
+      fontWeight: 500,
+      color: '#6e8b97',
+      align: 'left',
+      zIndex: 2,
+    },
+    {
+      id: 'footer_kid_value',
+      type: 'field',
+      binding: 'invoice.kid',
+      visibleIf: 'invoice.kid',
+      x: 372, y: 1090,
+      width: 160, height: 13,
+      fontFamily: 'Inter',
+      fontSize: 8.5,
+      fontWeight: 600,
+      color: '#0d3e51',
+      align: 'left',
+      zIndex: 2,
+    },
 
     // Footer — email (right-aligned)
     {

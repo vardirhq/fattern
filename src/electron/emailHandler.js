@@ -87,9 +87,9 @@ async function generatePdfForInvoice(database, invoiceId) {
   // Try to use the user's default template (same logic as pdf:generate-invoice in main.js)
   try {
     const templateStorage = new TemplateStorage();
-    // Read the stored default template ID; fall back to 'default_invoice'
-    const defaultTemplateId = database.getSetting('invoice.defaultTemplate', 'default_invoice');
-    const template = templateStorage.loadTemplate(defaultTemplateId);
+    // Stored default template, or Nordisk Pro when none was chosen (see resolveTemplate.js)
+    const { resolveInvoiceTemplate } = require('../db/resolveTemplate');
+    const template = resolveInvoiceTemplate(templateStorage, database.getSetting('invoice.defaultTemplate', null));
     if (template) {
       return await generateTemplatePDF(template, invoice, company, customer);
     }

@@ -16,7 +16,7 @@ export function TemplatesSettings({ onOpenTemplateEditor, onDeleteTemplate, onSe
   const [templates, setTemplates] = useState([]);
   const [loadingTemplates, setLoadingTemplates] = useState(false);
   const [activeFilter, setActiveFilter] = useState('all');
-  const defaultTemplateId = getSetting('invoice.defaultTemplate', 'default_invoice');
+  const defaultTemplateId = getSetting('invoice.defaultTemplate', 'preset_nordisk_pro');
 
   useEffect(() => {
     loadTemplates();

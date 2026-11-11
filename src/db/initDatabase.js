@@ -64,6 +64,15 @@ function applyMigrations(db) {
     console.warn('Migration warning (expense_items):', error.message);
   }
 
+  // Add kid (payment reference) column to invoices if it doesn't exist
+  try {
+    db.prepare('ALTER TABLE invoices ADD COLUMN kid TEXT').run();
+  } catch (error) {
+    if (!error.message.includes('duplicate column')) {
+      console.warn('Migration warning (invoices.kid):', error.message);
+    }
+  }
+
   // Add payment_date column to invoices if it doesn't exist
   try {
     db.prepare('ALTER TABLE invoices ADD COLUMN payment_date DATE').run();

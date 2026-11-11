@@ -860,7 +860,7 @@ function App() {
       }
 
       // Get default template ID from settings
-      const defaultTemplateId = getSetting('invoice.defaultTemplate', 'default_invoice');
+      const defaultTemplateId = getSetting('invoice.defaultTemplate', 'preset_nordisk_pro');
 
       const result = await api.pdf.generateInvoice(invoiceId, defaultTemplateId);
       if (result?.success && result?.filepath) {

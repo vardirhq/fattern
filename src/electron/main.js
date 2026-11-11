@@ -7,6 +7,7 @@ const { registerTemplateHandlers } = require('./templateHandlers');
 const { generateInvoicePDF } = require('./pdfGenerator');
 const { generateTemplatePDF } = require('./templatePdfGenerator');
 const { registerEmailHandlers } = require('./emailHandler');
+const { registerEhfHandlers } = require('./ehfHandlers');
 
 const isDev = Boolean(process.env.VITE_DEV_SERVER_URL);
 let database;
@@ -78,6 +79,7 @@ app.whenReady().then(() => {
 
   // Register email handlers
   registerEmailHandlers(ipcMain, database);
+  registerEhfHandlers(ipcMain, database);
   
   // File dialogs for template import/export
   ipcMain.handle('dialog:show-open-dialog', async (event, options) => {
@@ -162,7 +164,8 @@ app.whenReady().then(() => {
         try {
           const { TemplateStorage } = require('../db/templateStorage');
           const templateStorage = new TemplateStorage();
-          const template = templateStorage.loadTemplate(templateId);
+          const { resolveInvoiceTemplate } = require('../db/resolveTemplate');
+          const template = resolveInvoiceTemplate(templateStorage, templateId);
           if (template) {
             const filepath = await generateTemplatePDF(template, invoice, company, customer);
             database.logInvoiceEvent(invoiceId, 'pdf_generated', 'PDF generert');

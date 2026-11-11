@@ -433,6 +433,9 @@ function generateInvoicePDF(invoice, company, customer) {
       .fontSize(9)
       .font('Helvetica')
       .text(`Kontonummer: ${company.account_number}`, margin, notesY + 15);
+    if (invoice.kid) {
+      doc.text(`KID: ${invoice.kid}`, margin, notesY + 29);
+    }
   }
 
   // Footer
