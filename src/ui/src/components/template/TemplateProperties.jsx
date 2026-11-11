@@ -102,7 +102,7 @@ export function TemplateProperties({ element, onUpdate, template }) {
                 color: isActive ? 'var(--f-green-text)' : 'var(--f-text-subtle)',
                 background: isActive ? 'rgba(47,75,216,0.06)' : 'transparent',
               }}
-              onMouseEnter={e => { if (!isActive) { e.currentTarget.style.color = 'var(--f-text-body)'; e.currentTarget.style.background = 'rgba(255,255,255,0.04)'; } }}
+              onMouseEnter={e => { if (!isActive) { e.currentTarget.style.color = 'var(--f-text-body)'; e.currentTarget.style.background = 'var(--f-hover)'; } }}
               onMouseLeave={e => { if (!isActive) { e.currentTarget.style.color = 'var(--f-text-subtle)'; e.currentTarget.style.background = 'transparent'; } }}
             >
               <Icon className="h-3.5 w-3.5" />

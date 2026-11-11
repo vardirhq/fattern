@@ -128,7 +128,7 @@ export function CSVImportModal({ isOpen, onClose, onImport, type = 'customer' })
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4" style={{ background: 'rgba(4,10,8,0.75)', backdropFilter: 'blur(6px)' }}>
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4" style={{ background: 'var(--f-overlay)', backdropFilter: 'blur(6px)' }}>
       <div className="f-glass-hero w-full max-w-4xl rounded-2xl shadow-2xl">
         {/* Header */}
         <div className="flex items-center justify-between p-6" style={{ borderBottom: '1px solid var(--f-border-subtle)' }}>
@@ -139,7 +139,7 @@ export function CSVImportModal({ isOpen, onClose, onImport, type = 'customer' })
             onClick={onClose}
             className="rounded-lg p-2 transition"
             style={{ color: 'var(--f-text-subtle)' }}
-            onMouseEnter={e => e.currentTarget.style.background = 'rgba(255,255,255,0.08)'}
+            onMouseEnter={e => e.currentTarget.style.background = 'var(--f-hover-elevated)'}
             onMouseLeave={e => e.currentTarget.style.background = 'transparent'}
             aria-label={t('common.close')}
           >
@@ -151,7 +151,7 @@ export function CSVImportModal({ isOpen, onClose, onImport, type = 'customer' })
         <div className="p-6">
           {step === 'upload' && (
             <div className="space-y-4">
-              <div className="rounded-xl border-2 border-dashed p-12 text-center" style={{ borderColor: 'var(--f-border)', background: 'rgba(255,255,255,0.02)' }}>
+              <div className="rounded-xl border-2 border-dashed p-12 text-center" style={{ borderColor: 'var(--f-border)', background: 'var(--f-surface-hover)' }}>
                 <input
                   ref={fileInputRef}
                   type="file"
@@ -190,7 +190,7 @@ export function CSVImportModal({ isOpen, onClose, onImport, type = 'customer' })
 
               <div className="space-y-3 max-h-96 overflow-y-auto">
                 {csvData.headers.map((header) => (
-                  <div key={header} className="flex items-center gap-4 rounded-lg p-4" style={{ border: '1px solid var(--f-border-subtle)', background: 'rgba(255,255,255,0.02)' }}>
+                  <div key={header} className="flex items-center gap-4 rounded-lg p-4" style={{ border: '1px solid var(--f-border-subtle)', background: 'var(--f-surface-hover)' }}>
                     <div className="flex-1">
                       <p className="text-sm font-medium" style={{ color: 'var(--f-text-body)' }}>{header}</p>
                       <p className="text-xs mt-1" style={{ color: 'var(--f-text-subtle)' }}>
@@ -252,7 +252,7 @@ export function CSVImportModal({ isOpen, onClose, onImport, type = 'customer' })
 
               <div className="rounded-lg overflow-hidden" style={{ border: '1px solid var(--f-border-subtle)' }}>
                 <table className="min-w-full text-sm">
-                  <thead style={{ background: 'rgba(255,255,255,0.04)', borderBottom: '1px solid var(--f-border-subtle)' }}>
+                  <thead style={{ background: 'var(--f-hover)', borderBottom: '1px solid var(--f-border-subtle)' }}>
                     <tr>
                       {availableFields.filter((f) => mappedFields.has(f.value)).map((field) => (
                         <th key={field.value} className="px-4 py-2 text-left text-xs font-medium" style={{ color: 'var(--f-text-subtle)' }}>

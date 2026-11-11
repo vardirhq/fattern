@@ -115,7 +115,7 @@ export function ImportSettings({ onRefreshData }) {
 
         <div className="space-y-4">
           {/* CSV-import */}
-          <div className="rounded-lg p-6" style={{ border: '1px solid var(--f-border-subtle)', background: 'rgba(255,255,255,0.03)' }}>
+          <div className="rounded-lg p-6" style={{ border: '1px solid var(--f-border-subtle)', background: 'var(--f-surface-hover)' }}>
             <h4 className="text-sm font-semibold mb-2" style={{ color: 'var(--f-text-body)' }}>CSV-import</h4>
             <p className="text-xs mb-4" style={{ color: 'var(--f-text-subtle)' }}>
               Importer kunder eller produkter fra CSV-filer. Du kan mappe kolonner manuelt eller bruke automatisk AI-kolonnemapping (Supporter-pakken).
@@ -137,7 +137,7 @@ export function ImportSettings({ onRefreshData }) {
           </div>
 
           {/* SAF-T-import */}
-          <div className="rounded-lg p-6" style={{ border: '1px solid var(--f-border-subtle)', background: 'rgba(255,255,255,0.03)' }}>
+          <div className="rounded-lg p-6" style={{ border: '1px solid var(--f-border-subtle)', background: 'var(--f-surface-hover)' }}>
             <h4 className="text-sm font-semibold mb-1" style={{ color: 'var(--f-text-body)' }}>{t('settings.import.saft_title')}</h4>
             <p className="text-xs mb-1" style={{ color: 'var(--f-text-subtle)' }}>{t('settings.import.saft_description')}</p>
             <p className="text-xs mb-4 italic" style={{ color: 'var(--f-text-subtle)' }}>{t('settings.import.saft_systems')}</p>

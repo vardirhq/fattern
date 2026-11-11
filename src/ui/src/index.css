@@ -147,6 +147,9 @@
     --f-btn-ghost-bg:    #FFFFFF;
     --f-btn-ghost-hover: #F4F2EC;
 
+    /* Modal backdrop */
+    --f-overlay: rgba(21,23,26,0.45);
+
     /* Inverse surface */
     --f-inverse-bg:   #15171A;
     --f-inverse-text: #F4F2EC;

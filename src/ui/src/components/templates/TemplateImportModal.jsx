@@ -43,7 +43,7 @@ export function TemplateImportModal({ isOpen, onClose, onConfirm, templateMeta, 
                     <span style={{ color: 'var(--f-text-subtle)' }}>{t('template_import.tags_label')}</span>
                     <div className="flex flex-wrap gap-1">
                       {templateMeta.tags.map((tag, idx) => (
-                        <span key={idx} className="inline-flex items-center rounded-full px-2 py-0.5 text-xs font-medium" style={{ background: 'rgba(255,255,255,0.06)', color: 'var(--f-text-subtle)' }}>
+                        <span key={idx} className="inline-flex items-center rounded-full px-2 py-0.5 text-xs font-medium" style={{ background: 'var(--f-hover)', color: 'var(--f-text-subtle)' }}>
                           {tag}
                         </span>
                       ))}
@@ -120,7 +120,7 @@ export function TemplateImportModal({ isOpen, onClose, onConfirm, templateMeta, 
           onClick={onConfirm}
           disabled={hasErrors}
           className={`rounded-lg px-4 py-2 text-sm font-medium transition ${hasErrors ? 'cursor-not-allowed opacity-40' : 'f-btn-primary'}`}
-          style={hasErrors ? { background: 'rgba(255,255,255,0.06)', color: 'var(--f-text-subtle)' } : {}}
+          style={hasErrors ? { background: 'var(--f-hover)', color: 'var(--f-text-subtle)' } : {}}
         >
           {t('template_import.import_button')}
         </button>

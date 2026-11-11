@@ -95,7 +95,7 @@ export function TemplatePreview({ template, zoom = 100, pan = { x: 0, y: 0 }, on
 
   if (!template) {
     return (
-      <div className="flex h-full items-center justify-center" style={{ background: 'rgba(255,255,255,0.03)' }}>
+      <div className="flex h-full items-center justify-center" style={{ background: 'var(--f-surface-hover)' }}>
         <p style={{ color: 'var(--f-text-subtle)' }}>{t('template_editor.no_preview')}</p>
       </div>
     );
@@ -178,7 +178,7 @@ export function TemplatePreview({ template, zoom = 100, pan = { x: 0, y: 0 }, on
           onClick={onClose}
           className="absolute top-4 right-4 z-10 rounded-lg p-2 shadow-lg transition"
           style={{ background: 'rgba(12,22,18,0.9)', border: '1px solid var(--f-border)', color: 'var(--f-text-soft)' }}
-          onMouseEnter={e => e.currentTarget.style.background = 'rgba(255,255,255,0.1)'}
+          onMouseEnter={e => e.currentTarget.style.background = 'var(--f-hover-elevated)'}
           onMouseLeave={e => e.currentTarget.style.background = 'rgba(12,22,18,0.9)'}
           title={t('template_editor.close_preview')}
         >

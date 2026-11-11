@@ -25,7 +25,7 @@ export function DevSettings() {
                 {t('settings.dev.description')}
               </p>
               <div className="flex items-center gap-2 text-xs" style={{ color: 'var(--f-text-subtle)' }}>
-                <kbd className="px-2.5 py-1 rounded-lg text-xs font-mono" style={{ background: 'rgba(255,255,255,0.08)', border: '1px solid var(--f-border)', color: 'var(--f-text-body)' }}>
+                <kbd className="px-2.5 py-1 rounded-lg text-xs font-mono" style={{ background: 'var(--f-hover-elevated)', border: '1px solid var(--f-border)', color: 'var(--f-text-body)' }}>
                   Ctrl+Shift+D
                 </kbd>
                 <span>{t('settings.dev.shortcut_hint')}</span>
@@ -50,7 +50,7 @@ export function DevSettings() {
               <div className="flex items-center gap-3 mb-4">
                 <div className="flex-1 rounded-lg p-3" style={{
                   border: isSupporter ? '1px solid var(--f-border-green)' : '1px solid var(--f-border-subtle)',
-                  background: isSupporter ? 'var(--f-green-bg)' : 'rgba(255,255,255,0.03)',
+                  background: isSupporter ? 'var(--f-green-bg)' : 'var(--f-surface-hover)',
                 }}>
                   <p className="text-xs mb-1" style={{ color: 'var(--f-text-subtle)' }}>{t('settings.dev.status')}</p>
                   <p className="text-sm font-semibold" style={{ color: isSupporter ? 'var(--f-green-text)' : 'var(--f-text-soft)' }}>
@@ -58,7 +58,7 @@ export function DevSettings() {
                   </p>
                 </div>
                 {isSupporter && (
-                  <div className="flex-1 rounded-lg p-3" style={{ border: '1px solid var(--f-border-subtle)', background: 'rgba(255,255,255,0.03)' }}>
+                  <div className="flex-1 rounded-lg p-3" style={{ border: '1px solid var(--f-border-subtle)', background: 'var(--f-surface-hover)' }}>
                     <p className="text-xs mb-1" style={{ color: 'var(--f-text-subtle)' }}>{t('settings.dev.ai_credits')}</p>
                     <p className="text-sm font-semibold" style={{ color: 'var(--f-text-body)' }}>{aiCredits.toLocaleString()}</p>
                   </div>

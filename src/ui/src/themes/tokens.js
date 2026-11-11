@@ -90,6 +90,9 @@ const SHARED_LIGHT = {
   '--f-btn-ghost-bg':    '#FFFFFF',
   '--f-btn-ghost-hover': '#F4F2EC',
 
+  // Modal backdrop
+  '--f-overlay': 'rgba(21,23,26,0.45)',
+
   // Inverse (ink) surface — e.g. active nav item, dark summary cards
   '--f-inverse-bg':   '#15171A',
   '--f-inverse-text': '#F4F2EC',
@@ -177,6 +180,9 @@ const SHARED_DARK = {
   // Ghost / secondary button
   '--f-btn-ghost-bg':    'rgba(244,242,236,0.04)',
   '--f-btn-ghost-hover': 'rgba(244,242,236,0.08)',
+
+  // Modal backdrop
+  '--f-overlay': 'rgba(0,0,0,0.62)',
 
   // Inverse surface
   '--f-inverse-bg':   '#F4F2EC',

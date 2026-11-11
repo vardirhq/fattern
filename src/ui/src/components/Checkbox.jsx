@@ -16,7 +16,7 @@ export function Checkbox({ checked, onChange, label, description, disabled = fal
         <div
           className="relative flex h-5 w-5 items-center justify-center rounded-md transition-all duration-200"
           style={{
-            background: checked ? 'var(--f-green-bg)' : 'rgba(255,255,255,0.06)',
+            background: checked ? 'var(--f-green-bg)' : 'var(--f-hover)',
             border: checked ? '1.5px solid var(--f-border-green)' : '1.5px solid var(--f-border)',
             color: checked ? 'var(--f-green-text)' : 'transparent',
             boxShadow: checked ? 'none' : 'none',

@@ -22,7 +22,7 @@ export function Modal({ isOpen, onClose, title, description, children, footer, s
           exit={{ opacity: 0 }}
           transition={{ duration: 0.2 }}
           className="fixed inset-0 z-40 flex items-center justify-center px-4"
-          style={{ background: 'rgba(4,10,8,0.75)', backdropFilter: 'blur(6px)' }}
+          style={{ background: 'var(--f-overlay)', backdropFilter: 'blur(6px)' }}
           onClick={onClose}
         >
           <motion.div
@@ -38,7 +38,7 @@ export function Modal({ isOpen, onClose, title, description, children, footer, s
               onClick={onClose}
               className="absolute right-4 top-4 z-10 rounded-full px-2 py-0.5 text-xs font-medium transition"
               style={{
-                background: 'rgba(255,255,255,0.08)',
+                background: 'var(--f-hover-elevated)',
                 border: '1px solid var(--f-border)',
                 color: 'var(--f-text-subtle)',
               }}

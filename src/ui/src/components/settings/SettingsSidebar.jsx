@@ -32,13 +32,13 @@ export function SettingsSidebar({ activeCategory, onCategoryChange, showDevMenu 
                   border: isActive ? '1px solid var(--f-border-green)' : '1px solid transparent',
                   color: isActive ? 'var(--f-green-text)' : 'var(--f-text-soft)',
                 }}
-                onMouseEnter={e => { if (!isActive) { e.currentTarget.style.background = 'rgba(255,255,255,0.06)'; e.currentTarget.style.color = 'var(--f-text-body)'; }}}
+                onMouseEnter={e => { if (!isActive) { e.currentTarget.style.background = 'var(--f-hover)'; e.currentTarget.style.color = 'var(--f-text-body)'; }}}
                 onMouseLeave={e => { if (!isActive) { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.color = 'var(--f-text-soft)'; }}}
               >
                 <span
                   className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg transition"
                   style={{
-                    background: isActive ? 'rgba(47,75,216,0.15)' : 'rgba(255,255,255,0.06)',
+                    background: isActive ? 'rgba(47,75,216,0.15)' : 'var(--f-hover)',
                     color: isActive ? 'var(--f-green-text)' : 'var(--f-text-subtle)',
                   }}
                 >

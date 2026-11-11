@@ -1,5 +1,6 @@
 // src/ui/src/components/expenses/ExpenseCategoryChips.jsx
 import { useTranslation } from 'react-i18next';
+import { SearchBar } from '../SearchBar';
 
 export function ExpenseCategoryChips({ breakdown = [], activeCategory, onSelectCategory, query = '', onQueryChange }) {
   const { t } = useTranslation();
@@ -19,13 +20,13 @@ export function ExpenseCategoryChips({ breakdown = [], activeCategory, onSelectC
   };
 
   const chipActive = {
-    background: 'var(--f-accent)',
-    color: '#fff',
-    borderColor: 'var(--f-accent)',
+    background: 'var(--f-inverse-bg)',
+    color: 'var(--f-inverse-text)',
+    borderColor: 'var(--f-inverse-bg)',
   };
 
   const chipInactive = {
-    background: 'var(--f-surface-2)',
+    background: 'var(--f-surface-hover)',
     color: 'var(--f-text-soft)',
     borderColor: 'var(--f-border)',
   };
@@ -36,12 +37,12 @@ export function ExpenseCategoryChips({ breakdown = [], activeCategory, onSelectC
         display: 'flex',
         alignItems: 'center',
         gap: 8,
-        overflowX: 'auto',
-        paddingBottom: 4,
-        marginBottom: 4,
-        scrollbarWidth: 'none',
+        flexWrap: 'wrap',
       }}
     >
+      <div style={{ flex: '1 1 260px', minWidth: 200, order: -1, marginRight: 8 }}>
+        <SearchBar value={query} onChange={(v) => onQueryChange?.(v)} />
+      </div>
       {/* "Alle" chip */}
       <button
         type="button"
@@ -60,17 +61,17 @@ export function ExpenseCategoryChips({ breakdown = [], activeCategory, onSelectC
             type="button"
             style={{
               ...chipBase,
-              ...(isActive ? { background: cat.color || '#555', color: '#fff', borderColor: cat.color || '#555' } : chipInactive),
+              ...(isActive ? chipActive : chipInactive),
             }}
             onClick={() => onSelectCategory?.(isActive ? null : cat.id)}
           >
-            {!isActive && (
+            {(
               <span
                 style={{
                   width: 8,
                   height: 8,
                   borderRadius: '50%',
-                  background: cat.color || '#555',
+                  background: cat.color || 'var(--f-text-muted)',
                   flexShrink: 0,
                 }}
               />
@@ -80,27 +81,6 @@ export function ExpenseCategoryChips({ breakdown = [], activeCategory, onSelectC
         );
       })}
 
-      {/* Search input — pushed to right */}
-      <div style={{ marginLeft: 'auto', flexShrink: 0 }}>
-        <input
-          type="text"
-          value={query}
-          onChange={(e) => onQueryChange?.(e.target.value)}
-          placeholder={t('common.search', 'Søk…')}
-          style={{
-            padding: '4px 12px',
-            borderRadius: 20,
-            border: '1px solid var(--f-border)',
-            background: 'var(--f-surface-2)',
-            color: 'var(--f-text)',
-            fontSize: 13,
-            outline: 'none',
-            width: 160,
-          }}
-          onFocus={(e) => { e.target.style.borderColor = 'var(--f-accent)'; }}
-          onBlur={(e) => { e.target.style.borderColor = 'var(--f-border)'; }}
-        />
-      </div>
     </div>
   );
 }

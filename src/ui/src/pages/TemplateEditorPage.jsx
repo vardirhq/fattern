@@ -131,7 +131,7 @@ export function TemplateEditorPage({ templateId, onClose }) {
 
   if (isLoading) {
     return (
-      <div className="flex h-screen items-center justify-center" style={{ background: 'var(--f-bg)' }}>
+      <div className="flex h-screen items-center justify-center" style={{ background: 'var(--f-bg-base)' }}>
         <p style={{ color: 'var(--f-text-subtle)' }}>{t('template_editor.loading')}</p>
       </div>
     );
@@ -139,14 +139,14 @@ export function TemplateEditorPage({ templateId, onClose }) {
 
   if (!template) {
     return (
-      <div className="flex h-screen items-center justify-center" style={{ background: 'var(--f-bg)' }}>
+      <div className="flex h-screen items-center justify-center" style={{ background: 'var(--f-bg-base)' }}>
         <p style={{ color: 'var(--f-text-subtle)' }}>{t('template_editor.load_error')}</p>
       </div>
     );
   }
 
   return (
-    <div className="fixed inset-0 z-40 flex flex-col" style={{ top: 'var(--f-topbar-h)', background: 'var(--f-bg)' }}>
+    <div className="fixed inset-0 z-40 flex flex-col" style={{ top: 'var(--f-topbar-h)', background: 'var(--f-bg-base)' }}>
       {/* Top Bar */}
       <div className="flex h-14 items-center justify-between px-5" style={{ background: 'rgba(8,16,12,0.8)', borderBottom: '1px solid var(--f-border-subtle)', backdropFilter: 'blur(20px)' }}>
         <div className="flex items-center gap-5">
@@ -154,7 +154,7 @@ export function TemplateEditorPage({ templateId, onClose }) {
             onClick={onClose}
             className="flex items-center gap-2 rounded-lg px-3 py-1.5 text-sm font-medium transition"
             style={{ color: 'var(--f-text-soft)' }}
-            onMouseEnter={e => { e.currentTarget.style.background = 'rgba(255,255,255,0.06)'; e.currentTarget.style.color = 'var(--f-text-body)'; }}
+            onMouseEnter={e => { e.currentTarget.style.background = 'var(--f-hover)'; e.currentTarget.style.color = 'var(--f-text-body)'; }}
             onMouseLeave={e => { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.color = 'var(--f-text-soft)'; }}
           >
             <IconArrowLeft className="h-4 w-4" />
@@ -171,7 +171,7 @@ export function TemplateEditorPage({ templateId, onClose }) {
             disabled={!canUndo}
             className="rounded-lg px-3 py-1.5 text-sm font-medium transition disabled:opacity-40 disabled:cursor-not-allowed"
             style={{ color: 'var(--f-text-soft)' }}
-            onMouseEnter={e => { if (!e.currentTarget.disabled) e.currentTarget.style.background = 'rgba(255,255,255,0.06)'; }}
+            onMouseEnter={e => { if (!e.currentTarget.disabled) e.currentTarget.style.background = 'var(--f-hover)'; }}
             onMouseLeave={e => e.currentTarget.style.background = 'transparent'}
           >
             {t('template_editor.undo')}
@@ -181,7 +181,7 @@ export function TemplateEditorPage({ templateId, onClose }) {
             disabled={!canRedo}
             className="rounded-lg px-3 py-1.5 text-sm font-medium transition disabled:opacity-40 disabled:cursor-not-allowed"
             style={{ color: 'var(--f-text-soft)' }}
-            onMouseEnter={e => { if (!e.currentTarget.disabled) e.currentTarget.style.background = 'rgba(255,255,255,0.06)'; }}
+            onMouseEnter={e => { if (!e.currentTarget.disabled) e.currentTarget.style.background = 'var(--f-hover)'; }}
             onMouseLeave={e => e.currentTarget.style.background = 'transparent'}
           >
             {t('template_editor.redo')}
@@ -196,7 +196,7 @@ export function TemplateEditorPage({ templateId, onClose }) {
               className="rounded-lg p-1.5 transition disabled:opacity-40"
               style={{ color: 'var(--f-text-soft)' }}
               disabled={zoom <= 50}
-              onMouseEnter={e => { if (!e.currentTarget.disabled) e.currentTarget.style.background = 'rgba(255,255,255,0.06)'; }}
+              onMouseEnter={e => { if (!e.currentTarget.disabled) e.currentTarget.style.background = 'var(--f-hover)'; }}
               onMouseLeave={e => e.currentTarget.style.background = 'transparent'}
             >
               <IconZoomOut className="h-4 w-4" />
@@ -209,7 +209,7 @@ export function TemplateEditorPage({ templateId, onClose }) {
               className="rounded-lg p-1.5 transition disabled:opacity-40"
               style={{ color: 'var(--f-text-soft)' }}
               disabled={zoom >= 200}
-              onMouseEnter={e => { if (!e.currentTarget.disabled) e.currentTarget.style.background = 'rgba(255,255,255,0.06)'; }}
+              onMouseEnter={e => { if (!e.currentTarget.disabled) e.currentTarget.style.background = 'var(--f-hover)'; }}
               onMouseLeave={e => e.currentTarget.style.background = 'transparent'}
             >
               <IconZoomIn className="h-4 w-4" />
@@ -223,7 +223,7 @@ export function TemplateEditorPage({ templateId, onClose }) {
               }}
               className="ml-2 rounded-lg px-3 py-1.5 text-xs font-medium transition"
               style={{ color: 'var(--f-text-soft)' }}
-              onMouseEnter={e => e.currentTarget.style.background = 'rgba(255,255,255,0.06)'}
+              onMouseEnter={e => e.currentTarget.style.background = 'var(--f-hover)'}
               onMouseLeave={e => e.currentTarget.style.background = 'transparent'}
             >
               {t('template_editor.fit')}
@@ -237,7 +237,7 @@ export function TemplateEditorPage({ templateId, onClose }) {
             onClick={() => setShowPreview(!showPreview)}
             className="rounded-lg px-4 py-1.5 text-sm font-medium transition"
             style={{ color: 'var(--f-text-soft)' }}
-            onMouseEnter={e => { e.currentTarget.style.background = 'rgba(255,255,255,0.06)'; e.currentTarget.style.color = 'var(--f-text-body)'; }}
+            onMouseEnter={e => { e.currentTarget.style.background = 'var(--f-hover)'; e.currentTarget.style.color = 'var(--f-text-body)'; }}
             onMouseLeave={e => { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.color = 'var(--f-text-soft)'; }}
           >
             <IconEye className="mr-2 inline h-4 w-4" />
@@ -251,7 +251,7 @@ export function TemplateEditorPage({ templateId, onClose }) {
             onClick={() => setShowSettings(true)}
             className="rounded-lg px-4 py-1.5 text-sm font-medium transition"
             style={{ color: 'var(--f-text-soft)' }}
-            onMouseEnter={e => { e.currentTarget.style.background = 'rgba(255,255,255,0.06)'; e.currentTarget.style.color = 'var(--f-text-body)'; }}
+            onMouseEnter={e => { e.currentTarget.style.background = 'var(--f-hover)'; e.currentTarget.style.color = 'var(--f-text-body)'; }}
             onMouseLeave={e => { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.color = 'var(--f-text-soft)'; }}
             title={t('template_editor.settings_title')}
           >

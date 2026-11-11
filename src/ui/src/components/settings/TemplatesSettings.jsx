@@ -171,7 +171,7 @@ export function TemplatesSettings({ onOpenTemplateEditor, onDeleteTemplate, onSe
         ) : (
           <>
             {filteredTemplates.length === 0 ? (
-              <div className="rounded-lg p-6 text-center" style={{ border: '1px solid var(--f-border-subtle)', background: 'rgba(255,255,255,0.02)' }}>
+              <div className="rounded-lg p-6 text-center" style={{ border: '1px solid var(--f-border-subtle)', background: 'var(--f-surface-hover)' }}>
                 <p className="text-sm" style={{ color: 'var(--f-text-soft)' }}>
                   {templates.length === 0
                     ? t('settings.templates.empty')

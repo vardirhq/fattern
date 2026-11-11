@@ -16,7 +16,7 @@ export function ProductCard({ product, formatCurrency: fmt, onEdit, onDelete, in
       onMouseLeave={e => { e.currentTarget.style.borderColor = 'var(--f-border-subtle)'; }}
     >
       {product.image_path ? (
-        <div className="aspect-square w-full overflow-hidden" style={{ background: 'rgba(255,255,255,0.04)' }}>
+        <div className="aspect-square w-full overflow-hidden" style={{ background: 'var(--f-hover)' }}>
           <img
             src={product.image_path}
             alt={product.name}
@@ -38,7 +38,7 @@ export function ProductCard({ product, formatCurrency: fmt, onEdit, onDelete, in
             <h3 className="font-semibold" style={{ color: 'var(--f-text-body)' }}>{product.name}</h3>
             {product.sku && <p className="mt-1 text-xs" style={{ color: 'var(--f-text-subtle)' }}>SKU: {product.sku}</p>}
           </div>
-          <span className="ml-2 inline-flex rounded-full px-2 py-1 text-xs font-semibold" style={product.active ? { background: 'var(--f-green-bg)', color: 'var(--f-green-text)', border: '1px solid var(--f-border-green)' } : { background: 'rgba(255,255,255,0.06)', color: 'var(--f-text-subtle)' }}>
+          <span className="ml-2 inline-flex rounded-full px-2 py-1 text-xs font-semibold" style={product.active ? { background: 'var(--f-green-bg)', color: 'var(--f-green-text)', border: '1px solid var(--f-border-green)' } : { background: 'var(--f-hover)', color: 'var(--f-text-subtle)' }}>
             {product.active ? t('common.active') : t('common.inactive')}
           </span>
         </div>

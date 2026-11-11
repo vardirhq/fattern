@@ -418,11 +418,11 @@ export function InvoiceModal({ isOpen, mode = 'create', initialInvoice, onSubmit
                   onChange={setStatus}
                   noMargin
                   options={[
-                    { value: 'draft', label: 'Kladd', icon: <IconFile className="h-4 w-4" /> },
-                    { value: 'sent', label: 'Sendt', icon: <IconSend className="h-4 w-4" /> },
-                    { value: 'paid', label: 'Betalt', icon: <IconCircleCheck className="h-4 w-4" /> },
-                    { value: 'overdue', label: 'Forfalt', icon: <IconAlertCircle className="h-4 w-4" /> },
-                    { value: 'cancelled', label: 'Kansellert', icon: <IconX className="h-4 w-4" /> },
+                    { value: 'draft', label: t('status.draft'), icon: <IconFile className="h-4 w-4" /> },
+                    { value: 'sent', label: t('status.sent'), icon: <IconSend className="h-4 w-4" /> },
+                    { value: 'paid', label: t('status.paid'), icon: <IconCircleCheck className="h-4 w-4" /> },
+                    { value: 'overdue', label: t('status.overdue'), icon: <IconAlertCircle className="h-4 w-4" /> },
+                    { value: 'cancelled', label: t('status.cancelled'), icon: <IconX className="h-4 w-4" /> },
                   ]}
                 />
               </div>

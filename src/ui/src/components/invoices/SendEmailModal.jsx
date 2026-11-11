@@ -124,7 +124,7 @@ export function SendEmailModal({ isOpen, invoice, company, onClose, onStatusChan
   return (
     <div
       className="fixed inset-0 z-[80] flex items-center justify-center p-4"
-      style={{ background: 'rgba(4,10,8,0.80)', backdropFilter: 'blur(8px)' }}
+      style={{ background: 'var(--f-overlay)', backdropFilter: 'blur(8px)' }}
       onClick={(e) => { if (e.target === e.currentTarget) onClose(); }}
     >
       <div

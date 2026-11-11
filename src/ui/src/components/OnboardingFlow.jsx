@@ -102,7 +102,7 @@ export function OnboardingFlow({ initialCompany, onComplete }) {
         exit={{ opacity: 0 }}
         transition={{ duration: 0.3 }}
         className="fixed inset-0 z-[100] backdrop-blur-sm"
-        style={{ background: 'rgba(4,10,8,0.85)' }}
+        style={{ background: 'var(--f-overlay)' }}
       >
         <div className="flex h-full items-center justify-center px-4">
           <motion.div
@@ -140,7 +140,7 @@ export function OnboardingFlow({ initialCompany, onComplete }) {
       exit={{ opacity: 0 }}
       transition={{ duration: 0.3 }}
       className="fixed inset-0 z-[100] backdrop-blur-sm"
-      style={{ background: 'rgba(4,10,8,0.85)' }}
+      style={{ background: 'var(--f-overlay)' }}
     >
       <div className="flex h-full items-center justify-center px-4">
         <motion.div

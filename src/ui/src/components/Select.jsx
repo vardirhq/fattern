@@ -104,7 +104,7 @@ export function Select({ value, onChange, options = [], placeholder = 'Velg...',
         background: 'var(--f-surface-elevated)',
         backdropFilter: 'blur(20px)',
         border: '1px solid var(--f-border)',
-        boxShadow: '0 8px 32px rgba(0,0,0,0.4)',
+        boxShadow: '0 12px 32px var(--f-tooltip-shadow)',
       }}
     >
       {!showCustomInput ? (
@@ -124,7 +124,7 @@ export function Select({ value, onChange, options = [], placeholder = 'Velg...',
                   background: isSelected ? 'var(--f-green-bg)' : 'transparent',
                   color: isSelected ? 'var(--f-green-text)' : 'var(--f-text-soft)',
                 }}
-                onMouseEnter={e => { if (!isSelected) { e.currentTarget.style.background = 'rgba(255,255,255,0.06)'; e.currentTarget.style.color = 'var(--f-text-body)'; }}}
+                onMouseEnter={e => { if (!isSelected) { e.currentTarget.style.background = 'var(--f-hover)'; e.currentTarget.style.color = 'var(--f-text-body)'; }}}
                 onMouseLeave={e => { if (!isSelected) { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.color = 'var(--f-text-soft)'; }}}
               >
                 {optionIcon && <span className="flex-shrink-0 opacity-70">{optionIcon}</span>}

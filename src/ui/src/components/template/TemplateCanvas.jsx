@@ -153,7 +153,7 @@ export function TemplateCanvas({
     <div
       ref={containerRef}
       className="relative h-full w-full overflow-hidden"
-      style={{ background: 'rgba(4,10,8,0.6)' }}
+      style={{ background: 'var(--f-overlay)' }}
       onMouseDown={handleMouseDown}
       onMouseMove={handleMouseMove}
       onMouseUp={handleMouseUp}

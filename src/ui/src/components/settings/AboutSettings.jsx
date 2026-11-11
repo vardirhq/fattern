@@ -18,7 +18,7 @@ export function AboutSettings() {
             <div className="flex-shrink-0">
               <div className="relative">
                 <div className="absolute inset-0 rounded-2xl blur-xl" style={{ background: 'rgba(47,75,216,0.15)' }} />
-                <div className="relative rounded-2xl p-4" style={{ background: 'rgba(255,255,255,0.08)', border: '1px solid var(--f-border)', backdropFilter: 'blur(12px)' }}>
+                <div className="relative rounded-2xl p-4" style={{ background: 'var(--f-hover-elevated)', border: '1px solid var(--f-border)', backdropFilter: 'blur(12px)' }}>
                   <img
                     src="/logo.png"
                     alt="Fattern"

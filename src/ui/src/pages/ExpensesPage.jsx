@@ -76,7 +76,7 @@ export function ExpensesPage({
               <p className="text-sm" style={{ color: 'var(--f-text-subtle)' }}>
                 {t('expense.title')}
               </p>
-              <h1 className="mt-2 text-3xl font-semibold" style={{ color: 'var(--f-text)' }}>
+              <h1 className="mt-1 text-3xl font-semibold f-num" style={{ color: 'var(--f-text)' }}>
                 {fmt ? fmt(totalAmount) : totalAmount}
               </h1>
               <p className="mt-1 text-sm" style={{ color: 'var(--f-text-soft)' }}>
@@ -88,14 +88,14 @@ export function ExpensesPage({
               <button
                 type="button"
                 onClick={() => onCreateExpense?.()}
-                className="f-btn-primary rounded-2xl px-5 py-2 text-sm font-semibold"
+                className="f-btn-primary rounded-xl px-5 text-sm font-semibold" style={{ height: 44 }}
               >
                 {t('expense.new')}
               </button>
               <button
                 type="button"
                 onClick={() => onManageCategories?.()}
-                className="f-btn-ghost rounded-2xl px-5 py-2 text-sm font-semibold"
+                className="f-btn-ghost rounded-xl px-5 text-sm font-medium" style={{ height: 44 }}
               >
                 {t('expense.manage_categories')}
               </button>
@@ -108,7 +108,7 @@ export function ExpensesPage({
       <div style={{ display: 'flex', gap: 16, position: 'relative', alignItems: 'flex-start' }}>
         {/* Main column */}
         <div style={{ flex: 1, minWidth: 0 }}>
-          <div className="f-glass rounded-3xl p-6 space-y-4">
+          <div className="space-y-4">
             {breakdownForUI.length > 0 && (
               <ExpenseBreakdownBar
                 breakdown={breakdownForUI}

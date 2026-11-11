@@ -89,7 +89,7 @@ export function ExpenseAttachmentUpload({ value, onChange, maxSizeMB = 10, expen
                   src={preview}
                   alt={t('expense.attachment_preview')}
                   className="h-48 w-full rounded-2xl object-contain"
-                  style={{ border: '1px solid var(--f-border-subtle)', background: 'rgba(255,255,255,0.03)' }}
+                  style={{ border: '1px solid var(--f-border-subtle)', background: 'var(--f-surface-hover)' }}
                 />
                 <button
                   type="button"
@@ -106,7 +106,7 @@ export function ExpenseAttachmentUpload({ value, onChange, maxSizeMB = 10, expen
                 </button>
               </div>
             ) : (
-              <div className="flex items-center justify-between rounded-lg px-3 py-2" style={{ border: '1px solid var(--f-border-subtle)', background: 'rgba(255,255,255,0.03)' }}>
+              <div className="flex items-center justify-between rounded-lg px-3 py-2" style={{ border: '1px solid var(--f-border-subtle)', background: 'var(--f-surface-hover)' }}>
                 <div className="flex items-center gap-2">
                   <svg className="h-5 w-5" style={{ color: 'var(--f-text-subtle)' }} fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
@@ -121,7 +121,7 @@ export function ExpenseAttachmentUpload({ value, onChange, maxSizeMB = 10, expen
                   onClick={handleRemove}
                   className="rounded p-1 transition"
                   style={{ color: 'var(--f-text-subtle)' }}
-                  onMouseEnter={e => { e.currentTarget.style.background = 'rgba(255,255,255,0.06)'; e.currentTarget.style.color = 'var(--f-text-body)'; }}
+                  onMouseEnter={e => { e.currentTarget.style.background = 'var(--f-hover)'; e.currentTarget.style.color = 'var(--f-text-body)'; }}
                   onMouseLeave={e => { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.color = 'var(--f-text-subtle)'; }}
                   title={t('expense.attachment_remove')}
                 >
@@ -137,9 +137,9 @@ export function ExpenseAttachmentUpload({ value, onChange, maxSizeMB = 10, expen
             type="button"
             onClick={() => fileInputRef.current?.click()}
             className="flex w-full items-center justify-center rounded-lg border-2 border-dashed px-4 py-3 transition"
-            style={{ borderColor: 'var(--f-border)', color: 'var(--f-text-subtle)', background: 'rgba(255,255,255,0.02)' }}
+            style={{ borderColor: 'var(--f-border)', color: 'var(--f-text-subtle)', background: 'var(--f-surface-hover)' }}
             onMouseEnter={e => { e.currentTarget.style.borderColor = 'var(--f-border-green)'; e.currentTarget.style.color = 'var(--f-green-text)'; e.currentTarget.style.background = 'var(--f-green-bg)'; }}
-            onMouseLeave={e => { e.currentTarget.style.borderColor = 'var(--f-border)'; e.currentTarget.style.color = 'var(--f-text-subtle)'; e.currentTarget.style.background = 'rgba(255,255,255,0.02)'; }}
+            onMouseLeave={e => { e.currentTarget.style.borderColor = 'var(--f-border)'; e.currentTarget.style.color = 'var(--f-text-subtle)'; e.currentTarget.style.background = 'var(--f-surface-hover)'; }}
           >
             <svg className="mr-2 h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />

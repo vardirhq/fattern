@@ -78,7 +78,7 @@ export function TesseractTest() {
                 type="button"
                 onClick={() => fileInputRef.current?.click()}
                 className="flex w-full items-center justify-center gap-2 rounded-2xl border-2 border-dashed px-4 py-8 transition"
-                style={{ borderColor: 'var(--f-border)', background: 'rgba(255,255,255,0.02)', color: 'var(--f-text-subtle)' }}
+                style={{ borderColor: 'var(--f-border)', background: 'var(--f-surface-hover)', color: 'var(--f-text-subtle)' }}
                 onMouseEnter={e => { e.currentTarget.style.borderColor = 'var(--f-border-green)'; e.currentTarget.style.color = 'var(--f-green-text)'; }}
                 onMouseLeave={e => { e.currentTarget.style.borderColor = 'var(--f-border)'; e.currentTarget.style.color = 'var(--f-text-subtle)'; }}
               >
@@ -87,7 +87,7 @@ export function TesseractTest() {
               </button>
             ) : (
               <div className="space-y-3">
-                <div className="relative rounded-2xl overflow-hidden" style={{ border: '1px solid var(--f-border-subtle)', background: 'rgba(255,255,255,0.02)' }}>
+                <div className="relative rounded-2xl overflow-hidden" style={{ border: '1px solid var(--f-border-subtle)', background: 'var(--f-surface-hover)' }}>
                   <img
                     src={image}
                     alt="Forhåndsvisning"
@@ -140,7 +140,7 @@ export function TesseractTest() {
         {result && (
           <div>
             <label className="text-sm font-medium" style={{ color: 'var(--f-text-body)' }}>Ekstrahert tekst</label>
-            <div className="mt-2 rounded-2xl p-4" style={{ border: '1px solid var(--f-border-subtle)', background: 'rgba(255,255,255,0.02)' }}>
+            <div className="mt-2 rounded-2xl p-4" style={{ border: '1px solid var(--f-border-subtle)', background: 'var(--f-surface-hover)' }}>
               <pre className="whitespace-pre-wrap text-sm font-mono max-h-96 overflow-y-auto" style={{ color: 'var(--f-text-body)' }}>
                 {result || '(Ingen tekst funnet)'}
               </pre>
