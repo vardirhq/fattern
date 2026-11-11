@@ -728,7 +728,8 @@
       "pdf_generated": "PDF generated",
       "email_sent": "Email sent",
       "reminder_sent": "Reminder sent",
-      "ehf_exported": "EHF file saved"
+      "ehf_exported": "EHF file saved",
+      "ehf_sent": "EHF sent"
     }
   },
   "send_email": {
@@ -1151,6 +1152,32 @@
       "unknown_desc": "You may be offline. The rest of the check works without internet.",
       "invalid": "The customer has no valid organisation number",
       "invalid_desc": "EHF can only be sent to businesses with an organisation number."
+    },
+    "send_button": "Send EHF as {{name}}",
+    "sending": "Sending …",
+    "sent": "EHF sent",
+    "connect_hint": "Connect Recommand under Settings → Invoice to send directly, or save the file and send it yourself.",
+    "delivery": {
+      "delivered": "delivered",
+      "pending": "in progress",
+      "failed": "failed"
     }
+  },
+  "peppol": {
+    "title": "Send EHF via Recommand",
+    "desc": "Fattern sends the EHF file through your own Recommand account (free for 25 documents a month). The key is stored only on this machine.",
+    "connected_as": "Sending as {{name}}",
+    "disconnect": "Disconnect",
+    "key_id": "Key ID",
+    "secret": "Secret",
+    "secret_saved": "Saved – enter a new one to replace it",
+    "key_hint": "Create an API key of type \"basic\" in Recommand. It does not expire.",
+    "not_encrypted": "The system keychain is not available, so the key is stored unencrypted.",
+    "connect": "Connect and test",
+    "open_recommand": "Open Recommand",
+    "pick_company": "Choose the company you send as",
+    "company_selected": "Company selected",
+    "verified": "Verified",
+    "not_verified": "Not verified"
   }
 }

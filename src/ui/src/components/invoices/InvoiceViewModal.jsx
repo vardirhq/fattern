@@ -19,6 +19,7 @@ const EVENT_CONFIG = {
   email_sent:          { icon: IconMail,          color: 'var(--f-green-text)',labelKey: 'invoice_log.types.email_sent' },
   reminder_sent:       { icon: IconMail,          color: 'var(--f-danger-text)',labelKey: 'invoice_log.types.reminder_sent' },
   ehf_exported:        { icon: IconDownload,      color: 'var(--f-text-soft)', labelKey: 'invoice_log.types.ehf_exported' },
+  ehf_sent:            { icon: IconSend,          color: 'var(--f-success-text)', labelKey: 'invoice_log.types.ehf_sent' },
   overdue:             { icon: IconAlertCircle,   color: 'var(--f-warn)',      labelKey: 'invoice_log.types.status_changed' },
 };
 
@@ -594,7 +595,7 @@ export function InvoiceViewModal({ isOpen, invoice, onClose, onEdit, onGenerateP
         </div>
       )}
 
-      {activeTab === 'ehf' && <EhfPanel invoiceId={invoiceId} />}
+      {activeTab === 'ehf' && <EhfPanel invoiceId={invoiceId} onSent={() => onStatusChange?.('sent')} />}
 
       {activeTab === 'expenses' && (
         <LinkedExpensesTab

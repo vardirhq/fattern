@@ -6,7 +6,7 @@
  */
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { IconAlertCircle, IconAlertTriangle, IconCircleCheck, IconDownload, IconWorldOff } from '@tabler/icons-react';
+import { IconAlertCircle, IconAlertTriangle, IconCircleCheck, IconDownload, IconSend, IconWorldOff } from '@tabler/icons-react';
 import { useToast } from '../../hooks/useToast';
 
 function getEhfApi() {
@@ -21,12 +21,20 @@ const RECEIVER_TONE = {
   invalid: { bg: 'var(--f-hover)', border: 'var(--f-border)', color: 'var(--f-text-soft)', Icon: IconAlertCircle },
 };
 
-export function EhfPanel({ invoiceId }) {
+export function EhfPanel({ invoiceId, onSent }) {
   const { t } = useTranslation();
   const { toast } = useToast();
   const [check, setCheck] = useState(null);
   const [receiver, setReceiver] = useState(null);
   const [saving, setSaving] = useState(false);
+  const [sending, setSending] = useState(false);
+  const [sendResult, setSendResult] = useState(null);
+  const [peppolConfig, setPeppolConfig] = useState(null);
+
+  useEffect(() => {
+    const peppol = typeof window !== 'undefined' ? window.fattern?.peppol : null;
+    peppol?.getConfig().then(setPeppolConfig).catch(() => setPeppolConfig(null));
+  }, []);
 
   useEffect(() => {
     const api = getEhfApi();
@@ -76,6 +84,27 @@ export function EhfPanel({ invoiceId }) {
     }
   };
 
+  const canSendViaPeppol = Boolean(peppolConfig?.hasSecret && peppolConfig?.companyId);
+
+  const handleSend = async () => {
+    const peppol = window.fattern?.peppol;
+    if (!peppol) return;
+    setSending(true);
+    setSendResult(null);
+    try {
+      const result = await peppol.send(invoiceId);
+      setSendResult(result);
+      if (result.ok) {
+        toast.success(t('ehf.sent'), t(`ehf.delivery.${result.deliveryStatus || 'pending'}`));
+        onSent?.();
+      }
+    } catch (error) {
+      setSendResult({ ok: false, message: error.message });
+    } finally {
+      setSending(false);
+    }
+  };
+
   return (
     <div className="space-y-5">
       {/* Can the customer receive EHF? */}
@@ -115,18 +144,52 @@ export function EhfPanel({ invoiceId }) {
       </div>
 
       <div className="flex flex-wrap items-center gap-3">
+        {canSendViaPeppol && (
+          <button
+            type="button"
+            onClick={handleSend}
+            disabled={sending || errors.length > 0 || receiver?.status === 'not_registered' || receiver?.status === 'invalid'}
+            className="f-btn-primary rounded-xl px-4 text-sm flex items-center gap-2 disabled:opacity-50"
+            style={{ height: 40 }}
+          >
+            <IconSend size={16} aria-hidden="true" />
+            {sending ? t('ehf.sending') : t('ehf.send_button', { name: peppolConfig.companyName })}
+          </button>
+        )}
         <button
           type="button"
           onClick={handleSave}
           disabled={saving || errors.length > 0}
-          className="f-btn-primary rounded-xl px-4 text-sm flex items-center gap-2 disabled:opacity-50"
+          className={`${canSendViaPeppol ? 'f-btn-ghost' : 'f-btn-primary'} rounded-xl px-4 text-sm flex items-center gap-2 disabled:opacity-50`}
           style={{ height: 40, cursor: errors.length ? 'not-allowed' : 'pointer' }}
         >
           <IconDownload size={16} aria-hidden="true" />
           {t('ehf.save_button')}
         </button>
-        <span className="text-xs" style={{ color: 'var(--f-text-subtle)' }}>{t('ehf.send_hint')}</span>
+        {!canSendViaPeppol && (
+          <span className="text-xs" style={{ color: 'var(--f-text-subtle)' }}>{t('ehf.connect_hint')}</span>
+        )}
       </div>
+
+      {sendResult && (
+        <div
+          role={sendResult.ok ? 'status' : 'alert'}
+          className="rounded-xl p-4 text-sm space-y-1"
+          style={sendResult.ok
+            ? { background: 'var(--f-success-bg)', border: '1px solid var(--f-success-border)', color: 'var(--f-text)' }
+            : { background: 'var(--f-danger-bg)', border: '1px solid var(--f-danger-border)', color: 'var(--f-text)' }}
+        >
+          <p className="font-semibold">
+            {sendResult.ok ? `${t('ehf.sent')} · ${t(`ehf.delivery.${sendResult.deliveryStatus || 'pending'}`)}` : sendResult.message}
+          </p>
+          {!sendResult.ok && (sendResult.details || []).slice(0, 3).map((d, i) => (
+            <p key={i} className="text-xs" style={{ color: 'var(--f-text-soft)', overflowWrap: 'anywhere' }}>{d}</p>
+          ))}
+          {!sendResult.ok && (sendResult.problems || []).filter((p) => p.level === 'error').map((p, i) => (
+            <p key={`p${i}`} className="text-xs" style={{ color: 'var(--f-text-soft)' }}>{p.message}</p>
+          ))}
+        </div>
+      )}
     </div>
   );
 }

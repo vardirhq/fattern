@@ -1,6 +1,7 @@
 /**
  * Smoke check for the invoice editor's save path, payment reminders,
- * the VAT summary, KID numbers and EHF generation.
+ * the VAT summary, KID numbers, EHF generation and how Recommand's
+ * responses are explained (offline: no network calls).
  *
  * Builds create and edit payloads with the same function the editor uses
  * (buildInvoicePayload), sends them to a real FatternDatabase in a
@@ -192,6 +193,28 @@ try {
   check('EHF totals match the stored invoice', () => assert.equal(ehf.totals.payable, db.getInvoice(ehfInvoice.id).total));
   check('EHF line unit comes from the product (time → HUR)', () => assert.match(ehf.xml, /unitCode="HUR"/));
   check('AS sellers state Foretaksregisteret', () => assert.match(ehf.xml, /<cbc:CompanyID>Foretaksregisteret<\/cbc:CompanyID>/));
+
+  console.log('Recommand responses');
+  const { describeRecommandError, authHeader } = require('../src/electron/recommand.js');
+  check('basic auth when a key id is given', () => assert.match(authHeader({ keyId: 'key_1', secret: 's' }), /^Basic /));
+  check('bearer auth for a bare token', () => assert.match(authHeader({ keyId: '', secret: 'a.b.c' }), /^Bearer /));
+  check('unknown receiver is explained', () => {
+    const r = describeRecommandError({ status: 422, data: { success: false, errors: { root: ['x'] }, deliveryFailure: { channel: 'peppol', category: 'recipient_not_found' } } });
+    assert.equal(r.category, 'recipient_not_found');
+  });
+  check('unverified company is explained', () => {
+    const r = describeRecommandError({ status: 400, data: { success: false, errors: { root: ['Company must be verified before sending or receiving documents.'] } } });
+    assert.equal(r.category, 'not_verified');
+  });
+  check('invalid document keeps the validator detail', () => {
+    const r = describeRecommandError({ status: 400, data: { success: false, errors: { root: ['Document validation failed. Please ensure…', '[SAX] bad element'] } } });
+    assert.equal(r.category, 'validation');
+    assert.deepEqual(r.details, ['[SAX] bad element']);
+  });
+  check('rejected key and offline are explained', () => {
+    assert.equal(describeRecommandError({ status: 401, data: null }).category, 'auth');
+    assert.equal(describeRecommandError({ status: 0, data: null, networkError: 'timeout' }).category, 'offline');
+  });
 } finally {
   db.close();
   fs.rmSync(root, { recursive: true, force: true });

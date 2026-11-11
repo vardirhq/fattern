@@ -8,6 +8,7 @@ const { generateInvoicePDF } = require('./pdfGenerator');
 const { generateTemplatePDF } = require('./templatePdfGenerator');
 const { registerEmailHandlers } = require('./emailHandler');
 const { registerEhfHandlers } = require('./ehfHandlers');
+const { registerPeppolHandlers } = require('./peppolHandlers');
 
 const isDev = Boolean(process.env.VITE_DEV_SERVER_URL);
 let database;
@@ -80,6 +81,7 @@ app.whenReady().then(() => {
   // Register email handlers
   registerEmailHandlers(ipcMain, database);
   registerEhfHandlers(ipcMain, database);
+  registerPeppolHandlers(ipcMain, database);
   
   // File dialogs for template import/export
   ipcMain.handle('dialog:show-open-dialog', async (event, options) => {

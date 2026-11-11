@@ -728,7 +728,8 @@
       "pdf_generated": "PDF generert",
       "email_sent": "E-post sendt",
       "reminder_sent": "Purring sendt",
-      "ehf_exported": "EHF-fil lagret"
+      "ehf_exported": "EHF-fil lagret",
+      "ehf_sent": "EHF sendt"
     }
   },
   "send_email": {
@@ -1151,6 +1152,32 @@
       "unknown_desc": "Du er kanskje frakoblet. Resten av sjekken fungerer uten nett.",
       "invalid": "Kunden har ikke et gyldig organisasjonsnummer",
       "invalid_desc": "EHF kan bare sendes til virksomheter med organisasjonsnummer."
+    },
+    "send_button": "Send EHF som {{name}}",
+    "sending": "Sender …",
+    "sent": "EHF sendt",
+    "connect_hint": "Koble til Recommand under Innstillinger → Faktura for å sende direkte, eller lagre filen og send den selv.",
+    "delivery": {
+      "delivered": "levert",
+      "pending": "underveis",
+      "failed": "feilet"
     }
+  },
+  "peppol": {
+    "title": "Send EHF via Recommand",
+    "desc": "Fattern sender EHF-filen gjennom din egen Recommand-konto (gratis for 25 dokumenter i måneden). Nøkkelen lagres bare på denne maskinen.",
+    "connected_as": "Sender som {{name}}",
+    "disconnect": "Koble fra",
+    "key_id": "Nøkkel-ID",
+    "secret": "Hemmelighet",
+    "secret_saved": "Lagret – fyll inn for å bytte",
+    "key_hint": "Lag en API-nøkkel av typen «basic» i Recommand. Den utløper ikke.",
+    "not_encrypted": "Nøkkelringen på maskinen er ikke tilgjengelig, så nøkkelen lagres ukryptert.",
+    "connect": "Koble til og test",
+    "open_recommand": "Åpne Recommand",
+    "pick_company": "Velg firmaet du sender som",
+    "company_selected": "Firma valgt",
+    "verified": "Verifisert",
+    "not_verified": "Ikke verifisert"
   }
 }
