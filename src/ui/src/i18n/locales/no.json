@@ -122,7 +122,20 @@
     "no_overdue_invoices": "Ingen forfalte fakturaer.",
     "days_overdue_one": "{{count}} dag forfalt",
     "days_overdue_other": "{{count}} dager forfalt",
-    "and_more": "+ {{count}} til"
+    "and_more": "+ {{count}} til",
+    "remind": "Purr",
+    "reminded_on": "Purret {{date}}",
+    "vat_title": "MVA",
+    "vat_term": "termin",
+    "vat_deadline": "Frist {{date}}",
+    "vat_running": "Pågår",
+    "vat_output": "Utgående MVA",
+    "vat_input": "Inngående MVA",
+    "vat_payable": "Å betale",
+    "vat_refund": "Til gode",
+    "vat_estimate_note": "Anslag basert på fakturaer og utgifter i Fattern. Kontroller før du sender MVA-meldingen.",
+    "vat_missing_lines_one": "{{count}} utgift mangler MVA-linjer og er ikke med.",
+    "vat_missing_lines_other": "{{count}} utgifter mangler MVA-linjer og er ikke med."
   },
   "invoice": {
     "title": "Fakturaer",
@@ -216,7 +229,10 @@
       "confirm": "Koble valgte",
       "cancel": "Avbryt"
     },
-    "all": "Alle"
+    "all": "Alle",
+    "send_reminder": "Send purring",
+    "send_reminder_again": "Purr igjen",
+    "last_reminded": "Sist purret {{date}}"
   },
   "expense": {
     "filter_by": "Filtrer etter {{name}}",
@@ -695,7 +711,8 @@
       "updated_after_send": "Redigert etter utsending",
       "status_changed": "Status endret",
       "pdf_generated": "PDF generert",
-      "email_sent": "E-post sendt"
+      "email_sent": "E-post sendt",
+      "reminder_sent": "Purring sendt"
     }
   },
   "send_email": {
@@ -727,7 +744,12 @@
     "default_body_content": "Vedlagt finner du faktura {{num}}{{due}}.",
     "default_body_due": " med forfallsdato {{date}}",
     "default_body_contact": "Ta gjerne kontakt hvis du har spørsmål.",
-    "default_body_regards": "Med vennlig hilsen"
+    "default_body_regards": "Med vennlig hilsen",
+    "reminder_title": "Send purring",
+    "reminder_subject": "Purring: faktura {{num}} fra {{company}}",
+    "reminder_body_content": "Vi kan ikke se å ha mottatt betaling for faktura {{num}} på {{amount}}, som forfalt {{date}}.",
+    "reminder_body_request": "Vi ber om at beløpet betales innen {{days}} dager. Fakturaen er vedlagt.",
+    "reminder_body_ignore": "Har du allerede betalt, kan du se bort fra denne purringen."
   },
   "confirm": {
     "delete_invoice": "Slett faktura",

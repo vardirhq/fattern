@@ -1,4 +1,5 @@
 const { initializeDatabase, DB_PATH } = require('./initDatabase');
+const { relevantVatTerm } = require('./vatTerms');
 const { loadBetterSqlite3 } = require('./loadBetterSqlite3');
 
 function toDateOnlyString(dateLike) {
@@ -549,6 +550,53 @@ class FatternDatabase {
     return true;
   }
 
+  // ─── VAT (MVA) ────────────────────────────────────────────────────────────
+
+  /**
+   * Estimated VAT for one two-monthly term (see vatTerms.js).
+   * Output VAT: invoices that are sent, paid or overdue and not credited,
+   * by invoice date. Input VAT: VAT lines on expenses, by expense date.
+   * Expenses without VAT lines cannot be counted and are reported as such.
+   */
+  getVatSummary(today = new Date()) {
+    const term = relevantVatTerm(today);
+
+    const output = this.db.prepare(`
+      SELECT COALESCE(SUM(vat_total), 0) AS vat, COUNT(*) AS count
+      FROM invoices
+      WHERE invoice_date BETWEEN @start AND @end
+        AND status IN ('sent', 'paid', 'overdue')
+        AND COALESCE(credited, 0) = 0
+    `).get(term);
+
+    const input = this.db.prepare(`
+      SELECT COALESCE(SUM(expense_items.quantity * expense_items.unit_price * COALESCE(expense_items.vat_rate, 0)), 0) AS vat
+      FROM expense_items
+      JOIN expenses ON expenses.id = expense_items.expense_id
+      WHERE expenses.date BETWEEN @start AND @end
+    `).get(term);
+
+    const withoutVat = this.db.prepare(`
+      SELECT COUNT(*) AS count
+      FROM expenses
+      WHERE date BETWEEN @start AND @end
+        AND NOT EXISTS (
+          SELECT 1 FROM expense_items
+          WHERE expense_items.expense_id = expenses.id AND COALESCE(expense_items.vat_rate, 0) > 0
+        )
+    `).get(term);
+
+    const round = (n) => Math.round(n * 100) / 100;
+    return {
+      ...term,
+      outputVat: round(output.vat),
+      inputVat: round(input.vat),
+      payable: round(output.vat - input.vat),
+      invoiceCount: output.count,
+      expensesWithoutVat: withoutVat.count,
+    };
+  }
+
   // ─── Invoice event log ───────────────────────────────────────────────────────
 
   logInvoiceEvent(invoiceId, type, description, metadata = null) {
@@ -844,7 +892,11 @@ class FatternDatabase {
         invoices.total,
         invoices.status,
         invoices.payment_date,
-        customers.name as customer_name
+        customers.name as customer_name,
+        (SELECT MAX(created_at) FROM invoice_events
+          WHERE invoice_events.invoice_id = invoices.id AND invoice_events.type = 'reminder_sent') as last_reminder_at,
+        (SELECT COUNT(*) FROM invoice_events
+          WHERE invoice_events.invoice_id = invoices.id AND invoice_events.type = 'reminder_sent') as reminder_count
       FROM invoices
       LEFT JOIN customers ON customers.id = invoices.customer_id
       WHERE invoices.invoice_date BETWEEN @start AND @end
@@ -864,6 +916,8 @@ class FatternDatabase {
       date: row.invoice_date,
       due_date: row.due_date,
       payment_date: row.payment_date,
+      last_reminder_at: row.last_reminder_at || null,
+      reminder_count: row.reminder_count || 0,
     }));
   }
 

@@ -1,5 +1,6 @@
 /**
- * Smoke check for the invoice editor's save path.
+ * Smoke check for the invoice editor's save path, payment reminders and
+ * the VAT summary.
  *
  * Builds create and edit payloads with the same function the editor uses
  * (buildInvoicePayload), sends them to a real FatternDatabase in a
@@ -38,14 +39,16 @@ function check(name, fn) {
 
 const db = new FatternDatabase();
 try {
-  const year = db.listBudgetYears().find((y) => y.is_current) || db.listBudgetYears()[0];
+  // Fixed dates so the result never depends on the day the check runs.
+  const year = db.listBudgetYears().find((y) => y.start_date <= '2026-06-01' && y.end_date >= '2026-06-01')
+    || db.createBudgetYear({ label: '2026', startDate: '2026-01-01', endDate: '2026-12-31' });
   const customer = db.createCustomer({ name: 'Havbris Eiendom AS', email: 'faktura@havbris.no' });
   const product = db.createProduct({ name: 'Designsprint', unitPrice: 1250, vatRate: 0.25, unit: 'time' });
 
   // Form state as the editor holds it after picking a customer, adding a
   // product, adding a typed line and leaving one blank line.
-  const today = new Date().toISOString().slice(0, 10);
-  const due = new Date(Date.now() + 14 * 86400000).toISOString().slice(0, 10);
+  const today = '2026-11-20'; // 6th term, so it does not affect the VAT check below
+  const due = '2026-12-04';
   const formItems = [
     { id: 'temp-1', productId: product.id, description: 'Designsprint', quantity: 12, unitPrice: 1250, vatRate: 0.25 },
     { id: 'temp-2', productId: '', description: 'Reise Oslo–Bergen', quantity: 1, unitPrice: 2000, vatRate: 0.25 },
@@ -119,6 +122,43 @@ try {
   check('quantity change is saved', () => assert.equal(edited.items[0].quantity, 16));
   check('totals are recalculated', () => assert.equal(edited.total, (16 * 1250 + 2000) * 1.25));
   check('invoice number is unchanged', () => assert.equal(edited.invoice_number, saved.invoice_number));
+
+  console.log('Reminders');
+  db.logInvoiceEvent(created.id, 'reminder_sent', 'Purring sendt', { via: 'smtp' });
+  db.logInvoiceEvent(created.id, 'reminder_sent', 'Purring sendt', { via: 'smtp' });
+  const reminded = db.listInvoicesForBudgetYear(year.id, null).find((inv) => inv.dbId === created.id);
+  check('list reports reminder count and last reminder', () => {
+    assert.equal(reminded.reminder_count, 2);
+    assert.ok(reminded.last_reminder_at);
+  });
+
+  console.log('VAT');
+  // Inside 5th term 2026 (sep–okt), checked on 11 Nov when that term is due.
+  const vatCustomer = db.createCustomer({ name: 'MVA-test AS' });
+  const vatInvoice = (status, credited = false) => db.createInvoice({
+    ...buildInvoicePayload({
+      customerId: vatCustomer.id, invoiceDate: '2026-09-15', dueDate: '2026-09-29', status, credited,
+      items: [{ productId: '', description: 'Arbeid', quantity: 1, unitPrice: 10000, vatRate: 0.25 }],
+    }),
+    budgetYearId: year.id,
+  });
+  vatInvoice('sent');
+  vatInvoice('paid');
+  vatInvoice('draft');            // not counted
+  vatInvoice('cancelled');        // not counted
+  vatInvoice('sent', true);       // credited, not counted
+  db.addExpense({ vendor: 'Adobe', amount: 1250, date: '2026-10-02', items: [{ description: 'Lisens', quantity: 1, unitPrice: 1000, vatRate: 0.25 }] });
+  db.addExpense({ vendor: 'Kiosk', amount: 99, date: '2026-10-05' }); // no VAT lines
+  const vat = db.getVatSummary('2026-11-11');
+  check('picks 5th term 2026, due 10 Dec', () => {
+    assert.equal(vat.term, 5);
+    assert.equal(vat.state, 'due');
+    assert.equal(vat.deadline, '2026-12-10');
+  });
+  check('output VAT counts only sent/paid/overdue, uncredited (2 × 2 500)', () => assert.equal(vat.outputVat, 5000));
+  check('input VAT from expense lines (250)', () => assert.equal(vat.inputVat, 250));
+  check('payable = 4 750', () => assert.equal(vat.payable, 4750));
+  check('reports 1 expense without VAT lines', () => assert.equal(vat.expensesWithoutVat, 1));
 } finally {
   db.close();
   fs.rmSync(root, { recursive: true, force: true });

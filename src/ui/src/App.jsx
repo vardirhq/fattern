@@ -31,6 +31,7 @@ import { TimelineModal } from './components/events/TimelineModal';
 import { ConfirmModal } from './components/ConfirmModal';
 import { ToastContainer } from './components/Toast';
 import { useToast } from './hooks/useToast';
+import { SendEmailModal } from './components/invoices/SendEmailModal';
 import { navItems, workflowShortcuts, statusBadge, statusLabel } from './data/mockData.jsx';
 import { formatCurrency } from './utils/formatCurrency';
 import { formatDate } from './utils/formatDate';
@@ -84,6 +85,8 @@ function App() {
   const [isInvoiceViewModalOpen, setIsInvoiceViewModalOpen] = useState(false);
   const [viewingInvoice, setViewingInvoice] = useState(null);
   const [invoicesRefreshKey, setInvoicesRefreshKey] = useState(0);
+  const [reminderInvoice, setReminderInvoice] = useState(null);
+  const [vatSummary, setVatSummary] = useState(null);
   const [currentPage, setCurrentPage] = useState('Oversikt');
   const [templateEditorId, setTemplateEditorId] = useState(null);
   const [isTimelineModalOpen, setIsTimelineModalOpen] = useState(false);
@@ -91,6 +94,28 @@ function App() {
   const [customersRefreshKey, setCustomersRefreshKey] = useState(0);
   const [deleteConfirm, setDeleteConfirm] = useState({ isOpen: false, item: null, type: null, onConfirm: null, onDeactivate: null, showDeactivate: false });
   const { toasts, toast, removeToast } = useToast();
+
+  useEffect(() => {
+    const api = typeof window !== 'undefined' ? window.fattern?.db : null;
+    if (!api?.getVatSummary) return;
+    let cancelled = false;
+    api.getVatSummary()
+      .then((summary) => { if (!cancelled) setVatSummary(summary); })
+      .catch((error) => console.error('Kunne ikke hente MVA-oversikt', error));
+    return () => { cancelled = true; };
+  }, [invoicesRefreshKey, expensesRefreshKey]);
+
+  const openReminder = async (invoice) => {
+    const invoiceId = invoice?.dbId ?? invoice?.id;
+    const api = typeof window !== 'undefined' ? window.fattern?.db : null;
+    if (!invoiceId || !api?.getInvoice) return;
+    try {
+      const full = await api.getInvoice(invoiceId);
+      if (full) setReminderInvoice(full);
+    } catch (error) {
+      console.error('Kunne ikke hente faktura', error);
+    }
+  };
   const { isSupporter, activateSupporterPack, deactivateSupporterPack } = useSupporterPack();
 
   const handleKonami = useCallback(async () => {
@@ -871,6 +896,7 @@ function App() {
             onStatusChange={handleInvoiceStatusChange}
             showStatusModal={showInvoiceStatusModal}
             showToast={toast}
+            onSendReminder={openReminder}
           />
         );
       case 'Utgifter':
@@ -957,6 +983,8 @@ function App() {
             showInvoiceStatusModal={showInvoiceStatusModal}
             onViewInvoice={openViewInvoiceModal}
             overdueInvoices={(allInvoices || []).filter(inv => inv.status === 'overdue')}
+            onSendReminder={openReminder}
+            vatSummary={vatSummary}
           />
         );
     }
@@ -1106,6 +1134,14 @@ function App() {
         customers={customers || []}
         products={products || []}
         company={company}
+      />
+      <SendEmailModal
+        isOpen={!!reminderInvoice}
+        kind="reminder"
+        invoice={reminderInvoice}
+        company={company}
+        onClose={() => setReminderInvoice(null)}
+        onSent={() => setInvoicesRefreshKey((key) => key + 1)}
       />
       <ExpenseModal
         isOpen={isExpenseModalOpen}

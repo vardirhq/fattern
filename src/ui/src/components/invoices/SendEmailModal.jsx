@@ -14,7 +14,8 @@ function getEmailApi() {
   return typeof window !== 'undefined' ? window.fattern?.email ?? null : null;
 }
 
-export function SendEmailModal({ isOpen, invoice, company, onClose, onStatusChange }) {
+export function SendEmailModal({ isOpen, invoice, company, onClose, onStatusChange, kind = 'invoice', onSent }) {
+  const isReminder = kind === 'reminder';
   const { t } = useTranslation();
   const { toast } = useToast();
 
@@ -39,6 +40,25 @@ export function SendEmailModal({ isOpen, invoice, company, onClose, onStatusChan
     const customerName = invoice.customer_name ? ' ' + invoice.customer_name : '';
     const dueStr = dueDate ? t('send_email.default_body_due', { date: dueDate }) : '';
 
+    if (isReminder) {
+      const amount = new Intl.NumberFormat('nb-NO', { style: 'currency', currency: 'NOK' }).format(invoice.total ?? invoice.amount ?? 0);
+      setForm({
+        to: customerEmail,
+        subject: t('send_email.reminder_subject', { num: invoiceNum, company: companyName }),
+        message: [
+          t('send_email.default_body_greeting', { name: customerName }),
+          '',
+          t('send_email.reminder_body_content', { num: invoiceNum, amount, date: dueDate }),
+          '',
+          t('send_email.reminder_body_request', { days: 14 }),
+          '',
+          t('send_email.reminder_body_ignore'),
+          '',
+          t('send_email.default_body_regards'),
+          companyName,
+        ].join('\n'),
+      });
+    } else {
     setForm({
       to: customerEmail,
       subject: t('send_email.default_subject', { num: invoiceNum, company: companyName }),
@@ -53,6 +73,7 @@ export function SendEmailModal({ isOpen, invoice, company, onClose, onStatusChan
         companyName,
       ].join('\n'),
     });
+    }
 
     setSent(false);
 
@@ -64,7 +85,7 @@ export function SendEmailModal({ isOpen, invoice, company, onClose, onStatusChan
       .then((cfg) => setSmtpConfigured(!!(cfg.host && cfg.user && cfg.hasPassword)))
       .catch(() => setSmtpConfigured(false))
       .finally(() => setCheckingConfig(false));
-  }, [isOpen, invoice, company, t]);
+  }, [isOpen, invoice, company, t, isReminder]);
 
   if (!isOpen || !invoice) return null;
 
@@ -80,6 +101,7 @@ export function SendEmailModal({ isOpen, invoice, company, onClose, onStatusChan
         to:      form.to,
         subject: form.subject,
         message: form.message,
+        kind,
       });
 
       // Mark invoice as sent (only if it's still draft)
@@ -90,6 +112,7 @@ export function SendEmailModal({ isOpen, invoice, company, onClose, onStatusChan
       }
 
       setSent(true);
+      onSent?.();
       toast.success(t('send_email.sent_success'), t('send_email.sent_success_desc', { to: form.to }));
       setTimeout(onClose, 1200);
     } catch (err) {
@@ -109,8 +132,10 @@ export function SendEmailModal({ isOpen, invoice, company, onClose, onStatusChan
         to:      form.to,
         subject: form.subject,
         message: form.message,
+        kind,
       });
       toast.info(t('send_email.mailto_opened'), t('send_email.mailto_desc'));
+      onSent?.();
       if (result?.pdfPath) {
         console.info('PDF saved to:', result.pdfPath);
       }
@@ -145,7 +170,7 @@ export function SendEmailModal({ isOpen, invoice, company, onClose, onStatusChan
             </div>
             <div>
               <h3 className="text-base font-semibold" style={{ color: 'var(--f-text-body)' }}>
-                {t('send_email.title')}
+                {isReminder ? t('send_email.reminder_title') : t('send_email.title')}
               </h3>
               <p className="text-xs" style={{ color: 'var(--f-text-subtle)' }}>
                 {invoice.invoice_number || invoice.id}

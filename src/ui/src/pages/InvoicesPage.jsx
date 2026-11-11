@@ -10,7 +10,7 @@ import { formatCurrency } from '../utils/formatCurrency';
 import { useSettings } from '../hooks/useSettings';
 import { useSearch } from '../hooks/useSearch';
 
-export function InvoicesPage({ invoices, formatCurrency: fmt, onCreateInvoice, onEditInvoice, onDeleteInvoice, onViewInvoice, onStatusChange, showStatusModal, showToast }) {
+export function InvoicesPage({ invoices, formatCurrency: fmt, onCreateInvoice, onEditInvoice, onDeleteInvoice, onViewInvoice, onStatusChange, showStatusModal, showToast, onSendReminder }) {
   const { t } = useTranslation();
   const [generatingPdf, setGeneratingPdf] = useState(null);
   const [statusFilter, setStatusFilter] = useState('all');
@@ -142,6 +142,17 @@ export function InvoicesPage({ invoices, formatCurrency: fmt, onCreateInvoice, o
         style: { whiteSpace: 'nowrap', width: 1 },
         render: (_, invoice) => (
           <div className="flex items-center justify-end gap-2">
+            {invoice.status === 'overdue' && onSendReminder && (
+              <button
+                type="button"
+                onClick={() => onSendReminder(invoice)}
+                className="f-btn-ghost rounded-lg px-3 text-xs font-medium"
+                style={{ height: 30, marginRight: 4 }}
+                title={invoice.last_reminder_at ? t('invoice.last_reminded', { date: formatDate(invoice.last_reminder_at) }) : undefined}
+              >
+                {invoice.reminder_count > 0 ? t('invoice.send_reminder_again') : t('invoice.send_reminder')}
+              </button>
+            )}
             <button
               onClick={() => onViewInvoice?.(invoice)}
               className="rounded-lg p-1.5 text-ink-subtle hover:[background:var(--f-green-bg)] hover:[color:var(--f-green-text)]"

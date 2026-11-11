@@ -16,6 +16,7 @@ const EVENT_CONFIG = {
   status_changed:      { icon: IconCircleCheck,   color: 'var(--f-blue-text)', labelKey: 'invoice_log.types.status_changed' },
   pdf_generated:       { icon: IconDownload,      color: 'var(--f-text-soft)', labelKey: 'invoice_log.types.pdf_generated' },
   email_sent:          { icon: IconMail,          color: 'var(--f-green-text)',labelKey: 'invoice_log.types.email_sent' },
+  reminder_sent:       { icon: IconMail,          color: 'var(--f-danger-text)',labelKey: 'invoice_log.types.reminder_sent' },
   overdue:             { icon: IconAlertCircle,   color: 'var(--f-warn)',      labelKey: 'invoice_log.types.status_changed' },
 };
 

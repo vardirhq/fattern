@@ -241,6 +241,8 @@ export function DashboardView({
   showInvoiceStatusModal,
   onViewInvoice,
   overdueInvoices,
+  onSendReminder,
+  vatSummary,
 }) {
   const { t, i18n } = useTranslation();
   const fmt = (v) => (typeof formatCurrency === 'function' ? formatCurrency(v) : v);
@@ -366,31 +368,50 @@ export function DashboardView({
             overdueList.slice(0, 4).map(invoice => {
               const days = daysOverdue(invoice);
               return (
-                <button
+                <div
                   key={invoice.dbId ?? invoice.id}
-                  type="button"
-                  onClick={() => onViewInvoice?.(invoice)}
-                  className="f-attn-row"
-                  style={{
-                    display: 'flex', alignItems: 'center', gap: 12, width: '100%',
-                    padding: '12px 0', background: 'none', border: 'none',
-                    borderTop: '1px solid var(--f-border-faint)',
-                    cursor: 'pointer', textAlign: 'left', font: 'inherit', color: 'inherit',
-                  }}
+                  style={{ display: 'flex', alignItems: 'center', gap: 12, padding: '12px 0', borderTop: '1px solid var(--f-border-faint)' }}
                 >
-                  <span style={{ flex: 1, minWidth: 0, display: 'flex', flexDirection: 'column', gap: 3 }}>
-                    <span style={{ fontSize: 14, fontWeight: 600, color: 'var(--f-text)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
-                      {invoice.customer}
+                  <button
+                    type="button"
+                    onClick={() => onViewInvoice?.(invoice)}
+                    className="f-attn-row"
+                    style={{
+                      flex: 1, minWidth: 0, display: 'flex', alignItems: 'center', gap: 12,
+                      padding: 0, background: 'none', border: 'none',
+                      cursor: 'pointer', textAlign: 'left', font: 'inherit', color: 'inherit',
+                    }}
+                  >
+                    <span style={{ flex: 1, minWidth: 0, display: 'flex', flexDirection: 'column', gap: 3 }}>
+                      <span style={{ fontSize: 14, fontWeight: 600, color: 'var(--f-text)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                        {invoice.customer}
+                      </span>
+                      <span style={{ fontSize: 13, fontWeight: 500, color: 'var(--f-danger-text)' }}>
+                        {invoice.id}
+                        {days != null && ` · ${t('dashboard_view.days_overdue', '{{count}} dager forfalt', { count: days })}`}
+                      </span>
+                      {invoice.last_reminder_at && (
+                        <span style={{ fontSize: 12, color: 'var(--f-text-subtle)' }}>
+                          {t('dashboard_view.reminded_on', { date: formatDate(invoice.last_reminder_at) })}
+                        </span>
+                      )}
                     </span>
-                    <span style={{ fontSize: 13, fontWeight: 500, color: 'var(--f-danger-text)' }}>
-                      {invoice.id}
-                      {days != null && ` · ${t('dashboard_view.days_overdue', '{{count}} dager forfalt', { count: days })}`}
+                    <span className="f-num" style={{ fontSize: 14, fontWeight: 600, color: 'var(--f-text)', whiteSpace: 'nowrap' }}>
+                      {fmt(invoice.amount)}
                     </span>
-                  </span>
-                  <span className="f-num" style={{ fontSize: 14, fontWeight: 600, color: 'var(--f-text)', whiteSpace: 'nowrap' }}>
-                    {fmt(invoice.amount)}
-                  </span>
-                </button>
+                  </button>
+                  {onSendReminder && (
+                    <button
+                      type="button"
+                      onClick={() => onSendReminder(invoice)}
+                      className="f-btn-ghost"
+                      aria-label={`${t('invoice.send_reminder')}: ${invoice.customer}`}
+                      style={{ height: 36, padding: '0 12px', borderRadius: 8, fontSize: 13, fontWeight: 500, cursor: 'pointer', flexShrink: 0 }}
+                    >
+                      {t('dashboard_view.remind')}
+                    </button>
+                  )}
+                </div>
               );
             })
           )}
@@ -441,6 +462,45 @@ export function DashboardView({
 
       {/* ── Activity feed + Client highlights ───────────────────────── */}
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: 24 }}>
+        {vatSummary && (
+          <section
+            aria-label={t('dashboard_view.vat_title')}
+            style={{
+              borderRadius: 'var(--f-radius-lg)', padding: '20px 22px',
+              background: 'var(--f-inverse-bg)', color: 'var(--f-inverse-text)',
+              display: 'flex', flexDirection: 'column', gap: 14, minWidth: 0, alignSelf: 'start',
+            }}
+          >
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 12 }}>
+              <h2 style={{ margin: 0, fontSize: 16, fontWeight: 600, fontFamily: 'var(--f-font-sans)', letterSpacing: 0, color: 'inherit' }}>
+                {t('dashboard_view.vat_title')} · {vatSummary.term}. {t('dashboard_view.vat_term')}
+              </h2>
+              <span style={{ fontSize: 12, fontWeight: 600, padding: '4px 10px', borderRadius: 999, background: 'var(--f-inverse-text)', color: 'var(--f-inverse-bg)', whiteSpace: 'nowrap' }}>
+                {vatSummary.state === 'due'
+                  ? t('dashboard_view.vat_deadline', { date: formatDate(vatSummary.deadline) })
+                  : t('dashboard_view.vat_running')}
+              </span>
+            </div>
+            <span style={{ fontSize: 13, opacity: 0.75 }}>{vatSummary.months} {vatSummary.year}</span>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 8, fontSize: 14 }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', opacity: 0.85 }}>
+                <span>{t('dashboard_view.vat_output')}</span><span className="f-num">{fmt(vatSummary.outputVat)}</span>
+              </div>
+              <div style={{ display: 'flex', justifyContent: 'space-between', opacity: 0.85 }}>
+                <span>{t('dashboard_view.vat_input')}</span><span className="f-num">− {fmt(vatSummary.inputVat)}</span>
+              </div>
+            </div>
+            <div style={{ borderTop: '1px solid currentColor', borderTopColor: 'color-mix(in srgb, currentColor 22%, transparent)', paddingTop: 12, display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', gap: 12 }}>
+              <span>{vatSummary.payable >= 0 ? t('dashboard_view.vat_payable') : t('dashboard_view.vat_refund')}</span>
+              <span className="f-num" style={{ fontSize: 24, fontWeight: 600, whiteSpace: 'nowrap' }}>{fmt(Math.abs(vatSummary.payable))}</span>
+            </div>
+            <p style={{ margin: 0, fontSize: 12, lineHeight: 1.5, opacity: 0.7 }}>
+              {t('dashboard_view.vat_estimate_note')}
+              {vatSummary.expensesWithoutVat > 0 && ` ${t('dashboard_view.vat_missing_lines', { count: vatSummary.expensesWithoutVat })}`}
+            </p>
+          </section>
+        )}
+
 
         {/* Activity feed */}
         <GlassSection>
