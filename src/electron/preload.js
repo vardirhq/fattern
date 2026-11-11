@@ -106,6 +106,12 @@ contextBridge.exposeInMainWorld('fattern', {
   app: {
     wipeAllData: () => invoke('app:wipe-all-data'),
   },
+  peppol: {
+    getConfig:  ()          => invoke('peppol:get-config'),
+    saveConfig: (updates)   => invoke('peppol:save-config', updates),
+    test:       ()          => invoke('peppol:test'),
+    send:       (invoiceId) => invoke('peppol:send', invoiceId),
+  },
   ehf: {
     check:  (invoiceId) => invoke('ehf:check', invoiceId),
     save:   (invoiceId) => invoke('ehf:save', invoiceId),

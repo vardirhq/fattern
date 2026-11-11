@@ -1,6 +1,7 @@
 import { useTranslation } from 'react-i18next';
 import { useSettings } from '../../hooks/useSettings';
 import { useToast } from '../../hooks/useToast';
+import { PeppolSettings } from './PeppolSettings';
 
 function Toggle({ checked, onChange, disabled, label }) {
   return (
@@ -279,6 +280,8 @@ export function InvoiceSettings() {
             ))}
           </div>
         </SettingRow>
+
+        <PeppolSettings />
 
         {/* Info Box */}
         <div className="rounded-lg p-4" style={{ border: '1px solid var(--f-border-subtle)', background: 'var(--f-surface-hover)' }}>
