@@ -101,27 +101,27 @@ export function OnboardingFlow({ initialCompany, onComplete }) {
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
         transition={{ duration: 0.3 }}
-        className="fixed inset-0 z-[100] backdrop-blur-sm"
-        style={{ background: 'var(--f-overlay)' }}
+        className="fixed inset-0 z-100"
+        style={{ background: 'var(--scrim)' }}
       >
         <div className="flex h-full items-center justify-center px-4">
           <motion.div
             initial={{ opacity: 0, scale: 0.95, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             transition={{ duration: 0.3, ease: 'easeOut' }}
-            className="f-glass-hero w-full max-w-xl rounded-3xl p-8 shadow-2xl"
+            className="ft-card ft-raised w-full max-w-xl r-lg p-8 shadow-lg"
           >
             <div className="flex items-center gap-4">
-              <img src="/logo.png" alt="Fattern" className="h-12 w-12 drop-shadow-xl" />
+              <img src="/logo.png" alt="Fattern" className="h-12 w-12" />
               <div>
-                <p className="text-xs uppercase tracking-[0.4em]" style={{ color: 'var(--f-text-subtle)' }}>{t('onboarding_flow.startup')}</p>
-                <h2 className="text-2xl font-semibold" style={{ color: 'var(--f-text-body)' }}>{current.title}</h2>
+                <p className="text-xs uppercase tracking-widest" style={{ color: 'var(--ink-muted)' }}>{t('onboarding_flow.startup')}</p>
+                <h2 className="text-2xl font-semibold" style={{ color: 'var(--ink)' }}>{current.title}</h2>
               </div>
             </div>
-            <p className="mt-6" style={{ color: 'var(--f-text-soft)' }}>{current.description}</p>
+            <p className="mt-6" style={{ color: 'var(--ink-muted)' }}>{current.description}</p>
             <div className="mt-10 flex justify-end">
               <button
-                className="f-btn-primary rounded-2xl px-5 py-2 text-sm font-semibold"
+                className="ft-btn ft-btn-primary r-lg px-5 py-2 text-sm font-semibold"
                 onClick={() => setStepIndex(1)}
               >
                 {current.actionLabel}
@@ -139,8 +139,8 @@ export function OnboardingFlow({ initialCompany, onComplete }) {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.3 }}
-      className="fixed inset-0 z-[100] backdrop-blur-sm"
-      style={{ background: 'var(--f-overlay)' }}
+      className="fixed inset-0 z-100"
+      style={{ background: 'var(--scrim)' }}
     >
       <div className="flex h-full items-center justify-center px-4">
         <motion.div
@@ -149,22 +149,22 @@ export function OnboardingFlow({ initialCompany, onComplete }) {
           animate={{ opacity: 1, x: 0 }}
           exit={{ opacity: 0, x: -20 }}
           transition={{ duration: 0.3, ease: 'easeOut' }}
-          className="f-glass-hero w-full max-w-3xl rounded-3xl p-8 shadow-2xl"
+          className="ft-card ft-raised w-full max-w-3xl r-lg p-8 shadow-lg"
         >
           <div className="flex items-center gap-4">
-            <img src="/logo.png" alt="Fattern" className="h-12 w-12 drop-shadow-xl" />
+            <img src="/logo.png" alt="Fattern" className="h-12 w-12" />
             <div>
-              <p className="text-xs uppercase tracking-[0.4em]" style={{ color: 'var(--f-text-subtle)' }}>{t('onboarding_flow.startup')}</p>
-              <h2 className="text-2xl font-semibold" style={{ color: 'var(--f-text-body)' }}>{current.title}</h2>
+              <p className="text-xs uppercase tracking-widest" style={{ color: 'var(--ink-muted)' }}>{t('onboarding_flow.startup')}</p>
+              <h2 className="text-2xl font-semibold" style={{ color: 'var(--ink)' }}>{current.title}</h2>
             </div>
           </div>
-          <p className="mt-4" style={{ color: 'var(--f-text-soft)' }}>{current.description}</p>
+          <p className="mt-4" style={{ color: 'var(--ink-muted)' }}>{current.description}</p>
 
-          <form className="mt-8 grid gap-4 md:grid-cols-2" onSubmit={handleSubmit}>
-            <div className="md:col-span-2">
-              <label className="text-sm font-medium" style={{ color: 'var(--f-text-body)' }}>{t('onboarding_flow.company_name')}</label>
+          <form className="mt-8 grid gap-4 md-grid-cols-2" onSubmit={handleSubmit}>
+            <div className="md-col-span-2">
+              <label className="text-sm font-medium" style={{ color: 'var(--ink)' }}>{t('onboarding_flow.company_name')}</label>
               <input
-                className="f-input mt-2 w-full rounded-2xl px-4 py-2 text-sm"
+                className="ft-input mt-2 w-full r-lg px-4 py-2 text-sm"
                 value={form.name}
                 onChange={(e) => setForm((prev) => ({ ...prev, name: e.target.value }))}
                 required
@@ -172,91 +172,91 @@ export function OnboardingFlow({ initialCompany, onComplete }) {
               />
             </div>
             <div>
-              <label className="text-sm font-medium" style={{ color: 'var(--f-text-body)' }}>{t('onboarding_flow.registration_number')}</label>
+              <label className="text-sm font-medium" style={{ color: 'var(--ink)' }}>{t('onboarding_flow.registration_number')}</label>
               <input
-                className="f-input mt-2 w-full rounded-2xl px-4 py-2 text-sm"
+                className="ft-input mt-2 w-full r-lg px-4 py-2 text-sm"
                 value={form.org_number || ''}
                 onChange={(e) => setForm((prev) => ({ ...prev, org_number: e.target.value }))}
                 placeholder="999 888 777"
               />
             </div>
             <div>
-              <label className="text-sm font-medium" style={{ color: 'var(--f-text-body)' }}>{t('onboarding_flow.email')}</label>
+              <label className="text-sm font-medium" style={{ color: 'var(--ink)' }}>{t('onboarding_flow.email')}</label>
               <input
-                className="f-input mt-2 w-full rounded-2xl px-4 py-2 text-sm"
+                className="ft-input mt-2 w-full r-lg px-4 py-2 text-sm"
                 value={form.contact_email || ''}
                 onChange={(e) => setForm((prev) => ({ ...prev, contact_email: e.target.value }))}
                 placeholder="hei@studio.no"
               />
             </div>
             <div>
-              <label className="text-sm font-medium" style={{ color: 'var(--f-text-body)' }}>{t('onboarding_flow.phone')}</label>
+              <label className="text-sm font-medium" style={{ color: 'var(--ink)' }}>{t('onboarding_flow.phone')}</label>
               <input
-                className="f-input mt-2 w-full rounded-2xl px-4 py-2 text-sm"
+                className="ft-input mt-2 w-full r-lg px-4 py-2 text-sm"
                 value={form.contact_number || ''}
                 onChange={(e) => setForm((prev) => ({ ...prev, contact_number: e.target.value }))}
                 placeholder="+47 98 76 54 32"
               />
             </div>
             <div>
-              <label className="text-sm font-medium" style={{ color: 'var(--f-text-body)' }}>{t('onboarding_flow.bank_account')}</label>
+              <label className="text-sm font-medium" style={{ color: 'var(--ink)' }}>{t('onboarding_flow.bank_account')}</label>
               <input
-                className="f-input mt-2 w-full rounded-2xl px-4 py-2 text-sm"
+                className="ft-input mt-2 w-full r-lg px-4 py-2 text-sm"
                 value={form.account_number || ''}
                 onChange={(e) => setForm((prev) => ({ ...prev, account_number: e.target.value }))}
                 placeholder="1234.56.78901"
               />
             </div>
-            <div className="md:col-span-2">
-              <label className="text-sm font-medium" style={{ color: 'var(--f-text-body)' }}>{t('onboarding_flow.address')}</label>
+            <div className="md-col-span-2">
+              <label className="text-sm font-medium" style={{ color: 'var(--ink)' }}>{t('onboarding_flow.address')}</label>
               <input
-                className="f-input mt-2 w-full rounded-2xl px-4 py-2 text-sm"
+                className="ft-input mt-2 w-full r-lg px-4 py-2 text-sm"
                 value={form.address || ''}
                 onChange={(e) => setForm((prev) => ({ ...prev, address: e.target.value }))}
                 placeholder="Fatternveien 1"
               />
             </div>
             <div>
-              <label className="text-sm font-medium" style={{ color: 'var(--f-text-body)' }}>{t('onboarding_flow.postal_code')}</label>
+              <label className="text-sm font-medium" style={{ color: 'var(--ink)' }}>{t('onboarding_flow.postal_code')}</label>
               <input
-                className="f-input mt-2 w-full rounded-2xl px-4 py-2 text-sm"
+                className="ft-input mt-2 w-full r-lg px-4 py-2 text-sm"
                 value={form.post_number || ''}
                 onChange={(e) => setForm((prev) => ({ ...prev, post_number: e.target.value }))}
               />
             </div>
             <div>
-              <label className="text-sm font-medium" style={{ color: 'var(--f-text-body)' }}>{t('onboarding_flow.city')}</label>
+              <label className="text-sm font-medium" style={{ color: 'var(--ink)' }}>{t('onboarding_flow.city')}</label>
               <input
-                className="f-input mt-2 w-full rounded-2xl px-4 py-2 text-sm"
+                className="ft-input mt-2 w-full r-lg px-4 py-2 text-sm"
                 value={form.post_location || ''}
                 onChange={(e) => setForm((prev) => ({ ...prev, post_location: e.target.value }))}
               />
             </div>
             <div>
-              <label className="text-sm font-medium" style={{ color: 'var(--f-text-body)' }}>{t('onboarding_flow.vat_rate')}</label>
+              <label className="text-sm font-medium" style={{ color: 'var(--ink)' }}>{t('onboarding_flow.vat_rate')}</label>
               <input
                 type="number"
                 step="0.01"
                 min="0"
                 max="1"
-                className="f-input mt-2 w-full rounded-2xl px-4 py-2 text-sm"
+                className="ft-input mt-2 w-full r-lg px-4 py-2 text-sm"
                 value={form.vat_rate}
                 onChange={(e) => setForm((prev) => ({ ...prev, vat_rate: e.target.value }))}
               />
-              <p className="mt-1 text-xs" style={{ color: 'var(--f-text-subtle)' }}>{t('onboarding_flow.025_equals_25_vat')}</p>
+              <p className="mt-1 text-xs" style={{ color: 'var(--ink-muted)' }}>{t('onboarding_flow.025_equals_25_vat')}</p>
             </div>
 
             {error ? (
-              <p className="md:col-span-2 text-sm font-medium" style={{ color: 'var(--f-danger-text)' }}>{error}</p>
+              <p className="md-col-span-2 text-sm font-medium" style={{ color: 'var(--danger)' }}>{error}</p>
             ) : null}
 
-            <div className="md:col-span-2 mt-4 flex items-center justify-between">
+            <div className="md-col-span-2 mt-4 flex items-center justify-between">
               <button
                 type="button"
                 className="text-sm font-medium transition"
-                style={{ color: 'var(--f-text-subtle)' }}
-                onMouseEnter={e => e.currentTarget.style.color = 'var(--f-text-body)'}
-                onMouseLeave={e => e.currentTarget.style.color = 'var(--f-text-subtle)'}
+                style={{ color: 'var(--ink-muted)' }}
+                onMouseEnter={e => e.currentTarget.style.color = 'var(--ink)'}
+                onMouseLeave={e => e.currentTarget.style.color = 'var(--ink-muted)'}
                 onClick={() => {
                   markComplete();
                   onComplete?.(form);
@@ -266,7 +266,7 @@ export function OnboardingFlow({ initialCompany, onComplete }) {
               </button>
               <button
                 type="submit"
-                className="f-btn-primary rounded-2xl px-5 py-2 text-sm font-semibold disabled:opacity-50"
+                className="ft-btn ft-btn-primary r-lg px-5 py-2 text-sm font-semibold disabled-dim"
                 disabled={saving}
               >
                 {saving ? t('common.saving') : current.actionLabel}

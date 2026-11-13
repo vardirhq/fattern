@@ -29,9 +29,9 @@ export function Layout({ children, company, navItems, workflowShortcuts, activeN
             overflowY: 'auto',
             display: 'flex',
             flexDirection: 'column',
-            background: 'var(--f-surface)',
-            border: '1px solid var(--f-border)',
-            borderRadius: 'var(--f-radius-xl)',
+            background: 'var(--surface)',
+            border: '1px solid var(--line)',
+            borderRadius: 'var(--radius-lg)',
           }}
         >
           {children}

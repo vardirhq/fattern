@@ -12,12 +12,12 @@ function Toggle({ checked, onChange, disabled, label }) {
       aria-label={label}
       onClick={() => onChange(!checked)}
       disabled={disabled}
-      className="relative inline-flex h-6 w-11 flex-shrink-0 items-center rounded-full transition-colors focus:outline-none disabled:opacity-60"
-      style={{ background: checked ? 'var(--f-green)' : 'var(--f-hover-elevated)' }}
+      className="relative inline-flex h-6 w-11 shrink-0 items-center r-full transition-colors disabled-dim"
+      style={{ background: checked ? 'var(--brand)' : 'var(--line-strong)' }}
     >
       <span
-        className={`inline-block h-4 w-4 transform rounded-full transition-transform ${checked ? 'translate-x-6' : 'translate-x-1'}`}
-        style={{ background: checked ? 'var(--f-on-accent)' : 'var(--f-surface)' }}
+        className={`inline-block h-4 w-4  r-full transition-transform ${checked ? 'translate-x-6' : 'translate-x-1'}`}
+        style={{ background: checked ? 'var(--on-brand)' : 'var(--surface)' }}
       />
     </button>
   );
@@ -25,11 +25,11 @@ function Toggle({ checked, onChange, disabled, label }) {
 
 function SettingRow({ label, desc, children }) {
   return (
-    <div className="py-3" style={{ borderBottom: '1px solid var(--f-border-faint)' }}>
+    <div className="py-3" style={{ borderBottom: '1px solid var(--line)' }}>
       <div className="flex items-center justify-between gap-4">
         <div className="flex-1">
-          <span className="text-sm font-medium" style={{ color: 'var(--f-text-body)' }}>{label}</span>
-          {desc && <p className="text-xs mt-0.5" style={{ color: 'var(--f-text-subtle)' }}>{desc}</p>}
+          <span className="text-sm font-medium" style={{ color: 'var(--ink)' }}>{label}</span>
+          {desc && <p className="text-xs mt-0-5" style={{ color: 'var(--ink-muted)' }}>{desc}</p>}
         </div>
         {children}
       </div>
@@ -81,31 +81,31 @@ export function InvoiceSettings() {
   return (
     <div className="space-y-6">
       <div>
-        <h3 className="text-sm font-semibold mb-1" style={{ color: 'var(--f-text-body)' }}>{t('settings.invoice.title')}</h3>
-        <p className="text-xs mb-4" style={{ color: 'var(--f-text-subtle)' }}>{t('settings.invoice.desc')}</p>
+        <h3 className="text-sm font-semibold mb-1" style={{ color: 'var(--ink)' }}>{t('settings.invoice.title')}</h3>
+        <p className="text-xs mb-4" style={{ color: 'var(--ink-muted)' }}>{t('settings.invoice.desc')}</p>
       </div>
 
       <div className="space-y-4">
         {/* Payment Terms */}
-        <div className="py-3" style={{ borderBottom: '1px solid var(--f-border-faint)' }}>
+        <div className="py-3" style={{ borderBottom: '1px solid var(--line)' }}>
           <div className="flex items-center justify-between">
             <div className="flex-1">
-              <label className="text-sm font-medium" style={{ color: 'var(--f-text-body)' }}>{t('settings.invoice.payment_terms_label')}</label>
-              <p className="text-xs mt-0.5" style={{ color: 'var(--f-text-subtle)' }}>{t('settings.invoice.payment_terms_desc')}</p>
+              <label className="text-sm font-medium" style={{ color: 'var(--ink)' }}>{t('settings.invoice.payment_terms_label')}</label>
+              <p className="text-xs mt-0-5" style={{ color: 'var(--ink-muted)' }}>{t('settings.invoice.payment_terms_desc')}</p>
             </div>
-            <div className="flex rounded-lg p-0.5" style={{ border: '1px solid var(--f-border)', background: 'var(--f-hover)' }}>
+            <div className="flex r-md p-0-5" style={{ border: '1px solid var(--line)', background: 'var(--hover)' }}>
               {[14, 21, 30, 45, 60].map((days) => (
                 <button
                   key={days}
                   type="button"
                   onClick={() => handlePaymentTermsChange(days)}
                   disabled={isLoading}
-                  className="rounded-md px-3 py-1.5 text-xs font-medium transition disabled:opacity-60"
+                  className="r-md px-3 py-1-5 text-xs font-medium transition disabled-dim"
                   style={defaultPaymentTerms === days
-                    ? { background: 'var(--f-green-bg)', color: 'var(--f-green-text)', border: '1px solid var(--f-border-green)' }
-                    : { color: 'var(--f-text-soft)' }}
-                  onMouseEnter={e => { if (defaultPaymentTerms !== days) { e.currentTarget.style.background = 'var(--f-hover)'; e.currentTarget.style.color = 'var(--f-text-body)'; } }}
-                  onMouseLeave={e => { if (defaultPaymentTerms !== days) { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.color = 'var(--f-text-soft)'; } }}
+                    ? { background: 'var(--brand-soft)', color: 'var(--brand-ink)', border: '1px solid var(--brand-line)' }
+                    : { color: 'var(--ink-muted)' }}
+                  onMouseEnter={e => { if (defaultPaymentTerms !== days) { e.currentTarget.style.background = 'var(--hover)'; e.currentTarget.style.color = 'var(--ink)'; } }}
+                  onMouseLeave={e => { if (defaultPaymentTerms !== days) { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.color = 'var(--ink-muted)'; } }}
                 >
                   {days} {t('settings.invoice.days_unit')}
                 </button>
@@ -124,53 +124,54 @@ export function InvoiceSettings() {
                   handlePaymentTermsChange(days);
                 }
               }}
-              className="f-input w-24 rounded-lg px-2 py-1 text-sm"
+              className="ft-input w-24 r-md px-2 py-1 text-sm"
               placeholder={t('settings.invoice.custom_placeholder')}
             />
-            <span className="ml-2 text-xs" style={{ color: 'var(--f-text-subtle)' }}>{t('settings.invoice.days_unit')}</span>
+            <span className="ml-2 text-xs" style={{ color: 'var(--ink-muted)' }}>{t('settings.invoice.days_unit')}</span>
           </div>
         </div>
 
         {/* Auto-calculate Due Date */}
-        <div className="py-3" style={{ borderBottom: '1px solid var(--f-border-faint)' }}>
+        <div className="py-3" style={{ borderBottom: '1px solid var(--line)' }}>
           <div className="flex items-center justify-between">
             <div className="flex-1">
-              <label className="text-sm font-medium" style={{ color: 'var(--f-text-body)' }}>{t('settings.invoice.auto_due_label')}</label>
-              <p className="text-xs mt-0.5" style={{ color: 'var(--f-text-subtle)' }}>{t('settings.invoice.auto_due_desc')}</p>
+              <label className="text-sm font-medium" style={{ color: 'var(--ink)' }}>{t('settings.invoice.auto_due_label')}</label>
+              <p className="text-xs mt-0-5" style={{ color: 'var(--ink-muted)' }}>{t('settings.invoice.auto_due_desc')}</p>
             </div>
             <button
               type="button"
               onClick={() => handleAutoCalculateDueDate(!autoCalculateDueDate)}
               disabled={isLoading}
-              className="relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none disabled:opacity-60"
-              style={{ background: autoCalculateDueDate ? 'var(--f-green)' : 'var(--f-hover-elevated)' }}
+              className="relative inline-flex h-6 w-11 items-center r-full transition-colors disabled-dim"
+              style={{ background: autoCalculateDueDate ? 'var(--brand)' : 'var(--line-strong)' }}
             >
               <span
-                className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
+                className={`inline-block h-4 w-4  r-full transition-transform ${
                   autoCalculateDueDate ? 'translate-x-6' : 'translate-x-1'
                 }`}
+                style={{ background: autoCalculateDueDate ? 'var(--on-brand)' : 'var(--surface)' }}
               />
             </button>
           </div>
         </div>
 
         {/* Default Status */}
-        <div className="py-3" style={{ borderBottom: '1px solid var(--f-border-faint)' }}>
+        <div className="py-3" style={{ borderBottom: '1px solid var(--line)' }}>
           <div className="flex items-center justify-between">
             <div className="flex-1">
-              <label className="text-sm font-medium" style={{ color: 'var(--f-text-body)' }}>{t('settings.invoice.default_status_label')}</label>
-              <p className="text-xs mt-0.5" style={{ color: 'var(--f-text-subtle)' }}>{t('settings.invoice.default_status_desc')}</p>
+              <label className="text-sm font-medium" style={{ color: 'var(--ink)' }}>{t('settings.invoice.default_status_label')}</label>
+              <p className="text-xs mt-0-5" style={{ color: 'var(--ink-muted)' }}>{t('settings.invoice.default_status_desc')}</p>
             </div>
-            <div className="flex rounded-lg p-0.5" style={{ border: '1px solid var(--f-border)', background: 'var(--f-hover)' }}>
+            <div className="flex r-md p-0-5" style={{ border: '1px solid var(--line)', background: 'var(--hover)' }}>
               {['draft', 'sent'].map((s) => (
                 <button
                   key={s}
                   type="button"
                   onClick={() => handleDefaultStatusChange(s)}
                   disabled={isLoading}
-                  className="rounded-md px-3 py-1.5 text-xs font-medium transition disabled:opacity-60"
-                  style={defaultStatus === s ? { background: 'var(--f-green-bg)', color: 'var(--f-green-text)', border: '1px solid var(--f-border-green)' } : { color: 'var(--f-text-soft)' }}
-                  onMouseEnter={e => { if (defaultStatus !== s) { e.currentTarget.style.background = 'var(--f-hover)'; } }}
+                  className="r-md px-3 py-1-5 text-xs font-medium transition disabled-dim"
+                  style={defaultStatus === s ? { background: 'var(--brand-soft)', color: 'var(--brand-ink)', border: '1px solid var(--brand-line)' } : { color: 'var(--ink-muted)' }}
+                  onMouseEnter={e => { if (defaultStatus !== s) { e.currentTarget.style.background = 'var(--hover)'; } }}
                   onMouseLeave={e => { if (defaultStatus !== s) { e.currentTarget.style.background = 'transparent'; } }}
                 >
                   {t(`status.${s}`)}
@@ -181,23 +182,24 @@ export function InvoiceSettings() {
         </div>
 
         {/* Auto-increment Invoice Numbers */}
-        <div className="py-3" style={{ borderBottom: '1px solid var(--f-border-faint)' }}>
+        <div className="py-3" style={{ borderBottom: '1px solid var(--line)' }}>
           <div className="flex items-center justify-between">
             <div className="flex-1">
-              <label className="text-sm font-medium" style={{ color: 'var(--f-text-body)' }}>{t('settings.invoice.auto_increment_label')}</label>
-              <p className="text-xs mt-0.5" style={{ color: 'var(--f-text-subtle)' }}>{t('settings.invoice.auto_increment_desc')}</p>
+              <label className="text-sm font-medium" style={{ color: 'var(--ink)' }}>{t('settings.invoice.auto_increment_label')}</label>
+              <p className="text-xs mt-0-5" style={{ color: 'var(--ink-muted)' }}>{t('settings.invoice.auto_increment_desc')}</p>
             </div>
             <button
               type="button"
               onClick={() => handleAutoIncrementChange(!autoIncrementNumbers)}
               disabled={isLoading}
-              className="relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none disabled:opacity-60"
-              style={{ background: autoIncrementNumbers ? 'var(--f-green)' : 'var(--f-hover-elevated)' }}
+              className="relative inline-flex h-6 w-11 items-center r-full transition-colors disabled-dim"
+              style={{ background: autoIncrementNumbers ? 'var(--brand)' : 'var(--line-strong)' }}
             >
               <span
-                className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
+                className={`inline-block h-4 w-4  r-full transition-transform ${
                   autoIncrementNumbers ? 'translate-x-6' : 'translate-x-1'
                 }`}
+                style={{ background: autoIncrementNumbers ? 'var(--on-brand)' : 'var(--surface)' }}
               />
             </button>
           </div>
@@ -205,8 +207,8 @@ export function InvoiceSettings() {
 
         {/* Payment reference and EHF */}
         <div className="pt-4">
-          <h3 className="text-sm font-semibold mb-1" style={{ color: 'var(--f-text-body)' }}>{t('settings.invoice.payment_title')}</h3>
-          <p className="text-xs" style={{ color: 'var(--f-text-subtle)' }}>{t('settings.invoice.payment_desc')}</p>
+          <h3 className="text-sm font-semibold mb-1" style={{ color: 'var(--ink)' }}>{t('settings.invoice.payment_title')}</h3>
+          <p className="text-xs" style={{ color: 'var(--ink-muted)' }}>{t('settings.invoice.payment_desc')}</p>
         </div>
 
         <SettingRow label={t('settings.invoice.kid_label')} desc={t('settings.invoice.kid_desc')}>
@@ -221,21 +223,21 @@ export function InvoiceSettings() {
         {kidEnabled && (
           <SettingRow label={t('settings.invoice.kid_format_label')} desc={t('settings.invoice.kid_format_desc')}>
             <div className="flex items-center gap-3">
-              <div className="flex rounded-lg p-0.5" role="group" aria-label={t('settings.invoice.kid_format_label')} style={{ border: '1px solid var(--f-border)', background: 'var(--f-hover)' }}>
+              <div className="flex r-md p-0-5" role="group" aria-label={t('settings.invoice.kid_format_label')} style={{ border: '1px solid var(--line)', background: 'var(--hover)' }}>
                 {['mod10', 'mod11'].map((alg) => (
                   <button
                     key={alg}
                     type="button"
                     aria-pressed={kidAlgorithm === alg}
                     onClick={() => save('invoice.kid.algorithm', alg)}
-                    className="rounded-md px-3 py-1.5 text-xs font-medium"
-                    style={kidAlgorithm === alg ? { background: 'var(--f-inverse-bg)', color: 'var(--f-inverse-text)' } : { color: 'var(--f-text-soft)' }}
+                    className="r-md px-3 py-1-5 text-xs font-medium"
+                    style={kidAlgorithm === alg ? { background: 'var(--ink)', color: 'var(--bg)' } : { color: 'var(--ink-muted)' }}
                   >
                     {alg.toUpperCase()}
                   </button>
                 ))}
               </div>
-              <label className="flex items-center gap-2 text-xs" style={{ color: 'var(--f-text-soft)' }}>
+              <label className="flex items-center gap-2 text-xs" style={{ color: 'var(--ink-muted)' }}>
                 {t('settings.invoice.kid_length')}
                 <input
                   type="number"
@@ -247,7 +249,7 @@ export function InvoiceSettings() {
                     const n = parseInt(e.target.value, 10);
                     save('invoice.kid.length', n >= 2 && n <= 25 ? n : '');
                   }}
-                  className="f-input rounded-lg px-2 py-1 text-xs"
+                  className="ft-input r-md px-2 py-1 text-xs"
                   style={{ width: 72 }}
                 />
               </label>
@@ -265,15 +267,15 @@ export function InvoiceSettings() {
         </SettingRow>
 
         <SettingRow label={t('settings.invoice.foretak_label')} desc={t('settings.invoice.foretak_desc')}>
-          <div className="flex rounded-lg p-0.5" role="group" aria-label={t('settings.invoice.foretak_label')} style={{ border: '1px solid var(--f-border)', background: 'var(--f-hover)' }}>
+          <div className="flex r-md p-0-5" role="group" aria-label={t('settings.invoice.foretak_label')} style={{ border: '1px solid var(--line)', background: 'var(--hover)' }}>
             {['auto', 'true', 'false'].map((v) => (
               <button
                 key={v}
                 type="button"
                 aria-pressed={foretaksregisteret === v}
                 onClick={() => save('company.foretaksregisteret', v)}
-                className="rounded-md px-3 py-1.5 text-xs font-medium"
-                style={foretaksregisteret === v ? { background: 'var(--f-inverse-bg)', color: 'var(--f-inverse-text)' } : { color: 'var(--f-text-soft)' }}
+                className="r-md px-3 py-1-5 text-xs font-medium"
+                style={foretaksregisteret === v ? { background: 'var(--ink)', color: 'var(--bg)' } : { color: 'var(--ink-muted)' }}
               >
                 {t(`settings.invoice.foretak_${v}`)}
               </button>
@@ -284,9 +286,9 @@ export function InvoiceSettings() {
         <PeppolSettings />
 
         {/* Info Box */}
-        <div className="rounded-lg p-4" style={{ border: '1px solid var(--f-border-subtle)', background: 'var(--f-surface-hover)' }}>
-          <p className="text-xs" style={{ color: 'var(--f-text-soft)' }}>
-            <strong style={{ color: 'var(--f-text-body)' }}>{t('settings.invoice.note_title')}</strong>{' '}
+        <div className="r-md p-4" style={{ border: '1px solid var(--line)', background: 'var(--surface-sunken)' }}>
+          <p className="text-xs" style={{ color: 'var(--ink-muted)' }}>
+            <strong style={{ color: 'var(--ink)' }}>{t('settings.invoice.note_title')}</strong>{' '}
             {t('settings.invoice.note')}
           </p>
         </div>

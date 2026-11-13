@@ -25,10 +25,11 @@ export const workflowShortcuts = [
 ];
 
 export const statusBadge = {
-  paid:    'f-pill-paid',
-  sent:    'f-pill-sent',
-  draft:   'f-pill-draft',
-  overdue: 'f-pill-overdue',
+  paid:    'ft-badge ft-badge-paid',
+  sent:    'ft-badge ft-badge-sent',
+  draft:   'ft-badge',
+  overdue: 'ft-badge ft-badge-overdue',
+  cancelled: 'ft-badge ft-badge-credited',
 };
 
 export const statusLabel = {

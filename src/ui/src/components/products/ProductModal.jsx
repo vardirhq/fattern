@@ -91,9 +91,9 @@ export function ProductModal({ isOpen, mode = 'create', initialProduct, onSubmit
           <button
             type="button"
             className="text-sm font-medium transition"
-            style={{ color: 'var(--f-text-subtle)' }}
-            onMouseEnter={e => e.currentTarget.style.color = 'var(--f-text-body)'}
-            onMouseLeave={e => e.currentTarget.style.color = 'var(--f-text-subtle)'}
+            style={{ color: 'var(--ink-muted)' }}
+            onMouseEnter={e => e.currentTarget.style.color = 'var(--ink)'}
+            onMouseLeave={e => e.currentTarget.style.color = 'var(--ink-muted)'}
             onClick={onClose}
             disabled={saving}
           >
@@ -102,7 +102,7 @@ export function ProductModal({ isOpen, mode = 'create', initialProduct, onSubmit
           <button
             type="submit"
             form="product-form"
-            className="f-btn-primary rounded-2xl px-5 py-2 text-sm font-semibold disabled:opacity-60"
+            className="ft-btn ft-btn-primary r-lg px-5 py-2 text-sm font-semibold disabled-dim"
             disabled={saving}
           >
             {saving ? t('common.saving') : isEdit ? t('common.save_changes') : t('product_modal.create_button')}
@@ -112,9 +112,9 @@ export function ProductModal({ isOpen, mode = 'create', initialProduct, onSubmit
     >
       <form id="product-form" className="space-y-4" onSubmit={handleSubmit}>
         <div>
-          <label className="text-sm font-medium" style={{ color: 'var(--f-text-body)' }}>{t('product_modal.name_label')}</label>
+          <label className="text-sm font-medium" style={{ color: 'var(--ink)' }}>{t('product_modal.name_label')}</label>
           <input
-            className="f-input mt-2 w-full rounded-2xl px-4 py-2 text-sm"
+            className="ft-input mt-2 w-full r-lg px-4 py-2 text-sm"
             value={name}
             onChange={(e) => setName(e.target.value)}
             placeholder={t('product_modal.name_placeholder')}
@@ -122,26 +122,26 @@ export function ProductModal({ isOpen, mode = 'create', initialProduct, onSubmit
           />
         </div>
 
-        <div className="grid gap-4 md:grid-cols-2">
+        <div className="grid gap-4 md-grid-cols-2">
           <div>
-            <label className="text-sm font-medium" style={{ color: 'var(--f-text-body)' }}>SKU</label>
+            <label className="text-sm font-medium" style={{ color: 'var(--ink)' }}>SKU</label>
             <input
-              className="f-input mt-2 w-full rounded-2xl px-4 py-2 text-sm"
+              className="ft-input mt-2 w-full r-lg px-4 py-2 text-sm"
               value={sku}
               onChange={(e) => setSku(e.target.value)}
               placeholder={t('product_modal.sku_placeholder')}
             />
           </div>
           <div>
-            <label className="text-sm font-medium" style={{ color: 'var(--f-text-body)' }}>{t('product_modal.unit_label')}</label>
+            <label className="text-sm font-medium" style={{ color: 'var(--ink)' }}>{t('product_modal.unit_label')}</label>
             <UnitSelect value={unit || ''} onChange={setUnit} placeholder={t('product_modal.unit_placeholder')} />
           </div>
         </div>
 
         <div>
-          <label className="text-sm font-medium" style={{ color: 'var(--f-text-body)' }}>{t('product_modal.description_label')}</label>
+          <label className="text-sm font-medium" style={{ color: 'var(--ink)' }}>{t('product_modal.description_label')}</label>
           <textarea
-            className="f-input mt-2 w-full rounded-2xl px-4 py-2 text-sm"
+            className="ft-input mt-2 w-full r-lg px-4 py-2 text-sm"
             value={description}
             onChange={(e) => setDescription(e.target.value)}
             placeholder={t('product_modal.description_placeholder')}
@@ -153,14 +153,14 @@ export function ProductModal({ isOpen, mode = 'create', initialProduct, onSubmit
           <ImageUpload value={imagePath} onChange={setImagePath} label={t('product_modal.image_label')} />
         </div>
 
-        <div className="grid gap-4 md:grid-cols-2">
+        <div className="grid gap-4 md-grid-cols-2">
           <div>
-            <label className="text-sm font-medium" style={{ color: 'var(--f-text-body)' }}>{t('product_modal.price_label')}</label>
+            <label className="text-sm font-medium" style={{ color: 'var(--ink)' }}>{t('product_modal.price_label')}</label>
             <input
               type="number"
               step="0.01"
               min="0"
-              className="f-input mt-2 w-full rounded-2xl px-4 py-2 text-sm"
+              className="ft-input mt-2 w-full r-lg px-4 py-2 text-sm"
               value={unitPrice}
               onChange={(e) => setUnitPrice(e.target.value)}
               placeholder="0.00"
@@ -168,33 +168,33 @@ export function ProductModal({ isOpen, mode = 'create', initialProduct, onSubmit
             />
           </div>
           <div>
-            <label className="text-sm font-medium" style={{ color: 'var(--f-text-body)' }}>{t('product_modal.vat_label')}</label>
+            <label className="text-sm font-medium" style={{ color: 'var(--ink)' }}>{t('product_modal.vat_label')}</label>
             <input
               type="number"
               step="0.01"
               min="0"
               max="100"
-              className="f-input mt-2 w-full rounded-2xl px-4 py-2 text-sm"
+              className="ft-input mt-2 w-full r-lg px-4 py-2 text-sm"
               value={vatRate}
               onChange={(e) => setVatRate(e.target.value)}
               placeholder="25"
             />
-            <p className="mt-1 text-xs" style={{ color: 'var(--f-text-subtle)' }}>{t('product_modal.vat_hint')}</p>
+            <p className="mt-1 text-xs" style={{ color: 'var(--ink-muted)' }}>{t('product_modal.vat_hint')}</p>
           </div>
         </div>
 
-        <label className="flex items-center gap-2 text-sm" style={{ color: 'var(--f-text-body)' }}>
+        <label className="flex items-center gap-2 text-sm" style={{ color: 'var(--ink)' }}>
           <input
             type="checkbox"
-            className="h-4 w-4 rounded"
-            style={{ accentColor: 'var(--f-green)' }}
+            className="h-4 w-4 r-sm"
+            style={{ accentColor: 'var(--brand)' }}
             checked={active}
             onChange={(e) => setActive(e.target.checked)}
           />
           {t('product_modal.active_label')}
         </label>
 
-        {error ? <p className="text-sm font-medium" style={{ color: 'var(--f-danger-text)' }}>{error}</p> : null}
+        {error ? <p className="text-sm font-medium" style={{ color: 'var(--danger)' }}>{error}</p> : null}
       </form>
     </Modal>
   );

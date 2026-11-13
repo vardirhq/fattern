@@ -140,16 +140,16 @@ export function TemplateCard({
   return (
     <div
       ref={cardRef}
-      className="group relative rounded-xl overflow-hidden transition-all f-glass"
+      className="group relative r-lg overflow-hidden transition-all ft-card"
       style={isLocked
         ? { opacity: 0.7 }
         : isDefault
-        ? { borderColor: 'var(--f-border-green)', boxShadow: 'none' }
+        ? { borderColor: 'var(--brand-line)', boxShadow: 'none' }
         : {}
       }
     >
       {/* Preview */}
-      <div className="relative h-48 overflow-hidden flex items-center justify-center" style={{ background: 'var(--f-hover)' }}>
+      <div className="relative h-48 overflow-hidden flex items-center justify-center" style={{ background: 'var(--hover)' }}>
         {previewHtml ? (
           <div className="relative w-full h-full flex items-center justify-center">
             <iframe
@@ -169,12 +169,12 @@ export function TemplateCard({
             />
           </div>
         ) : (
-          <div className="flex items-center justify-center h-full text-xs" style={{ color: 'var(--f-text-subtle)' }}>
+          <div className="flex items-center justify-center h-full text-xs" style={{ color: 'var(--ink-muted)' }}>
             {t('settings.templates.loading_preview')}
           </div>
         )}
 
-        <div className="absolute inset-0 bg-gradient-to-t from-ink/20 via-transparent to-transparent pointer-events-none" />
+        <div className="absolute inset-0 fade-up pointer-events-none" />
       </div>
 
       {/* Card Content */}
@@ -182,19 +182,19 @@ export function TemplateCard({
         {/* Badges */}
         <div className="flex items-center gap-2 mb-3">
           {isDefault && (
-            <span className="inline-flex items-center gap-1 rounded-full px-2 py-1 text-xs font-semibold" style={{ background: 'var(--f-green-bg)', color: 'var(--f-green-text)', border: '1px solid var(--f-border-green)' }}>
+            <span className="inline-flex items-center gap-1 r-full px-2 py-1 text-xs font-semibold" style={{ background: 'var(--brand-soft)', color: 'var(--brand-ink)', border: '1px solid var(--brand-line)' }}>
               <IconCheck className="h-3 w-3" />
               {t('settings.templates.badge_default')}
             </span>
           )}
           {isPremium && (
-            <span className="inline-flex items-center gap-1 rounded-full px-2 py-1 text-xs font-semibold" style={{ background: 'rgba(217,119,6,0.15)', color: '#fbbf24', border: '1px solid rgba(217,119,6,0.3)' }}>
+            <span className="inline-flex items-center gap-1 r-full px-2 py-1 text-xs font-semibold" style={{ background: 'var(--warning-soft)', color: 'var(--warning)', border: '1px solid var(--warning-line)' }}>
               {isLocked && <IconLock className="h-3 w-3" />}
               Premium
             </span>
           )}
           {isPreset && !isPremium && !isDefault && (
-            <span className="inline-flex items-center rounded-full px-2 py-1 text-xs font-medium" style={{ background: 'var(--f-hover)', color: 'var(--f-text-subtle)' }}>
+            <span className="inline-flex items-center r-full px-2 py-1 text-xs font-medium" style={{ background: 'var(--hover)', color: 'var(--ink-muted)' }}>
               {t('settings.templates.badge_preset')}
             </span>
           )}
@@ -202,25 +202,25 @@ export function TemplateCard({
 
         <div className="flex items-start justify-between mb-2">
           <div className="flex-1 min-w-0">
-            <h4 className="text-sm font-semibold truncate" style={{ color: isLocked ? 'var(--f-text-subtle)' : 'var(--f-text-body)' }}>
+            <h4 className="text-sm font-semibold truncate" style={{ color: isLocked ? 'var(--ink-muted)' : 'var(--ink)' }}>
               {templateName}
             </h4>
             {templateMeta.description && (
-              <p className="text-xs mt-0.5 line-clamp-2" style={{ color: 'var(--f-text-subtle)' }}>
+              <p className="text-xs mt-0-5 line-clamp-2" style={{ color: 'var(--ink-muted)' }}>
                 {templateMeta.description}
               </p>
             )}
           </div>
 
           {/* Actions Menu */}
-          <div className="relative ml-2 flex-shrink-0">
+          <div className="relative ml-2 shrink-0">
             <button
               ref={buttonRef}
               onClick={() => setShowActions(!showActions)}
-              className="rounded-lg p-1.5 transition"
-              style={{ color: 'var(--f-text-subtle)' }}
-              onMouseEnter={e => { e.currentTarget.style.background = 'var(--f-hover-elevated)'; e.currentTarget.style.color = 'var(--f-text-body)'; }}
-              onMouseLeave={e => { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.color = 'var(--f-text-subtle)'; }}
+              className="r-md p-1-5 transition"
+              style={{ color: 'var(--ink-muted)' }}
+              onMouseEnter={e => { e.currentTarget.style.background = 'var(--hover-strong)'; e.currentTarget.style.color = 'var(--ink)'; }}
+              onMouseLeave={e => { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.color = 'var(--ink-muted)'; }}
               title={t('settings.templates.more_actions')}
             >
               <IconDotsVertical className="h-4 w-4" />
@@ -230,9 +230,9 @@ export function TemplateCard({
 
         {/* Tags */}
         {templateMeta.tags && templateMeta.tags.length > 0 && (
-          <div className="flex flex-wrap gap-1.5 mt-2">
+          <div className="flex flex-wrap gap-1-5 mt-2">
             {templateMeta.tags.map((tag, idx) => (
-              <span key={idx} className="inline-flex items-center rounded-full px-2 py-0.5 text-xs font-medium" style={{ background: 'var(--f-hover)', color: 'var(--f-text-subtle)' }}>
+              <span key={idx} className="inline-flex items-center r-full px-2 py-0-5 text-xs font-medium" style={{ background: 'var(--hover)', color: 'var(--ink-muted)' }}>
                 {tag}
               </span>
             ))}
@@ -242,16 +242,16 @@ export function TemplateCard({
         {/* Metadata */}
         <div className="flex flex-wrap items-center gap-2 mt-2">
           {templateMeta.version && (
-            <span className="text-xs" style={{ color: 'var(--f-text-subtle)' }}>v{templateMeta.version}</span>
+            <span className="text-xs" style={{ color: 'var(--ink-muted)' }}>v{templateMeta.version}</span>
           )}
           {templateMeta.author && (
-            <span className="text-xs" style={{ color: 'var(--f-text-subtle)' }}>{t('settings.templates.by_author', { author: templateMeta.author })}</span>
+            <span className="text-xs" style={{ color: 'var(--ink-muted)' }}>{t('settings.templates.by_author', { author: templateMeta.author })}</span>
           )}
         </div>
 
         {isLocked && (
-          <div className="mt-2 pt-2" style={{ borderTop: '1px solid var(--f-border)' }}>
-            <p className="text-xs font-medium flex items-center gap-1" style={{ color: '#fbbf24' }}>
+          <div className="mt-2 pt-2" style={{ borderTop: '1px solid var(--line)' }}>
+            <p className="text-xs font-medium flex items-center gap-1" style={{ color: 'var(--warning)' }}>
               <IconLock className="h-3 w-3" />
               {t('settings.templates.requires_supporter')}
             </p>
@@ -263,12 +263,12 @@ export function TemplateCard({
       {typeof document !== 'undefined' && showActions && createPortal(
         <div
           ref={menuRef}
-          className="fixed z-[9999] w-48 rounded-lg py-1"
+          className="fixed z-9999 w-48 r-md py-1"
           style={{
-            background: 'var(--f-surface-elevated)',
-            border: '1px solid var(--f-border)',
+            background: 'var(--surface-raised)',
+            border: '1px solid var(--line)',
             backdropFilter: 'blur(20px)',
-            boxShadow: '0 12px 32px var(--f-tooltip-shadow)',
+            boxShadow: '0 12px 32px var(--shadow-color)',
             top: `${menuPosition.top}px`,
             left: `${menuPosition.left}px`,
           }}
@@ -277,11 +277,11 @@ export function TemplateCard({
             <button
               onClick={() => { onSetDefault?.(); setShowActions(false); }}
               className="w-full px-3 py-2 text-left text-xs transition flex items-center gap-2"
-              style={{ color: 'var(--f-text-body)' }}
-              onMouseEnter={e => { e.currentTarget.style.background = 'var(--f-hover)'; }}
+              style={{ color: 'var(--ink)' }}
+              onMouseEnter={e => { e.currentTarget.style.background = 'var(--hover)'; }}
               onMouseLeave={e => { e.currentTarget.style.background = 'transparent'; }}
             >
-              <IconCheck className="h-3.5 w-3.5" />
+              <IconCheck className="h-3-5 w-3-5" />
               {t('settings.templates.set_default')}
             </button>
           )}
@@ -289,11 +289,11 @@ export function TemplateCard({
             <button
               onClick={() => { onEdit?.(); setShowActions(false); }}
               className="w-full px-3 py-2 text-left text-xs transition flex items-center gap-2"
-              style={{ color: 'var(--f-text-body)' }}
-              onMouseEnter={e => { e.currentTarget.style.background = 'var(--f-hover)'; }}
+              style={{ color: 'var(--ink)' }}
+              onMouseEnter={e => { e.currentTarget.style.background = 'var(--hover)'; }}
               onMouseLeave={e => { e.currentTarget.style.background = 'transparent'; }}
             >
-              <IconEdit className="h-3.5 w-3.5" />
+              <IconEdit className="h-3-5 w-3-5" />
               {t('common.edit')}
             </button>
           )}
@@ -301,11 +301,11 @@ export function TemplateCard({
             <button
               onClick={() => { onExport?.(); setShowActions(false); }}
               className="w-full px-3 py-2 text-left text-xs transition flex items-center gap-2"
-              style={{ color: 'var(--f-text-body)' }}
-              onMouseEnter={e => { e.currentTarget.style.background = 'var(--f-hover)'; }}
+              style={{ color: 'var(--ink)' }}
+              onMouseEnter={e => { e.currentTarget.style.background = 'var(--hover)'; }}
               onMouseLeave={e => { e.currentTarget.style.background = 'transparent'; }}
             >
-              <IconDownload className="h-3.5 w-3.5" />
+              <IconDownload className="h-3-5 w-3-5" />
               {t('settings.templates.export')}
             </button>
           )}
@@ -313,11 +313,11 @@ export function TemplateCard({
             <button
               onClick={() => { onDuplicate?.(); setShowActions(false); }}
               className="w-full px-3 py-2 text-left text-xs transition flex items-center gap-2"
-              style={{ color: 'var(--f-text-body)' }}
-              onMouseEnter={e => { e.currentTarget.style.background = 'var(--f-hover)'; }}
+              style={{ color: 'var(--ink)' }}
+              onMouseEnter={e => { e.currentTarget.style.background = 'var(--hover)'; }}
               onMouseLeave={e => { e.currentTarget.style.background = 'transparent'; }}
             >
-              <IconCopy className="h-3.5 w-3.5" />
+              <IconCopy className="h-3-5 w-3-5" />
               {t('settings.templates.duplicate')}
             </button>
           )}
@@ -325,11 +325,11 @@ export function TemplateCard({
             <button
               onClick={() => { onDelete?.(); setShowActions(false); }}
               className="w-full px-3 py-2 text-left text-xs transition flex items-center gap-2"
-              style={{ color: 'var(--f-danger-text)' }}
-              onMouseEnter={e => { e.currentTarget.style.background = 'var(--f-danger-bg)'; }}
+              style={{ color: 'var(--danger)' }}
+              onMouseEnter={e => { e.currentTarget.style.background = 'var(--danger-soft)'; }}
               onMouseLeave={e => { e.currentTarget.style.background = 'transparent'; }}
             >
-              <IconTrash className="h-3.5 w-3.5" />
+              <IconTrash className="h-3-5 w-3-5" />
               {t('common.delete')}
             </button>
           )}

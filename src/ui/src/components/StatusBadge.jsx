@@ -1,43 +1,30 @@
 import { useTranslation } from 'react-i18next';
 import {
-  IconCircleCheck,
+  IconCheck,
   IconSend,
-  IconFile,
+  IconPencil,
   IconAlertCircle,
-  IconX,
+  IconArrowBackUp,
 } from '@tabler/icons-react';
 import { statusBadge } from '../data/mockData.jsx';
 
 const statusIcons = {
-  paid:      IconCircleCheck,
+  paid:      IconCheck,
   sent:      IconSend,
-  draft:     IconFile,
+  draft:     IconPencil,
   overdue:   IconAlertCircle,
-  cancelled: IconX,
+  cancelled: IconArrowBackUp,
 };
 
 export function StatusBadge({ status, className = '' }) {
   const { t } = useTranslation();
-  const Icon = statusIcons[status] || IconFile;
-  const badgeClass = statusBadge[status] || 'f-pill-draft';
+  const Icon = statusIcons[status] || IconPencil;
+  const badgeClass = statusBadge[status] || 'ft-badge';
   const label = t(`status.${status}`, { defaultValue: status || t('errors.not_available') });
 
   return (
-    <span
-      className={badgeClass}
-      style={{
-        display: 'inline-flex',
-        alignItems: 'center',
-        gap: 5,
-        fontSize: 12,
-        fontWeight: 600,
-        borderRadius: 999,
-        padding: '3px 10px',
-        fontFamily: 'var(--f-font-sans)',
-        whiteSpace: 'nowrap',
-      }}
-    >
-      <Icon size={12} stroke={2.2} aria-hidden="true" />
+    <span className={`${badgeClass} ${className}`.trim()}>
+      <Icon size={12} stroke={2} aria-hidden="true" />
       {label}
     </span>
   );

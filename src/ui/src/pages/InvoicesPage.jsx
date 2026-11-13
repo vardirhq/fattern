@@ -71,11 +71,11 @@ export function InvoicesPage({ invoices, formatCurrency: fmt, onCreateInvoice, o
       {
         key: 'id',
         label: t('invoice.invoice_number'),
-        className: 'font-semibold text-ink',
+        className: 'ft-mono font-medium text-ink',
         render: (id, invoice) => (
           <button
             onClick={() => onViewInvoice?.(invoice)}
-            className="cursor-pointer text-left hover:underline hover:[color:var(--f-green-text)]"
+            className="cursor-pointer text-left hover-underline hover-text-brand"
           >
             {invoice.invoice_number || id}
           </button>
@@ -84,7 +84,7 @@ export function InvoicesPage({ invoices, formatCurrency: fmt, onCreateInvoice, o
       {
         key: 'customer',
         label: t('invoice.customer'),
-        className: 'text-ink-soft',
+        className: 'text-muted',
       },
       {
         key: 'status',
@@ -107,15 +107,15 @@ export function InvoicesPage({ invoices, formatCurrency: fmt, onCreateInvoice, o
         label: t('invoice.date'),
         render: (date, invoice) => (
           <div className="flex flex-col">
-            <span className="text-ink-subtle">{date ? formatDate(date) : '—'}</span>
+            <span className="text-muted">{date ? formatDate(date) : '—'}</span>
             {invoice.status === 'paid' && invoice.payment_date && (
-              <span className="text-xs font-medium" style={{ color: 'var(--f-success-text)' }}>
+              <span className="text-xs font-medium" style={{ color: 'var(--success)' }}>
                 {t('invoice.paid_date')} {formatDate(invoice.payment_date)}
               </span>
             )}
           </div>
         ),
-        className: 'text-ink-subtle',
+        className: 'ft-mono text-muted',
         sortFn: (a, b) => {
           const aDate = a ? new Date(a).getTime() : 0;
           const bDate = b ? new Date(b).getTime() : 0;
@@ -128,7 +128,7 @@ export function InvoicesPage({ invoices, formatCurrency: fmt, onCreateInvoice, o
         align: 'right',
         style: { whiteSpace: 'nowrap', width: 1 },
         render: (amount) => (typeof amount === 'number' ? fmt(amount) : '—'),
-        className: 'font-medium text-ink',
+        className: 'ft-mono font-medium text-ink',
         sortFn: (a, b) => {
           const aVal = typeof a === 'number' ? a : 0;
           const bVal = typeof b === 'number' ? b : 0;
@@ -146,7 +146,7 @@ export function InvoicesPage({ invoices, formatCurrency: fmt, onCreateInvoice, o
               <button
                 type="button"
                 onClick={() => onSendReminder(invoice)}
-                className="f-btn-ghost rounded-lg px-3 text-xs font-medium"
+                className="ft-btn ft-btn-secondary r-md px-3 text-xs font-medium"
                 style={{ height: 30, marginRight: 4 }}
                 title={invoice.last_reminder_at ? t('invoice.last_reminded', { date: formatDate(invoice.last_reminder_at) }) : undefined}
               >
@@ -155,7 +155,7 @@ export function InvoicesPage({ invoices, formatCurrency: fmt, onCreateInvoice, o
             )}
             <button
               onClick={() => onViewInvoice?.(invoice)}
-              className="rounded-lg p-1.5 text-ink-subtle hover:[background:var(--f-green-bg)] hover:[color:var(--f-green-text)]"
+              className="r-md p-1-5 text-muted hover-bg-brand hover-text-brand"
               aria-label={t('invoice.view_action')}
               title={t('invoice.view_action')}
             >
@@ -164,7 +164,7 @@ export function InvoicesPage({ invoices, formatCurrency: fmt, onCreateInvoice, o
             <button
               onClick={() => handleGeneratePDF(invoice)}
               disabled={generatingPdf === invoice.dbId}
-              className="rounded-lg p-1.5 text-ink-subtle hover:[background:var(--f-green-bg)] hover:[color:var(--f-green-text)] disabled:opacity-50"
+              className="r-md p-1-5 text-muted hover-bg-brand hover-text-brand disabled-dim"
               aria-label={t('invoice.generate_pdf')}
               title={t('invoice.generate_pdf')}
             >
@@ -172,7 +172,7 @@ export function InvoicesPage({ invoices, formatCurrency: fmt, onCreateInvoice, o
             </button>
             <button
               onClick={() => onEditInvoice?.(invoice)}
-              className="rounded-lg p-1.5 text-ink-subtle hover:[background:var(--f-green-bg)] hover:[color:var(--f-green-text)]"
+              className="r-md p-1-5 text-muted hover-bg-brand hover-text-brand"
               aria-label={t('invoice.edit')}
               title={t('invoice.edit')}
             >
@@ -180,7 +180,7 @@ export function InvoicesPage({ invoices, formatCurrency: fmt, onCreateInvoice, o
             </button>
             <button
               onClick={() => onDeleteInvoice?.(invoice)}
-              className="rounded-lg p-1.5 text-ink-subtle hover:[background:var(--f-danger-bg)] hover:[color:var(--f-danger-text)]"
+              className="r-md p-1-5 text-muted hover-bg-danger hover-text-danger"
               aria-label={t('invoice.delete')}
               title={t('invoice.delete')}
             >
@@ -202,15 +202,15 @@ export function InvoicesPage({ invoices, formatCurrency: fmt, onCreateInvoice, o
       <header style={{ position: 'relative' }}>
         <div className="pointer-events-none absolute inset-0" style={{ background: 'transparent' }} />
         <div className="relative z-10">
-          <div className="flex flex-col gap-6 lg:flex-row lg:items-start lg:justify-between">
+          <div className="flex flex-col gap-6 lg-flex-row lg-items-start lg-justify-between">
             <div>
-              <p className="text-sm" style={{ color: 'var(--f-text-subtle)' }}>{t('invoice.title')}</p>
-              <h1 className="mt-1 text-3xl font-semibold" style={{ color: 'var(--f-text)' }}>{t('invoice.all_invoices')}</h1>
-              <p className="mt-2 text-sm" style={{ color: 'var(--f-text-soft)' }}>{t('invoice.overview')}</p>
+              <p className="text-sm" style={{ color: 'var(--ink-muted)' }}>{t('invoice.title')}</p>
+              <h1 className="mt-1 text-3xl font-semibold" style={{ color: 'var(--ink)' }}>{t('invoice.all_invoices')}</h1>
+              <p className="mt-2 text-sm" style={{ color: 'var(--ink-muted)' }}>{t('invoice.overview')}</p>
             </div>
             <button
               onClick={() => onCreateInvoice?.()}
-              className="f-btn-primary rounded-2xl px-5 py-2 text-sm font-semibold"
+              className="ft-btn ft-btn-primary r-lg px-5 py-2 text-sm font-semibold"
             >
               {t('invoice.new')}
             </button>
@@ -237,11 +237,11 @@ export function InvoicesPage({ invoices, formatCurrency: fmt, onCreateInvoice, o
                 textAlign: 'left',
                 cursor: 'pointer',
                 padding: isActive ? '13px 15px' : '14px 16px',
-                borderRadius: 12,
+                borderRadius: 'var(--radius-lg)',
                 border: isActive
-                  ? '2px solid var(--f-text)'
-                  : `1px solid ${isDanger ? 'var(--f-danger-border)' : 'var(--f-border)'}`,
-                background: isDanger ? 'var(--f-danger-bg)' : isActive ? 'var(--f-surface)' : 'var(--f-surface-hover)',
+                  ? '2px solid var(--ink)'
+                  : `1px solid ${isDanger ? 'var(--danger-line)' : 'var(--line)'}`,
+                background: isDanger ? 'var(--danger-soft)' : isActive ? 'var(--surface)' : 'var(--surface-sunken)',
                 font: 'inherit',
                 color: 'inherit',
                 display: 'flex',
@@ -250,13 +250,13 @@ export function InvoicesPage({ invoices, formatCurrency: fmt, onCreateInvoice, o
                 minWidth: 0,
               }}
             >
-              <span style={{ fontSize: 13, fontWeight: isDanger ? 600 : 500, color: isDanger ? 'var(--f-danger-text)' : 'var(--f-text-soft)' }}>
+              <span style={{ fontSize: 13, fontWeight: isDanger ? 600 : 500, color: isDanger ? 'var(--danger)' : 'var(--ink-muted)' }}>
                 {tile.label}
               </span>
-              <span className="f-num" style={{ fontSize: 22, fontWeight: 600, color: 'var(--f-text)', whiteSpace: 'nowrap' }}>
+              <span className="ft-mono" style={{ fontSize: 22, fontWeight: 600, color: 'var(--ink)', whiteSpace: 'nowrap' }}>
                 {tile.count}
                 {tile.sum != null && tile.count > 0 && (
-                  <span style={{ marginLeft: 6, fontSize: 13, fontWeight: 500, color: isDanger ? 'var(--f-danger-text)' : 'var(--f-text-subtle)' }}>
+                  <span style={{ marginLeft: 6, fontSize: 13, fontWeight: 500, color: isDanger ? 'var(--danger)' : 'var(--ink-muted)' }}>
                     {'· '}{formatCurrency(tile.sum)}
                   </span>
                 )}
@@ -268,11 +268,11 @@ export function InvoicesPage({ invoices, formatCurrency: fmt, onCreateInvoice, o
 
       <section>
         {/* Toolbar: search + count */}
-        <div className="mb-4 flex flex-col gap-3 sm:flex-row sm:items-center">
+        <div className="mb-4 flex flex-col gap-3 sm-flex-row sm-items-center">
           <div className="flex-1">
             <SearchBar value={query} onChange={setQuery} />
           </div>
-          <span className="whitespace-nowrap text-xs" style={{ color: 'var(--f-text-subtle)' }}>
+          <span className="whitespace-nowrap text-xs" style={{ color: 'var(--ink-muted)' }}>
             {t('invoice.showing', { count: filtered.length, total: (invoices || []).length })}
           </span>
         </div>

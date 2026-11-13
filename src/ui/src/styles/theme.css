@@ -1,0 +1,63 @@
+/* App-level tokens derived from the design system, plus accent and palette overrides.
+   The design system's own tokens live in tokens.css (generated). */
+
+:root {
+  /* Tints for hover and for the hairline around a tinted callout */
+  --hover: color-mix(in srgb, var(--ink) 5%, transparent);
+  --hover-strong: color-mix(in srgb, var(--ink) 9%, transparent);
+  --brand-line: color-mix(in srgb, var(--brand) 35%, transparent);
+  --info-line: color-mix(in srgb, var(--info) 30%, transparent);
+  --success-line: color-mix(in srgb, var(--success) 30%, transparent);
+  --warning-line: color-mix(in srgb, var(--warning) 35%, transparent);
+  --danger-line: color-mix(in srgb, var(--danger) 30%, transparent);
+  --shadow-color: rgb(16 24 22 / 0.14);
+
+  /* App frame */
+  --topbar-h: 40px;
+  --bottombar-h: 38px;
+
+  /* Motion */
+  --ease: 120ms ease;
+}
+
+[data-theme="dark"] {
+  --shadow-color: rgb(0 0 0 / 0.5);
+}
+
+/* A user-chosen or premium accent replaces Gran. JS sets data-accent and --theme-accent on <html>. */
+:root[data-accent] {
+  --brand: color-mix(in oklab, var(--theme-accent), #000 6%);
+  --brand-hover: color-mix(in oklab, var(--theme-accent), #000 22%);
+  --on-brand: #FFFFFF;
+  --brand-soft: color-mix(in oklab, var(--theme-accent) 13%, var(--surface));
+  --brand-ink: color-mix(in oklab, var(--theme-accent), #000 18%);
+  --focus: var(--brand);
+  --focus-ring: 0 0 0 2px var(--surface), 0 0 0 4px var(--focus);
+  /* Paid stays green whatever the accent */
+  --success: #0A5A4D;
+  --success-soft: #DCF0E9;
+}
+
+:root[data-theme="dark"][data-accent] {
+  --brand: color-mix(in oklab, var(--theme-accent), #fff 42%);
+  --brand-hover: color-mix(in oklab, var(--theme-accent), #fff 58%);
+  --on-brand: #0C1110;
+  --brand-soft: color-mix(in oklab, var(--theme-accent) 24%, var(--surface));
+  --brand-ink: color-mix(in oklab, var(--theme-accent), #fff 55%);
+  --focus: var(--brand-ink);
+  --success: #6AD8B8;
+  --success-soft: #143A32;
+}
+
+/* Premium palettes tint the neutrals slightly toward their accent. */
+:root[data-palette] {
+  --bg: color-mix(in oklab, var(--theme-accent) 5%, #F4F7F5);
+  --surface-sunken: color-mix(in oklab, var(--theme-accent) 7%, #EAEFEC);
+}
+
+:root[data-theme="dark"][data-palette] {
+  --bg: color-mix(in oklab, var(--theme-accent) 7%, #0C1110);
+  --surface: color-mix(in oklab, var(--theme-accent) 6%, #141A18);
+  --surface-sunken: color-mix(in oklab, var(--theme-accent) 5%, #090D0C);
+  --surface-raised: color-mix(in oklab, var(--theme-accent) 8%, #1B2321);
+}

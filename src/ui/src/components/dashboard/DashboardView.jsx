@@ -11,9 +11,9 @@ function GlassSection({ children, style }) {
   return (
     <section
       style={{
-        background: 'var(--f-surface)',
-        border: '1px solid var(--f-border)',
-        borderRadius: 'var(--f-radius-lg)',
+        background: 'var(--surface)',
+        border: '1px solid var(--line)',
+        borderRadius: 'var(--radius-lg)',
         padding: '20px 22px',
         minWidth: 0,
         ...style,
@@ -27,7 +27,7 @@ function GlassSection({ children, style }) {
 function SectionHead({ title, link, onLink }) {
   return (
     <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 12, marginBottom: 12 }}>
-      <h2 style={{ margin: 0, fontSize: 16, fontWeight: 600, fontFamily: 'var(--f-font-sans)', letterSpacing: 0, color: 'var(--f-text)' }}>
+      <h2 style={{ margin: 0, fontSize: 16, fontWeight: 600, fontFamily: 'var(--font-sans)', letterSpacing: 0, color: 'var(--ink)' }}>
         {title}
       </h2>
       {link && (
@@ -36,7 +36,7 @@ function SectionHead({ title, link, onLink }) {
           onClick={onLink}
           style={{
             background: 'none', border: 'none', cursor: 'pointer', padding: 0,
-            fontSize: 13, color: 'var(--f-green-text)', fontWeight: 500,
+            fontSize: 13, color: 'var(--brand-ink)', fontWeight: 500,
           }}
         >
           {link}
@@ -56,18 +56,18 @@ function Kpi({ label, value, children, tint, isLast }) {
         flexDirection: 'column',
         gap: 10,
         minWidth: 0,
-        background: tint ? 'var(--f-warn-bg)' : 'transparent',
-        borderRight: isLast ? 'none' : '1px solid var(--f-border)',
+        background: tint ? 'var(--warning-soft)' : 'transparent',
+        borderRight: isLast ? 'none' : '1px solid var(--line)',
       }}
     >
-      <span style={{ fontSize: 13, fontWeight: 500, color: 'var(--f-text-soft)' }}>{label}</span>
+      <span style={{ fontSize: 13, fontWeight: 500, color: 'var(--ink-muted)' }}>{label}</span>
       <span
-        className="f-num"
-        style={{ fontSize: 28, fontWeight: 600, letterSpacing: '-0.02em', lineHeight: 1.1, color: 'var(--f-text)', whiteSpace: 'nowrap' }}
+        className="ft-mono"
+        style={{ fontSize: 28, fontWeight: 600, letterSpacing: '-0.02em', lineHeight: 1.1, color: 'var(--ink)', whiteSpace: 'nowrap' }}
       >
         {value}
       </span>
-      <div style={{ fontSize: 13, color: 'var(--f-text-soft)', minHeight: 18 }}>{children}</div>
+      <div style={{ fontSize: 13, color: 'var(--ink-muted)', minHeight: 18 }}>{children}</div>
     </div>
   );
 }
@@ -91,8 +91,8 @@ function TableHead() {
         gridTemplateColumns: COL_TEMPLATE,
         gap: 10,
         padding: '8px 16px',
-        background: 'var(--f-surface-hover)',
-        borderBottom: '1px solid var(--f-border-subtle)',
+        background: 'var(--surface-sunken)',
+        borderBottom: '1px solid var(--line)',
       }}
     >
       {['Nummer', 'Kunde', 'Status', 'Dato', 'Beløp'].map((h, i) => (
@@ -101,10 +101,10 @@ function TableHead() {
           style={{
             fontSize: 9.5,
             fontWeight: 600,
-            color: 'var(--f-text-muted)',
+            color: 'var(--ink-subtle)',
             letterSpacing: '0.1em',
             textTransform: 'uppercase',
-            fontFamily: 'var(--f-font-mono)',
+            fontFamily: 'var(--font-mono)',
             textAlign: i === 4 ? 'right' : 'left',
           }}
         >
@@ -126,18 +126,18 @@ function TableRow({ invoice, formatCurrency, onViewInvoice, onStatusChange, show
         gridTemplateColumns: COL_TEMPLATE,
         gap: 10,
         padding: '10px 16px',
-        borderBottom: isLast ? 'none' : '1px solid var(--f-border-faint)',
+        borderBottom: isLast ? 'none' : '1px solid var(--line)',
         cursor: 'pointer',
         alignItems: 'center',
         transition: 'background 0.1s',
       }}
-      onMouseEnter={e => (e.currentTarget.style.background = 'var(--f-hover)')}
+      onMouseEnter={e => (e.currentTarget.style.background = 'var(--hover)')}
       onMouseLeave={e => (e.currentTarget.style.background = 'transparent')}
     >
-      <div style={{ fontSize: 11, color: 'var(--f-text-subtle)', fontFamily: 'var(--f-font-mono)' }}>
+      <div style={{ fontSize: 11, color: 'var(--ink-muted)', fontFamily: 'var(--font-mono)' }}>
         {invoice.invoice_number || invoice.id}
       </div>
-      <div style={{ fontSize: 12.5, fontWeight: 500, color: 'var(--f-text-body)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+      <div style={{ fontSize: 12.5, fontWeight: 500, color: 'var(--ink)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
         {invoice.customer}
       </div>
       <div onClick={e => e.stopPropagation()}>
@@ -147,10 +147,10 @@ function TableRow({ invoice, formatCurrency, onViewInvoice, onStatusChange, show
           showModal={showStatusModal}
         />
       </div>
-      <div style={{ fontSize: 11, color: 'var(--f-text-subtle)', fontFamily: 'var(--f-font-mono)' }}>
+      <div style={{ fontSize: 11, color: 'var(--ink-muted)', fontFamily: 'var(--font-mono)' }}>
         {invoice.date ? formatDate(invoice.date) : '—'}
       </div>
-      <div style={{ fontSize: 12.5, fontWeight: 600, color: 'var(--f-text-body)', textAlign: 'right', fontFamily: 'var(--f-font-mono)' }}>
+      <div style={{ fontSize: 12.5, fontWeight: 600, color: 'var(--ink)', textAlign: 'right', fontFamily: 'var(--font-mono)' }}>
         {fmt(invoice.amount)}
       </div>
     </div>
@@ -164,17 +164,17 @@ function BudgetYearCard({ year, isActive, onEdit, onDelete, onSelect }) {
   return (
     <div
       style={{
-        borderRadius: 'var(--f-radius-md)',
+        borderRadius: 'var(--radius-md)',
         padding: '14px 16px',
-        border: isActive ? '1px solid var(--f-border-green)' : '1px solid var(--f-border)',
-        background: isActive ? 'var(--f-green-bg)' : 'var(--f-surface)',
+        border: isActive ? '1px solid var(--brand-line)' : '1px solid var(--line)',
+        background: isActive ? 'var(--brand-soft)' : 'var(--surface)',
         cursor: isActive ? 'default' : 'pointer',
         transition: 'all 0.15s',
       }}
       onClick={() => !isActive && onSelect?.(year.id)}
     >
-      <p style={{ fontSize: 13, fontWeight: 600, color: 'var(--f-text)' }}>{year.label}</p>
-      <p style={{ fontSize: 11, color: 'var(--f-text-subtle)', marginTop: 3, fontFamily: 'var(--f-font-mono)' }}>
+      <p style={{ fontSize: 13, fontWeight: 600, color: 'var(--ink)' }}>{year.label}</p>
+      <p style={{ fontSize: 11, color: 'var(--ink-muted)', marginTop: 3, fontFamily: 'var(--font-mono)' }}>
         {start ? formatDate(start) : '—'} → {end ? formatDate(end) : '—'}
       </p>
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginTop: 10 }}>
@@ -182,11 +182,11 @@ function BudgetYearCard({ year, isActive, onEdit, onDelete, onSelect }) {
           style={{
             display: 'inline-flex',
             padding: '2px 8px',
-            borderRadius: 20,
+            borderRadius: 'var(--radius-lg)',
             fontSize: 11,
             fontWeight: 600,
-            background: isActive ? 'var(--f-green)' : 'var(--f-hover-elevated)',
-            color: isActive ? 'var(--f-on-accent)' : 'var(--f-text-soft)',
+            background: isActive ? 'var(--brand)' : 'var(--hover-strong)',
+            color: isActive ? 'var(--on-brand)' : 'var(--ink-muted)',
           }}
         >
           {isActive ? 'Aktiv' : 'Tilgjengelig'}
@@ -194,14 +194,14 @@ function BudgetYearCard({ year, isActive, onEdit, onDelete, onSelect }) {
         <div style={{ display: 'flex', gap: 10, fontSize: 11 }}>
           <button
             onClick={e => { e.stopPropagation(); onEdit?.(year); }}
-            style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'var(--f-green-text)', fontWeight: 500 }}
+            style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'var(--brand-ink)', fontWeight: 500 }}
           >
             Rediger
           </button>
           {!isActive && (
             <button
               onClick={e => { e.stopPropagation(); onDelete?.(year); }}
-              style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'var(--f-danger)', fontWeight: 500 }}
+              style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'var(--danger)', fontWeight: 500 }}
             >
               Slett
             </button>
@@ -266,10 +266,10 @@ export function DashboardView({
       {/* ── Page header ─────────────────────────────────────────────── */}
       <header style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'flex-end', justifyContent: 'space-between', gap: 16 }}>
         <div>
-          <p style={{ margin: 0, fontSize: 13, color: 'var(--f-text-subtle)' }}>
+          <p style={{ margin: 0, fontSize: 13, color: 'var(--ink-muted)' }}>
             {todayLabel} · {t('dashboard_view.budget_year')} {yearLabel}
           </p>
-          <h1 style={{ margin: '6px 0 0', fontSize: 34, fontWeight: 600, letterSpacing: '-0.03em', lineHeight: 1.1, color: 'var(--f-text)' }}>
+          <h1 style={{ margin: '6px 0 0', fontSize: 34, fontWeight: 600, letterSpacing: '-0.03em', lineHeight: 1.1, color: 'var(--ink)' }}>
             {t('nav.overview')}
           </h1>
         </div>
@@ -277,16 +277,16 @@ export function DashboardView({
           <button
             type="button"
             onClick={() => onCreateExpense?.()}
-            className="f-btn-ghost"
-            style={{ height: 44, padding: '0 16px', borderRadius: 10, fontSize: 14, fontWeight: 500, cursor: 'pointer' }}
+            className="ft-btn ft-btn-secondary"
+            style={{ height: 44, padding: '0 16px', borderRadius: 'var(--radius-lg)', fontSize: 14, fontWeight: 500, cursor: 'pointer' }}
           >
             {t('dashboard_view.log_expense')}
           </button>
           <button
             type="button"
             onClick={() => onCreateInvoice?.()}
-            className="f-btn-primary"
-            style={{ height: 44, padding: '0 18px', borderRadius: 10, fontSize: 14, cursor: 'pointer', display: 'inline-flex', alignItems: 'center', gap: 8 }}
+            className="ft-btn ft-btn-primary"
+            style={{ height: 44, padding: '0 18px', borderRadius: 'var(--radius-lg)', fontSize: 14, cursor: 'pointer', display: 'inline-flex', alignItems: 'center', gap: 8 }}
           >
             <IconPlus size={16} stroke={2.2} aria-hidden="true" />
             {t('dashboard_view.new_invoice')}
@@ -300,8 +300,8 @@ export function DashboardView({
         style={{
           display: 'grid',
           gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
-          border: '1px solid var(--f-border)',
-          borderRadius: 'var(--f-radius-lg)',
+          border: '1px solid var(--line)',
+          borderRadius: 'var(--radius-lg)',
           overflow: 'hidden',
         }}
       >
@@ -313,14 +313,14 @@ export function DashboardView({
             role="img"
             aria-label={`${collectionRate}${t('dashboard_view.invoices_collected')}`}
             title={`${collectionRate}${t('dashboard_view.invoices_collected')}`}
-            style={{ height: 6, borderRadius: 3, background: 'var(--f-border)', overflow: 'hidden', marginTop: 6 }}
+            style={{ height: 6, borderRadius: 'var(--radius-xs)', background: 'var(--line)', overflow: 'hidden', marginTop: 6 }}
           >
-            <div style={{ width: `${Math.max(0, Math.min(100, collectionRate))}%`, height: 6, background: 'var(--f-text)' }} />
+            <div style={{ width: `${Math.max(0, Math.min(100, collectionRate))}%`, height: 6, background: 'var(--ink)' }} />
           </div>
         </Kpi>
         <Kpi label={t('dashboard_view.outstanding', 'Utestående')} value={fmt(outstanding)} tint={(summaries?.overdue ?? 0) > 0}>
           {(summaries?.overdue ?? 0) > 0 ? (
-            <span style={{ color: 'var(--f-danger-text)', fontWeight: 600 }}>
+            <span style={{ color: 'var(--danger)', fontWeight: 600 }}>
               {fmt(summaries.overdue)} {t('dashboard_view.overdue')}
             </span>
           ) : (
@@ -329,7 +329,7 @@ export function DashboardView({
         </Kpi>
         <Kpi label={t('dashboard_view.expenses')} value={fmt(summaries?.expenses ?? 0)} isLast>
           {t('dashboard_view.result', 'Resultat')}{' '}
-          <span className="f-num" style={{ fontWeight: 600, color: 'var(--f-text)' }}>{fmt(summaries?.net ?? 0)}</span>
+          <span className="ft-mono" style={{ fontWeight: 600, color: 'var(--ink)' }}>{fmt(summaries?.net ?? 0)}</span>
         </Kpi>
       </section>
 
@@ -350,17 +350,17 @@ export function DashboardView({
             <div style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 8, padding: '24px 8px', textAlign: 'center' }}>
               <span
                 style={{
-                  width: 36, height: 36, borderRadius: 18,
+                  width: 36, height: 36, borderRadius: 'var(--radius-lg)',
                   display: 'flex', alignItems: 'center', justifyContent: 'center',
-                  background: 'var(--f-success-bg)', color: 'var(--f-success-text)',
+                  background: 'var(--success-soft)', color: 'var(--success)',
                 }}
               >
                 <IconCheck size={18} stroke={2.2} aria-hidden="true" />
               </span>
-              <p style={{ margin: 0, fontSize: 14, fontWeight: 600, color: 'var(--f-text)' }}>
+              <p style={{ margin: 0, fontSize: 14, fontWeight: 600, color: 'var(--ink)' }}>
                 {t('dashboard_view.all_in_order', 'Alt i orden')}
               </p>
-              <p style={{ margin: 0, fontSize: 13, color: 'var(--f-text-soft)' }}>
+              <p style={{ margin: 0, fontSize: 13, color: 'var(--ink-muted)' }}>
                 {t('dashboard_view.no_overdue_invoices', 'Ingen forfalte fakturaer.')}
               </p>
             </div>
@@ -370,12 +370,12 @@ export function DashboardView({
               return (
                 <div
                   key={invoice.dbId ?? invoice.id}
-                  style={{ display: 'flex', alignItems: 'center', gap: 12, padding: '12px 0', borderTop: '1px solid var(--f-border-faint)' }}
+                  style={{ display: 'flex', alignItems: 'center', gap: 12, padding: '12px 0', borderTop: '1px solid var(--line)' }}
                 >
                   <button
                     type="button"
                     onClick={() => onViewInvoice?.(invoice)}
-                    className="f-attn-row"
+                    className="ft-attn-row"
                     style={{
                       flex: 1, minWidth: 0, display: 'flex', alignItems: 'center', gap: 12,
                       padding: 0, background: 'none', border: 'none',
@@ -383,20 +383,20 @@ export function DashboardView({
                     }}
                   >
                     <span style={{ flex: 1, minWidth: 0, display: 'flex', flexDirection: 'column', gap: 3 }}>
-                      <span style={{ fontSize: 14, fontWeight: 600, color: 'var(--f-text)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                      <span style={{ fontSize: 14, fontWeight: 600, color: 'var(--ink)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
                         {invoice.customer}
                       </span>
-                      <span style={{ fontSize: 13, fontWeight: 500, color: 'var(--f-danger-text)' }}>
+                      <span style={{ fontSize: 13, fontWeight: 500, color: 'var(--danger)' }}>
                         {invoice.id}
                         {days != null && ` · ${t('dashboard_view.days_overdue', '{{count}} dager forfalt', { count: days })}`}
                       </span>
                       {invoice.last_reminder_at && (
-                        <span style={{ fontSize: 12, color: 'var(--f-text-subtle)' }}>
+                        <span style={{ fontSize: 12, color: 'var(--ink-muted)' }}>
                           {t('dashboard_view.reminded_on', { date: formatDate(invoice.last_reminder_at) })}
                         </span>
                       )}
                     </span>
-                    <span className="f-num" style={{ fontSize: 14, fontWeight: 600, color: 'var(--f-text)', whiteSpace: 'nowrap' }}>
+                    <span className="ft-mono" style={{ fontSize: 14, fontWeight: 600, color: 'var(--ink)', whiteSpace: 'nowrap' }}>
                       {fmt(invoice.amount)}
                     </span>
                   </button>
@@ -404,9 +404,9 @@ export function DashboardView({
                     <button
                       type="button"
                       onClick={() => onSendReminder(invoice)}
-                      className="f-btn-ghost"
+                      className="ft-btn ft-btn-secondary"
                       aria-label={`${t('invoice.send_reminder')}: ${invoice.customer}`}
-                      style={{ height: 36, padding: '0 12px', borderRadius: 8, fontSize: 13, fontWeight: 500, cursor: 'pointer', flexShrink: 0 }}
+                      style={{ height: 36, padding: '0 12px', borderRadius: 'var(--radius-md)', fontSize: 13, fontWeight: 500, cursor: 'pointer', flexShrink: 0 }}
                     >
                       {t('dashboard_view.remind')}
                     </button>
@@ -416,7 +416,7 @@ export function DashboardView({
             })
           )}
           {overdueList.length > 4 && (
-            <p style={{ margin: '8px 0 0', fontSize: 13, color: 'var(--f-text-soft)' }}>
+            <p style={{ margin: '8px 0 0', fontSize: 13, color: 'var(--ink-muted)' }}>
               {t('dashboard_view.and_more', '+ {{count}} til', { count: overdueList.length - 4 })}
             </p>
           )}
@@ -432,16 +432,16 @@ export function DashboardView({
         />
         <div
           style={{
-            borderRadius: 'var(--f-radius-lg)',
+            borderRadius: 'var(--radius-lg)',
             overflow: 'hidden',
-            background: 'var(--f-surface)',
-            border: '1px solid var(--f-border)',
+            background: 'var(--surface)',
+            border: '1px solid var(--line)',
             boxShadow: 'none',
           }}
         >
           <TableHead />
           {invoices.length === 0 ? (
-            <div style={{ padding: '24px', textAlign: 'center', fontSize: 13, color: 'var(--f-text-subtle)' }}>
+            <div style={{ padding: '24px', textAlign: 'center', fontSize: 13, color: 'var(--ink-muted)' }}>
               Ingen fakturaer i denne perioden
             </div>
           ) : (
@@ -466,16 +466,16 @@ export function DashboardView({
           <section
             aria-label={t('dashboard_view.vat_title')}
             style={{
-              borderRadius: 'var(--f-radius-lg)', padding: '20px 22px',
-              background: 'var(--f-inverse-bg)', color: 'var(--f-inverse-text)',
+              borderRadius: 'var(--radius-lg)', padding: '20px 22px',
+              background: 'var(--ink)', color: 'var(--bg)',
               display: 'flex', flexDirection: 'column', gap: 14, minWidth: 0, alignSelf: 'start',
             }}
           >
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 12 }}>
-              <h2 style={{ margin: 0, fontSize: 16, fontWeight: 600, fontFamily: 'var(--f-font-sans)', letterSpacing: 0, color: 'inherit' }}>
+              <h2 style={{ margin: 0, fontSize: 16, fontWeight: 600, fontFamily: 'var(--font-sans)', letterSpacing: 0, color: 'inherit' }}>
                 {t('dashboard_view.vat_title')} · {vatSummary.term}. {t('dashboard_view.vat_term')}
               </h2>
-              <span style={{ fontSize: 12, fontWeight: 600, padding: '4px 10px', borderRadius: 999, background: 'var(--f-inverse-text)', color: 'var(--f-inverse-bg)', whiteSpace: 'nowrap' }}>
+              <span style={{ fontSize: 12, fontWeight: 600, padding: '4px 10px', borderRadius: 'var(--radius-full)', background: 'var(--bg)', color: 'var(--ink)', whiteSpace: 'nowrap' }}>
                 {vatSummary.state === 'due'
                   ? t('dashboard_view.vat_deadline', { date: formatDate(vatSummary.deadline) })
                   : t('dashboard_view.vat_running')}
@@ -484,15 +484,15 @@ export function DashboardView({
             <span style={{ fontSize: 13, opacity: 0.75 }}>{vatSummary.months} {vatSummary.year}</span>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 8, fontSize: 14 }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', opacity: 0.85 }}>
-                <span>{t('dashboard_view.vat_output')}</span><span className="f-num">{fmt(vatSummary.outputVat)}</span>
+                <span>{t('dashboard_view.vat_output')}</span><span className="ft-mono">{fmt(vatSummary.outputVat)}</span>
               </div>
               <div style={{ display: 'flex', justifyContent: 'space-between', opacity: 0.85 }}>
-                <span>{t('dashboard_view.vat_input')}</span><span className="f-num">− {fmt(vatSummary.inputVat)}</span>
+                <span>{t('dashboard_view.vat_input')}</span><span className="ft-mono">− {fmt(vatSummary.inputVat)}</span>
               </div>
             </div>
             <div style={{ borderTop: '1px solid currentColor', borderTopColor: 'color-mix(in srgb, currentColor 22%, transparent)', paddingTop: 12, display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', gap: 12 }}>
               <span>{vatSummary.payable >= 0 ? t('dashboard_view.vat_payable') : t('dashboard_view.vat_refund')}</span>
-              <span className="f-num" style={{ fontSize: 24, fontWeight: 600, whiteSpace: 'nowrap' }}>{fmt(Math.abs(vatSummary.payable))}</span>
+              <span className="ft-mono" style={{ fontSize: 24, fontWeight: 600, whiteSpace: 'nowrap' }}>{fmt(Math.abs(vatSummary.payable))}</span>
             </div>
             <p style={{ margin: 0, fontSize: 12, lineHeight: 1.5, opacity: 0.7 }}>
               {t('dashboard_view.vat_estimate_note')}
@@ -511,7 +511,7 @@ export function DashboardView({
           />
           <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
             {activityFeed.length === 0 ? (
-              <div style={{ padding: '16px', textAlign: 'center', fontSize: 13, color: 'var(--f-text-subtle)' }}>
+              <div style={{ padding: '16px', textAlign: 'center', fontSize: 13, color: 'var(--ink-muted)' }}>
                 Ingen aktivitet å vise
               </div>
             ) : (
@@ -521,37 +521,37 @@ export function DashboardView({
                   style={{
                     display: 'flex', alignItems: 'flex-start', gap: 10,
                     padding: '10px 12px',
-                    borderRadius: 'var(--f-radius)',
-                    background: 'var(--f-surface-hover)',
-                    border: '1px solid var(--f-border-faint)',
+                    borderRadius: 'var(--radius-md)',
+                    background: 'var(--surface-sunken)',
+                    border: '1px solid var(--line)',
                   }}
                 >
                   <div
                     style={{
-                      width: 32, height: 32, borderRadius: 8, flexShrink: 0,
+                      width: 32, height: 32, borderRadius: 'var(--radius-md)', flexShrink: 0,
                       display: 'flex', alignItems: 'center', justifyContent: 'center',
-                      background: item.status === 'success' ? 'var(--f-green-bg)'
-                                : item.status === 'warn'    ? 'rgba(240,184,64,0.15)'
-                                : 'var(--f-border)',
+                      background: item.status === 'success' ? 'var(--brand-soft)'
+                                : item.status === 'warn'    ? 'var(--warning-soft)'
+                                : 'var(--line)',
                       border: `1px solid ${
-                        item.status === 'success' ? 'var(--f-border-green)'
-                        : item.status === 'warn'  ? 'var(--f-warn-border)'
-                        : 'var(--f-border-subtle)'
+                        item.status === 'success' ? 'var(--brand-line)'
+                        : item.status === 'warn'  ? 'var(--warning-line)'
+                        : 'var(--line)'
                       }`,
-                      color: item.status === 'success' ? 'var(--f-green-text)'
-                           : item.status === 'warn'    ? 'var(--f-warn)'
-                           : 'var(--f-text-soft)',
+                      color: item.status === 'success' ? 'var(--brand-ink)'
+                           : item.status === 'warn'    ? 'var(--warning)'
+                           : 'var(--ink-muted)',
                       fontSize: 13, fontWeight: 600,
                     }}
                   >
                     {item.title.charAt(0)}
                   </div>
                   <div style={{ flex: 1, minWidth: 0 }}>
-                    <p style={{ fontSize: 12.5, fontWeight: 500, color: 'var(--f-text-body)', lineHeight: 1.3 }}>
+                    <p style={{ fontSize: 12.5, fontWeight: 500, color: 'var(--ink)', lineHeight: 1.3 }}>
                       {item.title}
                     </p>
-                    <p style={{ fontSize: 11, color: 'var(--f-text-subtle)', marginTop: 2 }}>{item.detail}</p>
-                    <p style={{ fontSize: 10, color: 'var(--f-text-muted)', marginTop: 3, fontFamily: 'var(--f-font-mono)' }}>
+                    <p style={{ fontSize: 11, color: 'var(--ink-muted)', marginTop: 2 }}>{item.detail}</p>
+                    <p style={{ fontSize: 10, color: 'var(--ink-subtle)', marginTop: 3, fontFamily: 'var(--font-mono)' }}>
                       {item.time}
                     </p>
                   </div>
@@ -559,8 +559,8 @@ export function DashboardView({
                     <p style={{
                       fontSize: 12,
                       fontWeight: 600,
-                      fontFamily: 'var(--f-font-mono)',
-                      color: item.amount > 0 ? 'var(--f-green-text)' : 'var(--f-text-subtle)',
+                      fontFamily: 'var(--font-mono)',
+                      color: item.amount > 0 ? 'var(--brand-ink)' : 'var(--ink-muted)',
                       flexShrink: 0,
                     }}>
                       {item.amount > 0 ? '+' : '-'}{fmt(Math.abs(item.amount))}
@@ -581,7 +581,7 @@ export function DashboardView({
           />
           <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
             {clientHighlights.length === 0 ? (
-              <div style={{ padding: '16px', textAlign: 'center', fontSize: 13, color: 'var(--f-text-subtle)' }}>
+              <div style={{ padding: '16px', textAlign: 'center', fontSize: 13, color: 'var(--ink-muted)' }}>
                 Ingen kunder med fakturaer
               </div>
             ) : (
@@ -591,16 +591,16 @@ export function DashboardView({
                   style={{
                     display: 'flex', alignItems: 'center', justifyContent: 'space-between',
                     padding: '10px 12px',
-                    borderRadius: 'var(--f-radius)',
-                    background: 'var(--f-surface-hover)',
-                    border: '1px solid var(--f-border-faint)',
+                    borderRadius: 'var(--radius-md)',
+                    background: 'var(--surface-sunken)',
+                    border: '1px solid var(--line)',
                   }}
                 >
                   <div>
-                    <p style={{ fontSize: 12.5, fontWeight: 500, color: 'var(--f-text-body)' }}>{client.name}</p>
-                    <p style={{ fontSize: 11, color: 'var(--f-text-subtle)', marginTop: 2 }}>{client.meta}</p>
+                    <p style={{ fontSize: 12.5, fontWeight: 500, color: 'var(--ink)' }}>{client.name}</p>
+                    <p style={{ fontSize: 11, color: 'var(--ink-muted)', marginTop: 2 }}>{client.meta}</p>
                   </div>
-                  <p style={{ fontSize: 13, fontWeight: 600, color: 'var(--f-green-text)', fontFamily: 'var(--f-font-mono)' }}>
+                  <p style={{ fontSize: 13, fontWeight: 600, color: 'var(--brand-ink)', fontFamily: 'var(--font-mono)' }}>
                     {fmt(client.value)}
                   </p>
                 </div>
@@ -619,7 +619,7 @@ export function DashboardView({
         />
         <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
           {expenses.length === 0 ? (
-            <div style={{ padding: '16px', textAlign: 'center', fontSize: 13, color: 'var(--f-text-subtle)' }}>
+            <div style={{ padding: '16px', textAlign: 'center', fontSize: 13, color: 'var(--ink-muted)' }}>
               Ingen utgifter registrert
             </div>
           ) : (
@@ -629,20 +629,20 @@ export function DashboardView({
                 style={{
                   display: 'flex', alignItems: 'center', justifyContent: 'space-between',
                   padding: '10px 12px',
-                  borderRadius: 'var(--f-radius)',
-                  background: 'var(--f-surface-hover)',
-                  border: '1px solid var(--f-border-faint)',
+                  borderRadius: 'var(--radius-md)',
+                  background: 'var(--surface-sunken)',
+                  border: '1px solid var(--line)',
                 }}
               >
                 <div>
-                  <p style={{ fontSize: 12.5, fontWeight: 500, color: 'var(--f-text-body)' }}>{expense.vendor}</p>
-                  <p style={{ fontSize: 11, color: 'var(--f-text-subtle)', marginTop: 2 }}>{expense.category}</p>
+                  <p style={{ fontSize: 12.5, fontWeight: 500, color: 'var(--ink)' }}>{expense.vendor}</p>
+                  <p style={{ fontSize: 11, color: 'var(--ink-muted)', marginTop: 2 }}>{expense.category}</p>
                 </div>
                 <div style={{ textAlign: 'right' }}>
-                  <p style={{ fontSize: 13, fontWeight: 600, color: 'var(--f-text-body)', fontFamily: 'var(--f-font-mono)' }}>
+                  <p style={{ fontSize: 13, fontWeight: 600, color: 'var(--ink)', fontFamily: 'var(--font-mono)' }}>
                     {fmt(expense.amount)}
                   </p>
-                  <p style={{ fontSize: 10, color: 'var(--f-text-muted)', marginTop: 2, fontFamily: 'var(--f-font-mono)' }}>
+                  <p style={{ fontSize: 10, color: 'var(--ink-subtle)', marginTop: 2, fontFamily: 'var(--font-mono)' }}>
                     {expense.date ? formatDate(expense.date) : '—'}
                   </p>
                 </div>

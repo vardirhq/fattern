@@ -192,9 +192,9 @@ export function ExpenseModal({ isOpen, mode = 'create', initialExpense, onSubmit
           <button
             type="button"
             className="text-sm font-medium transition"
-            style={{ color: 'var(--f-text-subtle)' }}
-            onMouseEnter={e => e.currentTarget.style.color = 'var(--f-text-body)'}
-            onMouseLeave={e => e.currentTarget.style.color = 'var(--f-text-subtle)'}
+            style={{ color: 'var(--ink-muted)' }}
+            onMouseEnter={e => e.currentTarget.style.color = 'var(--ink)'}
+            onMouseLeave={e => e.currentTarget.style.color = 'var(--ink-muted)'}
             onClick={onClose}
             disabled={saving}
           >
@@ -203,7 +203,7 @@ export function ExpenseModal({ isOpen, mode = 'create', initialExpense, onSubmit
           <button
             type="submit"
             form="expense-form"
-            className="f-btn-primary rounded-2xl px-5 py-2 text-sm font-semibold disabled:opacity-60"
+            className="ft-btn ft-btn-primary r-lg px-5 py-2 text-sm font-semibold disabled-dim"
             disabled={saving}
           >
             {saving ? 'Lagrer …' : isEdit ? 'Lagre endringer' : 'Registrer utgift'}
@@ -214,19 +214,19 @@ export function ExpenseModal({ isOpen, mode = 'create', initialExpense, onSubmit
       <form id="expense-form" className="space-y-6" onSubmit={handleSubmit}>
         {/* Basic Information Section */}
         <div className="space-y-4">
-          <h3 className="text-sm font-semibold" style={{ color: 'var(--f-text-body)' }}>Grunnleggende informasjon</h3>
-          <div className="grid gap-4 md:grid-cols-2">
+          <h3 className="text-sm font-semibold" style={{ color: 'var(--ink)' }}>Grunnleggende informasjon</h3>
+          <div className="grid gap-4 md-grid-cols-2">
             <div>
-              <label className="text-sm font-medium" style={{ color: 'var(--f-text-body)' }}>Leverandør</label>
+              <label className="text-sm font-medium" style={{ color: 'var(--ink)' }}>Leverandør</label>
               <input
-                className="f-input mt-2 w-full rounded-2xl px-4 py-2 text-sm"
+                className="ft-input mt-2 w-full r-lg px-4 py-2 text-sm"
                 value={vendor}
                 onChange={(e) => setVendor(e.target.value)}
                 placeholder="Eksempel: Rema 1000"
               />
             </div>
             <div>
-              <label className="text-sm font-medium" style={{ color: 'var(--f-text-body)' }}>Kategori</label>
+              <label className="text-sm font-medium" style={{ color: 'var(--ink)' }}>Kategori</label>
               <Select
                 value={categoryId}
                 onChange={setCategoryId}
@@ -235,17 +235,17 @@ export function ExpenseModal({ isOpen, mode = 'create', initialExpense, onSubmit
               />
             </div>
             <div>
-              <label className="text-sm font-medium" style={{ color: 'var(--f-text-body)' }}>Dato *</label>
+              <label className="text-sm font-medium" style={{ color: 'var(--ink)' }}>Dato *</label>
               <DatePicker
                 value={date}
                 onChange={setDate}
                 placeholder="dd.mm.yyyy"
                 required
-                className="f-input mt-2 w-full rounded-2xl px-4 py-2 text-sm"
+                className="ft-input mt-2 w-full r-lg px-4 py-2 text-sm"
               />
             </div>
             <div>
-              <label className="text-sm font-medium" style={{ color: 'var(--f-text-body)' }}>Valuta</label>
+              <label className="text-sm font-medium" style={{ color: 'var(--ink)' }}>Valuta</label>
               <Select
                 value={currency}
                 onChange={setCurrency}
@@ -259,20 +259,20 @@ export function ExpenseModal({ isOpen, mode = 'create', initialExpense, onSubmit
         {/* Line Items Section */}
         <div className="space-y-4">
           <div className="flex items-center justify-between">
-            <h3 className="text-sm font-semibold" style={{ color: 'var(--f-text-body)' }}>Linjeelementer</h3>
+            <h3 className="text-sm font-semibold" style={{ color: 'var(--ink)' }}>Linjeelementer</h3>
             <button
               type="button"
               onClick={handleAddItem}
-              className="f-btn-primary rounded-lg px-3 py-1.5 text-xs font-medium transition"
+              className="ft-btn ft-btn-primary r-md px-3 py-1-5 text-xs font-medium transition"
             >
               + Legg til linje
             </button>
           </div>
 
           {items.length > 0 ? (
-            <div className="rounded-xl overflow-hidden flex flex-col max-h-[400px]" style={{ border: '1px solid var(--f-border-subtle)' }}>
-              <div className="flex-shrink-0" style={{ background: 'var(--f-hover)', borderBottom: '1px solid var(--f-border-subtle)' }}>
-                <div className="grid grid-cols-[1fr_100px_120px_80px_120px_48px] gap-3 px-4 py-2.5 text-xs font-semibold uppercase tracking-wide" style={{ color: 'var(--f-text-subtle)' }}>
+            <div className="r-lg overflow-hidden flex flex-col max-h-400" style={{ border: '1px solid var(--line)' }}>
+              <div className="shrink-0" style={{ background: 'var(--hover)', borderBottom: '1px solid var(--line)' }}>
+                <div className="grid grid-invoice-lines gap-3 px-4 py-2-5 text-xs font-semibold uppercase tracking-wide" style={{ color: 'var(--ink-muted)' }}>
                   <div>Beskrivelse</div>
                   <div className="text-center">Antall</div>
                   <div className="text-right">Enhetspris</div>
@@ -281,14 +281,14 @@ export function ExpenseModal({ isOpen, mode = 'create', initialExpense, onSubmit
                   <div></div>
                 </div>
               </div>
-              <div className="flex-1 overflow-y-auto" style={{ borderColor: 'var(--f-border-faint)' }}>
+              <div className="flex-1 overflow-y-auto" style={{ borderColor: 'var(--line)' }}>
                 {items.map((item) => {
                   const lineSubtotal = (item.quantity || 1) * (item.unitPrice || 0);
                   const lineVat = lineSubtotal * (item.vatRate || 0);
                   const lineTotal = lineSubtotal + lineVat;
                   return (
-                    <div key={item.id} className="grid grid-cols-[1fr_100px_120px_80px_120px_48px] gap-3 px-4 py-3 transition" style={{ borderBottom: '1px solid var(--f-border-faint)' }}
-                      onMouseEnter={e => e.currentTarget.style.background = 'var(--f-surface-hover)'}
+                    <div key={item.id} className="grid grid-invoice-lines gap-3 px-4 py-3 transition" style={{ borderBottom: '1px solid var(--line)' }}
+                      onMouseEnter={e => e.currentTarget.style.background = 'var(--surface-sunken)'}
                       onMouseLeave={e => e.currentTarget.style.background = 'transparent'}
                     >
                       <input
@@ -296,7 +296,7 @@ export function ExpenseModal({ isOpen, mode = 'create', initialExpense, onSubmit
                         value={item.description}
                         onChange={(e) => handleItemChange(item.id, 'description', e.target.value)}
                         placeholder="Beskrivelse"
-                        className="f-input w-full rounded-lg px-3 py-2 text-sm"
+                        className="ft-input w-full r-md px-3 py-2 text-sm"
                       />
                       <input
                         type="number"
@@ -304,7 +304,7 @@ export function ExpenseModal({ isOpen, mode = 'create', initialExpense, onSubmit
                         min="0"
                         value={item.quantity}
                         onChange={(e) => handleItemChange(item.id, 'quantity', parseFloat(e.target.value) || 0)}
-                        className="f-input w-full rounded-lg px-2 py-2 text-sm text-center"
+                        className="ft-input w-full r-md px-2 py-2 text-sm text-center"
                       />
                       <input
                         type="number"
@@ -312,7 +312,7 @@ export function ExpenseModal({ isOpen, mode = 'create', initialExpense, onSubmit
                         min="0"
                         value={item.unitPrice}
                         onChange={(e) => handleItemChange(item.id, 'unitPrice', parseFloat(e.target.value) || 0)}
-                        className="f-input w-full rounded-lg px-2 py-2 text-sm text-right"
+                        className="ft-input w-full r-md px-2 py-2 text-sm text-right"
                       />
                       <input
                         type="number"
@@ -321,18 +321,18 @@ export function ExpenseModal({ isOpen, mode = 'create', initialExpense, onSubmit
                         max="1"
                         value={item.vatRate}
                         onChange={(e) => handleItemChange(item.id, 'vatRate', parseFloat(e.target.value) || 0)}
-                        className="f-input w-full rounded-lg px-2 py-2 text-sm text-right"
+                        className="ft-input w-full r-md px-2 py-2 text-sm text-right"
                       />
-                      <div className="flex items-center justify-end text-sm font-medium" style={{ color: 'var(--f-text-body)' }}>
+                      <div className="flex items-center justify-end text-sm font-medium" style={{ color: 'var(--ink)' }}>
                         {lineTotal.toFixed(2)}
                       </div>
                       <button
                         type="button"
                         onClick={() => handleRemoveItem(item.id)}
                         className="flex items-center justify-center transition"
-                        style={{ color: 'var(--f-text-subtle)' }}
-                        onMouseEnter={e => e.currentTarget.style.color = 'var(--f-danger-text)'}
-                        onMouseLeave={e => e.currentTarget.style.color = 'var(--f-text-subtle)'}
+                        style={{ color: 'var(--ink-muted)' }}
+                        onMouseEnter={e => e.currentTarget.style.color = 'var(--danger)'}
+                        onMouseLeave={e => e.currentTarget.style.color = 'var(--ink-muted)'}
                         title="Fjern linje"
                       >
                         <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -344,16 +344,16 @@ export function ExpenseModal({ isOpen, mode = 'create', initialExpense, onSubmit
                 })}
               </div>
               {items.length > 0 && (
-                <div className="flex-shrink-0 px-4 py-3 space-y-2" style={{ background: 'var(--f-surface-hover)', borderTop: '1px solid var(--f-border-subtle)' }}>
-                  <div className="flex justify-between text-sm" style={{ color: 'var(--f-text-soft)' }}>
+                <div className="shrink-0 px-4 py-3 space-y-2" style={{ background: 'var(--surface-sunken)', borderTop: '1px solid var(--line)' }}>
+                  <div className="flex justify-between text-sm" style={{ color: 'var(--ink-muted)' }}>
                     <span>Sum eks. MVA:</span>
-                    <span className="font-medium" style={{ color: 'var(--f-text-body)' }}>{subtotal.toFixed(2)}</span>
+                    <span className="font-medium" style={{ color: 'var(--ink)' }}>{subtotal.toFixed(2)}</span>
                   </div>
-                  <div className="flex justify-between text-sm" style={{ color: 'var(--f-text-soft)' }}>
+                  <div className="flex justify-between text-sm" style={{ color: 'var(--ink-muted)' }}>
                     <span>MVA:</span>
-                    <span className="font-medium" style={{ color: 'var(--f-text-body)' }}>{vatTotal.toFixed(2)}</span>
+                    <span className="font-medium" style={{ color: 'var(--ink)' }}>{vatTotal.toFixed(2)}</span>
                   </div>
-                  <div className="flex justify-between text-base font-semibold pt-2" style={{ color: 'var(--f-text-body)', borderTop: '1px solid var(--f-border-subtle)' }}>
+                  <div className="flex justify-between text-base font-semibold pt-2" style={{ color: 'var(--ink)', borderTop: '1px solid var(--line)' }}>
                     <span>Totalt:</span>
                     <span>{total.toFixed(2)} {currency}</span>
                   </div>
@@ -361,18 +361,18 @@ export function ExpenseModal({ isOpen, mode = 'create', initialExpense, onSubmit
               )}
             </div>
           ) : (
-            <div className="rounded-xl border-2 border-dashed p-8 text-center" style={{ borderColor: 'var(--f-border)', background: 'var(--f-surface-hover)' }}>
-              <p className="text-sm mb-3" style={{ color: 'var(--f-text-subtle)' }}>Legg til linjeelementer for å dele opp utgiften</p>
-              <p className="text-xs mb-4" style={{ color: 'var(--f-text-subtle)' }}>eller</p>
+            <div className="r-lg border-2 border-dashed p-8 text-center" style={{ borderColor: 'var(--line)', background: 'var(--surface-sunken)' }}>
+              <p className="text-sm mb-3" style={{ color: 'var(--ink-muted)' }}>Legg til linjeelementer for å dele opp utgiften</p>
+              <p className="text-xs mb-4" style={{ color: 'var(--ink-muted)' }}>eller</p>
               <div className="max-w-xs mx-auto">
-                <label className="text-sm font-medium block mb-2" style={{ color: 'var(--f-text-body)' }}>
+                <label className="text-sm font-medium block mb-2" style={{ color: 'var(--ink)' }}>
                   Beløp direkte *
                 </label>
                 <input
                   type="number"
                   step="0.01"
                   min="0"
-                  className="f-input w-full rounded-2xl px-4 py-2 text-sm"
+                  className="ft-input w-full r-lg px-4 py-2 text-sm"
                   value={amount}
                   onChange={(e) => setAmount(e.target.value)}
                   placeholder="0.00"
@@ -385,8 +385,8 @@ export function ExpenseModal({ isOpen, mode = 'create', initialExpense, onSubmit
 
         {/* Additional Information Section */}
         <div className="space-y-4">
-          <h3 className="text-sm font-semibold" style={{ color: 'var(--f-text-body)' }}>Tilleggsinformasjon</h3>
-          <div className="grid gap-4 md:grid-cols-[1fr_2fr]">
+          <h3 className="text-sm font-semibold" style={{ color: 'var(--ink)' }}>Tilleggsinformasjon</h3>
+          <div className="grid gap-4 md-grid-cols-1-2">
             <div>
               <ExpenseAttachmentUpload
                 value={attachmentPath}
@@ -396,9 +396,9 @@ export function ExpenseModal({ isOpen, mode = 'create', initialExpense, onSubmit
               />
             </div>
             <div>
-              <label className="text-sm font-medium" style={{ color: 'var(--f-text-body)' }}>Notater</label>
+              <label className="text-sm font-medium" style={{ color: 'var(--ink)' }}>Notater</label>
               <textarea
-                className="f-input mt-2 w-full rounded-2xl px-4 py-2 text-sm"
+                className="ft-input mt-2 w-full r-lg px-4 py-2 text-sm"
                 value={notes}
                 onChange={(e) => setNotes(e.target.value)}
                 placeholder="Valgfrie notater om utgiften"
@@ -409,8 +409,8 @@ export function ExpenseModal({ isOpen, mode = 'create', initialExpense, onSubmit
         </div>
 
         {error ? (
-          <div className="rounded-lg p-3" style={{ background: 'var(--f-danger-bg)', border: '1px solid var(--f-danger-border)' }}>
-            <p className="text-sm font-medium" style={{ color: 'var(--f-danger-text)' }}>{error}</p>
+          <div className="r-md p-3" style={{ background: 'var(--danger-soft)', border: '1px solid var(--danger-line)' }}>
+            <p className="text-sm font-medium" style={{ color: 'var(--danger)' }}>{error}</p>
           </div>
         ) : null}
       </form>

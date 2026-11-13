@@ -130,15 +130,15 @@ export function BottomBar({
     <div
       ref={rootRef}
       style={{
-        height: 'var(--f-bottom-h)',
+        height: 'var(--bottombar-h)',
         display: 'flex',
         alignItems: 'center',
         gap: 4,
         padding: '0 18px',
         flexShrink: 0,
-        background: 'var(--f-surface-bottom)',
+        background: 'var(--bg)',
         backdropFilter: 'blur(20px)',
-        borderTop: '1px solid var(--f-border-top)',
+        borderTop: '1px solid var(--line)',
         zIndex: 100,
         position: 'relative',
       }}
@@ -150,9 +150,9 @@ export function BottomBar({
         title={t('layout.bottom_bar.company_settings')}
         style={{
           display: 'flex', alignItems: 'center', gap: 7,
-          background: 'var(--f-surface)',
-          border: '1px solid var(--f-border)',
-          borderRadius: 20,
+          background: 'var(--surface)',
+          border: '1px solid var(--line)',
+          borderRadius: 'var(--radius-lg)',
           padding: '4px 12px 4px 6px',
           marginRight: 10,
           flexShrink: 0,
@@ -160,21 +160,21 @@ export function BottomBar({
           transition: 'background 0.12s, border-color 0.12s',
         }}
         onMouseEnter={e => {
-          e.currentTarget.style.background = 'var(--f-hover)';
-          e.currentTarget.style.borderColor = 'var(--f-border-green)';
+          e.currentTarget.style.background = 'var(--hover)';
+          e.currentTarget.style.borderColor = 'var(--brand-line)';
         }}
         onMouseLeave={e => {
-          e.currentTarget.style.background = 'var(--f-surface)';
-          e.currentTarget.style.borderColor = 'var(--f-border)';
+          e.currentTarget.style.background = 'var(--surface)';
+          e.currentTarget.style.borderColor = 'var(--line)';
         }}
       >
         <span
           style={{
             width: 20, height: 20, borderRadius: '50%',
-            background: 'rgba(47,75,216,0.25)',
-            border: '1px solid rgba(47,75,216,0.3)',
+            background: 'var(--brand-line)',
+            border: '1px solid var(--brand-line)',
             display: 'flex', alignItems: 'center', justifyContent: 'center',
-            fontSize: 8, fontWeight: 700, color: 'var(--f-green)',
+            fontSize: 8, fontWeight: 700, color: 'var(--brand)',
           }}
         >
           {initials}
@@ -182,7 +182,7 @@ export function BottomBar({
         <span
           style={{
             fontSize: 11,
-            color: 'var(--f-text-soft)',
+            color: 'var(--ink-muted)',
             fontWeight: 500,
             whiteSpace: 'nowrap',
           }}
@@ -204,39 +204,39 @@ export function BottomBar({
           style={{
             display: 'flex', alignItems: 'center', gap: 6,
             padding: '4px 10px',
-            borderRadius: 8,
-            background: isCommandOpen ? 'var(--f-hover)' : 'none',
+            borderRadius: 'var(--radius-md)',
+            background: isCommandOpen ? 'var(--hover)' : 'none',
             border: '1px solid transparent',
             cursor: 'pointer',
             transition: 'background 0.1s, border-color 0.1s',
           }}
           onMouseEnter={e => {
-            e.currentTarget.style.background = 'var(--f-hover)';
-            e.currentTarget.style.borderColor = 'var(--f-border)';
+            e.currentTarget.style.background = 'var(--hover)';
+            e.currentTarget.style.borderColor = 'var(--line)';
           }}
           onMouseLeave={e => {
-            e.currentTarget.style.background = isCommandOpen ? 'var(--f-hover)' : 'none';
+            e.currentTarget.style.background = isCommandOpen ? 'var(--hover)' : 'none';
             e.currentTarget.style.borderColor = 'transparent';
           }}
         >
-          <IconCirclePlus size={14} stroke={1.8} style={{ color: 'var(--f-green-text)' }} />
-          <span style={{ fontSize: 11.5, color: 'var(--f-text-soft)', fontWeight: 600 }}>
+          <IconCirclePlus size={14} stroke={1.8} style={{ color: 'var(--brand-ink)' }} />
+          <span style={{ fontSize: 11.5, color: 'var(--ink-muted)', fontWeight: 600 }}>
             {t('layout.bottom_bar.quick_actions')}
           </span>
           <span
             style={{
               fontSize: 10,
-              color: 'var(--f-text-muted)',
-              background: 'var(--f-hover-elevated)',
-              border: '1px solid var(--f-border)',
-              borderRadius: 4,
+              color: 'var(--ink-subtle)',
+              background: 'var(--hover-strong)',
+              border: '1px solid var(--line)',
+              borderRadius: 'var(--radius-sm)',
               padding: '1px 5px',
-              fontFamily: 'var(--f-font-mono)',
+              fontFamily: 'var(--font-mono)',
             }}
           >
             {primaryShortcut}
           </span>
-          <IconChevronUp size={13} stroke={1.8} style={{ color: 'var(--f-text-muted)' }} />
+          <IconChevronUp size={13} stroke={1.8} style={{ color: 'var(--ink-subtle)' }} />
         </button>
 
         {isCommandOpen && (
@@ -247,10 +247,10 @@ export function BottomBar({
               left: 0,
               width: 300,
               padding: 8,
-              borderRadius: 14,
-              background: 'var(--f-surface-elevated)',
-              border: '1px solid var(--f-border)',
-              boxShadow: '0 12px 32px var(--f-tooltip-shadow)',
+              borderRadius: 'var(--radius-lg)',
+              background: 'var(--surface-raised)',
+              border: '1px solid var(--line)',
+              boxShadow: '0 12px 32px var(--shadow-color)',
               backdropFilter: 'blur(20px)',
             }}
           >
@@ -258,7 +258,7 @@ export function BottomBar({
               style={{
                 padding: '6px 8px 8px',
                 fontSize: 10,
-                color: 'var(--f-text-muted)',
+                color: 'var(--ink-subtle)',
                 textTransform: 'uppercase',
                 letterSpacing: '0.08em',
                 fontWeight: 700,
@@ -285,16 +285,16 @@ export function BottomBar({
                       gap: 10,
                       width: '100%',
                       padding: '9px 10px',
-                      borderRadius: 10,
+                      borderRadius: 'var(--radius-lg)',
                       border: 'none',
                       background: 'transparent',
-                      color: action.disabled ? 'var(--f-text-muted)' : 'var(--f-text-body)',
+                      color: action.disabled ? 'var(--ink-subtle)' : 'var(--ink)',
                       cursor: action.disabled ? 'not-allowed' : 'pointer',
                       opacity: action.disabled ? 0.55 : 1,
                       textAlign: 'left',
                     }}
                     onMouseEnter={e => {
-                      if (!action.disabled) e.currentTarget.style.background = 'var(--f-hover)';
+                      if (!action.disabled) e.currentTarget.style.background = 'var(--hover)';
                     }}
                     onMouseLeave={e => (e.currentTarget.style.background = 'transparent')}
                   >
@@ -302,12 +302,12 @@ export function BottomBar({
                       style={{
                         width: 26,
                         height: 26,
-                        borderRadius: 8,
+                        borderRadius: 'var(--radius-md)',
                         display: 'flex',
                         alignItems: 'center',
                         justifyContent: 'center',
-                        background: 'var(--f-green-bg)',
-                        color: 'var(--f-green-text)',
+                        background: 'var(--brand-soft)',
+                        color: 'var(--brand-ink)',
                         flexShrink: 0,
                       }}
                     >
@@ -323,7 +323,7 @@ export function BottomBar({
                             display: 'block',
                             marginTop: 2,
                             fontSize: 10,
-                            color: 'var(--f-text-muted)',
+                            color: 'var(--ink-subtle)',
                             lineHeight: 1.2,
                           }}
                         >
@@ -335,10 +335,10 @@ export function BottomBar({
                       <span
                         style={{
                           fontSize: 10,
-                          color: 'var(--f-text-muted)',
-                          fontFamily: 'var(--f-font-mono)',
-                          border: '1px solid var(--f-border)',
-                          borderRadius: 5,
+                          color: 'var(--ink-subtle)',
+                          fontFamily: 'var(--font-mono)',
+                          border: '1px solid var(--line)',
+                          borderRadius: 'var(--radius-md)',
                           padding: '1px 5px',
                         }}
                       >
@@ -368,27 +368,27 @@ export function BottomBar({
             alignItems: 'center',
             gap: 7,
             padding: '4px 10px',
-            borderRadius: 8,
-            background: isBudgetYearOpen ? 'var(--f-hover)' : 'none',
+            borderRadius: 'var(--radius-md)',
+            background: isBudgetYearOpen ? 'var(--hover)' : 'none',
             border: '1px solid transparent',
-            color: 'var(--f-text-soft)',
+            color: 'var(--ink-muted)',
             cursor: 'pointer',
             transition: 'background 0.1s, border-color 0.1s',
           }}
           onMouseEnter={e => {
-            e.currentTarget.style.background = 'var(--f-hover)';
-            e.currentTarget.style.borderColor = 'var(--f-border)';
+            e.currentTarget.style.background = 'var(--hover)';
+            e.currentTarget.style.borderColor = 'var(--line)';
           }}
           onMouseLeave={e => {
-            e.currentTarget.style.background = isBudgetYearOpen ? 'var(--f-hover)' : 'none';
+            e.currentTarget.style.background = isBudgetYearOpen ? 'var(--hover)' : 'none';
             e.currentTarget.style.borderColor = 'transparent';
           }}
         >
-          <IconCalendarStats size={14} stroke={1.8} style={{ color: 'var(--f-green-text)' }} />
+          <IconCalendarStats size={14} stroke={1.8} style={{ color: 'var(--brand-ink)' }} />
           <span style={{ fontSize: 11.5, fontWeight: 600, whiteSpace: 'nowrap' }}>
             {activeBudgetYearLabel || t('layout.bottom_bar.no_budget_year')}
           </span>
-          <IconChevronUp size={13} stroke={1.8} style={{ color: 'var(--f-text-muted)' }} />
+          <IconChevronUp size={13} stroke={1.8} style={{ color: 'var(--ink-subtle)' }} />
         </button>
 
         {isBudgetYearOpen && (
@@ -399,10 +399,10 @@ export function BottomBar({
               right: 0,
               width: 280,
               padding: 8,
-              borderRadius: 14,
-              background: 'var(--f-surface-elevated)',
-              border: '1px solid var(--f-border)',
-              boxShadow: '0 12px 32px var(--f-tooltip-shadow)',
+              borderRadius: 'var(--radius-lg)',
+              background: 'var(--surface-raised)',
+              border: '1px solid var(--line)',
+              boxShadow: '0 12px 32px var(--shadow-color)',
               backdropFilter: 'blur(20px)',
             }}
           >
@@ -410,7 +410,7 @@ export function BottomBar({
               style={{
                 padding: '6px 8px 8px',
                 fontSize: 10,
-                color: 'var(--f-text-muted)',
+                color: 'var(--ink-subtle)',
                 textTransform: 'uppercase',
                 letterSpacing: '0.08em',
                 fontWeight: 700,
@@ -437,25 +437,25 @@ export function BottomBar({
                       gap: 10,
                       width: '100%',
                       padding: '9px 10px',
-                      borderRadius: 10,
+                      borderRadius: 'var(--radius-lg)',
                       border: 'none',
-                      background: isActive ? 'var(--f-green-bg)' : 'transparent',
-                      color: isActive ? 'var(--f-green-text)' : 'var(--f-text-body)',
+                      background: isActive ? 'var(--brand-soft)' : 'transparent',
+                      color: isActive ? 'var(--brand-ink)' : 'var(--ink)',
                       cursor: isActive ? 'default' : 'pointer',
                       textAlign: 'left',
                     }}
                     onMouseEnter={e => {
-                      if (!isActive) e.currentTarget.style.background = 'var(--f-hover)';
+                      if (!isActive) e.currentTarget.style.background = 'var(--hover)';
                     }}
                     onMouseLeave={e => {
-                      e.currentTarget.style.background = isActive ? 'var(--f-green-bg)' : 'transparent';
+                      e.currentTarget.style.background = isActive ? 'var(--brand-soft)' : 'transparent';
                     }}
                   >
                     <span style={{ flex: 1, minWidth: 0 }}>
                       <span style={{ display: 'block', fontSize: 12, fontWeight: 650 }}>
                         {label}
                       </span>
-                      <span style={{ display: 'block', marginTop: 2, fontSize: 10, color: 'var(--f-text-muted)' }}>
+                      <span style={{ display: 'block', marginTop: 2, fontSize: 10, color: 'var(--ink-subtle)' }}>
                         {isActive ? t('layout.bottom_bar.active_budget_year') : t('layout.bottom_bar.switch_to_budget_year')}
                       </span>
                     </span>
@@ -463,7 +463,7 @@ export function BottomBar({
                   </button>
                 );
               }) : (
-                <div style={{ padding: '9px 10px', fontSize: 12, color: 'var(--f-text-muted)' }}>
+                <div style={{ padding: '9px 10px', fontSize: 12, color: 'var(--ink-subtle)' }}>
                   {t('layout.bottom_bar.no_budget_years')}
                 </div>
               )}
@@ -483,16 +483,16 @@ export function BottomBar({
                   width: '100%',
                   marginTop: 6,
                   padding: '9px 10px',
-                  borderRadius: 10,
-                  border: '1px dashed var(--f-border-green)',
+                  borderRadius: 'var(--radius-lg)',
+                  border: '1px dashed var(--brand-line)',
                   background: 'transparent',
-                  color: 'var(--f-green-text)',
+                  color: 'var(--brand-ink)',
                   cursor: 'pointer',
                   fontSize: 12,
                   fontWeight: 650,
                   textAlign: 'left',
                 }}
-                onMouseEnter={e => (e.currentTarget.style.background = 'var(--f-green-bg)')}
+                onMouseEnter={e => (e.currentTarget.style.background = 'var(--brand-soft)')}
                 onMouseLeave={e => (e.currentTarget.style.background = 'transparent')}
               >
                 <IconCirclePlus size={15} stroke={1.8} />
@@ -516,27 +516,27 @@ export function BottomBar({
           style={{
             display: 'flex', alignItems: 'center', gap: 6,
             fontSize: 10.5,
-            color: 'var(--f-text-muted)',
-            fontFamily: 'var(--f-font-mono)',
-            background: isStatusOpen ? 'var(--f-hover)' : 'none',
+            color: 'var(--ink-subtle)',
+            fontFamily: 'var(--font-mono)',
+            background: isStatusOpen ? 'var(--hover)' : 'none',
             border: '1px solid transparent',
-            borderRadius: 8,
+            borderRadius: 'var(--radius-md)',
             padding: '4px 8px',
             cursor: 'pointer',
           }}
           onMouseEnter={e => {
-            e.currentTarget.style.background = 'var(--f-hover)';
-            e.currentTarget.style.borderColor = 'var(--f-border)';
+            e.currentTarget.style.background = 'var(--hover)';
+            e.currentTarget.style.borderColor = 'var(--line)';
           }}
           onMouseLeave={e => {
-            e.currentTarget.style.background = isStatusOpen ? 'var(--f-hover)' : 'none';
+            e.currentTarget.style.background = isStatusOpen ? 'var(--hover)' : 'none';
             e.currentTarget.style.borderColor = 'transparent';
           }}
         >
           <span
             style={{
               width: 6, height: 6, borderRadius: '50%',
-              background: 'var(--f-green)',
+              background: 'var(--brand)',
               boxShadow: 'none',
               flexShrink: 0,
             }}
@@ -552,12 +552,12 @@ export function BottomBar({
               right: 0,
               width: 260,
               padding: 12,
-              borderRadius: 14,
-              background: 'var(--f-surface-elevated)',
-              border: '1px solid var(--f-border)',
-              boxShadow: '0 12px 32px var(--f-tooltip-shadow)',
+              borderRadius: 'var(--radius-lg)',
+              background: 'var(--surface-raised)',
+              border: '1px solid var(--line)',
+              boxShadow: '0 12px 32px var(--shadow-color)',
               backdropFilter: 'blur(20px)',
-              fontFamily: 'var(--f-font-sans)',
+              fontFamily: 'var(--font-sans)',
             }}
           >
             <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 10 }}>
@@ -565,17 +565,17 @@ export function BottomBar({
                 style={{
                   width: 22,
                   height: 22,
-                  borderRadius: 8,
+                  borderRadius: 'var(--radius-md)',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  background: 'var(--f-green-bg)',
-                  color: 'var(--f-green-text)',
+                  background: 'var(--brand-soft)',
+                  color: 'var(--brand-ink)',
                 }}
               >
                 <IconBuilding size={14} stroke={1.8} />
               </span>
-              <span style={{ fontSize: 12, fontWeight: 700, color: 'var(--f-text-body)' }}>
+              <span style={{ fontSize: 12, fontWeight: 700, color: 'var(--ink)' }}>
                 {t('layout.bottom_bar.status_title')}
               </span>
             </div>
@@ -590,8 +590,8 @@ export function BottomBar({
                     fontSize: 11,
                   }}
                 >
-                  <span style={{ color: 'var(--f-text-muted)' }}>{item.label}</span>
-                  <span style={{ color: 'var(--f-text-soft)', fontWeight: 600, textAlign: 'right' }}>{item.value}</span>
+                  <span style={{ color: 'var(--ink-subtle)' }}>{item.label}</span>
+                  <span style={{ color: 'var(--ink-muted)', fontWeight: 600, textAlign: 'right' }}>{item.value}</span>
                 </div>
               ))}
             </div>

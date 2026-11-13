@@ -36,7 +36,7 @@ function generateInvoicePDF(invoice, company, customer) {
   const stream = fs.createWriteStream(filepath);
   doc.pipe(stream);
 
-  // Colors (matching brand colors from tailwind.config.cjs)
+  // Colors (legacy PDF palette; the app UI colours live in docs/design-system/tokens.json)
   const brandDeep = '#0d3e51';
   const brandBase = '#2f8981';
   const brandLift = '#67b999';

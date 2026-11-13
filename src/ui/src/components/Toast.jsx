@@ -10,36 +10,36 @@ import {
 
 const variants = {
   success: {
-    bg: 'rgba(47,75,216,0.12)',
-    border: '1px solid rgba(47,75,216,0.25)',
-    text: 'var(--f-text)',
+    bg: 'var(--brand-soft)',
+    border: '1px solid var(--brand-line)',
+    text: 'var(--ink)',
     icon: IconCircleCheck,
-    iconColor: 'var(--f-green)',
-    progress: 'var(--f-green)',
+    iconColor: 'var(--brand)',
+    progress: 'var(--brand)',
   },
   error: {
-    bg: 'rgba(240,120,96,0.12)',
-    border: '1px solid rgba(240,120,96,0.25)',
-    text: 'var(--f-text)',
+    bg: 'var(--danger-soft)',
+    border: '1px solid var(--danger-line)',
+    text: 'var(--ink)',
     icon: IconAlertCircle,
-    iconColor: 'var(--f-danger)',
-    progress: 'var(--f-danger)',
+    iconColor: 'var(--danger)',
+    progress: 'var(--danger)',
   },
   warning: {
-    bg: 'rgba(240,184,64,0.12)',
-    border: '1px solid rgba(240,184,64,0.25)',
-    text: 'var(--f-text)',
+    bg: 'var(--warning-soft)',
+    border: '1px solid var(--warning-line)',
+    text: 'var(--ink)',
     icon: IconAlertTriangle,
-    iconColor: 'var(--f-warn)',
-    progress: 'var(--f-warn)',
+    iconColor: 'var(--warning)',
+    progress: 'var(--warning)',
   },
   info: {
-    bg: 'rgba(80,140,220,0.12)',
-    border: '1px solid rgba(80,140,220,0.25)',
-    text: 'var(--f-text)',
+    bg: 'var(--info-soft)',
+    border: '1px solid var(--info-line)',
+    text: 'var(--ink)',
     icon: IconInfoCircle,
-    iconColor: 'var(--f-blue)',
-    progress: 'var(--f-blue)',
+    iconColor: 'var(--info)',
+    progress: 'var(--info)',
   },
 };
 
@@ -75,13 +75,13 @@ export function Toast({ id, message, variant = 'info', duration = 4000, onClose 
         display: 'flex',
         alignItems: 'flex-start',
         gap: 12,
-        borderRadius: 'var(--f-radius-md)',
+        borderRadius: 'var(--radius-md)',
         border: style.border,
         background: style.bg,
         backdropFilter: 'blur(20px)',
         color: style.text,
         padding: '12px 14px',
-        boxShadow: '0 12px 32px var(--f-tooltip-shadow)',
+        boxShadow: '0 12px 32px var(--shadow-color)',
         minWidth: 300,
         maxWidth: 420,
       }}
@@ -95,13 +95,13 @@ export function Toast({ id, message, variant = 'info', duration = 4000, onClose 
               marginTop: 8,
               height: 2,
               width: '100%',
-              borderRadius: 2,
-              background: 'var(--f-hover-elevated)',
+              borderRadius: 'var(--radius-xs)',
+              background: 'var(--hover-strong)',
               overflow: 'hidden',
             }}
           >
             <motion.div
-              style={{ height: '100%', background: style.progress, borderRadius: 2 }}
+              style={{ height: '100%', background: style.progress, borderRadius: 'var(--radius-xs)' }}
               initial={{ width: '100%' }}
               animate={{ width: `${progress}%` }}
               transition={{ duration: 0.1, ease: 'linear' }}
@@ -114,13 +114,13 @@ export function Toast({ id, message, variant = 'info', duration = 4000, onClose 
         aria-label="Lukk"
         style={{
           background: 'none', border: 'none', cursor: 'pointer',
-          color: 'var(--f-text-subtle)', flexShrink: 0, padding: 2,
+          color: 'var(--ink-muted)', flexShrink: 0, padding: 2,
           display: 'flex', alignItems: 'center', justifyContent: 'center',
-          borderRadius: 4,
+          borderRadius: 'var(--radius-sm)',
           transition: 'color 0.1s',
         }}
-        onMouseEnter={e => (e.currentTarget.style.color = 'var(--f-text-body)')}
-        onMouseLeave={e => (e.currentTarget.style.color = 'var(--f-text-subtle)')}
+        onMouseEnter={e => (e.currentTarget.style.color = 'var(--ink)')}
+        onMouseLeave={e => (e.currentTarget.style.color = 'var(--ink-muted)')}
       >
         <IconX size={14} stroke={2} />
       </button>
@@ -133,7 +133,7 @@ export function ToastContainer({ toasts, onClose }) {
     <div
       style={{
         position: 'fixed',
-        top: 'calc(var(--f-topbar-h) + 12px)',
+        top: 'calc(var(--topbar-h) + 12px)',
         right: 16,
         zIndex: 9999,
         display: 'flex',

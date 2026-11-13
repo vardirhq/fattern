@@ -198,10 +198,10 @@ export function SettingsPage({ company, onCompanyUpdate, onOpenTemplateEditor, o
 
         {/* Main Content */}
         <main className="flex-1 min-w-0">
-          <div className="f-glass rounded-2xl overflow-hidden">
-            <div className="px-8 py-6" style={{ borderBottom: '1px solid var(--f-border-subtle)', background: 'transparent' }}>
-              <h2 className="text-2xl font-semibold" style={{ color: 'var(--f-text)' }}>{activeCategoryLabel}</h2>
-              <p className="text-sm mt-2" style={{ color: 'var(--f-text-soft)' }}>{activeCategoryDescription}</p>
+          <div className="ft-card r-lg overflow-hidden">
+            <div className="px-8 py-6" style={{ borderBottom: '1px solid var(--line)', background: 'transparent' }}>
+              <h2 className="text-2xl font-semibold" style={{ color: 'var(--ink)' }}>{activeCategoryLabel}</h2>
+              <p className="text-sm mt-2" style={{ color: 'var(--ink-muted)' }}>{activeCategoryDescription}</p>
             </div>
 
             <div className="p-8">

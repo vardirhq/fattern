@@ -14,7 +14,7 @@ function WipeConfirmModal({ onConfirm, onCancel }) {
     <div
       style={{
         position: 'fixed', inset: 0, zIndex: 9999,
-        background: 'var(--f-overlay)',
+        background: 'var(--scrim)',
         backdropFilter: 'blur(6px)',
         display: 'flex', alignItems: 'center', justifyContent: 'center',
       }}
@@ -23,42 +23,42 @@ function WipeConfirmModal({ onConfirm, onCancel }) {
       <div
         style={{
           width: 440,
-          background: 'var(--f-surface-elevated)',
-          border: '1px solid rgba(240,80,70,0.35)',
-          borderRadius: 16,
+          background: 'var(--surface-raised)',
+          border: '1px solid var(--danger-line)',
+          borderRadius: 'var(--radius-lg)',
           padding: '28px 28px 24px',
-          boxShadow: '0 0 0 1px rgba(0,0,0,0.4), 0 24px 64px rgba(0,0,0,0.5)',
+          boxShadow: 'var(--shadow-lg)',
         }}
       >
         {/* Header */}
         <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 18 }}>
           <div style={{
-            width: 40, height: 40, borderRadius: 10, flexShrink: 0,
-            background: 'rgba(240,80,70,0.12)',
+            width: 40, height: 40, borderRadius: 'var(--radius-lg)', flexShrink: 0,
+            background: 'var(--danger-soft)',
             display: 'flex', alignItems: 'center', justifyContent: 'center',
           }}>
-            <IconAlertTriangle size={20} style={{ color: '#f05046' }} />
+            <IconAlertTriangle size={20} style={{ color: 'var(--danger)' }} />
           </div>
           <div>
-            <div style={{ fontSize: 15, fontWeight: 600, color: 'var(--f-text-body)' }}>
+            <div style={{ fontSize: 15, fontWeight: 600, color: 'var(--ink)' }}>
               {t('settings.general.wipe_modal_title')}
             </div>
-            <div style={{ fontSize: 12, color: 'var(--f-text-subtle)', marginTop: 1 }}>
+            <div style={{ fontSize: 12, color: 'var(--ink-muted)', marginTop: 1 }}>
               {t('settings.general.wipe_modal_irreversible')}
             </div>
           </div>
         </div>
 
         {/* Warning text */}
-        <p style={{ fontSize: 13, color: 'var(--f-text-soft)', lineHeight: 1.6, marginBottom: 20 }}>
+        <p style={{ fontSize: 13, color: 'var(--ink-muted)', lineHeight: 1.6, marginBottom: 20 }}>
           {t('settings.general.wipe_modal_warning')}
         </p>
 
         {/* Typed confirmation */}
         <div style={{ marginBottom: 20 }}>
-          <label style={{ fontSize: 12, color: 'var(--f-text-subtle)', display: 'block', marginBottom: 6 }}>
+          <label style={{ fontSize: 12, color: 'var(--ink-muted)', display: 'block', marginBottom: 6 }}>
             {t('settings.general.wipe_modal_type_label', { phrase: '' })}
-            <strong style={{ color: 'var(--f-text-body)', letterSpacing: '0.04em' }}>{CONFIRM_PHRASE}</strong>
+            <strong style={{ color: 'var(--ink)', letterSpacing: '0.04em' }}>{CONFIRM_PHRASE}</strong>
             {t('settings.general.wipe_modal_type_label', { phrase: '' }).split('{{phrase}}')[1] || ':'}
           </label>
           <input
@@ -70,13 +70,13 @@ function WipeConfirmModal({ onConfirm, onCancel }) {
             style={{
               width: '100%',
               padding: '9px 12px',
-              borderRadius: 8,
+              borderRadius: 'var(--radius-md)',
               fontSize: 13,
               fontFamily: 'var(--font-mono, ui-monospace, monospace)',
               letterSpacing: '0.05em',
-              background: 'var(--f-input-bg)',
-              border: `1px solid ${matches ? 'rgba(240,80,70,0.6)' : 'var(--f-border-subtle)'}`,
-              color: matches ? '#f07060' : 'var(--f-text-body)',
+              background: 'var(--surface)',
+              border: `1px solid ${matches ? 'var(--danger)' : 'var(--line)'}`,
+              color: matches ? 'var(--danger)' : 'var(--ink)',
               outline: 'none',
               transition: 'border-color 0.15s, color 0.15s',
             }}
@@ -88,9 +88,9 @@ function WipeConfirmModal({ onConfirm, onCancel }) {
           <button
             onClick={onCancel}
             style={{
-              padding: '8px 16px', borderRadius: 8, fontSize: 13, fontWeight: 500,
-              background: 'none', border: '1px solid var(--f-border-subtle)',
-              color: 'var(--f-text-soft)', cursor: 'pointer',
+              padding: '8px 16px', borderRadius: 'var(--radius-md)', fontSize: 13, fontWeight: 500,
+              background: 'none', border: '1px solid var(--line)',
+              color: 'var(--ink-muted)', cursor: 'pointer',
             }}
           >
             {t('settings.general.wipe_modal_cancel')}
@@ -99,10 +99,10 @@ function WipeConfirmModal({ onConfirm, onCancel }) {
             onClick={onConfirm}
             disabled={!matches}
             style={{
-              padding: '8px 20px', borderRadius: 8, fontSize: 13, fontWeight: 600,
-              background: matches ? 'rgba(240,80,70,0.15)' : 'var(--f-hover)',
-              border: `1px solid ${matches ? 'rgba(240,80,70,0.5)' : 'var(--f-border-faint)'}`,
-              color: matches ? '#f07060' : 'var(--f-text-subtle)',
+              padding: '8px 20px', borderRadius: 'var(--radius-md)', fontSize: 13, fontWeight: 600,
+              background: matches ? 'var(--danger-soft)' : 'var(--hover)',
+              border: `1px solid ${matches ? 'var(--danger)' : 'var(--line)'}`,
+              color: matches ? 'var(--danger)' : 'var(--ink-muted)',
               cursor: matches ? 'pointer' : 'not-allowed',
               transition: 'all 0.15s',
             }}
@@ -156,21 +156,21 @@ export function GeneralSettings({ onRefreshData }) {
     <>
       <div className="space-y-6">
         <div>
-          <h3 className="text-sm font-semibold mb-1" style={{ color: 'var(--f-text-body)' }}>
+          <h3 className="text-sm font-semibold mb-1" style={{ color: 'var(--ink)' }}>
             {t('settings.general.title')}
           </h3>
-          <p className="text-xs mb-4" style={{ color: 'var(--f-text-subtle)' }}>
+          <p className="text-xs mb-4" style={{ color: 'var(--ink-muted)' }}>
             {t('settings.general.description')}
           </p>
         </div>
 
         {/* ── Language selector ─────────────────────────────────────────────── */}
         <div className="space-y-4">
-          <div className="py-3" style={{ borderBottom: '1px solid var(--f-border-faint)' }}>
-            <label className="text-xs font-medium uppercase tracking-wider" style={{ color: 'var(--f-text-subtle)' }}>
+          <div className="py-3" style={{ borderBottom: '1px solid var(--line)' }}>
+            <label className="text-xs font-medium uppercase tracking-wider" style={{ color: 'var(--ink-muted)' }}>
               {t('settings.general.language_section')}
             </label>
-            <p className="text-sm mt-1.5 mb-3" style={{ color: 'var(--f-text-soft)' }}>
+            <p className="text-sm mt-1-5 mb-3" style={{ color: 'var(--ink-muted)' }}>
               {t('settings.general.language_label')}
             </p>
             <div style={{ display: 'flex', gap: 8 }}>
@@ -183,20 +183,20 @@ export function GeneralSettings({ onRefreshData }) {
                   onClick={() => handleLanguageChange(code)}
                   style={{
                     padding: '6px 16px',
-                    borderRadius: 8,
+                    borderRadius: 'var(--radius-md)',
                     fontSize: 13,
                     fontWeight: 500,
                     cursor: 'pointer',
                     transition: 'all 0.13s',
                     background: currentLang === code
-                      ? 'var(--f-green-bg)'
-                      : 'var(--f-hover)',
+                      ? 'var(--brand-soft)'
+                      : 'var(--hover)',
                     border: currentLang === code
-                      ? '1px solid var(--f-border-green)'
-                      : '1px solid var(--f-border-subtle)',
+                      ? '1px solid var(--brand-line)'
+                      : '1px solid var(--line)',
                     color: currentLang === code
-                      ? 'var(--f-green-text)'
-                      : 'var(--f-text-soft)',
+                      ? 'var(--brand-ink)'
+                      : 'var(--ink-muted)',
                   }}
                 >
                   {label}
@@ -209,18 +209,18 @@ export function GeneralSettings({ onRefreshData }) {
         {/* ── Danger zone ─────────────────────────────────────────────────── */}
         <div style={{ marginTop: 32 }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 12 }}>
-            <div style={{ flex: 1, height: 1, background: 'rgba(240,80,70,0.2)' }} />
-            <span style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'rgba(240,80,70,0.55)', flexShrink: 0 }}>
+            <div style={{ flex: 1, height: 1, background: 'var(--danger-line)' }} />
+            <span style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--danger)', flexShrink: 0 }}>
               {t('settings.general.danger_zone')}
             </span>
-            <div style={{ flex: 1, height: 1, background: 'rgba(240,80,70,0.2)' }} />
+            <div style={{ flex: 1, height: 1, background: 'var(--danger-line)' }} />
           </div>
 
           <div
             style={{
-              borderRadius: 12,
-              border: '1px solid rgba(240,80,70,0.2)',
-              background: 'rgba(240,80,70,0.04)',
+              borderRadius: 'var(--radius-lg)',
+              border: '1px solid var(--danger-line)',
+              background: 'var(--danger-soft)',
               padding: '16px 18px',
               display: 'flex',
               alignItems: 'center',
@@ -229,10 +229,10 @@ export function GeneralSettings({ onRefreshData }) {
             }}
           >
             <div>
-              <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--f-text-body)', marginBottom: 3 }}>
+              <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--ink)', marginBottom: 3 }}>
                 {t('settings.general.wipe_title')}
               </div>
-              <div style={{ fontSize: 12, color: 'var(--f-text-subtle)', lineHeight: 1.5 }}>
+              <div style={{ fontSize: 12, color: 'var(--ink-muted)', lineHeight: 1.5 }}>
                 {t('settings.general.wipe_desc')}
               </div>
             </div>
@@ -241,17 +241,17 @@ export function GeneralSettings({ onRefreshData }) {
               disabled={wiping}
               style={{
                 display: 'flex', alignItems: 'center', gap: 7,
-                padding: '8px 14px', borderRadius: 8,
+                padding: '8px 14px', borderRadius: 'var(--radius-md)',
                 fontSize: 12, fontWeight: 600, flexShrink: 0,
-                background: 'rgba(240,80,70,0.08)',
-                border: '1px solid rgba(240,80,70,0.3)',
-                color: '#f07060',
+                background: 'var(--danger-soft)',
+                border: '1px solid var(--danger-line)',
+                color: 'var(--danger)',
                 cursor: wiping ? 'not-allowed' : 'pointer',
                 opacity: wiping ? 0.5 : 1,
                 transition: 'all 0.15s',
               }}
-              onMouseEnter={e => { e.currentTarget.style.background = 'rgba(240,80,70,0.15)'; e.currentTarget.style.borderColor = 'rgba(240,80,70,0.5)'; }}
-              onMouseLeave={e => { e.currentTarget.style.background = 'rgba(240,80,70,0.08)'; e.currentTarget.style.borderColor = 'rgba(240,80,70,0.3)'; }}
+              onMouseEnter={e => { e.currentTarget.style.background = 'var(--danger-soft)'; e.currentTarget.style.borderColor = 'var(--danger)'; }}
+              onMouseLeave={e => { e.currentTarget.style.background = 'var(--danger-soft)'; e.currentTarget.style.borderColor = 'var(--danger-line)'; }}
             >
               <IconTrash size={13} />
               {wiping ? t('settings.general.wipe_deleting') : t('settings.general.wipe_button')}
@@ -265,7 +265,7 @@ export function GeneralSettings({ onRefreshData }) {
         <div
           style={{
             position: 'fixed', inset: 0, zIndex: 9998,
-            background: 'var(--f-overlay)',
+            background: 'var(--scrim)',
             backdropFilter: 'blur(4px)',
             display: 'flex', alignItems: 'center', justifyContent: 'center',
           }}
@@ -273,27 +273,27 @@ export function GeneralSettings({ onRefreshData }) {
         >
           <div
             style={{
-              background: 'var(--f-surface-elevated)',
-              border: '1px solid rgba(240,80,70,0.25)',
-              borderRadius: 14,
+              background: 'var(--surface-raised)',
+              border: '1px solid var(--danger-line)',
+              borderRadius: 'var(--radius-lg)',
               padding: '22px 24px 20px',
               width: 340,
-              boxShadow: '0 12px 32px var(--f-tooltip-shadow)',
+              boxShadow: '0 12px 32px var(--shadow-color)',
             }}
           >
-            <div style={{ fontSize: 14, fontWeight: 600, color: 'var(--f-text-body)', marginBottom: 8 }}>
+            <div style={{ fontSize: 14, fontWeight: 600, color: 'var(--ink)', marginBottom: 8 }}>
               {t('settings.general.first_confirm_title')}
             </div>
-            <p style={{ fontSize: 12, color: 'var(--f-text-soft)', lineHeight: 1.6, marginBottom: 18 }}>
+            <p style={{ fontSize: 12, color: 'var(--ink-muted)', lineHeight: 1.6, marginBottom: 18 }}>
               {t('settings.general.first_confirm_desc')}
             </p>
             <div style={{ display: 'flex', gap: 8, justifyContent: 'flex-end' }}>
               <button
                 onClick={() => setShowFirstConfirm(false)}
                 style={{
-                  padding: '7px 14px', borderRadius: 7, fontSize: 12, fontWeight: 500,
-                  background: 'none', border: '1px solid var(--f-border-subtle)',
-                  color: 'var(--f-text-soft)', cursor: 'pointer',
+                  padding: '7px 14px', borderRadius: 'var(--radius-md)', fontSize: 12, fontWeight: 500,
+                  background: 'none', border: '1px solid var(--line)',
+                  color: 'var(--ink-muted)', cursor: 'pointer',
                 }}
               >
                 {t('settings.general.first_confirm_cancel')}
@@ -301,10 +301,10 @@ export function GeneralSettings({ onRefreshData }) {
               <button
                 onClick={() => { setShowFirstConfirm(false); setShowSecondConfirm(true); }}
                 style={{
-                  padding: '7px 14px', borderRadius: 7, fontSize: 12, fontWeight: 600,
-                  background: 'rgba(240,80,70,0.12)',
-                  border: '1px solid rgba(240,80,70,0.4)',
-                  color: '#f07060', cursor: 'pointer',
+                  padding: '7px 14px', borderRadius: 'var(--radius-md)', fontSize: 12, fontWeight: 600,
+                  background: 'var(--danger-soft)',
+                  border: '1px solid var(--danger-line)',
+                  color: 'var(--danger)', cursor: 'pointer',
                 }}
               >
                 {t('settings.general.first_confirm_proceed')}

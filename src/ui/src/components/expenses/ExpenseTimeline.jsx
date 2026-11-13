@@ -26,7 +26,7 @@ export function ExpenseTimeline({ expenses = [], formatCurrency, onSelectExpense
 
   if (groups.length === 0) {
     return (
-      <div style={{ padding: '40px 0', textAlign: 'center', color: 'var(--f-text-subtle)', fontSize: 14 }}>
+      <div style={{ padding: '40px 0', textAlign: 'center', color: 'var(--ink-muted)', fontSize: 14 }}>
         {t('expense.no_expenses')}
       </div>
     );
@@ -51,7 +51,7 @@ export function ExpenseTimeline({ expenses = [], formatCurrency, onSelectExpense
                 style={{
                   fontSize: 12,
                   fontWeight: 600,
-                  color: 'var(--f-text-subtle)',
+                  color: 'var(--ink-muted)',
                   textTransform: 'uppercase',
                   letterSpacing: '0.08em',
                   whiteSpace: 'nowrap',
@@ -59,8 +59,8 @@ export function ExpenseTimeline({ expenses = [], formatCurrency, onSelectExpense
               >
                 {monthLabel(monthKey, i18n.language, t('expense.unknown_date'))}
               </span>
-              <div style={{ flex: 1, height: 1, background: 'var(--f-border)' }} />
-              <span style={{ fontSize: 12, color: 'var(--f-text-subtle)', whiteSpace: 'nowrap' }}>
+              <div style={{ flex: 1, height: 1, background: 'var(--line)' }} />
+              <span style={{ fontSize: 12, color: 'var(--ink-muted)', whiteSpace: 'nowrap' }}>
                 {formatCurrency ? formatCurrency(groupTotal) : groupTotal}
               </span>
             </div>

@@ -168,7 +168,7 @@ These will come later in v2/v3.
 
 * **Electron**
 * **React (with Vite)**
-* **TailwindCSS 3.4+**
+* **Plain CSS** with design tokens (see `docs/design-system/`)
 * **Framer Motion** (subtle animation)
 * **react-icons**
 

@@ -78,7 +78,7 @@ Fattern er en desktop-applikasjon designet spesielt for norske freelancere og sm
 ### Moderne Teknologi
 - **Electron**: Tverrplattform desktop-applikasjon
 - **React**: Moderne, responsiv brukergrensesnitt
-- **TailwindCSS**: Rask og tilpassbar styling
+- **Ren CSS**: Designsystem med tokens, uten CSS-rammeverk (se `docs/design-system/`)
 - **SQLite**: Rask og pålitelig lokal database
 
 ### Brukeropplevelse

@@ -65,9 +65,9 @@ export function BudgetYearModal({ isOpen, mode = 'create', initialYear, onSubmit
           <button
             type="button"
             className="text-sm font-medium transition"
-            style={{ color: 'var(--f-text-subtle)' }}
-            onMouseEnter={e => e.currentTarget.style.color = 'var(--f-text-body)'}
-            onMouseLeave={e => e.currentTarget.style.color = 'var(--f-text-subtle)'}
+            style={{ color: 'var(--ink-muted)' }}
+            onMouseEnter={e => e.currentTarget.style.color = 'var(--ink)'}
+            onMouseLeave={e => e.currentTarget.style.color = 'var(--ink-muted)'}
             onClick={onClose}
             disabled={saving}
           >
@@ -76,7 +76,7 @@ export function BudgetYearModal({ isOpen, mode = 'create', initialYear, onSubmit
           <button
             type="submit"
             form="budget-year-form"
-            className="f-btn-primary rounded-2xl px-5 py-2 text-sm font-semibold disabled:opacity-60"
+            className="ft-btn ft-btn-primary r-lg px-5 py-2 text-sm font-semibold disabled-dim"
             disabled={saving}
           >
             {saving ? t('common.saving') : isEdit ? t('budget_year.form.save_button') : t('budget_year.form.create_button')}
@@ -86,48 +86,48 @@ export function BudgetYearModal({ isOpen, mode = 'create', initialYear, onSubmit
     >
       <form id="budget-year-form" className="space-y-4" onSubmit={handleSubmit}>
         <div>
-          <label className="text-sm font-medium" style={{ color: 'var(--f-text-body)' }}>{t('budget_year.form.label')}</label>
+          <label className="text-sm font-medium" style={{ color: 'var(--ink)' }}>{t('budget_year.form.label')}</label>
           <input
-            className="f-input mt-2 w-full rounded-2xl px-4 py-2 text-sm"
+            className="ft-input mt-2 w-full r-lg px-4 py-2 text-sm"
             value={label}
             onChange={(e) => setLabel(e.target.value)}
             placeholder={t('budget_year.form.label_placeholder')}
           />
         </div>
 
-        <div className="grid gap-4 md:grid-cols-2">
+        <div className="grid gap-4 md-grid-cols-2">
           <div>
-            <label className="text-sm font-medium" style={{ color: 'var(--f-text-body)' }}>{t('budget_year.form.start_date')}</label>
+            <label className="text-sm font-medium" style={{ color: 'var(--ink)' }}>{t('budget_year.form.start_date')}</label>
             <DatePicker
               value={startDate}
               onChange={setStartDate}
               placeholder="dd.mm.yyyy"
-              className="f-input mt-2 w-full rounded-2xl px-4 py-2 text-sm"
+              className="ft-input mt-2 w-full r-lg px-4 py-2 text-sm"
             />
           </div>
           <div>
-            <label className="text-sm font-medium" style={{ color: 'var(--f-text-body)' }}>{t('budget_year.form.end_date')}</label>
+            <label className="text-sm font-medium" style={{ color: 'var(--ink)' }}>{t('budget_year.form.end_date')}</label>
             <DatePicker
               value={endDate}
               onChange={setEndDate}
               placeholder="dd.mm.yyyy"
-              className="f-input mt-2 w-full rounded-2xl px-4 py-2 text-sm"
+              className="ft-input mt-2 w-full r-lg px-4 py-2 text-sm"
             />
           </div>
         </div>
 
-        <label className="flex items-center gap-2 text-sm" style={{ color: 'var(--f-text-body)' }}>
+        <label className="flex items-center gap-2 text-sm" style={{ color: 'var(--ink)' }}>
           <input
             type="checkbox"
-            className="h-4 w-4 rounded"
-            style={{ accentColor: 'var(--f-green)' }}
+            className="h-4 w-4 r-sm"
+            style={{ accentColor: 'var(--brand)' }}
             checked={isCurrent}
             onChange={(e) => setIsCurrent(e.target.checked)}
           />
           {t('budget_year.form.mark_current')}
         </label>
 
-        {error ? <p className="text-sm font-medium" style={{ color: 'var(--f-danger-text)' }}>{error}</p> : null}
+        {error ? <p className="text-sm font-medium" style={{ color: 'var(--danger)' }}>{error}</p> : null}
       </form>
     </Modal>
   );

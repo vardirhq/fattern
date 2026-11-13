@@ -21,9 +21,9 @@ export function ConfirmModal({
   const resolvedDeactivateLabel = deactivateLabel ?? t('common.deactivate');
   const resolvedCancelLabel = cancelLabel ?? t('common.cancel');
   const variantStyles = {
-    danger: { button: 'f-btn-danger' },
+    danger: { button: 'ft-btn ft-btn-danger' },
     warning: { button: '' }, // inline amber styling
-    info: { button: 'f-btn-primary' },
+    info: { button: 'ft-btn ft-btn-primary' },
   };
 
   const styles = variantStyles[variant] || variantStyles.danger;
@@ -59,9 +59,9 @@ export function ConfirmModal({
           <button
             type="button"
             className="text-sm font-medium transition"
-            style={{ color: 'var(--f-text-subtle)' }}
-            onMouseEnter={e => e.currentTarget.style.color = 'var(--f-text-body)'}
-            onMouseLeave={e => e.currentTarget.style.color = 'var(--f-text-subtle)'}
+            style={{ color: 'var(--ink-muted)' }}
+            onMouseEnter={e => e.currentTarget.style.color = 'var(--ink)'}
+            onMouseLeave={e => e.currentTarget.style.color = 'var(--ink-muted)'}
             onClick={onClose}
             disabled={isLoading}
           >
@@ -73,7 +73,7 @@ export function ConfirmModal({
                 type="button"
                 onClick={handleDeactivate}
                 disabled={isLoading}
-                className="f-btn-primary rounded-2xl px-5 py-2 text-sm font-semibold transition disabled:opacity-60"
+                className="ft-btn ft-btn-primary r-lg px-5 py-2 text-sm font-semibold transition disabled-dim"
               >
                 {isLoading ? t('common.processing') : resolvedDeactivateLabel}
               </button>
@@ -82,8 +82,8 @@ export function ConfirmModal({
               type="button"
               onClick={handleConfirm}
               disabled={isLoading}
-              className={`rounded-2xl px-5 py-2 text-sm font-semibold transition disabled:opacity-60 ${styles.button}`}
-              style={variant === 'warning' ? { background: 'rgba(217,119,6,0.15)', color: '#fbbf24', border: '1px solid rgba(217,119,6,0.3)' } : {}}
+              className={`r-lg px-5 py-2 text-sm font-semibold transition disabled-dim ${styles.button}`}
+              style={variant === 'warning' ? { background: 'var(--warning-soft)', color: 'var(--warning)', border: '1px solid var(--warning-line)' } : {}}
             >
               {isLoading ? t('common.processing') : resolvedConfirmLabel}
             </button>

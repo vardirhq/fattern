@@ -71,15 +71,15 @@ export function ExpensesPage({
       <header style={{ position: 'relative' }}>
         <div className="pointer-events-none absolute inset-0" style={{ background: 'transparent' }} />
         <div className="relative z-10">
-          <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
+          <div className="flex flex-col gap-4 lg-flex-row lg-items-start lg-justify-between">
             <div>
-              <p className="text-sm" style={{ color: 'var(--f-text-subtle)' }}>
+              <p className="text-sm" style={{ color: 'var(--ink-muted)' }}>
                 {t('expense.title')}
               </p>
-              <h1 className="mt-1 text-3xl font-semibold f-num" style={{ color: 'var(--f-text)' }}>
+              <h1 className="mt-1 text-3xl font-semibold ft-mono" style={{ color: 'var(--ink)' }}>
                 {fmt ? fmt(totalAmount) : totalAmount}
               </h1>
-              <p className="mt-1 text-sm" style={{ color: 'var(--f-text-soft)' }}>
+              <p className="mt-1 text-sm" style={{ color: 'var(--ink-muted)' }}>
                 {filteredExpenses.length}{' '}
                 {filteredExpenses.length === 1 ? t('expense.expense_singular') : t('expense.expense_plural')}
               </p>
@@ -88,14 +88,14 @@ export function ExpensesPage({
               <button
                 type="button"
                 onClick={() => onCreateExpense?.()}
-                className="f-btn-primary rounded-xl px-5 text-sm font-semibold" style={{ height: 44 }}
+                className="ft-btn ft-btn-primary r-lg px-5 text-sm font-semibold" style={{ height: 44 }}
               >
                 {t('expense.new')}
               </button>
               <button
                 type="button"
                 onClick={() => onManageCategories?.()}
-                className="f-btn-ghost rounded-xl px-5 text-sm font-medium" style={{ height: 44 }}
+                className="ft-btn ft-btn-secondary r-lg px-5 text-sm font-medium" style={{ height: 44 }}
               >
                 {t('expense.manage_categories')}
               </button>

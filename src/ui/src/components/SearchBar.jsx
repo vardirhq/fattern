@@ -10,7 +10,7 @@ export function SearchBar({ value, onChange, placeholder }) {
         stroke={1.8}
         style={{
           position: 'absolute', left: 10, top: '50%', transform: 'translateY(-50%)',
-          color: 'var(--f-text-subtle)', pointerEvents: 'none', zIndex: 1,
+          color: 'var(--ink-muted)', pointerEvents: 'none', zIndex: 1,
         }}
       />
       <input
@@ -20,18 +20,18 @@ export function SearchBar({ value, onChange, placeholder }) {
         placeholder={placeholder || t('common.search')}
         style={{
           width: '100%',
-          borderRadius: 10,
-          border: '1px solid var(--f-border)',
-          background: 'var(--f-surface)',
+          borderRadius: 'var(--radius-lg)',
+          border: '1px solid var(--line)',
+          background: 'var(--surface)',
           backdropFilter: 'blur(12px)',
-          color: 'var(--f-text-body)',
+          color: 'var(--ink)',
           fontSize: 13,
           padding: '7px 34px',
           outline: 'none',
           transition: 'border-color 0.15s',
         }}
-        onFocus={e => (e.target.style.borderColor = 'var(--f-border-green)')}
-        onBlur={e  => (e.target.style.borderColor = 'var(--f-border)')}
+        onFocus={e => (e.target.style.borderColor = 'var(--brand-line)')}
+        onBlur={e  => (e.target.style.borderColor = 'var(--line)')}
       />
       {value && (
         <button
@@ -41,7 +41,7 @@ export function SearchBar({ value, onChange, placeholder }) {
           style={{
             position: 'absolute', right: 8, top: '50%', transform: 'translateY(-50%)',
             background: 'none', border: 'none', cursor: 'pointer',
-            color: 'var(--f-text-subtle)', display: 'flex', alignItems: 'center', justifyContent: 'center',
+            color: 'var(--ink-muted)', display: 'flex', alignItems: 'center', justifyContent: 'center',
           }}
         >
           <IconX size={14} stroke={2} />

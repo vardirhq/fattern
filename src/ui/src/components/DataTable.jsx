@@ -60,17 +60,17 @@ export function DataTable({ columns, data, emptyMessage = 'Ingen data å vise', 
 
   if (!data || data.length === 0) {
     return (
-      <div className="rounded-2xl p-12 text-center" style={{ border: '1px solid var(--f-border-subtle)', background: 'var(--f-surface-hover)' }}>
-        <p className="text-sm" style={{ color: 'var(--f-text-subtle)' }}>{emptyMessage}</p>
+      <div className="r-lg p-12 text-center" style={{ border: '1px solid var(--line)', background: 'var(--surface-sunken)' }}>
+        <p className="text-sm" style={{ color: 'var(--ink-muted)' }}>{emptyMessage}</p>
       </div>
     );
   }
 
   return (
-    <div className="overflow-x-auto rounded-2xl" style={{ border: '1px solid var(--f-border-subtle)' }}>
+    <div className="overflow-x-auto r-lg" style={{ border: '1px solid var(--line)' }}>
       <table className="min-w-full text-sm">
         <thead>
-          <tr style={{ background: 'var(--f-hover)', borderBottom: '1px solid var(--f-border-subtle)', color: 'var(--f-text-subtle)' }}>
+          <tr style={{ background: 'var(--hover)', borderBottom: '1px solid var(--line)', color: 'var(--ink-muted)' }}>
             {columns.map((column) => {
               const isSortable = column.sortable !== false && column.key !== 'actions';
               const isSorted = sortColumn === column.key;
@@ -82,9 +82,9 @@ export function DataTable({ columns, data, emptyMessage = 'Ingen data å vise', 
                   className={`px-4 py-3 font-medium ${column.align === 'right' ? 'text-right' : 'text-left'} ${
                     isSortable ? 'cursor-pointer select-none transition-colors' : ''
                   }`}
-                  style={{ color: 'var(--f-text-subtle)', ...(column.headerStyle || column.style || {}) }}
+                  style={{ color: 'var(--ink-muted)', ...(column.headerStyle || column.style || {}) }}
                   onClick={() => isSortable && handleSort(column.key)}
-                  onMouseEnter={e => { if (isSortable) e.currentTarget.style.background = 'var(--f-hover)'; }}
+                  onMouseEnter={e => { if (isSortable) e.currentTarget.style.background = 'var(--hover)'; }}
                   onMouseLeave={e => { e.currentTarget.style.background = 'transparent'; }}
                 >
                   <div className={`flex items-center gap-2 ${column.align === 'right' ? 'justify-end' : ''}`}>
@@ -93,11 +93,11 @@ export function DataTable({ columns, data, emptyMessage = 'Ingen data å vise', 
                       <span className="flex flex-col">
                         <IconChevronUp
                           size={11}
-                          style={{ opacity: isSorted && isAsc ? 1 : 0.3, color: isSorted && isAsc ? 'var(--f-green-text)' : 'inherit' }}
+                          style={{ opacity: isSorted && isAsc ? 1 : 0.3, color: isSorted && isAsc ? 'var(--brand-ink)' : 'inherit' }}
                         />
                         <IconChevronDown
                           size={11}
-                          style={{ marginTop: -3, opacity: isSorted && !isAsc ? 1 : 0.3, color: isSorted && !isAsc ? 'var(--f-green-text)' : 'inherit' }}
+                          style={{ marginTop: -3, opacity: isSorted && !isAsc ? 1 : 0.3, color: isSorted && !isAsc ? 'var(--brand-ink)' : 'inherit' }}
                         />
                       </span>
                     )}
@@ -114,8 +114,8 @@ export function DataTable({ columns, data, emptyMessage = 'Ingen data å vise', 
               initial={{ opacity: 0, x: -10 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.2, delay: rowIndex * 0.02 }}
-              style={{ borderBottom: '1px solid var(--f-border-faint)' }}
-              onMouseEnter={e => e.currentTarget.style.background = 'var(--f-surface-hover)'}
+              style={{ borderBottom: '1px solid var(--line)' }}
+              onMouseEnter={e => e.currentTarget.style.background = 'var(--surface-sunken)'}
               onMouseLeave={e => e.currentTarget.style.background = 'transparent'}
             >
               {columns.map((column) => {

@@ -1,0 +1,111 @@
+/* Fattern — generated from docs/design-system/tokens.json by scripts/build-tokens.js. Do not edit by hand. */
+
+:root,
+[data-theme="light"] {
+  color-scheme: light;
+  --bg: #F4F7F5;
+  --surface: #FFFFFF;
+  --surface-sunken: #EAEFEC;
+  --surface-raised: #FFFFFF;
+  --scrim: #10181680;
+  --line: #DAE2DE;
+  --line-strong: #7C8A85;
+  --ink: #101816;
+  --ink-muted: #4D5C57;
+  --ink-subtle: #5F6E69;
+  --brand: #0C6A5B;
+  --brand-hover: #09564A;
+  --on-brand: #FFFFFF;
+  --brand-soft: #DCF0E9;
+  --brand-ink: #0A5A4D;
+  --accent: #F0B03A;
+  --on-accent: #2A1C00;
+  --accent-soft: #FCEFCF;
+  --accent-ink: #855600;
+  --info: #1C5BB8;
+  --info-soft: #E0EBFA;
+  --success: var(--brand-ink);
+  --success-soft: var(--brand-soft);
+  --warning: var(--accent-ink);
+  --warning-soft: var(--accent-soft);
+  --danger: #B23220;
+  --on-danger: #FFFFFF;
+  --danger-soft: #FAE5E0;
+  --focus: #0C6A5B;
+  --shadow-sm: 0 1px 2px #1018160f;
+  --shadow-md: 0 4px 12px #1018161f, 0 1px 2px #10181614;
+  --shadow-lg: 0 16px 40px #10181633, 0 2px 6px #1018161a;
+  --focus-ring: 0 0 0 2px #FFFFFF, 0 0 0 4px #0C6A5B;
+}
+
+[data-theme="dark"] {
+  color-scheme: dark;
+  --bg: #0C1110;
+  --surface: #141A18;
+  --surface-sunken: #090D0C;
+  --surface-raised: #1B2321;
+  --scrim: #000000A6;
+  --line: #26302D;
+  --line-strong: #62726C;
+  --ink: #ECF1EF;
+  --ink-muted: #A2B0AB;
+  --ink-subtle: #84938E;
+  --brand: #45C9A5;
+  --brand-hover: #6AD8B8;
+  --on-brand: #06211A;
+  --brand-soft: #143A32;
+  --brand-ink: #6AD8B8;
+  --accent-soft: #3A2C0C;
+  --accent-ink: #F2C464;
+  --info: #7FB2F5;
+  --info-soft: #132842;
+  --danger: #FF8A73;
+  --on-danger: #2A0A05;
+  --danger-soft: #3D1711;
+  --focus: #6AD8B8;
+  --shadow-sm: 0 1px 2px #00000066;
+  --shadow-md: 0 4px 12px #00000080, 0 1px 2px #00000066;
+  --shadow-lg: 0 16px 40px #000000b3, 0 2px 6px #00000080;
+  --focus-ring: 0 0 0 2px #0C1110, 0 0 0 4px #6AD8B8;
+}
+
+:root {
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --space-12: 48px;
+  --space-16: 64px;
+  --radius-xs: 3px;
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 10px;
+  --radius-full: 999px;
+  --control-sm: 28px;
+  --control-md: 36px;
+  --control-lg: 44px;
+  --row: 44px;
+  --sidebar: 232px;
+  --font-display: "Schibsted Grotesk Variable", "Schibsted Grotesk", "Hanken Grotesk Variable", system-ui, sans-serif;
+  --font-sans: "Hanken Grotesk Variable", "Hanken Grotesk", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "JetBrains Mono Variable", "JetBrains Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+}
+
+/* Type styles */
+.type-display { font-family: var(--font-display); font-size: 40px; line-height: 44px; font-weight: 700; letter-spacing: -0.02em; }
+.type-h1 { font-family: var(--font-display); font-size: 28px; line-height: 34px; font-weight: 700; letter-spacing: -0.015em; }
+.type-h2 { font-family: var(--font-display); font-size: 20px; line-height: 28px; font-weight: 600; letter-spacing: -0.01em; }
+.type-h3 { font-family: var(--font-display); font-size: 16px; line-height: 24px; font-weight: 600; }
+.type-body-lg { font-family: var(--font-sans); font-size: 16px; line-height: 24px; font-weight: 400; }
+.type-body { font-family: var(--font-sans); font-size: 14px; line-height: 20px; font-weight: 400; }
+.type-body-strong { font-family: var(--font-sans); font-size: 14px; line-height: 20px; font-weight: 600; }
+.type-small { font-family: var(--font-sans); font-size: 13px; line-height: 18px; font-weight: 400; }
+.type-label { font-family: var(--font-sans); font-size: 12px; line-height: 16px; font-weight: 600; }
+.type-overline { font-family: var(--font-sans); font-size: 11px; line-height: 16px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; }
+.type-figure { font-family: var(--font-mono); font-size: 28px; line-height: 32px; font-weight: 500; letter-spacing: -0.02em; font-variant-numeric: tabular-nums; }
+.type-amount { font-family: var(--font-mono); font-size: 14px; line-height: 20px; font-weight: 500; font-variant-numeric: tabular-nums; }
+.type-id { font-family: var(--font-mono); font-size: 13px; line-height: 18px; font-weight: 400; font-variant-numeric: tabular-nums; }

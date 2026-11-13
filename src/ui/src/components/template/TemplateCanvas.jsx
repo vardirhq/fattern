@@ -153,7 +153,7 @@ export function TemplateCanvas({
     <div
       ref={containerRef}
       className="relative h-full w-full overflow-hidden"
-      style={{ background: 'var(--f-overlay)' }}
+      style={{ background: 'var(--scrim)' }}
       onMouseDown={handleMouseDown}
       onMouseMove={handleMouseMove}
       onMouseUp={handleMouseUp}
@@ -178,7 +178,7 @@ export function TemplateCanvas({
       {/* Canvas (A4 artboard) — explicit #ffffff, never inherits theme's --color-white */}
       <div
         ref={canvasRef}
-        className="absolute shadow-2xl"
+        className="absolute shadow-lg"
         style={{
           background: '#ffffff',
           left: '50%',

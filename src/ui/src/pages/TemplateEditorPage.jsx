@@ -131,37 +131,37 @@ export function TemplateEditorPage({ templateId, onClose }) {
 
   if (isLoading) {
     return (
-      <div className="flex h-screen items-center justify-center" style={{ background: 'var(--f-bg-base)' }}>
-        <p style={{ color: 'var(--f-text-subtle)' }}>{t('template_editor.loading')}</p>
+      <div className="flex h-screen items-center justify-center" style={{ background: 'var(--bg)' }}>
+        <p style={{ color: 'var(--ink-muted)' }}>{t('template_editor.loading')}</p>
       </div>
     );
   }
 
   if (!template) {
     return (
-      <div className="flex h-screen items-center justify-center" style={{ background: 'var(--f-bg-base)' }}>
-        <p style={{ color: 'var(--f-text-subtle)' }}>{t('template_editor.load_error')}</p>
+      <div className="flex h-screen items-center justify-center" style={{ background: 'var(--bg)' }}>
+        <p style={{ color: 'var(--ink-muted)' }}>{t('template_editor.load_error')}</p>
       </div>
     );
   }
 
   return (
-    <div className="fixed inset-0 z-40 flex flex-col" style={{ top: 'var(--f-topbar-h)', background: 'var(--f-bg-base)' }}>
+    <div className="fixed inset-0 z-40 flex flex-col" style={{ top: 'var(--topbar-h)', background: 'var(--bg)' }}>
       {/* Top Bar */}
-      <div className="flex h-14 items-center justify-between px-5" style={{ background: 'rgba(8,16,12,0.8)', borderBottom: '1px solid var(--f-border-subtle)', backdropFilter: 'blur(20px)' }}>
+      <div className="flex h-14 items-center justify-between px-5" style={{ background: 'rgba(8,16,12,0.8)', borderBottom: '1px solid var(--line)', backdropFilter: 'blur(20px)' }}>
         <div className="flex items-center gap-5">
           <button
             onClick={onClose}
-            className="flex items-center gap-2 rounded-lg px-3 py-1.5 text-sm font-medium transition"
-            style={{ color: 'var(--f-text-soft)' }}
-            onMouseEnter={e => { e.currentTarget.style.background = 'var(--f-hover)'; e.currentTarget.style.color = 'var(--f-text-body)'; }}
-            onMouseLeave={e => { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.color = 'var(--f-text-soft)'; }}
+            className="flex items-center gap-2 r-md px-3 py-1-5 text-sm font-medium transition"
+            style={{ color: 'var(--ink-muted)' }}
+            onMouseEnter={e => { e.currentTarget.style.background = 'var(--hover)'; e.currentTarget.style.color = 'var(--ink)'; }}
+            onMouseLeave={e => { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.color = 'var(--ink-muted)'; }}
           >
             <IconArrowLeft className="h-4 w-4" />
             {t('common.back')}
           </button>
-          <div className="h-6 w-px" style={{ background: 'var(--f-border)' }} />
-          <h1 className="text-sm font-semibold" style={{ color: 'var(--f-text-body)' }}>{template.meta?.name || template.name}</h1>
+          <div className="h-6 w-px" style={{ background: 'var(--line)' }} />
+          <h1 className="text-sm font-semibold" style={{ color: 'var(--ink)' }}>{template.meta?.name || template.name}</h1>
         </div>
 
         <div className="flex items-center gap-3">
@@ -169,9 +169,9 @@ export function TemplateEditorPage({ templateId, onClose }) {
           <button
             onClick={handleUndo}
             disabled={!canUndo}
-            className="rounded-lg px-3 py-1.5 text-sm font-medium transition disabled:opacity-40 disabled:cursor-not-allowed"
-            style={{ color: 'var(--f-text-soft)' }}
-            onMouseEnter={e => { if (!e.currentTarget.disabled) e.currentTarget.style.background = 'var(--f-hover)'; }}
+            className="r-md px-3 py-1-5 text-sm font-medium transition disabled-dim"
+            style={{ color: 'var(--ink-muted)' }}
+            onMouseEnter={e => { if (!e.currentTarget.disabled) e.currentTarget.style.background = 'var(--hover)'; }}
             onMouseLeave={e => e.currentTarget.style.background = 'transparent'}
           >
             {t('template_editor.undo')}
@@ -179,37 +179,37 @@ export function TemplateEditorPage({ templateId, onClose }) {
           <button
             onClick={handleRedo}
             disabled={!canRedo}
-            className="rounded-lg px-3 py-1.5 text-sm font-medium transition disabled:opacity-40 disabled:cursor-not-allowed"
-            style={{ color: 'var(--f-text-soft)' }}
-            onMouseEnter={e => { if (!e.currentTarget.disabled) e.currentTarget.style.background = 'var(--f-hover)'; }}
+            className="r-md px-3 py-1-5 text-sm font-medium transition disabled-dim"
+            style={{ color: 'var(--ink-muted)' }}
+            onMouseEnter={e => { if (!e.currentTarget.disabled) e.currentTarget.style.background = 'var(--hover)'; }}
             onMouseLeave={e => e.currentTarget.style.background = 'transparent'}
           >
             {t('template_editor.redo')}
           </button>
 
-          <div className="h-6 w-px" style={{ background: 'var(--f-border)' }} />
+          <div className="h-6 w-px" style={{ background: 'var(--line)' }} />
 
           {/* Zoom Controls */}
           <div className="flex items-center gap-1">
             <button
               onClick={() => setZoom((z) => Math.max(50, z - 25))}
-              className="rounded-lg p-1.5 transition disabled:opacity-40"
-              style={{ color: 'var(--f-text-soft)' }}
+              className="r-md p-1-5 transition disabled-dim"
+              style={{ color: 'var(--ink-muted)' }}
               disabled={zoom <= 50}
-              onMouseEnter={e => { if (!e.currentTarget.disabled) e.currentTarget.style.background = 'var(--f-hover)'; }}
+              onMouseEnter={e => { if (!e.currentTarget.disabled) e.currentTarget.style.background = 'var(--hover)'; }}
               onMouseLeave={e => e.currentTarget.style.background = 'transparent'}
             >
               <IconZoomOut className="h-4 w-4" />
             </button>
-            <span className="min-w-[4rem] text-center text-sm font-medium" style={{ color: 'var(--f-text-body)' }}>
+            <span className="min-w-16 text-center text-sm font-medium" style={{ color: 'var(--ink)' }}>
               {zoom}%
             </span>
             <button
               onClick={() => setZoom((z) => Math.min(200, z + 25))}
-              className="rounded-lg p-1.5 transition disabled:opacity-40"
-              style={{ color: 'var(--f-text-soft)' }}
+              className="r-md p-1-5 transition disabled-dim"
+              style={{ color: 'var(--ink-muted)' }}
               disabled={zoom >= 200}
-              onMouseEnter={e => { if (!e.currentTarget.disabled) e.currentTarget.style.background = 'var(--f-hover)'; }}
+              onMouseEnter={e => { if (!e.currentTarget.disabled) e.currentTarget.style.background = 'var(--hover)'; }}
               onMouseLeave={e => e.currentTarget.style.background = 'transparent'}
             >
               <IconZoomIn className="h-4 w-4" />
@@ -221,50 +221,50 @@ export function TemplateEditorPage({ templateId, onClose }) {
                 const fitZoom = Math.floor((viewportHeight / A4_HEIGHT) * 100);
                 setZoom(Math.min(100, Math.max(50, fitZoom)));
               }}
-              className="ml-2 rounded-lg px-3 py-1.5 text-xs font-medium transition"
-              style={{ color: 'var(--f-text-soft)' }}
-              onMouseEnter={e => e.currentTarget.style.background = 'var(--f-hover)'}
+              className="ml-2 r-md px-3 py-1-5 text-xs font-medium transition"
+              style={{ color: 'var(--ink-muted)' }}
+              onMouseEnter={e => e.currentTarget.style.background = 'var(--hover)'}
               onMouseLeave={e => e.currentTarget.style.background = 'transparent'}
             >
               {t('template_editor.fit')}
             </button>
           </div>
 
-          <div className="h-6 w-px" style={{ background: 'var(--f-border)' }} />
+          <div className="h-6 w-px" style={{ background: 'var(--line)' }} />
 
           {/* Preview */}
           <button
             onClick={() => setShowPreview(!showPreview)}
-            className="rounded-lg px-4 py-1.5 text-sm font-medium transition"
-            style={{ color: 'var(--f-text-soft)' }}
-            onMouseEnter={e => { e.currentTarget.style.background = 'var(--f-hover)'; e.currentTarget.style.color = 'var(--f-text-body)'; }}
-            onMouseLeave={e => { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.color = 'var(--f-text-soft)'; }}
+            className="r-md px-4 py-1-5 text-sm font-medium transition"
+            style={{ color: 'var(--ink-muted)' }}
+            onMouseEnter={e => { e.currentTarget.style.background = 'var(--hover)'; e.currentTarget.style.color = 'var(--ink)'; }}
+            onMouseLeave={e => { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.color = 'var(--ink-muted)'; }}
           >
             <IconEye className="mr-2 inline h-4 w-4" />
             {showPreview ? t('template_editor.edit_mode') : t('template_editor.preview')}
           </button>
 
-          <div className="h-6 w-px" style={{ background: 'var(--f-border)' }} />
+          <div className="h-6 w-px" style={{ background: 'var(--line)' }} />
 
           {/* Settings */}
           <button
             onClick={() => setShowSettings(true)}
-            className="rounded-lg px-4 py-1.5 text-sm font-medium transition"
-            style={{ color: 'var(--f-text-soft)' }}
-            onMouseEnter={e => { e.currentTarget.style.background = 'var(--f-hover)'; e.currentTarget.style.color = 'var(--f-text-body)'; }}
-            onMouseLeave={e => { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.color = 'var(--f-text-soft)'; }}
+            className="r-md px-4 py-1-5 text-sm font-medium transition"
+            style={{ color: 'var(--ink-muted)' }}
+            onMouseEnter={e => { e.currentTarget.style.background = 'var(--hover)'; e.currentTarget.style.color = 'var(--ink)'; }}
+            onMouseLeave={e => { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.color = 'var(--ink-muted)'; }}
             title={t('template_editor.settings_title')}
           >
             <IconSettings className="mr-2 inline h-4 w-4" />
             {t('template_editor.settings')}
           </button>
 
-          <div className="h-6 w-px" style={{ background: 'var(--f-border)' }} />
+          <div className="h-6 w-px" style={{ background: 'var(--line)' }} />
 
           {/* Save */}
           <button
             onClick={handleSave}
-            className="f-btn-primary rounded-lg px-4 py-1.5 text-sm font-medium"
+            className="ft-btn ft-btn-primary r-md px-4 py-1-5 text-sm font-medium"
           >
             <IconDeviceFloppy className="mr-2 inline h-4 w-4" />
             {t('template_editor.save')}
@@ -387,7 +387,7 @@ function createElement(type) {
         borderWidth: 1,
         borderColor: '#d5e7e6',
         borderStyle: 'solid',
-        borderRadius: 0,
+        borderRadius: 'var(--radius-xs)',
         zIndex: 0,
       };
     default:

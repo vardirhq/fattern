@@ -96,15 +96,15 @@ export function Select({ value, onChange, options = [], placeholder = 'Velg...',
   const dropdownContent = isOpen ? (
     <div
       ref={dropdownRef}
-      className="fixed z-[9999] rounded-xl overflow-hidden"
+      className="fixed z-9999 r-lg overflow-hidden"
       style={{
         top: `${dropdownPosition.top}px`,
         left: `${dropdownPosition.left}px`,
         width: `${dropdownPosition.width}px`,
-        background: 'var(--f-surface-elevated)',
+        background: 'var(--surface-raised)',
         backdropFilter: 'blur(20px)',
-        border: '1px solid var(--f-border)',
-        boxShadow: '0 12px 32px var(--f-tooltip-shadow)',
+        border: '1px solid var(--line)',
+        boxShadow: '0 12px 32px var(--shadow-color)',
       }}
     >
       {!showCustomInput ? (
@@ -119,15 +119,15 @@ export function Select({ value, onChange, options = [], placeholder = 'Velg...',
                 key={optionValue}
                 type="button"
                 onClick={() => handleSelect(optionValue)}
-                className="flex w-full items-center gap-2 rounded-lg px-3 py-2 text-left text-sm transition"
+                className="flex w-full items-center gap-2 r-md px-3 py-2 text-left text-sm transition"
                 style={{
-                  background: isSelected ? 'var(--f-green-bg)' : 'transparent',
-                  color: isSelected ? 'var(--f-green-text)' : 'var(--f-text-soft)',
+                  background: isSelected ? 'var(--brand-soft)' : 'transparent',
+                  color: isSelected ? 'var(--brand-ink)' : 'var(--ink-muted)',
                 }}
-                onMouseEnter={e => { if (!isSelected) { e.currentTarget.style.background = 'var(--f-hover)'; e.currentTarget.style.color = 'var(--f-text-body)'; }}}
-                onMouseLeave={e => { if (!isSelected) { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.color = 'var(--f-text-soft)'; }}}
+                onMouseEnter={e => { if (!isSelected) { e.currentTarget.style.background = 'var(--hover)'; e.currentTarget.style.color = 'var(--ink)'; }}}
+                onMouseLeave={e => { if (!isSelected) { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.color = 'var(--ink-muted)'; }}}
               >
-                {optionIcon && <span className="flex-shrink-0 opacity-70">{optionIcon}</span>}
+                {optionIcon && <span className="shrink-0 opacity-70">{optionIcon}</span>}
                 {optionLabel}
               </button>
             );
@@ -144,12 +144,12 @@ export function Select({ value, onChange, options = [], placeholder = 'Velg...',
               else if (e.key === 'Escape') { setShowCustomInput(false); setIsOpen(false); }
             }}
             placeholder="Skriv inn enhet"
-            className="f-input w-full px-3 py-2 text-sm"
+            className="ft-input w-full px-3 py-2 text-sm"
             autoFocus
           />
           <div className="mt-2 flex gap-2">
-            <button type="button" onClick={handleCustomSubmit} className="f-btn-primary flex-1 rounded-lg px-3 py-1.5 text-sm font-medium">Lagre</button>
-            <button type="button" onClick={() => { setShowCustomInput(false); setCustomValue(''); }} className="f-btn-ghost flex-1 rounded-lg px-3 py-1.5 text-sm font-medium">Avbryt</button>
+            <button type="button" onClick={handleCustomSubmit} className="ft-btn ft-btn-primary flex-1 r-md px-3 py-1-5 text-sm font-medium">Lagre</button>
+            <button type="button" onClick={() => { setShowCustomInput(false); setCustomValue(''); }} className="ft-btn ft-btn-secondary flex-1 r-md px-3 py-1-5 text-sm font-medium">Avbryt</button>
           </div>
         </div>
       )}
@@ -163,12 +163,12 @@ export function Select({ value, onChange, options = [], placeholder = 'Velg...',
           ref={buttonRef}
           type="button"
           onClick={() => setIsOpen(!isOpen)}
-          className={`${noMargin ? '' : 'mt-2 '}w-full rounded-xl px-4 py-2 text-left text-sm f-input`}
+          className={`${noMargin ? '' : 'mt-2 '}w-full r-lg px-4 py-2 text-left text-sm ft-input`}
           style={{ cursor: 'pointer' }}
         >
-          <span className="flex items-center gap-2" style={{ color: selectedOption ? 'var(--f-text-body)' : 'var(--f-text-subtle)' }}>
+          <span className="flex items-center gap-2" style={{ color: selectedOption ? 'var(--ink)' : 'var(--ink-muted)' }}>
             {selectedOption && getOptionIcon(selectedOption) && (
-              <span className="flex-shrink-0 opacity-70">{getOptionIcon(selectedOption)}</span>
+              <span className="shrink-0 opacity-70">{getOptionIcon(selectedOption)}</span>
             )}
             {selectedOption ? getOptionLabel(selectedOption) : placeholder}
           </span>

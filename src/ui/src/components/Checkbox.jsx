@@ -5,7 +5,7 @@ export function Checkbox({ checked, onChange, label, description, disabled = fal
     <label
       className={`group flex items-start gap-3 ${disabled ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'} ${className}`}
     >
-      <div className="relative flex-shrink-0 mt-0.5">
+      <div className="relative shrink-0 mt-0-5 pt-0-5">
         <input
           type="checkbox"
           checked={checked}
@@ -14,28 +14,28 @@ export function Checkbox({ checked, onChange, label, description, disabled = fal
           className="sr-only"
         />
         <div
-          className="relative flex h-5 w-5 items-center justify-center rounded-md transition-all duration-200"
+          className="ft-checkbox-box relative flex h-4 w-4 items-center justify-center transition-all"
           style={{
-            background: checked ? 'var(--f-green-bg)' : 'var(--f-hover)',
-            border: checked ? '1.5px solid var(--f-border-green)' : '1.5px solid var(--f-border)',
-            color: checked ? 'var(--f-green-text)' : 'transparent',
-            boxShadow: checked ? 'none' : 'none',
+            borderRadius: 'var(--radius-xs)',
+            background: checked ? 'var(--brand)' : 'var(--surface)',
+            border: checked ? '1px solid var(--brand)' : '1px solid var(--line-strong)',
+            color: checked ? 'var(--on-brand)' : 'transparent',
           }}
         >
           {checked && <IconCheck size={12} stroke={2.8} />}
         </div>
       </div>
-      <div className="flex-1 min-w-0 pt-0.5">
+      <div className="flex-1 min-w-0 pt-0-5">
         {label && (
           <span
             className="block text-sm font-medium transition-colors"
-            style={{ color: checked ? 'var(--f-text-body)' : 'var(--f-text-soft)' }}
+            style={{ color: 'var(--ink)' }}
           >
             {label}
           </span>
         )}
         {description && (
-          <span className="mt-0.5 block text-xs" style={{ color: 'var(--f-text-subtle)' }}>{description}</span>
+          <span className="mt-0-5 block text-xs" style={{ color: 'var(--ink-muted)' }}>{description}</span>
         )}
       </div>
     </label>

@@ -1,12 +1,13 @@
 # App Icons
 
-The app icon is the Fattern mark: a lowercase f whose crossbar is a moustache.
+The app icon is the Fattern mark: a white F whose crossbar is an amber moustache, on a spruce-green tile.
 Source drawings:
 
-- `src/ui/public/fattern-monogram.svg` (also at the repo root) — the full mark, used for 64 px and up
-- `fattern-mark-small.svg` (this folder) — a heavier drawing for 16 and 32 px, so the moustache stays legible
+- `src/ui/public/fattern-monogram.svg` (also at the repo root and as `src/ui/public/brand/fattern-mark.svg`)
+- `fattern-mark-small.svg` (this folder) — the same drawing, kept under its old name
 
-The React version lives in `src/ui/src/components/brand/FatternMark.jsx`.
+The PNG files here are rendered from that SVG. The React version lives in `src/ui/src/components/brand/FatternMark.jsx`.
+Usage rules are in `docs/design-system/README.md`.
 
 ## Required Files
 
