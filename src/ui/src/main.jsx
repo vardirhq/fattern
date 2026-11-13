@@ -1,9 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App.jsx';
+import '@fontsource-variable/schibsted-grotesk';
+import '@fontsource-variable/hanken-grotesk';
+import '@fontsource-variable/jetbrains-mono';
 import './index.css';
 import './i18n/config.js';
-import { getTheme, applyTheme } from './themes';
+import { getTheme, applyTheme, createThemeVariant } from './themes';
 
 // Initialize theme immediately before React renders to prevent flash
 function initializeTheme() {
@@ -12,7 +15,8 @@ function initializeTheme() {
     // This gets updated whenever the theme changes
     const themeId = localStorage.getItem('fattern:theme') || 'light';
     const theme = getTheme(themeId);
-    applyTheme(theme);
+    const accent = localStorage.getItem(`fattern:theme.${themeId}.accent`);
+    applyTheme(accent ? createThemeVariant(theme, accent) : theme);
   } catch (error) {
     console.error('Failed to initialize theme', error);
     // Apply default light theme

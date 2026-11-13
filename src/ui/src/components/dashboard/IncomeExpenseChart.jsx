@@ -19,8 +19,8 @@ function formatCurrencyShort(value) {
 const CustomTooltip = ({ active, payload, label, incomeLabel, expensesLabel }) => {
   if (!active || !payload?.length) return null;
   return (
-    <div className="rounded-xl p-3 shadow-lg text-sm" style={{ background: 'var(--f-surface-elevated)', border: '1px solid var(--f-border)' }}>
-      <p className="font-semibold mb-2" style={{ color: 'var(--f-text-body)' }}>{label}</p>
+    <div className="r-lg p-3 shadow-lg text-sm" style={{ background: 'var(--surface-raised)', border: '1px solid var(--line)' }}>
+      <p className="font-semibold mb-2" style={{ color: 'var(--ink)' }}>{label}</p>
       {payload.map((entry) => (
         <p key={entry.name} style={{ color: entry.color }}>
           {entry.name === 'income' ? incomeLabel : expensesLabel}:{' '}
@@ -42,7 +42,7 @@ export function IncomeExpenseChart({ data = [] }) {
 
   if (!data.length) {
     return (
-      <div className="flex h-48 items-center justify-center text-sm" style={{ color: 'var(--f-text-subtle)' }}>
+      <div className="flex h-48 items-center justify-center text-sm" style={{ color: 'var(--ink-muted)' }}>
         {t('dashboard_view.no_data_for_period')}
       </div>
     );
@@ -51,16 +51,16 @@ export function IncomeExpenseChart({ data = [] }) {
   return (
     <ResponsiveContainer width="100%" height={220}>
       <BarChart data={data} margin={{ top: 4, right: 8, left: 0, bottom: 0 }}>
-        <CartesianGrid strokeDasharray="3 3" stroke="var(--f-border-faint)" vertical={false} />
+        <CartesianGrid strokeDasharray="3 3" stroke="var(--line)" vertical={false} />
         <XAxis
           dataKey="label"
-          tick={{ fontSize: 11, fill: 'var(--f-text-subtle)' }}
+          tick={{ fontSize: 11, fill: 'var(--ink-muted)' }}
           tickLine={false}
           axisLine={false}
         />
         <YAxis
           tickFormatter={formatCurrencyShort}
-          tick={{ fontSize: 11, fill: 'var(--f-text-subtle)' }}
+          tick={{ fontSize: 11, fill: 'var(--ink-muted)' }}
           tickLine={false}
           axisLine={false}
           width={48}
@@ -69,11 +69,11 @@ export function IncomeExpenseChart({ data = [] }) {
           content={<CustomTooltip incomeLabel={incomeLabel} expensesLabel={expensesLabel} />}
         />
         <Legend
-          wrapperStyle={{ fontSize: 12, paddingTop: 8, color: 'var(--f-text-soft)' }}
+          wrapperStyle={{ fontSize: 12, paddingTop: 8, color: 'var(--ink-muted)' }}
           formatter={(value) => (value === 'income' ? incomeLabel : expensesLabel)}
         />
-        <Bar dataKey="income" name="income" fill="var(--f-green)" radius={[3, 3, 0, 0]} />
-        <Bar dataKey="expenses" name="expenses" fill="var(--f-chart-muted, #C9C3B4)" radius={[3, 3, 0, 0]} />
+        <Bar dataKey="income" name="income" fill="var(--brand)" radius={[3, 3, 0, 0]} />
+        <Bar dataKey="expenses" name="expenses" fill="var(--accent)" radius={[3, 3, 0, 0]} />
       </BarChart>
     </ResponsiveContainer>
   );

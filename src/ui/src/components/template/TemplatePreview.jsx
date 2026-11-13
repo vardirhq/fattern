@@ -95,8 +95,8 @@ export function TemplatePreview({ template, zoom = 100, pan = { x: 0, y: 0 }, on
 
   if (!template) {
     return (
-      <div className="flex h-full items-center justify-center" style={{ background: 'var(--f-surface-hover)' }}>
-        <p style={{ color: 'var(--f-text-subtle)' }}>{t('template_editor.no_preview')}</p>
+      <div className="flex h-full items-center justify-center" style={{ background: 'var(--surface-sunken)' }}>
+        <p style={{ color: 'var(--ink-muted)' }}>{t('template_editor.no_preview')}</p>
       </div>
     );
   }
@@ -176,9 +176,9 @@ export function TemplatePreview({ template, zoom = 100, pan = { x: 0, y: 0 }, on
       {onClose && (
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 z-10 rounded-lg p-2 shadow-lg transition"
-          style={{ background: 'rgba(12,22,18,0.9)', border: '1px solid var(--f-border)', color: 'var(--f-text-soft)' }}
-          onMouseEnter={e => e.currentTarget.style.background = 'var(--f-hover-elevated)'}
+          className="absolute top-4 right-4 z-10 r-md p-2 shadow-lg transition"
+          style={{ background: 'rgba(12,22,18,0.9)', border: '1px solid var(--line)', color: 'var(--ink-muted)' }}
+          onMouseEnter={e => e.currentTarget.style.background = 'var(--hover-strong)'}
           onMouseLeave={e => e.currentTarget.style.background = 'rgba(12,22,18,0.9)'}
           title={t('template_editor.close_preview')}
         >
@@ -187,7 +187,7 @@ export function TemplatePreview({ template, zoom = 100, pan = { x: 0, y: 0 }, on
       )}
       <div className="relative h-full w-full overflow-auto">
         <div
-          className="absolute shadow-2xl"
+          className="absolute shadow-lg"
           style={{
             background: '#ffffff',
             left: '50%',

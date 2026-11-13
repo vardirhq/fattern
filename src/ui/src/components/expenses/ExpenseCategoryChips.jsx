@@ -10,7 +10,7 @@ export function ExpenseCategoryChips({ breakdown = [], activeCategory, onSelectC
     alignItems: 'center',
     gap: 6,
     padding: '4px 12px',
-    borderRadius: 20,
+    borderRadius: 'var(--radius-lg)',
     fontSize: 13,
     fontWeight: 500,
     cursor: 'pointer',
@@ -20,15 +20,15 @@ export function ExpenseCategoryChips({ breakdown = [], activeCategory, onSelectC
   };
 
   const chipActive = {
-    background: 'var(--f-inverse-bg)',
-    color: 'var(--f-inverse-text)',
-    borderColor: 'var(--f-inverse-bg)',
+    background: 'var(--ink)',
+    color: 'var(--bg)',
+    borderColor: 'var(--ink)',
   };
 
   const chipInactive = {
-    background: 'var(--f-surface-hover)',
-    color: 'var(--f-text-soft)',
-    borderColor: 'var(--f-border)',
+    background: 'var(--surface-sunken)',
+    color: 'var(--ink-muted)',
+    borderColor: 'var(--line)',
   };
 
   return (
@@ -71,7 +71,7 @@ export function ExpenseCategoryChips({ breakdown = [], activeCategory, onSelectC
                   width: 8,
                   height: 8,
                   borderRadius: '50%',
-                  background: cat.color || 'var(--f-text-muted)',
+                  background: cat.color || 'var(--ink-subtle)',
                   flexShrink: 0,
                 }}
               />

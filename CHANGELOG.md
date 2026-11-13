@@ -11,6 +11,18 @@ This project follows **Keep a Changelog** and **Semantic Versioning (pre-1.0)**.
 
 ---
 
+# **[Unreleased]**
+
+### Changed
+
+* **New design system.** Spruce-green brand colour, amber accent, cool neutrals, small radii, and three bundled typefaces (Schibsted Grotesk, Hanken Grotesk, JetBrains Mono for amounts and identifiers). Documented in `docs/design-system/`.
+* **New logo.** An F with a moustache crossbar, plus a wordmark; app icons regenerated.
+* **Plain CSS.** Tailwind, PostCSS and Autoprefixer are removed. Styles live in `src/ui/src/styles/` and tokens compile from `docs/design-system/tokens.json` with `npm run tokens`.
+* **Themes.** Light and Dark are now defined in CSS. Accent colours and the premium palettes (Hav, Skog, Solnedgang, Skifer, Midnatt) are applied on top of them; the default accent is Gran.
+* Fonts are bundled with the app and no longer loaded from Google Fonts.
+
+---
+
 # **[0.6.0] – 2025-12-09**
 
 ### Added

@@ -7,7 +7,7 @@ export function QuantityInput({ value, onChange, min = 0, step = 0.01, placehold
       value={value}
       onChange={(e) => onChange?.(e.target.value)}
       placeholder={placeholder}
-      className="f-input mt-2 w-full rounded-2xl px-4 py-2 text-sm"
+      className="ft-input mt-2 w-full r-lg px-4 py-2 text-sm"
       {...props}
     />
   );

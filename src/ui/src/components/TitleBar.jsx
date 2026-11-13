@@ -28,13 +28,13 @@ export function TitleBar({ title = 'Fattern', showBrand = false }) {
   return (
     <div
       style={{
-        height: 'var(--f-topbar-h)',
+        height: 'var(--topbar-h)',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'space-between',
         padding: '0 18px',
         flexShrink: 0,
-        background: 'var(--f-surface-topbar)',
+        background: 'var(--bg)',
         WebkitAppRegion: 'drag',
         userSelect: 'none',
         zIndex: 100,
@@ -43,7 +43,7 @@ export function TitleBar({ title = 'Fattern', showBrand = false }) {
       {/* Brand */}
       <div style={{ display: 'flex', alignItems: 'center', gap: 9 }}>
         {showBrand && <FatternMark size={18} title="" />}
-        <span style={{ fontSize: 13, fontWeight: 500, color: 'var(--f-text-subtle)', letterSpacing: '-0.01em' }}>
+        <span style={{ fontSize: 13, fontWeight: 500, color: 'var(--ink-muted)', letterSpacing: '-0.01em' }}>
           {title}
         </span>
       </div>
@@ -58,14 +58,14 @@ export function TitleBar({ title = 'Fattern', showBrand = false }) {
           title={t('layout.dev_tools')}
           style={{
             background: 'none', border: 'none', cursor: 'pointer',
-            color: 'var(--f-text-muted)',
+            color: 'var(--ink-subtle)',
             display: 'flex', alignItems: 'center', justifyContent: 'center',
-            width: 22, height: 22, borderRadius: 5,
+            width: 22, height: 22, borderRadius: 'var(--radius-md)',
             transition: 'color 0.12s',
             marginRight: 4,
           }}
-          onMouseEnter={e => (e.currentTarget.style.color = 'var(--f-text-subtle)')}
-          onMouseLeave={e => (e.currentTarget.style.color = 'var(--f-text-muted)')}
+          onMouseEnter={e => (e.currentTarget.style.color = 'var(--ink-muted)')}
+          onMouseLeave={e => (e.currentTarget.style.color = 'var(--ink-subtle)')}
         >
           <IconTerminal2 size={13} stroke={1.6} />
         </button>
@@ -74,7 +74,7 @@ export function TitleBar({ title = 'Fattern', showBrand = false }) {
         {[
           { color: '#f0c060', labelKey: 'layout.minimize', action: handleMinimize },
           { color: '#70c87a', labelKey: isMaximized ? 'layout.restore' : 'layout.maximize', action: handleMaximize },
-          { color: '#f07060', labelKey: 'layout.close', action: handleClose },
+          { color: 'var(--danger)', labelKey: 'layout.close', action: handleClose },
         ].map(({ color, labelKey, action }) => (
           <button
             key={labelKey}

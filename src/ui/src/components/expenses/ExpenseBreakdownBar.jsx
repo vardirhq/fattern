@@ -14,9 +14,9 @@ export function ExpenseBreakdownBar({ breakdown = [], activeCategory, onSelectCa
           display: 'flex',
           gap: 2,
           height: 12,
-          borderRadius: 6,
+          borderRadius: 'var(--radius-md)',
           overflow: 'hidden',
-          background: 'var(--f-surface-hover)',
+          background: 'var(--surface-sunken)',
         }}
       >
         {breakdown.map((cat) => (
@@ -73,10 +73,10 @@ export function ExpenseBreakdownBar({ breakdown = [], activeCategory, onSelectCa
                   outlineOffset: 2,
                 }}
               />
-              <span style={{ fontSize: 12, color: 'var(--f-text-soft)' }}>
+              <span style={{ fontSize: 12, color: 'var(--ink-muted)' }}>
                 {cat.name}
               </span>
-              <span style={{ fontSize: 12, color: 'var(--f-text-subtle)', marginLeft: 2 }}>
+              <span style={{ fontSize: 12, color: 'var(--ink-muted)', marginLeft: 2 }}>
                 {pct}%
               </span>
             </button>

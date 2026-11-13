@@ -13,10 +13,10 @@ export function TemplatePalette({ onAddElement }) {
   ];
 
   return (
-    <div className="w-64" style={{ borderRight: '1px solid var(--f-border-subtle)', background: 'rgba(8,16,12,0.6)' }}>
-      <div className="p-4" style={{ borderBottom: '1px solid var(--f-border-subtle)' }}>
-        <h2 className="text-sm font-semibold" style={{ color: 'var(--f-text-body)' }}>{t('template_editor.palette_title')}</h2>
-        <p className="mt-1 text-xs" style={{ color: 'var(--f-text-subtle)' }}>{t('template_editor.palette_desc')}</p>
+    <div className="w-64" style={{ borderRight: '1px solid var(--line)', background: 'rgba(8,16,12,0.6)' }}>
+      <div className="p-4" style={{ borderBottom: '1px solid var(--line)' }}>
+        <h2 className="text-sm font-semibold" style={{ color: 'var(--ink)' }}>{t('template_editor.palette_title')}</h2>
+        <p className="mt-1 text-xs" style={{ color: 'var(--ink-muted)' }}>{t('template_editor.palette_desc')}</p>
       </div>
       <div className="p-4 space-y-2">
         {paletteItems.map((item) => {
@@ -25,12 +25,12 @@ export function TemplatePalette({ onAddElement }) {
             <button
               key={item.type}
               onClick={() => onAddElement(item.type)}
-              className="flex w-full items-center gap-3 rounded-lg px-4 py-3 text-left transition"
-              style={{ border: '1px solid var(--f-border-subtle)', background: 'transparent', color: 'var(--f-text-body)' }}
-              onMouseEnter={e => { e.currentTarget.style.background = 'var(--f-green-bg)'; e.currentTarget.style.borderColor = 'var(--f-border-green)'; e.currentTarget.style.color = 'var(--f-green-text)'; }}
-              onMouseLeave={e => { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.borderColor = 'var(--f-border-subtle)'; e.currentTarget.style.color = 'var(--f-text-body)'; }}
+              className="flex w-full items-center gap-3 r-md px-4 py-3 text-left transition"
+              style={{ border: '1px solid var(--line)', background: 'transparent', color: 'var(--ink)' }}
+              onMouseEnter={e => { e.currentTarget.style.background = 'var(--brand-soft)'; e.currentTarget.style.borderColor = 'var(--brand-line)'; e.currentTarget.style.color = 'var(--brand-ink)'; }}
+              onMouseLeave={e => { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.borderColor = 'var(--line)'; e.currentTarget.style.color = 'var(--ink)'; }}
             >
-              <Icon className="h-5 w-5 flex-shrink-0" style={{ color: 'var(--f-text-subtle)' }} />
+              <Icon className="h-5 w-5 shrink-0" style={{ color: 'var(--ink-muted)' }} />
               <span className="text-sm font-medium">{item.label}</span>
             </button>
           );

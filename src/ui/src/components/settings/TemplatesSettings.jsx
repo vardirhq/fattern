@@ -162,24 +162,24 @@ export function TemplatesSettings({ onOpenTemplateEditor, onDeleteTemplate, onSe
 
       <div className="flex-1 space-y-6">
         <div>
-          <h3 className="text-sm font-semibold mb-1" style={{ color: 'var(--f-text-body)' }}>{t('settings.templates.title')}</h3>
-          <p className="text-xs mb-4" style={{ color: 'var(--f-text-subtle)' }}>{t('settings.templates.desc')}</p>
+          <h3 className="text-sm font-semibold mb-1" style={{ color: 'var(--ink)' }}>{t('settings.templates.title')}</h3>
+          <p className="text-xs mb-4" style={{ color: 'var(--ink-muted)' }}>{t('settings.templates.desc')}</p>
         </div>
 
         {loadingTemplates ? (
-          <div className="py-8 text-center text-sm" style={{ color: 'var(--f-text-subtle)' }}>{t('settings.templates.loading')}</div>
+          <div className="py-8 text-center text-sm" style={{ color: 'var(--ink-muted)' }}>{t('settings.templates.loading')}</div>
         ) : (
           <>
             {filteredTemplates.length === 0 ? (
-              <div className="rounded-lg p-6 text-center" style={{ border: '1px solid var(--f-border-subtle)', background: 'var(--f-surface-hover)' }}>
-                <p className="text-sm" style={{ color: 'var(--f-text-soft)' }}>
+              <div className="r-md p-6 text-center" style={{ border: '1px solid var(--line)', background: 'var(--surface-sunken)' }}>
+                <p className="text-sm" style={{ color: 'var(--ink-muted)' }}>
                   {templates.length === 0
                     ? t('settings.templates.empty')
                     : t('settings.templates.empty_filter', { filter: filterLabel(activeFilter) })}
                 </p>
               </div>
             ) : (
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-4">
+              <div className="grid grid-cols-1 sm-grid-cols-2 lg-grid-cols-3 xl-grid-cols-4 xxl-grid-cols-5 gap-4">
                 {filteredTemplates.map((template) => {
                   const templateId = getTemplateId(template);
                   const isDefault = isTemplateDefault(templateId, defaultTemplateId);
@@ -204,17 +204,17 @@ export function TemplatesSettings({ onOpenTemplateEditor, onDeleteTemplate, onSe
         )}
 
         {!hasPremiumTemplates && isSupporter && (
-          <div className="rounded-lg p-4" style={{ border: '1px solid var(--f-border-green)', background: 'var(--f-green-bg)' }}>
+          <div className="r-md p-4" style={{ border: '1px solid var(--brand-line)', background: 'var(--brand-soft)' }}>
             <div className="flex items-start justify-between">
               <div className="flex-1">
-                <h4 className="text-sm font-semibold mb-1" style={{ color: 'var(--f-green-text)' }}>{t('settings.templates.premium_title')}</h4>
-                <p className="text-xs mb-3" style={{ color: 'var(--f-green-text-dim)' }}>
+                <h4 className="text-sm font-semibold mb-1" style={{ color: 'var(--brand-ink)' }}>{t('settings.templates.premium_title')}</h4>
+                <p className="text-xs mb-3" style={{ color: 'var(--brand-ink)' }}>
                   {t('settings.templates.premium_desc')}
                 </p>
               </div>
               <button
                 onClick={handleCreatePremiumTemplates}
-                className="f-btn-primary rounded-lg px-4 py-2 text-xs font-semibold"
+                className="ft-btn ft-btn-primary r-md px-4 py-2 text-xs font-semibold"
               >
                 {t('settings.templates.create_premium_button')}
               </button>
@@ -223,12 +223,12 @@ export function TemplatesSettings({ onOpenTemplateEditor, onDeleteTemplate, onSe
         )}
 
         {hasPremiumTemplates && !isSupporter && (
-          <div className="rounded-lg p-4" style={{ border: '1px solid rgba(217,119,6,0.3)', background: 'rgba(217,119,6,0.08)' }}>
+          <div className="r-md p-4" style={{ border: '1px solid var(--warning-line)', background: 'var(--warning-soft)' }}>
             <div className="flex items-start gap-3">
-              <IconLock className="h-5 w-5 flex-shrink-0 mt-0.5" style={{ color: '#fbbf24' }} />
+              <IconLock className="h-5 w-5 shrink-0 mt-0-5" style={{ color: 'var(--warning)' }} />
               <div className="flex-1">
-                <h4 className="text-sm font-semibold mb-1" style={{ color: 'var(--f-text-body)' }}>{t('settings.templates.premium_available_title')}</h4>
-                <p className="text-xs" style={{ color: 'var(--f-text-soft)' }}>
+                <h4 className="text-sm font-semibold mb-1" style={{ color: 'var(--ink)' }}>{t('settings.templates.premium_available_title')}</h4>
+                <p className="text-xs" style={{ color: 'var(--ink-muted)' }}>
                   {t('settings.templates.premium_available_desc')}
                 </p>
               </div>
@@ -236,15 +236,15 @@ export function TemplatesSettings({ onOpenTemplateEditor, onDeleteTemplate, onSe
           </div>
         )}
 
-        <div className="pt-4" style={{ borderTop: '1px solid var(--f-border-faint)' }}>
-          <p className="text-xs mb-3" style={{ color: 'var(--f-text-subtle)' }}>
+        <div className="pt-4" style={{ borderTop: '1px solid var(--line)' }}>
+          <p className="text-xs mb-3" style={{ color: 'var(--ink-muted)' }}>
             {t('settings.templates.default_hint')}
           </p>
           <div className="flex gap-2">
             {onImportTemplate && (
               <button
                 onClick={onImportTemplate}
-                className="f-btn-ghost rounded-lg px-4 py-2 text-sm font-medium flex items-center gap-2"
+                className="ft-btn ft-btn-secondary r-md px-4 py-2 text-sm font-medium flex items-center gap-2"
               >
                 <IconPackage className="h-4 w-4" />
                 {t('settings.templates.import_button')}
@@ -253,7 +253,7 @@ export function TemplatesSettings({ onOpenTemplateEditor, onDeleteTemplate, onSe
             {onOpenTemplateEditor && (
               <button
                 onClick={handleCreateNewTemplate}
-                className="f-btn-primary rounded-lg px-4 py-2 text-sm font-medium"
+                className="ft-btn ft-btn-primary r-md px-4 py-2 text-sm font-medium"
               >
                 {t('settings.templates.create_button')}
               </button>

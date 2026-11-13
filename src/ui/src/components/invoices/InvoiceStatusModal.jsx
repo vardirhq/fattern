@@ -78,9 +78,9 @@ export function InvoiceStatusModal({ isOpen, invoice, onClose, onSubmit, initial
           <button
             type="button"
             className="text-sm font-medium transition"
-            style={{ color: 'var(--f-text-subtle)' }}
-            onMouseEnter={e => e.currentTarget.style.color = 'var(--f-text-body)'}
-            onMouseLeave={e => e.currentTarget.style.color = 'var(--f-text-subtle)'}
+            style={{ color: 'var(--ink-muted)' }}
+            onMouseEnter={e => e.currentTarget.style.color = 'var(--ink)'}
+            onMouseLeave={e => e.currentTarget.style.color = 'var(--ink-muted)'}
             onClick={onClose}
             disabled={saving}
           >
@@ -89,7 +89,7 @@ export function InvoiceStatusModal({ isOpen, invoice, onClose, onSubmit, initial
           <button
             type="submit"
             form="status-form"
-            className="f-btn-primary rounded-2xl px-5 py-2 text-sm font-semibold disabled:opacity-60"
+            className="ft-btn ft-btn-primary r-lg px-5 py-2 text-sm font-semibold disabled-dim"
             disabled={saving}
           >
             {saving ? t('common.saving') : t('invoice_status.update_button')}
@@ -99,7 +99,7 @@ export function InvoiceStatusModal({ isOpen, invoice, onClose, onSubmit, initial
     >
       <form id="status-form" className="space-y-4" onSubmit={handleSubmit}>
         <div>
-          <label className="text-sm font-medium" style={{ color: 'var(--f-text-body)' }}>{t('invoice_status.status_label')}</label>
+          <label className="text-sm font-medium" style={{ color: 'var(--ink)' }}>{t('invoice_status.status_label')}</label>
           <Select
             value={status}
             onChange={setStatus}
@@ -110,7 +110,7 @@ export function InvoiceStatusModal({ isOpen, invoice, onClose, onSubmit, initial
 
         {requiresDate && (
           <div>
-            <label className="text-sm font-medium" style={{ color: 'var(--f-text-body)' }}>
+            <label className="text-sm font-medium" style={{ color: 'var(--ink)' }}>
               {status === 'paid' ? t('invoice_status.payment_date_label') : t('invoice_status.date_label')} *
             </label>
             <DatePicker
@@ -118,17 +118,17 @@ export function InvoiceStatusModal({ isOpen, invoice, onClose, onSubmit, initial
               onChange={setPaymentDate}
               placeholder="dd.mm.yyyy"
               required
-              className="f-input mt-2 w-full rounded-2xl px-4 py-2 text-sm"
+              className="ft-input mt-2 w-full r-lg px-4 py-2 text-sm"
             />
-            <p className="mt-1 text-xs" style={{ color: 'var(--f-text-subtle)' }}>
+            <p className="mt-1 text-xs" style={{ color: 'var(--ink-muted)' }}>
               {status === 'paid' ? t('invoice_status.paid_question') : t('invoice_status.date_question')}
             </p>
           </div>
         )}
 
         {error ? (
-          <div className="rounded-lg p-3" style={{ background: 'var(--f-danger-bg)', border: '1px solid var(--f-danger-border)' }}>
-            <p className="text-sm font-medium" style={{ color: 'var(--f-danger-text)' }}>{error}</p>
+          <div className="r-md p-3" style={{ background: 'var(--danger-soft)', border: '1px solid var(--danger-line)' }}>
+            <p className="text-sm font-medium" style={{ color: 'var(--danger)' }}>{error}</p>
           </div>
         ) : null}
       </form>

@@ -27,7 +27,7 @@ export function InvoiceStatusSelector({ invoice, onStatusChange, showModal }) {
   const dropRef = useRef(null);
 
   const currentDef = STATUS_OPTION_DEFS.find((o) => o.value === invoice.status) || STATUS_OPTION_DEFS[0];
-  const badgeClass = statusBadge[invoice.status] || 'f-pill-draft';
+  const badgeClass = statusBadge[invoice.status] || 'ft-badge';
 
   // Position dropdown below the badge
   const open = () => {
@@ -73,11 +73,11 @@ export function InvoiceStatusSelector({ invoice, onStatusChange, showModal }) {
         left: pos.left,
         zIndex: 9999,
         minWidth: 150,
-        background: 'var(--f-surface-elevated)',
+        background: 'var(--surface-raised)',
         backdropFilter: 'blur(20px)',
-        border: '1px solid var(--f-border)',
-        borderRadius: 10,
-        boxShadow: '0 12px 32px var(--f-tooltip-shadow)',
+        border: '1px solid var(--line)',
+        borderRadius: 'var(--radius-lg)',
+        boxShadow: '0 12px 32px var(--shadow-color)',
         padding: 4,
       }}
     >
@@ -90,14 +90,14 @@ export function InvoiceStatusSelector({ invoice, onStatusChange, showModal }) {
             style={{
               display: 'flex', alignItems: 'center', gap: 8,
               width: '100%', padding: '7px 10px',
-              borderRadius: 7, border: 'none', cursor: 'pointer',
+              borderRadius: 'var(--radius-md)', border: 'none', cursor: 'pointer',
               fontSize: 12, fontWeight: isActive ? 600 : 400,
-              background: isActive ? 'var(--f-green-bg)' : 'transparent',
-              color: isActive ? 'var(--f-green-text)' : 'var(--f-text-soft)',
+              background: isActive ? 'var(--brand-soft)' : 'transparent',
+              color: isActive ? 'var(--brand-ink)' : 'var(--ink-muted)',
               transition: 'background 0.1s, color 0.1s',
             }}
-            onMouseEnter={e => { if (!isActive) { e.currentTarget.style.background = 'var(--f-hover-elevated)'; e.currentTarget.style.color = 'var(--f-text-body)'; }}}
-            onMouseLeave={e => { if (!isActive) { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.color = 'var(--f-text-soft)'; }}}
+            onMouseEnter={e => { if (!isActive) { e.currentTarget.style.background = 'var(--hover-strong)'; e.currentTarget.style.color = 'var(--ink)'; }}}
+            onMouseLeave={e => { if (!isActive) { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.color = 'var(--ink-muted)'; }}}
           >
             <Icon size={13} stroke={1.8} />
             {t(labelKey)}
@@ -116,12 +116,6 @@ export function InvoiceStatusSelector({ invoice, onStatusChange, showModal }) {
         title={t('invoice.status')}
         className={badgeClass}
         style={{
-          display: 'inline-flex', alignItems: 'center', gap: 5,
-          fontSize: 12, fontWeight: 600,
-          borderRadius: 999,
-          padding: '3px 8px 3px 10px',
-          fontFamily: 'var(--f-font-sans)',
-          whiteSpace: 'nowrap',
           cursor: 'pointer',
         }}
       >

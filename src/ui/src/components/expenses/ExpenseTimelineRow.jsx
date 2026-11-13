@@ -5,7 +5,7 @@ import { formatDate } from '../../utils/formatDate';
 
 export function ExpenseTimelineRow({ expense, formatCurrency, isSelected, onClick }) {
   const { t } = useTranslation();
-  const accentColor = expense.category_color || 'var(--f-text-muted)';
+  const accentColor = expense.category_color || 'var(--ink-subtle)';
 
   return (
     <div
@@ -17,11 +17,11 @@ export function ExpenseTimelineRow({ expense, formatCurrency, isSelected, onClic
         display: 'flex',
         alignItems: 'center',
         gap: 12,
-        borderRadius: 12,
+        borderRadius: 'var(--radius-lg)',
         cursor: 'pointer',
-        border: isSelected ? '2px solid var(--f-text)' : '1px solid var(--f-border)',
+        border: isSelected ? '2px solid var(--ink)' : '1px solid var(--line)',
         padding: isSelected ? '9px 13px' : '10px 14px',
-        background: 'var(--f-surface)',
+        background: 'var(--surface)',
         transition: 'border-color 150ms, background 150ms',
         marginBottom: 6,
       }}
@@ -29,7 +29,7 @@ export function ExpenseTimelineRow({ expense, formatCurrency, isSelected, onClic
       {/* Category dot */}
       <span
         aria-hidden="true"
-        style={{ width: 10, height: 10, borderRadius: 5, background: accentColor, flexShrink: 0 }}
+        style={{ width: 10, height: 10, borderRadius: 'var(--radius-md)', background: accentColor, flexShrink: 0 }}
       />
 
       {/* Content */}
@@ -38,7 +38,7 @@ export function ExpenseTimelineRow({ expense, formatCurrency, isSelected, onClic
           style={{
             fontWeight: 600,
             fontSize: 14,
-            color: 'var(--f-text)',
+            color: 'var(--ink)',
             overflow: 'hidden',
             textOverflow: 'ellipsis',
             whiteSpace: 'nowrap',
@@ -46,7 +46,7 @@ export function ExpenseTimelineRow({ expense, formatCurrency, isSelected, onClic
         >
           {expense.vendor || t('expense.unknown_vendor')}
         </div>
-        <div style={{ fontSize: 12, color: 'var(--f-text-subtle)', marginTop: 2 }}>
+        <div style={{ fontSize: 12, color: 'var(--ink-muted)', marginTop: 2 }}>
           <span>{expense.date ? formatDate(expense.date) : '—'}</span>
           {expense.category_name && (
             <>
@@ -60,9 +60,9 @@ export function ExpenseTimelineRow({ expense, formatCurrency, isSelected, onClic
       {/* Right side: amount + attachment indicator */}
       <div style={{ display: 'flex', alignItems: 'center', gap: 8, flexShrink: 0 }}>
         {expense.attachment_path && (
-          <IconPaperclip size={14} stroke={1.5} title={t('expense.has_receipt')} aria-label={t('expense.has_receipt')} style={{ color: 'var(--f-text-subtle)', flexShrink: 0 }} />
+          <IconPaperclip size={14} stroke={1.5} title={t('expense.has_receipt')} aria-label={t('expense.has_receipt')} style={{ color: 'var(--ink-muted)', flexShrink: 0 }} />
         )}
-        <span className="f-num" style={{ fontWeight: 600, fontSize: 14, color: 'var(--f-text)', whiteSpace: 'nowrap' }}>
+        <span className="ft-mono" style={{ fontWeight: 600, fontSize: 14, color: 'var(--ink)', whiteSpace: 'nowrap' }}>
           {formatCurrency ? formatCurrency(expense.amount) : expense.amount}
         </span>
       </div>

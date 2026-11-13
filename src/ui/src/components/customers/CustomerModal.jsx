@@ -83,9 +83,9 @@ export function CustomerModal({ isOpen, mode = 'create', initialCustomer, onSubm
           <button
             type="button"
             className="text-sm font-medium transition"
-            style={{ color: 'var(--f-text-subtle)' }}
-            onMouseEnter={e => e.currentTarget.style.color = 'var(--f-text-body)'}
-            onMouseLeave={e => e.currentTarget.style.color = 'var(--f-text-subtle)'}
+            style={{ color: 'var(--ink-muted)' }}
+            onMouseEnter={e => e.currentTarget.style.color = 'var(--ink)'}
+            onMouseLeave={e => e.currentTarget.style.color = 'var(--ink-muted)'}
             onClick={onClose}
             disabled={saving}
           >
@@ -94,7 +94,7 @@ export function CustomerModal({ isOpen, mode = 'create', initialCustomer, onSubm
           <button
             type="submit"
             form="customer-form"
-            className="f-btn-primary rounded-2xl px-5 py-2 text-sm font-semibold disabled:opacity-60"
+            className="ft-btn ft-btn-primary r-lg px-5 py-2 text-sm font-semibold disabled-dim"
             disabled={saving}
           >
             {saving ? t('common.saving') : isEdit ? t('common.save_changes') : t('customer_modal.create_button')}
@@ -104,9 +104,9 @@ export function CustomerModal({ isOpen, mode = 'create', initialCustomer, onSubm
     >
       <form id="customer-form" className="space-y-4" onSubmit={handleSubmit}>
         <div>
-          <label className="text-sm font-medium" style={{ color: 'var(--f-text-body)' }}>{t('customer_modal.name_label')}</label>
+          <label className="text-sm font-medium" style={{ color: 'var(--ink)' }}>{t('customer_modal.name_label')}</label>
           <input
-            className="f-input mt-2 w-full rounded-2xl px-4 py-2 text-sm"
+            className="ft-input mt-2 w-full r-lg px-4 py-2 text-sm"
             value={name}
             onChange={(e) => setName(e.target.value)}
             placeholder={t('customer_modal.name_placeholder')}
@@ -114,20 +114,20 @@ export function CustomerModal({ isOpen, mode = 'create', initialCustomer, onSubm
           />
         </div>
 
-        <div className="grid gap-4 md:grid-cols-2">
+        <div className="grid gap-4 md-grid-cols-2">
           <div>
-            <label className="text-sm font-medium" style={{ color: 'var(--f-text-body)' }}>{t('customer_modal.contact_label')}</label>
+            <label className="text-sm font-medium" style={{ color: 'var(--ink)' }}>{t('customer_modal.contact_label')}</label>
             <input
-              className="f-input mt-2 w-full rounded-2xl px-4 py-2 text-sm"
+              className="ft-input mt-2 w-full r-lg px-4 py-2 text-sm"
               value={contactName}
               onChange={(e) => setContactName(e.target.value)}
               placeholder={t('customer_modal.contact_placeholder')}
             />
           </div>
           <div>
-            <label className="text-sm font-medium" style={{ color: 'var(--f-text-body)' }}>{t('customer_modal.org_number_label')}</label>
+            <label className="text-sm font-medium" style={{ color: 'var(--ink)' }}>{t('customer_modal.org_number_label')}</label>
             <input
-              className="f-input mt-2 w-full rounded-2xl px-4 py-2 text-sm"
+              className="ft-input mt-2 w-full r-lg px-4 py-2 text-sm"
               value={orgNumber}
               onChange={(e) => setOrgNumber(e.target.value)}
               placeholder="123 456 789"
@@ -135,22 +135,22 @@ export function CustomerModal({ isOpen, mode = 'create', initialCustomer, onSubm
           </div>
         </div>
 
-        <div className="grid gap-4 md:grid-cols-2">
+        <div className="grid gap-4 md-grid-cols-2">
           <div>
-            <label className="text-sm font-medium" style={{ color: 'var(--f-text-body)' }}>{t('customer_modal.email_label')}</label>
+            <label className="text-sm font-medium" style={{ color: 'var(--ink)' }}>{t('customer_modal.email_label')}</label>
             <input
               type="email"
-              className="f-input mt-2 w-full rounded-2xl px-4 py-2 text-sm"
+              className="ft-input mt-2 w-full r-lg px-4 py-2 text-sm"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="kunde@example.com"
             />
           </div>
           <div>
-            <label className="text-sm font-medium" style={{ color: 'var(--f-text-body)' }}>{t('customer_modal.phone_label')}</label>
+            <label className="text-sm font-medium" style={{ color: 'var(--ink)' }}>{t('customer_modal.phone_label')}</label>
             <input
               type="tel"
-              className="f-input mt-2 w-full rounded-2xl px-4 py-2 text-sm"
+              className="ft-input mt-2 w-full r-lg px-4 py-2 text-sm"
               value={phone}
               onChange={(e) => setPhone(e.target.value)}
               placeholder="+47 123 45 678"
@@ -159,29 +159,29 @@ export function CustomerModal({ isOpen, mode = 'create', initialCustomer, onSubm
         </div>
 
         <div>
-          <label className="text-sm font-medium" style={{ color: 'var(--f-text-body)' }}>{t('customer_modal.address_label')}</label>
+          <label className="text-sm font-medium" style={{ color: 'var(--ink)' }}>{t('customer_modal.address_label')}</label>
           <input
-            className="f-input mt-2 w-full rounded-2xl px-4 py-2 text-sm"
+            className="ft-input mt-2 w-full r-lg px-4 py-2 text-sm"
             value={address}
             onChange={(e) => setAddress(e.target.value)}
             placeholder={t('customer_modal.address_placeholder')}
           />
         </div>
 
-        <div className="grid gap-4 md:grid-cols-2">
+        <div className="grid gap-4 md-grid-cols-2">
           <div>
-            <label className="text-sm font-medium" style={{ color: 'var(--f-text-body)' }}>{t('customer_modal.post_number_label')}</label>
+            <label className="text-sm font-medium" style={{ color: 'var(--ink)' }}>{t('customer_modal.post_number_label')}</label>
             <input
-              className="f-input mt-2 w-full rounded-2xl px-4 py-2 text-sm"
+              className="ft-input mt-2 w-full r-lg px-4 py-2 text-sm"
               value={postNumber}
               onChange={(e) => setPostNumber(e.target.value)}
               placeholder="0001"
             />
           </div>
           <div>
-            <label className="text-sm font-medium" style={{ color: 'var(--f-text-body)' }}>{t('customer_modal.post_location_label')}</label>
+            <label className="text-sm font-medium" style={{ color: 'var(--ink)' }}>{t('customer_modal.post_location_label')}</label>
             <input
-              className="f-input mt-2 w-full rounded-2xl px-4 py-2 text-sm"
+              className="ft-input mt-2 w-full r-lg px-4 py-2 text-sm"
               value={postLocation}
               onChange={(e) => setPostLocation(e.target.value)}
               placeholder="Oslo"
@@ -194,19 +194,19 @@ export function CustomerModal({ isOpen, mode = 'create', initialCustomer, onSubm
         </div>
 
         <div className="flex gap-4">
-          <label className="flex items-center gap-2 text-sm" style={{ color: 'var(--f-text-body)' }}>
+          <label className="flex items-center gap-2 text-sm" style={{ color: 'var(--ink)' }}>
             <input
               type="checkbox"
-              className="h-4 w-4 rounded" style={{ accentColor: 'var(--f-green)' }}
+              className="h-4 w-4 r-sm" style={{ accentColor: 'var(--brand)' }}
               checked={vatExempt}
               onChange={(e) => setVatExempt(e.target.checked)}
             />
             {t('customer_modal.vat_exempt_label')}
           </label>
-          <label className="flex items-center gap-2 text-sm" style={{ color: 'var(--f-text-body)' }}>
+          <label className="flex items-center gap-2 text-sm" style={{ color: 'var(--ink)' }}>
             <input
               type="checkbox"
-              className="h-4 w-4 rounded" style={{ accentColor: 'var(--f-green)' }}
+              className="h-4 w-4 r-sm" style={{ accentColor: 'var(--brand)' }}
               checked={active}
               onChange={(e) => setActive(e.target.checked)}
             />
@@ -214,7 +214,7 @@ export function CustomerModal({ isOpen, mode = 'create', initialCustomer, onSubm
           </label>
         </div>
 
-        {error ? <p className="text-sm font-medium" style={{ color: 'var(--f-danger-text)' }}>{error}</p> : null}
+        {error ? <p className="text-sm font-medium" style={{ color: 'var(--danger)' }}>{error}</p> : null}
       </form>
     </Modal>
   );

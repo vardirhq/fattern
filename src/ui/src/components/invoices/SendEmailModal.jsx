@@ -148,31 +148,31 @@ export function SendEmailModal({ isOpen, invoice, company, onClose, onStatusChan
 
   return (
     <div
-      className="fixed inset-0 z-[80] flex items-center justify-center p-4"
-      style={{ background: 'var(--f-overlay)', backdropFilter: 'blur(8px)' }}
+      className="fixed inset-0 z-80 flex items-center justify-center p-4"
+      style={{ background: 'var(--scrim)', backdropFilter: 'blur(8px)' }}
       onClick={(e) => { if (e.target === e.currentTarget) onClose(); }}
     >
       <div
-        className="f-glass-hero w-full max-w-lg rounded-3xl shadow-2xl flex flex-col"
+        className="ft-card ft-raised w-full max-w-lg r-lg shadow-lg flex flex-col"
         style={{ maxHeight: '90vh' }}
       >
         {/* Header */}
         <div
-          className="flex items-center justify-between p-6 flex-shrink-0"
-          style={{ borderBottom: '1px solid var(--f-border-subtle)' }}
+          className="flex items-center justify-between p-6 shrink-0"
+          style={{ borderBottom: '1px solid var(--line)' }}
         >
           <div className="flex items-center gap-3">
             <div
-              className="w-8 h-8 rounded-xl flex items-center justify-center"
-              style={{ background: 'var(--f-green-bg)', border: '1px solid var(--f-border-green)' }}
+              className="w-8 h-8 r-lg flex items-center justify-center"
+              style={{ background: 'var(--brand-soft)', border: '1px solid var(--brand-line)' }}
             >
-              <IconMail className="h-4 w-4" style={{ color: 'var(--f-green-text)' }} />
+              <IconMail className="h-4 w-4" style={{ color: 'var(--brand-ink)' }} />
             </div>
             <div>
-              <h3 className="text-base font-semibold" style={{ color: 'var(--f-text-body)' }}>
+              <h3 className="text-base font-semibold" style={{ color: 'var(--ink)' }}>
                 {isReminder ? t('send_email.reminder_title') : t('send_email.title')}
               </h3>
-              <p className="text-xs" style={{ color: 'var(--f-text-subtle)' }}>
+              <p className="text-xs" style={{ color: 'var(--ink-muted)' }}>
                 {invoice.invoice_number || invoice.id}
               </p>
             </div>
@@ -180,9 +180,9 @@ export function SendEmailModal({ isOpen, invoice, company, onClose, onStatusChan
           <button
             type="button"
             onClick={onClose}
-            className="rounded-lg p-1.5 transition"
-            style={{ color: 'var(--f-text-subtle)' }}
-            onMouseEnter={e => e.currentTarget.style.background = 'var(--f-hover)'}
+            className="r-md p-1-5 transition"
+            style={{ color: 'var(--ink-muted)' }}
+            onMouseEnter={e => e.currentTarget.style.background = 'var(--hover)'}
             onMouseLeave={e => e.currentTarget.style.background = 'transparent'}
           >
             <IconX className="h-4 w-4" />
@@ -194,14 +194,14 @@ export function SendEmailModal({ isOpen, invoice, company, onClose, onStatusChan
           {/* SMTP warning */}
           {!checkingConfig && !smtpConfigured && (
             <div
-              className="flex items-start gap-2 rounded-xl p-3 text-xs"
+              className="flex items-start gap-2 r-lg p-3 text-xs"
               style={{
-                background: 'var(--f-warn-bg)',
-                border: '1px solid var(--f-warn-border)',
-                color: 'var(--f-warn)',
+                background: 'var(--warning-soft)',
+                border: '1px solid var(--warning-line)',
+                color: 'var(--warning)',
               }}
             >
-              <IconAlertCircle className="h-4 w-4 flex-shrink-0 mt-0.5" />
+              <IconAlertCircle className="h-4 w-4 shrink-0 mt-0-5" />
               <span>{t('send_email.smtp_not_configured')}</span>
             </div>
           )}
@@ -209,87 +209,87 @@ export function SendEmailModal({ isOpen, invoice, company, onClose, onStatusChan
           {/* Success banner */}
           {sent && (
             <div
-              className="flex items-center gap-2 rounded-xl p-3 text-xs"
+              className="flex items-center gap-2 r-lg p-3 text-xs"
               style={{
-                background: 'var(--f-green-bg)',
-                border: '1px solid var(--f-border-green)',
-                color: 'var(--f-green-text)',
+                background: 'var(--brand-soft)',
+                border: '1px solid var(--brand-line)',
+                color: 'var(--brand-ink)',
               }}
             >
-              <IconCheck className="h-4 w-4 flex-shrink-0" />
+              <IconCheck className="h-4 w-4 shrink-0" />
               {t('send_email.sent_success')}
             </div>
           )}
 
           {/* To */}
           <div>
-            <label className="block text-xs mb-1.5 font-medium" style={{ color: 'var(--f-text-subtle)' }}>
+            <label className="block text-xs mb-1-5 font-medium" style={{ color: 'var(--ink-muted)' }}>
               {t('send_email.to_label')}
             </label>
             <input
-              className="f-input w-full text-sm rounded-xl px-3 py-2"
+              className="ft-input w-full text-sm r-lg px-3 py-2"
               type="email"
               placeholder={t('send_email.to_placeholder')}
               value={form.to}
               onChange={(e) => setForm((f) => ({ ...f, to: e.target.value }))}
-              style={{ color: 'var(--f-text-body)' }}
+              style={{ color: 'var(--ink)' }}
               autoFocus
             />
           </div>
 
           {/* Subject */}
           <div>
-            <label className="block text-xs mb-1.5 font-medium" style={{ color: 'var(--f-text-subtle)' }}>
+            <label className="block text-xs mb-1-5 font-medium" style={{ color: 'var(--ink-muted)' }}>
               {t('send_email.subject_label')}
             </label>
             <input
-              className="f-input w-full text-sm rounded-xl px-3 py-2"
+              className="ft-input w-full text-sm r-lg px-3 py-2"
               type="text"
               value={form.subject}
               onChange={(e) => setForm((f) => ({ ...f, subject: e.target.value }))}
-              style={{ color: 'var(--f-text-body)' }}
+              style={{ color: 'var(--ink)' }}
             />
           </div>
 
           {/* Message */}
           <div>
-            <label className="block text-xs mb-1.5 font-medium" style={{ color: 'var(--f-text-subtle)' }}>
+            <label className="block text-xs mb-1-5 font-medium" style={{ color: 'var(--ink-muted)' }}>
               {t('send_email.message_label')}
             </label>
             <textarea
-              className="f-input w-full text-sm rounded-xl px-3 py-2 resize-none"
+              className="ft-input w-full text-sm r-lg px-3 py-2 resize-none"
               rows={8}
               value={form.message}
               onChange={(e) => setForm((f) => ({ ...f, message: e.target.value }))}
-              style={{ color: 'var(--f-text-body)', fontFamily: 'var(--f-font-sans)' }}
+              style={{ color: 'var(--ink)', fontFamily: 'var(--font-sans)' }}
             />
           </div>
 
           {/* Attachment note */}
-          <p className="text-xs flex items-center gap-1.5" style={{ color: 'var(--f-text-muted)' }}>
-            <IconMail className="h-3.5 w-3.5 flex-shrink-0" />
+          <p className="text-xs flex items-center gap-1-5" style={{ color: 'var(--ink-subtle)' }}>
+            <IconMail className="h-3-5 w-3-5 shrink-0" />
             {t('send_email.attachment_note')}
           </p>
         </div>
 
         {/* Footer */}
         <div
-          className="flex items-center justify-between gap-3 p-5 flex-shrink-0"
-          style={{ borderTop: '1px solid var(--f-border-subtle)' }}
+          className="flex items-center justify-between gap-3 p-5 shrink-0"
+          style={{ borderTop: '1px solid var(--line)' }}
         >
           {/* Mailto fallback */}
           <button
             type="button"
             onClick={handleOpenMailto}
             disabled={openingMailto || !form.to}
-            className="flex items-center gap-2 text-sm font-medium rounded-2xl px-4 py-2 transition-all disabled:opacity-40"
+            className="flex items-center gap-2 text-sm font-medium r-lg px-4 py-2 transition-all disabled-dim"
             style={{
-              background: 'var(--f-btn-ghost-bg)',
-              border: '1px solid var(--f-border)',
-              color: 'var(--f-text-soft)',
+              background: 'var(--surface)',
+              border: '1px solid var(--line)',
+              color: 'var(--ink-muted)',
             }}
-            onMouseEnter={e => { if (!openingMailto) e.currentTarget.style.background = 'var(--f-btn-ghost-hover)'; }}
-            onMouseLeave={e => e.currentTarget.style.background = 'var(--f-btn-ghost-bg)'}
+            onMouseEnter={e => { if (!openingMailto) e.currentTarget.style.background = 'var(--surface-sunken)'; }}
+            onMouseLeave={e => e.currentTarget.style.background = 'var(--surface)'}
             title={t('send_email.mailto_title')}
           >
             <IconExternalLink className="h-4 w-4" />
@@ -301,9 +301,9 @@ export function SendEmailModal({ isOpen, invoice, company, onClose, onStatusChan
               type="button"
               onClick={onClose}
               className="text-sm font-medium transition px-3 py-2"
-              style={{ color: 'var(--f-text-subtle)' }}
-              onMouseEnter={e => e.currentTarget.style.color = 'var(--f-text-body)'}
-              onMouseLeave={e => e.currentTarget.style.color = 'var(--f-text-subtle)'}
+              style={{ color: 'var(--ink-muted)' }}
+              onMouseEnter={e => e.currentTarget.style.color = 'var(--ink)'}
+              onMouseLeave={e => e.currentTarget.style.color = 'var(--ink-muted)'}
             >
               {t('common.cancel')}
             </button>
@@ -311,11 +311,11 @@ export function SendEmailModal({ isOpen, invoice, company, onClose, onStatusChan
               type="button"
               onClick={handleSendSMTP}
               disabled={sending || !form.to || !smtpConfigured || checkingConfig}
-              className="flex items-center gap-2 text-sm font-semibold rounded-2xl px-5 py-2 transition-all disabled:opacity-40"
+              className="flex items-center gap-2 text-sm font-semibold r-lg px-5 py-2 transition-all disabled-dim"
               style={{
-                background: smtpConfigured ? 'var(--f-green)' : 'var(--f-surface)',
-                border: `1px solid ${smtpConfigured ? 'var(--f-border-green)' : 'var(--f-border)'}`,
-                color: smtpConfigured ? '#fff' : 'var(--f-text-muted)',
+                background: smtpConfigured ? 'var(--brand)' : 'var(--surface)',
+                border: `1px solid ${smtpConfigured ? 'var(--brand-line)' : 'var(--line)'}`,
+                color: smtpConfigured ? '#fff' : 'var(--ink-subtle)',
               }}
               title={!smtpConfigured ? t('send_email.smtp_configure_hint') : undefined}
             >

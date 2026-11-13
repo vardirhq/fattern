@@ -48,26 +48,26 @@ export function CustomersPage({ customers, onEditCustomer, onDeleteCustomer, onC
       {
         key: 'contact_name',
         label: t('customer.contact'),
-        className: 'text-ink-soft',
+        className: 'text-muted',
       },
       {
         key: 'email',
         label: t('customer.email'),
-        className: 'text-ink-soft',
+        className: 'text-muted',
       },
       {
         key: 'phone',
         label: t('customer.phone'),
-        className: 'text-ink-subtle',
+        className: 'text-muted',
       },
       {
         key: 'active',
         label: t('customer.status'),
         render: (active) => (
-          <span className="inline-flex rounded-full px-3 py-1 text-xs font-semibold"
+          <span className="inline-flex r-full px-3 py-1 text-xs font-semibold"
             style={active
-              ? { background: 'var(--f-success-bg)', color: 'var(--f-success-text)', border: '1px solid var(--f-success-border)' }
-              : { background: 'var(--f-hover)', color: 'var(--f-text-subtle)', border: '1px solid var(--f-border)' }
+              ? { background: 'var(--success-soft)', color: 'var(--success)', border: '1px solid var(--success-line)' }
+              : { background: 'var(--hover)', color: 'var(--ink-muted)', border: '1px solid var(--line)' }
             }>
             {active ? t('common.active') : t('common.inactive')}
           </span>
@@ -84,16 +84,16 @@ export function CustomersPage({ customers, onEditCustomer, onDeleteCustomer, onC
           <div className="flex items-center justify-end gap-2">
             <button
               type="button"
-              className="text-sm font-medium hover:underline"
-              style={{ color: 'var(--f-green-text)' }}
+              className="text-sm font-medium hover-underline"
+              style={{ color: 'var(--brand-ink)' }}
               onClick={() => onEditCustomer?.(customer)}
             >
               {t('customer.edit')}
             </button>
             <button
               type="button"
-              className="text-sm font-medium hover:underline"
-              style={{ color: 'var(--f-danger-text)' }}
+              className="text-sm font-medium hover-underline"
+              style={{ color: 'var(--danger)' }}
               onClick={() => onDeleteCustomer?.(customer)}
             >
               {t('customer.delete')}
@@ -114,27 +114,27 @@ export function CustomersPage({ customers, onEditCustomer, onDeleteCustomer, onC
       <header style={{ position: 'relative' }}>
         <div className="pointer-events-none absolute inset-0" style={{ background: 'transparent' }} />
         <div className="relative z-10">
-          <div className="flex flex-col gap-6 lg:flex-row lg:items-start lg:justify-between">
+          <div className="flex flex-col gap-6 lg-flex-row lg-items-start lg-justify-between">
             <div>
-              <p className="text-sm" style={{ color: 'var(--f-text-subtle)' }}>{t('customer.title')}</p>
-              <h1 className="mt-1 text-3xl font-semibold" style={{ color: 'var(--f-text)' }}>{t('customer.all_customers')}</h1>
-              <p className="mt-2 text-sm" style={{ color: 'var(--f-text-soft)' }}>{t('customer.overview')}</p>
+              <p className="text-sm" style={{ color: 'var(--ink-muted)' }}>{t('customer.title')}</p>
+              <h1 className="mt-1 text-3xl font-semibold" style={{ color: 'var(--ink)' }}>{t('customer.all_customers')}</h1>
+              <p className="mt-2 text-sm" style={{ color: 'var(--ink-muted)' }}>{t('customer.overview')}</p>
             </div>
             <div className="flex items-center gap-3">
-              <div className="flex rounded-xl p-1" style={{ background: 'var(--f-hover)', border: '1px solid var(--f-border)' }}>
+              <div className="flex r-lg p-1" style={{ background: 'var(--hover)', border: '1px solid var(--line)' }}>
                 <button
                   type="button"
                   onClick={() => handleViewModeChange('table')}
-                  className="rounded-lg px-3 py-1.5 text-sm font-medium transition"
-                  style={viewMode === 'table' ? { background: 'var(--f-inverse-bg)', color: 'var(--f-inverse-text)' } : { color: 'var(--f-text-soft)' }}
+                  className="r-md px-3 py-1-5 text-sm font-medium transition"
+                  style={viewMode === 'table' ? { background: 'var(--ink)', color: 'var(--bg)' } : { color: 'var(--ink-muted)' }}
                 >
                   {t('common.list')}
                 </button>
                 <button
                   type="button"
                   onClick={() => handleViewModeChange('card')}
-                  className="rounded-lg px-3 py-1.5 text-sm font-medium transition"
-                  style={viewMode === 'card' ? { background: 'var(--f-inverse-bg)', color: 'var(--f-inverse-text)' } : { color: 'var(--f-text-soft)' }}
+                  className="r-md px-3 py-1-5 text-sm font-medium transition"
+                  style={viewMode === 'card' ? { background: 'var(--ink)', color: 'var(--bg)' } : { color: 'var(--ink-muted)' }}
                 >
                   {t('common.card')}
                 </button>
@@ -142,7 +142,7 @@ export function CustomersPage({ customers, onEditCustomer, onDeleteCustomer, onC
               <button
                 type="button"
                 onClick={() => onCreateCustomer?.()}
-                className="f-btn-primary rounded-2xl px-5 py-2 text-sm font-semibold"
+                className="ft-btn ft-btn-primary r-lg px-5 py-2 text-sm font-semibold"
               >
                 {t('customer.new')}
               </button>
@@ -153,7 +153,7 @@ export function CustomersPage({ customers, onEditCustomer, onDeleteCustomer, onC
 
       <section>
         {/* Toolbar */}
-        <div className="mb-4 flex flex-col gap-3 sm:flex-row sm:items-center">
+        <div className="mb-4 flex flex-col gap-3 sm-flex-row sm-items-center">
           <div className="flex-1">
             <SearchBar value={query} onChange={setQuery} />
           </div>
@@ -165,7 +165,7 @@ export function CustomersPage({ customers, onEditCustomer, onDeleteCustomer, onC
               noMargin
             />
           </div>
-          <span className="whitespace-nowrap text-xs" style={{ color: 'var(--f-text-subtle)' }}>
+          <span className="whitespace-nowrap text-xs" style={{ color: 'var(--ink-muted)' }}>
             {t('customer.showing', { count: filtered.length, total: (customers || []).length })}
           </span>
         </div>
@@ -173,7 +173,7 @@ export function CustomersPage({ customers, onEditCustomer, onDeleteCustomer, onC
         {viewMode === 'table' ? (
           <DataTable columns={columns} data={filtered} emptyMessage={emptyMessage} />
         ) : (
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+          <div className="grid gap-4 sm-grid-cols-2 lg-grid-cols-3 xl-grid-cols-4">
             {filtered && filtered.length > 0 ? (
               filtered.map((customer, index) => (
                 <CustomerCard
@@ -185,7 +185,7 @@ export function CustomersPage({ customers, onEditCustomer, onDeleteCustomer, onC
                 />
               ))
             ) : (
-              <div className="col-span-full py-12 text-center text-ink-subtle">{emptyMessage}</div>
+              <div className="col-span-full py-12 text-center text-muted">{emptyMessage}</div>
             )}
           </div>
         )}

@@ -102,9 +102,9 @@ export function ExpenseCategoryModal({ isOpen, mode = 'create', initialCategory,
           <button
             type="button"
             className="text-sm font-medium transition"
-            style={{ color: 'var(--f-text-subtle)' }}
-            onMouseEnter={e => e.currentTarget.style.color = 'var(--f-text-body)'}
-            onMouseLeave={e => e.currentTarget.style.color = 'var(--f-text-subtle)'}
+            style={{ color: 'var(--ink-muted)' }}
+            onMouseEnter={e => e.currentTarget.style.color = 'var(--ink)'}
+            onMouseLeave={e => e.currentTarget.style.color = 'var(--ink-muted)'}
             onClick={onClose}
             disabled={saving}
           >
@@ -113,7 +113,7 @@ export function ExpenseCategoryModal({ isOpen, mode = 'create', initialCategory,
           <button
             type="submit"
             form="expense-category-form"
-            className="f-btn-primary rounded-2xl px-5 py-2 text-sm font-semibold disabled:opacity-60"
+            className="ft-btn ft-btn-primary r-lg px-5 py-2 text-sm font-semibold disabled-dim"
             disabled={saving}
           >
             {saving ? t('expense_category.saving') : isEdit ? t('expense_category.save_changes') : t('expense_category.create_button')}
@@ -123,9 +123,9 @@ export function ExpenseCategoryModal({ isOpen, mode = 'create', initialCategory,
     >
       <form id="expense-category-form" className="space-y-4" onSubmit={handleSubmit}>
         <div>
-          <label className="text-sm font-medium" style={{ color: 'var(--f-text-body)' }}>{t('expense_category.name_label')}</label>
+          <label className="text-sm font-medium" style={{ color: 'var(--ink)' }}>{t('expense_category.name_label')}</label>
           <input
-            className="f-input mt-2 w-full rounded-2xl px-4 py-2 text-sm"
+            className="ft-input mt-2 w-full r-lg px-4 py-2 text-sm"
             value={name}
             onChange={(e) => setName(e.target.value)}
             placeholder={t('expense_category.name_placeholder')}
@@ -134,19 +134,19 @@ export function ExpenseCategoryModal({ isOpen, mode = 'create', initialCategory,
         </div>
 
         <div>
-          <label className="text-sm font-medium" style={{ color: 'var(--f-text-body)' }}>{t('expense_category.parent_label')}</label>
+          <label className="text-sm font-medium" style={{ color: 'var(--ink)' }}>{t('expense_category.parent_label')}</label>
           <Select
             value={parentId}
             onChange={setParentId}
             options={parentOptions}
             placeholder={t('expense_category.parent_placeholder')}
           />
-          <p className="mt-1 text-xs" style={{ color: 'var(--f-text-subtle)' }}>
+          <p className="mt-1 text-xs" style={{ color: 'var(--ink-muted)' }}>
             {t('expense_category.parent_hint')}
           </p>
         </div>
 
-        {error ? <p className="text-sm font-medium" style={{ color: 'var(--f-danger-text)' }}>{error}</p> : null}
+        {error ? <p className="text-sm font-medium" style={{ color: 'var(--danger)' }}>{error}</p> : null}
       </form>
     </Modal>
   );

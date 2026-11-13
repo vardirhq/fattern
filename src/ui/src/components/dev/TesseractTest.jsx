@@ -63,31 +63,31 @@ export function TesseractTest() {
   return (
     <div className="space-y-6">
       <div>
-        <h3 className="text-lg font-semibold" style={{ color: 'var(--f-text-body)' }}>Tesseract.js OCR-test</h3>
-        <p className="mt-1 text-sm" style={{ color: 'var(--f-text-soft)' }}>
+        <h3 className="text-lg font-semibold" style={{ color: 'var(--ink)' }}>Tesseract.js OCR-test</h3>
+        <p className="mt-1 text-sm" style={{ color: 'var(--ink-muted)' }}>
           Prøv Tesseract.js OCR ved å laste opp et bilde og se den ekstraherte teksten.
         </p>
       </div>
 
       <div className="space-y-4">
         <div>
-          <label className="text-sm font-medium" style={{ color: 'var(--f-text-body)' }}>Velg bilde</label>
+          <label className="text-sm font-medium" style={{ color: 'var(--ink)' }}>Velg bilde</label>
           <div className="mt-2">
             {!image ? (
               <button
                 type="button"
                 onClick={() => fileInputRef.current?.click()}
-                className="flex w-full items-center justify-center gap-2 rounded-2xl border-2 border-dashed px-4 py-8 transition"
-                style={{ borderColor: 'var(--f-border)', background: 'var(--f-surface-hover)', color: 'var(--f-text-subtle)' }}
-                onMouseEnter={e => { e.currentTarget.style.borderColor = 'var(--f-border-green)'; e.currentTarget.style.color = 'var(--f-green-text)'; }}
-                onMouseLeave={e => { e.currentTarget.style.borderColor = 'var(--f-border)'; e.currentTarget.style.color = 'var(--f-text-subtle)'; }}
+                className="flex w-full items-center justify-center gap-2 r-lg border-2 border-dashed px-4 py-8 transition"
+                style={{ borderColor: 'var(--line)', background: 'var(--surface-sunken)', color: 'var(--ink-muted)' }}
+                onMouseEnter={e => { e.currentTarget.style.borderColor = 'var(--brand-line)'; e.currentTarget.style.color = 'var(--brand-ink)'; }}
+                onMouseLeave={e => { e.currentTarget.style.borderColor = 'var(--line)'; e.currentTarget.style.color = 'var(--ink-muted)'; }}
               >
                 <IconUpload className="h-5 w-5" />
                 <span>Klikk for å laste opp bilde</span>
               </button>
             ) : (
               <div className="space-y-3">
-                <div className="relative rounded-2xl overflow-hidden" style={{ border: '1px solid var(--f-border-subtle)', background: 'var(--f-surface-hover)' }}>
+                <div className="relative r-lg overflow-hidden" style={{ border: '1px solid var(--line)', background: 'var(--surface-sunken)' }}>
                   <img
                     src={image}
                     alt="Forhåndsvisning"
@@ -99,7 +99,7 @@ export function TesseractTest() {
                     type="button"
                     onClick={handleProcess}
                     disabled={loading}
-                    className="f-btn-primary flex-1 rounded-2xl px-4 py-2 text-sm font-semibold disabled:opacity-60 flex items-center justify-center gap-2"
+                    className="ft-btn ft-btn-primary flex-1 r-lg px-4 py-2 text-sm font-semibold disabled-dim flex items-center justify-center gap-2"
                   >
                     {loading ? (
                       <>
@@ -114,7 +114,7 @@ export function TesseractTest() {
                     type="button"
                     onClick={handleClear}
                     disabled={loading}
-                    className="f-btn-ghost rounded-2xl px-4 py-2 text-sm font-medium disabled:opacity-60"
+                    className="ft-btn ft-btn-secondary r-lg px-4 py-2 text-sm font-medium disabled-dim"
                   >
                     Fjern bilde
                   </button>
@@ -132,20 +132,20 @@ export function TesseractTest() {
         </div>
 
         {error && (
-          <div className="rounded-lg p-3" style={{ background: 'var(--f-danger-bg)', border: '1px solid var(--f-danger-border)' }}>
-            <p className="text-sm font-medium" style={{ color: 'var(--f-danger-text)' }}>{error}</p>
+          <div className="r-md p-3" style={{ background: 'var(--danger-soft)', border: '1px solid var(--danger-line)' }}>
+            <p className="text-sm font-medium" style={{ color: 'var(--danger)' }}>{error}</p>
           </div>
         )}
 
         {result && (
           <div>
-            <label className="text-sm font-medium" style={{ color: 'var(--f-text-body)' }}>Ekstrahert tekst</label>
-            <div className="mt-2 rounded-2xl p-4" style={{ border: '1px solid var(--f-border-subtle)', background: 'var(--f-surface-hover)' }}>
-              <pre className="whitespace-pre-wrap text-sm font-mono max-h-96 overflow-y-auto" style={{ color: 'var(--f-text-body)' }}>
+            <label className="text-sm font-medium" style={{ color: 'var(--ink)' }}>Ekstrahert tekst</label>
+            <div className="mt-2 r-lg p-4" style={{ border: '1px solid var(--line)', background: 'var(--surface-sunken)' }}>
+              <pre className="whitespace-pre-wrap text-sm font-mono max-h-96 overflow-y-auto" style={{ color: 'var(--ink)' }}>
                 {result || '(Ingen tekst funnet)'}
               </pre>
             </div>
-            <p className="mt-2 text-xs" style={{ color: 'var(--f-text-subtle)' }}>
+            <p className="mt-2 text-xs" style={{ color: 'var(--ink-muted)' }}>
               {result.length} tegn ekstrahert
             </p>
           </div>

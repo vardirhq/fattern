@@ -77,17 +77,17 @@ export function PeppolSettings() {
   return (
     <div className="space-y-3 pt-4">
       <div>
-        <h3 className="text-sm font-semibold mb-1" style={{ color: 'var(--f-text-body)' }}>{t('peppol.title')}</h3>
-        <p className="text-xs" style={{ color: 'var(--f-text-subtle)' }}>{t('peppol.desc')}</p>
+        <h3 className="text-sm font-semibold mb-1" style={{ color: 'var(--ink)' }}>{t('peppol.title')}</h3>
+        <p className="text-xs" style={{ color: 'var(--ink-muted)' }}>{t('peppol.desc')}</p>
       </div>
 
       {connected && (
-        <div className="flex items-center justify-between gap-3 rounded-xl p-3" style={{ background: 'var(--f-success-bg)', border: '1px solid var(--f-success-border)' }}>
-          <span className="flex items-center gap-2 text-sm" style={{ color: 'var(--f-text)' }}>
-            <IconCircleCheck size={16} stroke={2} style={{ color: 'var(--f-success-text)' }} aria-hidden="true" />
+        <div className="flex items-center justify-between gap-3 r-lg p-3" style={{ background: 'var(--success-soft)', border: '1px solid var(--success-line)' }}>
+          <span className="flex items-center gap-2 text-sm" style={{ color: 'var(--ink)' }}>
+            <IconCircleCheck size={16} stroke={2} style={{ color: 'var(--success)' }} aria-hidden="true" />
             {t('peppol.connected_as', { name: config.companyName })}
           </span>
-          <button type="button" onClick={handleDisconnect} className="f-btn-ghost rounded-lg px-3 text-xs font-medium" style={{ height: 32 }}>
+          <button type="button" onClick={handleDisconnect} className="ft-btn ft-btn-secondary r-md px-3 text-xs font-medium" style={{ height: 32 }}>
             {t('peppol.disconnect')}
           </button>
         </div>
@@ -95,7 +95,7 @@ export function PeppolSettings() {
 
       <div className="grid gap-3" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))' }}>
         <div>
-          <label className="f-label" htmlFor="peppol-key-id">{t('peppol.key_id')}</label>
+          <label className="ft-label" htmlFor="peppol-key-id">{t('peppol.key_id')}</label>
           <input
             id="peppol-key-id"
             type="text"
@@ -103,11 +103,11 @@ export function PeppolSettings() {
             onChange={(e) => setKeyId(e.target.value)}
             placeholder="key_…"
             autoComplete="off"
-            className="f-input w-full rounded-lg px-3 py-2 text-sm"
+            className="ft-input w-full r-md px-3 py-2 text-sm"
           />
         </div>
         <div>
-          <label className="f-label" htmlFor="peppol-secret">{t('peppol.secret')}</label>
+          <label className="ft-label" htmlFor="peppol-secret">{t('peppol.secret')}</label>
           <input
             id="peppol-secret"
             type="password"
@@ -115,13 +115,13 @@ export function PeppolSettings() {
             onChange={(e) => setSecret(e.target.value)}
             placeholder={config?.hasSecret ? t('peppol.secret_saved') : 'secret_…'}
             autoComplete="off"
-            className="f-input w-full rounded-lg px-3 py-2 text-sm"
+            className="ft-input w-full r-md px-3 py-2 text-sm"
           />
         </div>
       </div>
-      <p className="text-xs" style={{ color: 'var(--f-text-subtle)' }}>
+      <p className="text-xs" style={{ color: 'var(--ink-muted)' }}>
         {t('peppol.key_hint')}{' '}
-        {config && !config.encrypted && <span style={{ color: 'var(--f-warn)' }}>{t('peppol.not_encrypted')}</span>}
+        {config && !config.encrypted && <span style={{ color: 'var(--warning)' }}>{t('peppol.not_encrypted')}</span>}
       </p>
 
       <div className="flex flex-wrap items-center gap-3">
@@ -129,7 +129,7 @@ export function PeppolSettings() {
           type="button"
           onClick={handleConnect}
           disabled={testing || (!secret && !config?.hasSecret)}
-          className="f-btn-primary rounded-lg px-4 text-sm disabled:opacity-50"
+          className="ft-btn ft-btn-primary r-md px-4 text-sm disabled-dim"
           style={{ height: 40 }}
         >
           {testing ? t('common.loading') : t('peppol.connect')}
@@ -139,14 +139,14 @@ export function PeppolSettings() {
           target="_blank"
           rel="noreferrer"
           className="flex items-center gap-1 text-xs font-medium"
-          style={{ color: 'var(--f-green-text)' }}
+          style={{ color: 'var(--brand-ink)' }}
         >
           {t('peppol.open_recommand')} <IconExternalLink size={13} aria-hidden="true" />
         </a>
       </div>
 
       {result && !result.ok && (
-        <p role="alert" className="flex items-start gap-2 text-sm" style={{ color: 'var(--f-danger-text)' }}>
+        <p role="alert" className="flex items-start gap-2 text-sm" style={{ color: 'var(--danger)' }}>
           <IconAlertCircle size={16} stroke={2} style={{ flexShrink: 0, marginTop: 2 }} aria-hidden="true" />
           {result.message}
         </p>
@@ -154,7 +154,7 @@ export function PeppolSettings() {
 
       {companies.length > 0 && (
         <div className="space-y-2">
-          <span className="text-xs font-medium" style={{ color: 'var(--f-text-soft)' }}>{t('peppol.pick_company')}</span>
+          <span className="text-xs font-medium" style={{ color: 'var(--ink-muted)' }}>{t('peppol.pick_company')}</span>
           {companies.map((c) => {
             const selected = c.id === config?.companyId;
             return (
@@ -164,19 +164,19 @@ export function PeppolSettings() {
                 aria-pressed={selected}
                 disabled={!c.isVerified}
                 onClick={() => handlePickCompany(c)}
-                className="f-pick-row flex w-full items-center justify-between gap-3 rounded-lg px-3 py-2 text-left text-sm disabled:opacity-60"
+                className="ft-pick-row flex w-full items-center justify-between gap-3 r-md px-3 py-2 text-left text-sm disabled-dim"
                 style={{
-                  border: selected ? '2px solid var(--f-text)' : '1px solid var(--f-border)',
-                  background: 'var(--f-surface)',
-                  color: 'var(--f-text)',
+                  border: selected ? '2px solid var(--ink)' : '1px solid var(--line)',
+                  background: 'var(--surface)',
+                  color: 'var(--ink)',
                   cursor: c.isVerified ? 'pointer' : 'not-allowed',
                 }}
               >
                 <span>
                   {c.name}
-                  {c.enterpriseNumber && <span className="f-num" style={{ color: 'var(--f-text-subtle)' }}> · {c.enterpriseNumber}</span>}
+                  {c.enterpriseNumber && <span className="ft-mono" style={{ color: 'var(--ink-muted)' }}> · {c.enterpriseNumber}</span>}
                 </span>
-                <span className="text-xs" style={{ color: c.isVerified ? 'var(--f-success-text)' : 'var(--f-text-subtle)' }}>
+                <span className="text-xs" style={{ color: c.isVerified ? 'var(--success)' : 'var(--ink-muted)' }}>
                   {c.isVerified ? t('peppol.verified') : t('peppol.not_verified')}
                 </span>
               </button>

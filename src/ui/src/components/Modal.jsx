@@ -22,7 +22,7 @@ export function Modal({ isOpen, onClose, title, description, children, footer, s
           exit={{ opacity: 0 }}
           transition={{ duration: 0.2 }}
           className="fixed inset-0 z-40 flex items-center justify-center px-4"
-          style={{ background: 'var(--f-overlay)', backdropFilter: 'blur(6px)' }}
+          style={{ background: 'var(--scrim)', backdropFilter: 'blur(6px)' }}
           onClick={onClose}
         >
           <motion.div
@@ -31,45 +31,45 @@ export function Modal({ isOpen, onClose, title, description, children, footer, s
             exit={{ opacity: 0, scale: 0.95, y: 20 }}
             transition={{ duration: 0.2, ease: 'easeOut' }}
             onClick={(e) => e.stopPropagation()}
-            className={`relative flex flex-col w-full ${maxWidthClass} max-h-[90vh] rounded-3xl overflow-hidden f-glass-hero`}
+            className={`relative flex flex-col w-full ${maxWidthClass} max-h-90vh r-lg overflow-hidden ft-card ft-raised`}
           >
             <button
               type="button"
               onClick={onClose}
-              className="absolute right-4 top-4 z-10 rounded-full px-2 py-0.5 text-xs font-medium transition"
+              className="absolute right-4 top-4 z-10 r-full px-2 py-0-5 text-xs font-medium transition"
               style={{
-                background: 'var(--f-hover-elevated)',
-                border: '1px solid var(--f-border)',
-                color: 'var(--f-text-subtle)',
+                background: 'var(--hover-strong)',
+                border: '1px solid var(--line)',
+                color: 'var(--ink-muted)',
               }}
-              onMouseEnter={e => (e.currentTarget.style.color = 'var(--f-text-body)')}
-              onMouseLeave={e => (e.currentTarget.style.color = 'var(--f-text-subtle)')}
+              onMouseEnter={e => (e.currentTarget.style.color = 'var(--ink)')}
+              onMouseLeave={e => (e.currentTarget.style.color = 'var(--ink-muted)')}
             >
               {t('common.close')}
             </button>
 
             {(title || description) && (
               <header
-                className="flex-shrink-0 px-6 pt-6 pb-4"
-                style={{ borderBottom: '1px solid var(--f-border-subtle)' }}
+                className="shrink-0 px-6 pt-6 pb-4"
+                style={{ borderBottom: '1px solid var(--line)' }}
               >
                 {title ? (
-                  <h2 className="text-lg font-semibold" style={{ color: 'var(--f-text)' }}>{title}</h2>
+                  <h2 className="text-lg font-semibold" style={{ color: 'var(--ink)' }}>{title}</h2>
                 ) : null}
                 {description ? (
-                  <p className="mt-1 text-sm" style={{ color: 'var(--f-text-soft)' }}>{description}</p>
+                  <p className="mt-1 text-sm" style={{ color: 'var(--ink-muted)' }}>{description}</p>
                 ) : null}
               </header>
             )}
 
             <div className="flex-1 overflow-y-auto px-6">
-              <div className="space-y-4 text-sm py-5" style={{ color: 'var(--f-text-body)' }}>{children}</div>
+              <div className="space-y-4 text-sm py-5" style={{ color: 'var(--ink)' }}>{children}</div>
             </div>
 
             {footer ? (
               <footer
-                className="flex-shrink-0 px-6 pb-6 pt-4 flex items-center justify-end gap-3"
-                style={{ borderTop: '1px solid var(--f-border-subtle)', background: 'var(--f-surface-hover)' }}
+                className="shrink-0 px-6 pb-6 pt-4 flex items-center justify-end gap-3"
+                style={{ borderTop: '1px solid var(--line)', background: 'var(--surface-sunken)' }}
               >
                 {footer}
               </footer>

@@ -328,14 +328,14 @@ export function TemplateElement({
       {isSelected && (
         <>
           {/* Resize handles */}
-          <div className="resize-handle absolute -right-1 -top-1 h-3 w-3 cursor-nwse-resize rounded-full" style={{ background: '#2F4BD8' }} />
-          <div className="resize-handle absolute -right-1 -bottom-1 h-3 w-3 cursor-nesw-resize rounded-full" style={{ background: '#2F4BD8' }} />
-          <div className="resize-handle absolute -left-1 -top-1 h-3 w-3 cursor-nesw-resize rounded-full" style={{ background: '#2F4BD8' }} />
-          <div className="resize-handle absolute -left-1 -bottom-1 h-3 w-3 cursor-nwse-resize rounded-full" style={{ background: '#2F4BD8' }} />
-          <div className="resize-handle absolute -right-1 top-1/2 h-3 w-3 -translate-y-1/2 cursor-ew-resize rounded-full" style={{ background: '#2F4BD8' }} />
-          <div className="resize-handle absolute -bottom-1 left-1/2 h-3 w-3 -translate-x-1/2 cursor-ns-resize rounded-full" style={{ background: '#2F4BD8' }} />
-          <div className="resize-handle absolute -left-1 top-1/2 h-3 w-3 -translate-y-1/2 cursor-ew-resize rounded-full" style={{ background: '#2F4BD8' }} />
-          <div className="resize-handle absolute -top-1 left-1/2 h-3 w-3 -translate-x-1/2 cursor-ns-resize rounded-full" style={{ background: '#2F4BD8' }} />
+          <div className="resize-handle absolute -right-1 -top-1 h-3 w-3 cursor-nwse-resize r-full" style={{ background: '#2F4BD8' }} />
+          <div className="resize-handle absolute -right-1 -bottom-1 h-3 w-3 cursor-nesw-resize r-full" style={{ background: '#2F4BD8' }} />
+          <div className="resize-handle absolute -left-1 -top-1 h-3 w-3 cursor-nesw-resize r-full" style={{ background: '#2F4BD8' }} />
+          <div className="resize-handle absolute -left-1 -bottom-1 h-3 w-3 cursor-nwse-resize r-full" style={{ background: '#2F4BD8' }} />
+          <div className="resize-handle absolute -right-1 top-half h-3 w-3 -translate-y-half cursor-ew-resize r-full" style={{ background: '#2F4BD8' }} />
+          <div className="resize-handle absolute -bottom-1 left-half h-3 w-3 -translate-x-half cursor-ns-resize r-full" style={{ background: '#2F4BD8' }} />
+          <div className="resize-handle absolute -left-1 top-half h-3 w-3 -translate-y-half cursor-ew-resize r-full" style={{ background: '#2F4BD8' }} />
+          <div className="resize-handle absolute -top-1 left-half h-3 w-3 -translate-x-half cursor-ns-resize r-full" style={{ background: '#2F4BD8' }} />
         </>
       )}
     </div>

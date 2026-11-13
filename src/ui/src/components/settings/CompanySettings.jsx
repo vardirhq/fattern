@@ -106,16 +106,16 @@ export function CompanySettings({ company, onCompanyUpdate }) {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h3 className="text-sm font-semibold mb-1" style={{ color: 'var(--f-text)' }}>{t('settings.company.title')}</h3>
-          <p className="text-xs" style={{ color: 'var(--f-text-subtle)' }}>{t('settings.company.description')}</p>
+          <h3 className="text-sm font-semibold mb-1" style={{ color: 'var(--ink)' }}>{t('settings.company.title')}</h3>
+          <p className="text-xs" style={{ color: 'var(--ink-muted)' }}>{t('settings.company.description')}</p>
         </div>
         {!isEditingCompany ? (
           <button
             type="button"
             onClick={handleCompanyEdit}
-            className="f-btn-ghost flex items-center gap-2 rounded-lg px-3 py-1.5 text-xs font-medium transition"
+            className="ft-btn ft-btn-secondary flex items-center gap-2 r-md px-3 py-1-5 text-xs font-medium transition"
           >
-            <IconEdit className="h-3.5 w-3.5" />
+            <IconEdit className="h-3-5 w-3-5" />
             {t('common.edit')}
           </button>
         ) : (
@@ -124,18 +124,18 @@ export function CompanySettings({ company, onCompanyUpdate }) {
               type="button"
               onClick={handleCompanyCancel}
               disabled={savingCompany}
-              className="f-btn-ghost flex items-center gap-2 rounded-lg px-3 py-1.5 text-xs font-medium transition disabled:opacity-60"
+              className="ft-btn ft-btn-secondary flex items-center gap-2 r-md px-3 py-1-5 text-xs font-medium transition disabled-dim"
             >
-              <IconX className="h-3.5 w-3.5" />
+              <IconX className="h-3-5 w-3-5" />
               {t('common.cancel')}
             </button>
             <button
               type="button"
               onClick={handleCompanySave}
               disabled={savingCompany}
-              className="f-btn-primary flex items-center gap-2 rounded-lg px-3 py-1.5 text-xs font-medium transition disabled:opacity-60"
+              className="ft-btn ft-btn-primary flex items-center gap-2 r-md px-3 py-1-5 text-xs font-medium transition disabled-dim"
             >
-              <IconDeviceFloppy className="h-3.5 w-3.5" />
+              <IconDeviceFloppy className="h-3-5 w-3-5" />
               {savingCompany ? t('common.saving') : t('common.save')}
             </button>
           </div>
@@ -143,8 +143,8 @@ export function CompanySettings({ company, onCompanyUpdate }) {
       </div>
 
       <div className="space-y-4">
-        <div className="py-3" style={{ borderBottom: '1px solid var(--f-border-faint)' }}>
-          <label className="f-label uppercase tracking-wider">
+        <div className="py-3" style={{ borderBottom: '1px solid var(--line)' }}>
+          <label className="ft-label uppercase tracking-wider">
             {t('settings.company.name')} *
           </label>
           {isEditingCompany ? (
@@ -152,16 +152,16 @@ export function CompanySettings({ company, onCompanyUpdate }) {
               type="text"
               value={companyForm.name}
               onChange={(e) => setCompanyForm({ ...companyForm, name: e.target.value })}
-              className="f-input w-full rounded-lg px-3 py-2 text-sm"
+              className="ft-input w-full r-md px-3 py-2 text-sm"
               placeholder={t('settings.company.name')}
             />
           ) : (
-            <p className="text-sm mt-1.5" style={{ color: 'var(--f-text-body)' }}>{company?.name || notSet}</p>
+            <p className="text-sm mt-1-5" style={{ color: 'var(--ink)' }}>{company?.name || notSet}</p>
           )}
         </div>
 
-        <div className="py-3" style={{ borderBottom: '1px solid var(--f-border-faint)' }}>
-          <label className="f-label uppercase tracking-wider">
+        <div className="py-3" style={{ borderBottom: '1px solid var(--line)' }}>
+          <label className="ft-label uppercase tracking-wider">
             {t('settings.company.org_number')}
           </label>
           {isEditingCompany ? (
@@ -169,17 +169,17 @@ export function CompanySettings({ company, onCompanyUpdate }) {
               type="text"
               value={companyForm.org_number}
               onChange={(e) => setCompanyForm({ ...companyForm, org_number: e.target.value })}
-              className="f-input w-full rounded-lg px-3 py-2 text-sm"
+              className="ft-input w-full r-md px-3 py-2 text-sm"
               placeholder="123 456 789"
             />
           ) : (
-            <p className="text-sm mt-1.5" style={{ color: 'var(--f-text-body)' }}>{company?.org_number || notSet}</p>
+            <p className="text-sm mt-1-5" style={{ color: 'var(--ink)' }}>{company?.org_number || notSet}</p>
           )}
         </div>
 
-        <div className="grid gap-4 md:grid-cols-2">
-          <div className="py-3" style={{ borderBottom: '1px solid var(--f-border-faint)' }}>
-            <label className="f-label uppercase tracking-wider">
+        <div className="grid gap-4 md-grid-cols-2">
+          <div className="py-3" style={{ borderBottom: '1px solid var(--line)' }}>
+            <label className="ft-label uppercase tracking-wider">
               {t('settings.company.email')}
             </label>
             {isEditingCompany ? (
@@ -187,16 +187,16 @@ export function CompanySettings({ company, onCompanyUpdate }) {
                 type="email"
                 value={companyForm.contact_email}
                 onChange={(e) => setCompanyForm({ ...companyForm, contact_email: e.target.value })}
-                className="f-input w-full rounded-lg px-3 py-2 text-sm"
+                className="ft-input w-full r-md px-3 py-2 text-sm"
                 placeholder="firma@example.com"
               />
             ) : (
-              <p className="text-sm mt-1.5" style={{ color: 'var(--f-text-body)' }}>{company?.contact_email || notSet}</p>
+              <p className="text-sm mt-1-5" style={{ color: 'var(--ink)' }}>{company?.contact_email || notSet}</p>
             )}
           </div>
 
-          <div className="py-3" style={{ borderBottom: '1px solid var(--f-border-faint)' }}>
-            <label className="f-label uppercase tracking-wider">
+          <div className="py-3" style={{ borderBottom: '1px solid var(--line)' }}>
+            <label className="ft-label uppercase tracking-wider">
               {t('settings.company.phone')}
             </label>
             {isEditingCompany ? (
@@ -204,33 +204,33 @@ export function CompanySettings({ company, onCompanyUpdate }) {
                 type="tel"
                 value={companyForm.contact_number}
                 onChange={(e) => setCompanyForm({ ...companyForm, contact_number: e.target.value })}
-                className="f-input w-full rounded-lg px-3 py-2 text-sm"
+                className="ft-input w-full r-md px-3 py-2 text-sm"
                 placeholder="+47 123 45 678"
               />
             ) : (
-              <p className="text-sm mt-1.5" style={{ color: 'var(--f-text-body)' }}>{company?.contact_number || notSet}</p>
+              <p className="text-sm mt-1-5" style={{ color: 'var(--ink)' }}>{company?.contact_number || notSet}</p>
             )}
           </div>
         </div>
 
-        <div className="py-3" style={{ borderBottom: '1px solid var(--f-border-faint)' }}>
-          <label className="f-label uppercase tracking-wider">{t('settings.company.address')}</label>
+        <div className="py-3" style={{ borderBottom: '1px solid var(--line)' }}>
+          <label className="ft-label uppercase tracking-wider">{t('settings.company.address')}</label>
           {isEditingCompany ? (
             <input
               type="text"
               value={companyForm.address}
               onChange={(e) => setCompanyForm({ ...companyForm, address: e.target.value })}
-              className="f-input w-full rounded-lg px-3 py-2 text-sm"
+              className="ft-input w-full r-md px-3 py-2 text-sm"
               placeholder={t('settings.company.address')}
             />
           ) : (
-            <p className="text-sm mt-1.5" style={{ color: 'var(--f-text-body)' }}>{company?.address || notSet}</p>
+            <p className="text-sm mt-1-5" style={{ color: 'var(--ink)' }}>{company?.address || notSet}</p>
           )}
         </div>
 
-        <div className="grid gap-4 md:grid-cols-2">
-          <div className="py-3" style={{ borderBottom: '1px solid var(--f-border-faint)' }}>
-            <label className="f-label uppercase tracking-wider">
+        <div className="grid gap-4 md-grid-cols-2">
+          <div className="py-3" style={{ borderBottom: '1px solid var(--line)' }}>
+            <label className="ft-label uppercase tracking-wider">
               {t('settings.company.postal_code')}
             </label>
             {isEditingCompany ? (
@@ -238,16 +238,16 @@ export function CompanySettings({ company, onCompanyUpdate }) {
                 type="text"
                 value={companyForm.post_number}
                 onChange={(e) => setCompanyForm({ ...companyForm, post_number: e.target.value })}
-                className="f-input w-full rounded-lg px-3 py-2 text-sm"
+                className="ft-input w-full r-md px-3 py-2 text-sm"
                 placeholder="0001"
               />
             ) : (
-              <p className="text-sm mt-1.5" style={{ color: 'var(--f-text-body)' }}>{company?.post_number || notSet}</p>
+              <p className="text-sm mt-1-5" style={{ color: 'var(--ink)' }}>{company?.post_number || notSet}</p>
             )}
           </div>
 
-          <div className="py-3" style={{ borderBottom: '1px solid var(--f-border-faint)' }}>
-            <label className="f-label uppercase tracking-wider">
+          <div className="py-3" style={{ borderBottom: '1px solid var(--line)' }}>
+            <label className="ft-label uppercase tracking-wider">
               {t('settings.company.city')}
             </label>
             {isEditingCompany ? (
@@ -255,18 +255,18 @@ export function CompanySettings({ company, onCompanyUpdate }) {
                 type="text"
                 value={companyForm.post_location}
                 onChange={(e) => setCompanyForm({ ...companyForm, post_location: e.target.value })}
-                className="f-input w-full rounded-lg px-3 py-2 text-sm"
+                className="ft-input w-full r-md px-3 py-2 text-sm"
                 placeholder="Oslo"
               />
             ) : (
-              <p className="text-sm mt-1.5" style={{ color: 'var(--f-text-body)' }}>{company?.post_location || notSet}</p>
+              <p className="text-sm mt-1-5" style={{ color: 'var(--ink)' }}>{company?.post_location || notSet}</p>
             )}
           </div>
         </div>
 
-        <div className="grid gap-4 md:grid-cols-2">
-          <div className="py-3" style={{ borderBottom: '1px solid var(--f-border-faint)' }}>
-            <label className="f-label uppercase tracking-wider">
+        <div className="grid gap-4 md-grid-cols-2">
+          <div className="py-3" style={{ borderBottom: '1px solid var(--line)' }}>
+            <label className="ft-label uppercase tracking-wider">
               {t('settings.company.bank_account')}
             </label>
             {isEditingCompany ? (
@@ -274,16 +274,16 @@ export function CompanySettings({ company, onCompanyUpdate }) {
                 type="text"
                 value={companyForm.account_number}
                 onChange={(e) => setCompanyForm({ ...companyForm, account_number: e.target.value })}
-                className="f-input w-full rounded-lg px-3 py-2 text-sm"
+                className="ft-input w-full r-md px-3 py-2 text-sm"
                 placeholder="1234 56 78901"
               />
             ) : (
-              <p className="text-sm mt-1.5" style={{ color: 'var(--f-text-body)' }}>{company?.account_number || notSet}</p>
+              <p className="text-sm mt-1-5" style={{ color: 'var(--ink)' }}>{company?.account_number || notSet}</p>
             )}
           </div>
 
-          <div className="py-3" style={{ borderBottom: '1px solid var(--f-border-faint)' }}>
-            <label className="f-label uppercase tracking-wider">
+          <div className="py-3" style={{ borderBottom: '1px solid var(--line)' }}>
+            <label className="ft-label uppercase tracking-wider">
               {t('settings.company.vat_rate_label')}
             </label>
             {isEditingCompany ? (
@@ -294,11 +294,11 @@ export function CompanySettings({ company, onCompanyUpdate }) {
                 max="100"
                 value={companyForm.vat_rate}
                 onChange={(e) => setCompanyForm({ ...companyForm, vat_rate: e.target.value })}
-                className="f-input w-full rounded-lg px-3 py-2 text-sm"
+                className="ft-input w-full r-md px-3 py-2 text-sm"
                 placeholder="25"
               />
             ) : (
-              <p className="text-sm mt-1.5" style={{ color: 'var(--f-text-body)' }}>
+              <p className="text-sm mt-1-5" style={{ color: 'var(--ink)' }}>
                 {company?.vat_rate != null ? `${(company.vat_rate * 100).toFixed(0)}%` : '25%'}
               </p>
             )}
@@ -306,8 +306,8 @@ export function CompanySettings({ company, onCompanyUpdate }) {
         </div>
 
         {companyError && (
-          <div className="rounded-lg px-3 py-2" style={{ background: 'var(--f-danger-bg)', border: '1px solid var(--f-danger-border)' }}>
-            <p className="text-xs font-medium" style={{ color: 'var(--f-danger-text)' }}>{companyError}</p>
+          <div className="r-md px-3 py-2" style={{ background: 'var(--danger-soft)', border: '1px solid var(--danger-line)' }}>
+            <p className="text-xs font-medium" style={{ color: 'var(--danger)' }}>{companyError}</p>
           </div>
         )}
       </div>

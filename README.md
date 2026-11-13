@@ -66,7 +66,7 @@ db.close();
 
 ## UI preview
 
-The UI preview now uses the intended stack from `PROJECT.md`: **React + Vite + TailwindCSS**. The Vite root is `src/ui`, and the build output lands in `dist/ui`.
+The UI preview now uses the intended stack from `PROJECT.md`: **React + Vite with plain CSS**. The Vite root is `src/ui`, and the build output lands in `dist/ui`.
 
 To explore the dashboard locally:
 
@@ -88,9 +88,19 @@ The UI is fully connected to the SQLite database and includes:
 - Custom invoice template editor
 - PDF generation (default and template-based)
 
+## Styling and design system
+
+The UI uses plain CSS, with no CSS framework or preprocessor. The Fattern design system is documented in [`docs/design-system/`](docs/design-system/README.md).
+
+- `docs/design-system/tokens.json` is the source for colours, type, spacing, radii and shadows. Run `npm run tokens` after editing it to regenerate `src/ui/src/styles/tokens.css`.
+- `src/ui/src/styles/` holds the stylesheets, loaded in this order by `src/ui/src/index.css`: `tokens.css` (generated), `theme.css` (app tokens, accent and premium palettes), `base.css` (reset), `components.css` (`ft-*` component classes) and `utilities.css` (layout utilities on the 4px grid).
+- Themes are applied by setting `data-theme`, `data-accent` and `data-palette` on `<html>` (see `src/ui/src/themes/index.js`).
+- Fonts (Schibsted Grotesk, Hanken Grotesk, JetBrains Mono) are bundled through `@fontsource-variable`, so the app needs no network to render.
+- The logo files are in `src/ui/public/brand/`; the React version is `src/ui/src/components/brand/FatternMark.jsx`.
+
 ## Desktop shell (Electron)
 
-Electron is now wired up to host the Vite/Tailwind renderer. During development you can launch both the dev server and the Electron shell together:
+Electron is now wired up to host the Vite renderer. During development you can launch both the dev server and the Electron shell together:
 
 ```bash
 npm run desktop:dev
@@ -106,4 +116,4 @@ The Electron entry point is `src/electron/main.js`, and the preload hook lives i
 
 ## Project direction
 
-The intended stack for the desktop app is Electron + React (Vite) with TailwindCSS, Framer Motion, and `better-sqlite3` for data storage (see `PROJECT.md`). Future work will connect the renderer and main processes to this schema via IPC while keeping the app fully offline and private.
+The intended stack for the desktop app is Electron + React (Vite) with plain CSS, Framer Motion, and `better-sqlite3` for data storage (see `PROJECT.md`). Future work will connect the renderer and main processes to this schema via IPC while keeping the app fully offline and private.

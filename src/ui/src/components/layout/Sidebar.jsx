@@ -53,23 +53,23 @@ function NavItem({ label, isActive, onClick, badge }) {
       type="button"
       onClick={() => onClick?.(label)}
       aria-current={isActive ? 'page' : undefined}
-      className={isActive ? undefined : 'f-nav-item'}
+      className={isActive ? undefined : 'ft-nav-hover'}
       style={{
         width: '100%',
-        height: 40,
+        height: 36,
         display: 'flex',
         alignItems: 'center',
         gap: 12,
         padding: '0 12px',
-        borderRadius: 8,
+        borderRadius: 'var(--radius-md)',
         border: 'none',
         cursor: 'pointer',
         textAlign: 'left',
-        fontFamily: 'var(--f-font-sans)',
+        fontFamily: 'var(--font-sans)',
         fontSize: 14,
-        fontWeight: 500,
-        background: isActive ? 'var(--f-inverse-bg)' : 'transparent',
-        color: isActive ? 'var(--f-inverse-text)' : 'var(--f-text-soft)',
+        fontWeight: isActive ? 600 : 500,
+        background: isActive ? 'var(--brand-soft)' : 'transparent',
+        color: isActive ? 'var(--brand-ink)' : 'var(--ink-muted)',
         transition: 'background 0.12s, color 0.12s',
       }}
     >
@@ -79,19 +79,19 @@ function NavItem({ label, isActive, onClick, badge }) {
       </span>
       {count > 0 && (
         <span
-          className="f-num"
+          className="ft-mono"
           style={{
             minWidth: 20,
             height: 20,
             padding: '0 6px',
-            borderRadius: 999,
+            borderRadius: 'var(--radius-full)',
             display: 'inline-flex',
             alignItems: 'center',
             justifyContent: 'center',
             fontSize: 12,
             fontWeight: 600,
-            background: isActive ? 'var(--f-inverse-text)' : 'var(--f-danger-bg)',
-            color: 'var(--f-danger-text)',
+            background: isActive ? 'var(--bg)' : 'var(--danger-soft)',
+            color: 'var(--danger)',
           }}
         >
           {count}
@@ -121,18 +121,18 @@ export function Sidebar({ navItems, activeNavItem, onNavigate, badges = {} }) {
     <nav
       aria-label="Hovedmeny"
       style={{
-        width: 'var(--f-rail-w)',
+        width: 'var(--sidebar)',
         flexShrink: 0,
         display: 'flex',
         flexDirection: 'column',
         gap: 24,
         padding: '20px 14px 16px',
-        background: 'var(--f-surface-rail)',
+        background: 'var(--surface)',
         overflowY: 'auto',
       }}
     >
       <style>{`
-        .f-nav-item:hover { background: var(--f-hover-elevated) !important; color: var(--f-text) !important; }
+        .f-nav-item:hover { background: var(--hover-strong) !important; color: var(--ink) !important; }
       `}</style>
 
       <div style={{ padding: '0 8px' }}>

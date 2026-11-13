@@ -46,14 +46,14 @@ export function ProductsPage({ products, formatCurrency: fmt, onEditProduct, onD
       {
         key: 'sku',
         label: t('product.sku'),
-        className: 'text-ink-soft',
+        className: 'text-muted',
       },
       {
         key: 'unit_price',
         label: t('product.price'),
         align: 'right',
         render: (price) => (typeof price === 'number' ? fmt(price) : '—'),
-        className: 'font-medium text-ink',
+        className: 'ft-mono font-medium text-ink',
         sortFn: (a, b) => {
           const aVal = typeof a === 'number' ? a : 0;
           const bVal = typeof b === 'number' ? b : 0;
@@ -65,7 +65,7 @@ export function ProductsPage({ products, formatCurrency: fmt, onEditProduct, onD
         label: t('product.vat'),
         align: 'right',
         render: (rate) => (rate != null ? `${(rate * 100).toFixed(0)}%` : '—'),
-        className: 'text-ink-subtle',
+        className: 'text-muted',
         sortFn: (a, b) => {
           const aVal = a != null ? a : 0;
           const bVal = b != null ? b : 0;
@@ -75,16 +75,16 @@ export function ProductsPage({ products, formatCurrency: fmt, onEditProduct, onD
       {
         key: 'unit',
         label: t('product.unit'),
-        className: 'text-ink-subtle',
+        className: 'text-muted',
       },
       {
         key: 'active',
         label: t('product.status'),
         render: (active) => (
-          <span className="inline-flex rounded-full px-3 py-1 text-xs font-semibold"
+          <span className="inline-flex r-full px-3 py-1 text-xs font-semibold"
             style={active
-              ? { background: 'var(--f-success-bg)', color: 'var(--f-success-text)', border: '1px solid var(--f-success-border)' }
-              : { background: 'var(--f-hover)', color: 'var(--f-text-subtle)', border: '1px solid var(--f-border)' }
+              ? { background: 'var(--success-soft)', color: 'var(--success)', border: '1px solid var(--success-line)' }
+              : { background: 'var(--hover)', color: 'var(--ink-muted)', border: '1px solid var(--line)' }
             }>
             {active ? t('common.active') : t('common.inactive')}
           </span>
@@ -101,16 +101,16 @@ export function ProductsPage({ products, formatCurrency: fmt, onEditProduct, onD
           <div className="flex items-center justify-end gap-2">
             <button
               type="button"
-              className="text-sm font-medium hover:underline"
-              style={{ color: 'var(--f-green-text)' }}
+              className="text-sm font-medium hover-underline"
+              style={{ color: 'var(--brand-ink)' }}
               onClick={() => onEditProduct?.(product)}
             >
               {t('product.edit')}
             </button>
             <button
               type="button"
-              className="text-sm font-medium hover:underline"
-              style={{ color: 'var(--f-danger-text)' }}
+              className="text-sm font-medium hover-underline"
+              style={{ color: 'var(--danger)' }}
               onClick={() => onDeleteProduct?.(product)}
             >
               {t('product.delete')}
@@ -131,27 +131,27 @@ export function ProductsPage({ products, formatCurrency: fmt, onEditProduct, onD
       <header style={{ position: 'relative' }}>
         <div className="pointer-events-none absolute inset-0" style={{ background: 'transparent' }} />
         <div className="relative z-10">
-          <div className="flex flex-col gap-6 lg:flex-row lg:items-start lg:justify-between">
+          <div className="flex flex-col gap-6 lg-flex-row lg-items-start lg-justify-between">
             <div>
-              <p className="text-sm" style={{ color: 'var(--f-text-subtle)' }}>{t('product.title')}</p>
-              <h1 className="mt-1 text-3xl font-semibold" style={{ color: 'var(--f-text)' }}>{t('product.all_products')}</h1>
-              <p className="mt-2 text-sm" style={{ color: 'var(--f-text-soft)' }}>{t('product.overview')}</p>
+              <p className="text-sm" style={{ color: 'var(--ink-muted)' }}>{t('product.title')}</p>
+              <h1 className="mt-1 text-3xl font-semibold" style={{ color: 'var(--ink)' }}>{t('product.all_products')}</h1>
+              <p className="mt-2 text-sm" style={{ color: 'var(--ink-muted)' }}>{t('product.overview')}</p>
             </div>
             <div className="flex items-center gap-3">
-              <div className="flex rounded-xl p-1" style={{ background: 'var(--f-hover)', border: '1px solid var(--f-border)' }}>
+              <div className="flex r-lg p-1" style={{ background: 'var(--hover)', border: '1px solid var(--line)' }}>
                 <button
                   type="button"
                   onClick={() => handleViewModeChange('table')}
-                  className="rounded-lg px-3 py-1.5 text-sm font-medium transition"
-                  style={viewMode === 'table' ? { background: 'var(--f-inverse-bg)', color: 'var(--f-inverse-text)' } : { color: 'var(--f-text-soft)' }}
+                  className="r-md px-3 py-1-5 text-sm font-medium transition"
+                  style={viewMode === 'table' ? { background: 'var(--ink)', color: 'var(--bg)' } : { color: 'var(--ink-muted)' }}
                 >
                   {t('common.list')}
                 </button>
                 <button
                   type="button"
                   onClick={() => handleViewModeChange('card')}
-                  className="rounded-lg px-3 py-1.5 text-sm font-medium transition"
-                  style={viewMode === 'card' ? { background: 'var(--f-inverse-bg)', color: 'var(--f-inverse-text)' } : { color: 'var(--f-text-soft)' }}
+                  className="r-md px-3 py-1-5 text-sm font-medium transition"
+                  style={viewMode === 'card' ? { background: 'var(--ink)', color: 'var(--bg)' } : { color: 'var(--ink-muted)' }}
                 >
                   {t('common.card')}
                 </button>
@@ -159,7 +159,7 @@ export function ProductsPage({ products, formatCurrency: fmt, onEditProduct, onD
               <button
                 type="button"
                 onClick={() => onCreateProduct?.()}
-                className="f-btn-primary rounded-2xl px-5 py-2 text-sm font-semibold"
+                className="ft-btn ft-btn-primary r-lg px-5 py-2 text-sm font-semibold"
               >
                 {t('product.new')}
               </button>
@@ -170,7 +170,7 @@ export function ProductsPage({ products, formatCurrency: fmt, onEditProduct, onD
 
       <section>
         {/* Toolbar */}
-        <div className="mb-4 flex flex-col gap-3 sm:flex-row sm:items-center">
+        <div className="mb-4 flex flex-col gap-3 sm-flex-row sm-items-center">
           <div className="flex-1">
             <SearchBar value={query} onChange={setQuery} />
           </div>
@@ -182,7 +182,7 @@ export function ProductsPage({ products, formatCurrency: fmt, onEditProduct, onD
               noMargin
             />
           </div>
-          <span className="whitespace-nowrap text-xs" style={{ color: 'var(--f-text-subtle)' }}>
+          <span className="whitespace-nowrap text-xs" style={{ color: 'var(--ink-muted)' }}>
             {t('product.showing', { count: filtered.length, total: (products || []).length })}
           </span>
         </div>
@@ -190,7 +190,7 @@ export function ProductsPage({ products, formatCurrency: fmt, onEditProduct, onD
         {viewMode === 'table' ? (
           <DataTable columns={columns} data={filtered} emptyMessage={emptyMessage} />
         ) : (
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+          <div className="grid gap-4 sm-grid-cols-2 lg-grid-cols-3 xl-grid-cols-4">
             {filtered && filtered.length > 0 ? (
               filtered.map((product, index) => (
                 <ProductCard
@@ -203,7 +203,7 @@ export function ProductsPage({ products, formatCurrency: fmt, onEditProduct, onD
                 />
               ))
             ) : (
-              <div className="col-span-full py-12 text-center text-ink-subtle">{emptyMessage}</div>
+              <div className="col-span-full py-12 text-center text-muted">{emptyMessage}</div>
             )}
           </div>
         )}
